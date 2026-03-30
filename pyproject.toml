@@ -32,6 +32,21 @@ classifiers = [
 dynamic = ["version"]
 dependencies = []
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/subway_access"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/subway_access/data" = "subway_access/data"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src/subway_access",
+  "/tests",
+  "/README.md",
+  "/LICENSE",
+  "/docs",
+]
+
 [project.scripts]
 subway-access = "subway_access.cli:main"
 
