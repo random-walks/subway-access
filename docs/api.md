@@ -1,9 +1,25 @@
-# API status
+# API scaffold
 
-The public API is not implemented yet. This page will fill in once the first data ingestion, catchment, and scoring modules are added.
+The public API is intentionally scaffolded before implementation so the target surface is visible and importable.
 
-The expected first stable surfaces are:
+Every callable below currently raises `NotImplementedError` until the real implementation lands.
 
-- station and feed ingestion helpers
-- catchment generation utilities
-- tract-level scoring and aggregation functions
+## Models
+
+::: subway_access.models
+
+## Loaders
+
+::: subway_access.loaders
+
+## Processors
+
+::: subway_access.processors
+
+## Exporters
+
+::: subway_access.exporters
+
+## CLI
+
+::: subway_access.cli

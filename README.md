@@ -9,11 +9,11 @@ Spatial analysis toolkit for evaluating NYC subway accessibility, reliability, a
 
 ## Status
 
-This repository has been scaffolded as a public-ready package repo before implementation starts.
+This repository has been scaffolded as a public-ready package repo before implementation starts and now includes the exact seed docs that define the product target.
 
 - Packaging, docs, CI, and release plumbing are present.
 - The package is still in the planning and seeding phase.
-- There is not yet a stable user-facing API.
+- The target API surface is scaffolded with typed placeholders that raise `NotImplementedError`.
 
 ## Why This Exists
 
@@ -36,6 +36,13 @@ into a reusable analysis toolkit rather than a one-off notebook.
 - CSV tables for policy analysis
 - notebook-friendly borough walkthroughs
 
+## Seeded Sources Of Truth
+
+- `docs/notes/original-spec.md`: exact copied seed spec for `subway-access`
+- `docs/notes/gap-explination.md`: exact copied gap analysis that explains why this project is still worth building
+- `docs/agent-kickoff-todo.md`: kickoff plan for follow-on implementation agents
+- `docs/agent-handoff-prompt.md`: paste-ready prompt for the next agent session
+
 ## Initial Scope
 
 - ingest station and accessibility data
@@ -44,12 +51,15 @@ into a reusable analysis toolkit rather than a one-off notebook.
 - produce a basic accessibility gap score
 - document methodology clearly enough for external review
 
-## Documentation
+## Scaffolded Package Surface
 
-- `docs/project-brief.md`: problem framing and positioning
-- `docs/data-sources.md`: core feeds and input assumptions
-- `docs/mvp-roadmap.md`: v0.1 scope and stretch path
-- `docs/notes/original-spec.md`: preserved project seed notes
+The package now exposes planned-but-unimplemented modules so contributors can see the intended shape before building:
+
+- `subway_access.loaders`
+- `subway_access.processors`
+- `subway_access.exporters`
+- `subway_access.models`
+- `subway_access.cli`
 
 ## Development
 

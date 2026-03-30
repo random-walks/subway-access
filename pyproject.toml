@@ -32,6 +32,9 @@ classifiers = [
 dynamic = ["version"]
 dependencies = []
 
+[project.scripts]
+subway-access = "subway_access.cli:main"
+
 [project.urls]
 Homepage = "https://github.com/random-walks/subway-access"
 "Bug Tracker" = "https://github.com/random-walks/subway-access/issues"
