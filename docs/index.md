@@ -1,13 +1,31 @@
 # subway-access
 
-`subway-access` is a Python-first toolkit for measuring how accessible NYC subway service really is once you account for outages, walking distance, and neighborhood need.
+`subway-access` is a Python-first toolkit for measuring how accessible NYC subway
+service really is once you account for walking distance and neighborhood need.
 
-The repo is being seeded early so the eventual implementation grows inside a proper OSS package structure rather than inside a notebook dump.
+## Implemented in v0.1
 
-This docs site now includes two exact source documents imported from the showcase planning repo:
+The current release includes one real, deterministic happy path:
 
-- the original `subway-access` seed spec
-- the gap explanation for why this is still a real OSS opportunity
+- load a small packaged station dataset plus ADA status rows
+- generate first-pass Euclidean catchments from a fixed walking-speed
+  assumption
+- load tract-level demographic fixture data
+- compute tract-level need and accessibility gap outputs
+- export catchments to GeoJSON and gaps to CSV
+- run the full flow from the `subway-access demo` CLI command
+
+## Planned later
+
+The project still aims to move beyond binary ADA labels toward
+reliability-aware analysis, but the following surfaces remain intentionally
+unimplemented placeholders:
+
+- outage loading
+- pedestrian network loading
+- reliability scoring
+- advanced routing and travel-time modeling
+- broader station metrics exports
 
 ## Project Focus
 
@@ -21,6 +39,7 @@ This docs site now includes two exact source documents imported from the showcas
 - [Project brief](project-brief.md)
 - [Data sources](data-sources.md)
 - [MVP roadmap](mvp-roadmap.md)
+- [Python API](api.md)
 - [Agent kickoff TODO](agent-kickoff-todo.md)
 - [Agent handoff prompt](agent-handoff-prompt.md)
 - [Original seed spec](notes/original-spec.md)

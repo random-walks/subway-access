@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, replace
-from pathlib import Path
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 AccessibilityLabel = Literal["accessible", "not_accessible", "unknown"]
 
@@ -27,11 +29,11 @@ class CatchmentRequest:
         """Validate the supported v0.1 request shape."""
 
         if self.minutes <= 0:
-            raise ValueError("Catchment minutes must be greater than zero.")
+            message = "Catchment minutes must be greater than zero."
+            raise ValueError(message)
         if self.mode != "walk":
-            raise ValueError(
-                "Only walk catchments are implemented in subway-access v0.1."
-            )
+            message = "Only walk catchments are implemented in subway-access v0.1."
+            raise ValueError(message)
 
 
 @dataclass(frozen=True, slots=True)
@@ -180,10 +182,8 @@ class StationDataset:
         unknown_ids = sorted(set(status_by_station).difference(station_ids))
         if unknown_ids:
             joined_ids = ", ".join(unknown_ids)
-            raise ValueError(
-                "Accessibility data references unknown station IDs: "
-                f"{joined_ids}."
-            )
+            message = f"Accessibility data references unknown station IDs: {joined_ids}."
+            raise ValueError(message)
 
         merged = tuple(
             replace(

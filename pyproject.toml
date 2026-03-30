@@ -176,6 +176,9 @@ ignore = [
 "tests/**" = ["T20"]
 "noxfile.py" = ["T20"]
 "docs/examples/**" = ["T20"]
+"src/subway_access/_version.py" = ["Q000", "RUF022"]
+"src/subway_access/cli.py" = ["T20"]
+"src/subway_access/_not_implemented.py" = ["EM"]
 
 
 [tool.pylint]

@@ -6,6 +6,9 @@ from math import asin, atan2, cos, degrees, pi, radians, sin, sqrt
 
 EARTH_RADIUS_METERS = 6_371_000.0
 METERS_PER_MINUTE_WALKING = 80.0
+_POSITIVE_MINUTES_MESSAGE = "Catchment minutes must be positive."
+_POSITIVE_RADIUS_MESSAGE = "Catchment radius must be positive."
+_MINIMUM_SIDES_MESSAGE = "Catchment polygon needs at least 8 sides."
 
 
 def haversine_distance_meters(
@@ -35,7 +38,7 @@ def walk_radius_meters(minutes: int) -> float:
     """Convert walking minutes into the v0.1 Euclidean radius."""
 
     if minutes <= 0:
-        raise ValueError("Catchment minutes must be positive.")
+        raise ValueError(_POSITIVE_MINUTES_MESSAGE)
     return minutes * METERS_PER_MINUTE_WALKING
 
 
@@ -49,9 +52,9 @@ def build_circle_polygon(
     """Build a simple lon/lat polygon approximating a circle around a point."""
 
     if radius_meters <= 0:
-        raise ValueError("Catchment radius must be positive.")
+        raise ValueError(_POSITIVE_RADIUS_MESSAGE)
     if sides < 8:
-        raise ValueError("Catchment polygon needs at least 8 sides.")
+        raise ValueError(_MINIMUM_SIDES_MESSAGE)
 
     latitude_radians = radians(latitude)
     angular_distance = radius_meters / EARTH_RADIUS_METERS

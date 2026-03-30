@@ -4,17 +4,23 @@ from __future__ import annotations
 
 import csv
 import json
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from ._not_implemented import planned_surface
-from .models import CatchmentDataset, ExportTarget, GapAnalysis
+
+if TYPE_CHECKING:
+    from pathlib import Path
+
+    from .models import CatchmentDataset, ExportTarget, GapAnalysis
 
 
 def _validate_target_format(target: ExportTarget, *, expected_format: str) -> Path:
     if target.format.lower() != expected_format:
-        raise ValueError(
-            f"Expected export target format {expected_format!r}, got {target.format!r}."
+        message = (
+            f"Expected export target format {expected_format!r}, got "
+            f"{target.format!r}."
         )
+        raise ValueError(message)
 
     output_path = target.output_path.expanduser().resolve()
     output_path.parent.mkdir(parents=True, exist_ok=True)

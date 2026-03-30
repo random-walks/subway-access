@@ -3,13 +3,17 @@
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
-from collections.abc import Sequence
+from typing import TYPE_CHECKING
 
 from .exporters import export_catchments_geojson, export_gap_table
 from .loaders import load_accessibility_status, load_census_data, load_gtfs
 from .models import CatchmentRequest, ExportTarget
 from .processors import analyze_gaps, generate_catchments, score_accessibility
+
+if TYPE_CHECKING:
+    from collections.abc import Sequence
 
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -44,6 +48,10 @@ def _build_parser() -> argparse.ArgumentParser:
 def run_demo(output_dir: Path, *, minutes: int) -> int:
     """Run the packaged v0.1 demo analysis and export outputs."""
 
+    if minutes <= 0:
+        message = "Catchment minutes must be greater than zero."
+        raise ValueError(message)
+
     stations = load_gtfs().with_accessibility(load_accessibility_status())
     demographics = load_census_data()
     catchments = generate_catchments(stations, CatchmentRequest(minutes=minutes))
@@ -52,16 +60,19 @@ def run_demo(output_dir: Path, *, minutes: int) -> int:
 
     output_dir.mkdir(parents=True, exist_ok=True)
     catchments_path = output_dir / "catchments.geojson"
-    gaps_path = output_dir / "accessibility_gaps.csv"
+    gaps_path = output_dir / "accessibility-gaps.csv"
 
     export_catchments_geojson(
         catchments, ExportTarget(format="geojson", output_path=catchments_path)
     )
     export_gap_table(gaps, ExportTarget(format="csv", output_path=gaps_path))
 
-    print(f"Wrote catchment GeoJSON to {catchments_path}")
-    print(f"Wrote accessibility gap CSV to {gaps_path}")
-    print(f"Processed {len(stations.stations)} stations and {len(gaps.records)} tracts.")
+    sys.stdout.write("Generated subway-access v0.1 demo outputs:\n")
+    sys.stdout.write(f"- Catchment GeoJSON: {catchments_path}\n")
+    sys.stdout.write(f"- Accessibility gap CSV: {gaps_path}\n")
+    sys.stdout.write(
+        f"- Processed {len(stations.stations)} stations and {len(gaps.records)} tracts.\n"
+    )
     return 0
 
 
@@ -69,10 +80,15 @@ def main(argv: Sequence[str] | None = None) -> int:
     """Entry point for the implemented CLI."""
 
     parser = _build_parser()
-    args = parser.parse_args(list(argv) if argv is not None else None)
+    command_line = list(argv) if argv is not None else None
+    args = parser.parse_args(command_line)
 
-    if args.command == "demo":
+    if args.command != "demo":
+        message = f"Unsupported command: {args.command}"
+        raise RuntimeError(message)
+
+    try:
         return run_demo(args.output_dir, minutes=args.minutes)
-
-    parser.error(f"Unsupported command: {args.command}")
-    return 2
+    except ValueError as exc:
+        parser._print_message(f"{parser.prog}: error: {exc}\n", sys.stderr)
+        raise SystemExit(2) from exc

@@ -5,19 +5,25 @@ from __future__ import annotations
 import csv
 import json
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any, cast
 
-from ._fixtures import DEFAULT_ACCESSIBILITY_FIXTURE, DEFAULT_STATIONS_FIXTURE, DEFAULT_TRACTS_FIXTURE
+from ._fixtures import (
+    DEFAULT_ACCESSIBILITY_FIXTURE,
+    DEFAULT_STATIONS_FIXTURE,
+    DEFAULT_TRACTS_FIXTURE,
+)
 from ._not_implemented import planned_surface
 from .models import (
     AccessibilityDataset,
-    AccessibilityLabel,
     AccessibilityStatus,
     DemographicDataset,
     Station,
     StationDataset,
     TractDemographics,
 )
+
+if TYPE_CHECKING:
+    from .models import AccessibilityLabel
 
 _VALID_ACCESSIBILITY_STATUSES: tuple[AccessibilityLabel, ...] = (
     "accessible",
@@ -35,12 +41,14 @@ def _load_csv_rows(source: str | Path, *, required_columns: tuple[str, ...]) -> 
     with path.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
         if reader.fieldnames is None:
-            raise ValueError(f"{path} does not contain a header row.")
+            message = f"{path} does not contain a header row."
+            raise ValueError(message)
 
         missing_columns = sorted(set(required_columns).difference(reader.fieldnames))
         if missing_columns:
             joined = ", ".join(missing_columns)
-            raise ValueError(f"{path} is missing required columns: {joined}.")
+            message = f"{path} is missing required columns: {joined}."
+            raise ValueError(message)
 
         return [dict(row) for row in reader]
 
@@ -49,29 +57,34 @@ def _parse_accessibility_label(raw_value: str, *, path: Path, station_id: str) -
     value = raw_value.strip().lower()
     if value not in _VALID_ACCESSIBILITY_STATUSES:
         valid_values = ", ".join(_VALID_ACCESSIBILITY_STATUSES)
-        raise ValueError(
+        message = (
             f"{path} contains invalid ada_status {value!r} for station {station_id}. "
             f"Expected one of: {valid_values}."
         )
-    return value
+        raise ValueError(message)
+    return cast("AccessibilityLabel", value)
 
 
 def _parse_float(value: str, *, field_name: str, path: Path, row_id: str) -> float:
     try:
         return float(value)
     except ValueError as exc:
-        raise ValueError(
-            f"{path} contains a non-numeric {field_name!r} value for record {row_id!r}: {value!r}."
-        ) from exc
+        message = (
+            f"{path} contains a non-numeric {field_name!r} value "
+            f"for record {row_id!r}: {value!r}."
+        )
+        raise ValueError(message) from exc
 
 
 def _parse_int(value: int | str, *, field_name: str, path: Path, row_id: str) -> int:
     try:
         return int(value)
     except ValueError as exc:
-        raise ValueError(
-            f"{path} contains a non-integer {field_name!r} value for record {row_id!r}: {value!r}."
-        ) from exc
+        message = (
+            f"{path} contains a non-integer {field_name!r} value "
+            f"for record {row_id!r}: {value!r}."
+        )
+        raise ValueError(message) from exc
 
 
 def _ensure_unique_ids(records: list[dict[str, str]], *, id_field: str, path: Path) -> None:
@@ -85,7 +98,8 @@ def _ensure_unique_ids(records: list[dict[str, str]], *, id_field: str, path: Pa
 
     if duplicates:
         joined = ", ".join(sorted(duplicates))
-        raise ValueError(f"{path} contains duplicate {id_field} values: {joined}.")
+        message = f"{path} contains duplicate {id_field} values: {joined}."
+        raise ValueError(message)
 
 
 def load_gtfs(source: str | Path = DEFAULT_STATIONS_FIXTURE) -> StationDataset:
@@ -143,6 +157,7 @@ def load_accessibility_status(
 
 def load_outages(source: str | Path) -> Any:
     """Load current or historical elevator and escalator outage data."""
+    del source
     planned_surface("load_outages()")
 
 
@@ -155,7 +170,8 @@ def load_census_data(source: str | Path = DEFAULT_TRACTS_FIXTURE) -> Demographic
 
     features = raw_payload.get("features")
     if not isinstance(features, list):
-        raise ValueError(f"{path} must contain a GeoJSON FeatureCollection with features.")
+        message = f"{path} must contain a GeoJSON FeatureCollection with features."
+        raise TypeError(message)
 
     tracts: list[TractDemographics] = []
     seen_ids: set[str] = set()
@@ -163,24 +179,29 @@ def load_census_data(source: str | Path = DEFAULT_TRACTS_FIXTURE) -> Demographic
 
     for feature in features:
         if not isinstance(feature, dict):
-            raise ValueError(f"{path} contains a non-object feature entry.")
+            message = f"{path} contains a non-object feature entry."
+            raise TypeError(message)
 
         properties = feature.get("properties")
         if not isinstance(properties, dict):
-            raise ValueError(f"{path} contains a feature without object properties.")
+            message = f"{path} contains a feature without object properties."
+            raise TypeError(message)
 
         tract_id = str(properties.get("tract_id", "")).strip()
         if not tract_id:
-            raise ValueError(f"{path} contains a feature without a tract_id.")
+            message = f"{path} contains a feature without a tract_id."
+            raise ValueError(message)
         if tract_id in seen_ids:
             duplicates.add(tract_id)
         seen_ids.add(tract_id)
 
         geometry = feature.get("geometry")
         if not isinstance(geometry, dict) or geometry.get("type") != "Point":
-            raise ValueError(
-                f"{path} feature {tract_id} must use Point geometry for centroid-based v0.1 joins."
+            message = (
+                f"{path} feature {tract_id} must use Point geometry "
+                "for centroid-based v0.1 joins."
             )
+            raise TypeError(message)
 
         coordinates = geometry.get("coordinates")
         if (
@@ -188,9 +209,10 @@ def load_census_data(source: str | Path = DEFAULT_TRACTS_FIXTURE) -> Demographic
             or len(coordinates) != 2
             or not all(isinstance(value, int | float) for value in coordinates)
         ):
-            raise ValueError(
+            message = (
                 f"{path} feature {tract_id} must contain two numeric point coordinates."
             )
+            raise TypeError(message)
 
         tracts.append(
             TractDemographics(
@@ -238,7 +260,8 @@ def load_census_data(source: str | Path = DEFAULT_TRACTS_FIXTURE) -> Demographic
 
     if duplicates:
         joined = ", ".join(sorted(duplicates))
-        raise ValueError(f"{path} contains duplicate tract_id values: {joined}.")
+        message = f"{path} contains duplicate tract_id values: {joined}."
+        raise ValueError(message)
 
     return DemographicDataset(tracts=tuple(tracts))
 

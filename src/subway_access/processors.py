@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from statistics import fmean
 
-from ._geo import approximate_circle_polygon, haversine_distance_meters, walk_radius_meters
+from ._geo import build_circle_polygon, haversine_distance_meters, walk_radius_meters
 from ._not_implemented import planned_surface
 from .models import (
     AccessibilityScoreDataset,
@@ -19,18 +19,11 @@ from .models import (
     TractAccessibilityRecord,
 )
 
-WALKING_SPEED_METERS_PER_MINUTE = 80.0
-
 
 def generate_catchments(
     station_data: StationDataset, request: CatchmentRequest
 ) -> CatchmentDataset:
     """Generate first-pass Euclidean catchments for a walk threshold."""
-
-    if request.minutes <= 0:
-        raise ValueError("Catchment minutes must be greater than zero.")
-    if request.mode != "walk":
-        raise ValueError("Only walk catchments are implemented in v0.1.")
 
     radius_meters = walk_radius_meters(request.minutes)
     features = tuple(
@@ -44,7 +37,7 @@ def generate_catchments(
             radius_meters=radius_meters,
             minutes=request.minutes,
             method="euclidean-buffer-v0.1",
-            polygon=approximate_circle_polygon(
+            polygon=build_circle_polygon(
                 latitude=station.latitude,
                 longitude=station.longitude,
                 radius_meters=radius_meters,
@@ -71,9 +64,6 @@ def score_accessibility(
     """Score tract accessibility using station, catchment, and demographic inputs."""
 
     radius_by_station_id = catchments.radius_by_station_id()
-    station_name_by_id = {
-        station.station_id: station.name for station in station_data.accessible_stations
-    }
     accessible_stations = station_data.accessible_stations
 
     records: list[TractAccessibilityRecord] = []

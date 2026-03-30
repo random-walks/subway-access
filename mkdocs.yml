@@ -49,6 +49,7 @@ plugins:
 
 nav:
   - Home: index.md
+  - Usage: usage.md
   - Project Brief: project-brief.md
   - Data Sources: data-sources.md
   - MVP Roadmap: mvp-roadmap.md
