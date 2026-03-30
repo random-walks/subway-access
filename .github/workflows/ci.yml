@@ -35,7 +35,7 @@ jobs:
       - uses: astral-sh/setup-uv@v7
 
       - name: Install package and dev dependencies
-        run: uv sync --group docs
+        run: uv sync --group docs --group lint
 
       - name: Run Ruff
         run: uv run python -m ruff check src tests
