@@ -3,8 +3,15 @@ from __future__ import annotations
 import importlib.metadata
 from pathlib import Path
 
+import pytest
+
 import subway_access as m
-from subway_access.models import AccessibilityQuery, CatchmentRequest, ExportTarget, TimeWindow
+from subway_access.models import (
+    AccessibilityQuery,
+    CatchmentRequest,
+    ExportTarget,
+    TimeWindow,
+)
 
 
 def test_version() -> None:
@@ -24,3 +31,17 @@ def test_planned_surface_is_importable() -> None:
     assert callable(m.load_gtfs)
     assert callable(m.generate_catchments)
     assert callable(m.export_station_metrics)
+
+
+def test_unimplemented_surfaces_fail_loudly() -> None:
+    with pytest.raises(NotImplementedError, match="load_outages"):
+        m.load_outages("outages.json")
+
+    with pytest.raises(NotImplementedError, match="load_pedestrian_network"):
+        m.load_pedestrian_network()
+
+    with pytest.raises(NotImplementedError, match="compute_reliability"):
+        m.compute_reliability({}, {}, TimeWindow(days=30))
+
+    with pytest.raises(NotImplementedError, match="export_station_metrics"):
+        m.export_station_metrics({}, ExportTarget(format="csv", output_path=Path("stations.csv")))

@@ -1,6 +1,15 @@
 # Data Sources
 
-## Primary Inputs
+## Implemented In v0.1
+
+- packaged synthetic station fixture in a GTFS-like CSV shape
+- packaged synthetic ADA status fixture keyed by station ID
+- packaged synthetic tract centroid GeoJSON with demographic rates
+
+These fixtures are intentionally small and deterministic so the first release
+can be tested end to end without requiring live feed access.
+
+## Planned Official Inputs
 
 - MTA static GTFS station and route data
 - MTA elevator and escalator equipment feeds
@@ -17,9 +26,11 @@
 
 ## Early Technical Notes
 
-- first-pass catchments can be simpler than the eventual full network model
+- v0.1 uses Euclidean catchments around station points rather than network
+  isochrones
 - outage history may require local persistence and collection strategy notes
 - station naming crosswalks will matter early
+- tract joins currently use tract centroids rather than full polygon overlap
 
 ## Documentation Follow-Up
 
