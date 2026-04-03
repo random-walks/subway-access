@@ -24,9 +24,7 @@ except ImportError:  # pragma: no cover - fallback for editable installs
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="subway-access",
-        description=(
-            "Run the fixture-backed v0.1 subway accessibility demo workflow."
-        ),
+        description=("Run the fixture-backed v0.1 subway accessibility demo workflow."),
     )
     parser.add_argument(
         "--version",

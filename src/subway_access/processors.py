@@ -89,7 +89,9 @@ def score_accessibility(
             if distance <= radius:
                 covering_station_ids.append(station.station_id)
 
-        need_score = fmean((tract.disability_rate, tract.senior_rate, tract.poverty_rate))
+        need_score = fmean(
+            (tract.disability_rate, tract.senior_rate, tract.poverty_rate)
+        )
         records.append(
             TractAccessibilityRecord(
                 tract_id=tract.tract_id,
@@ -134,7 +136,9 @@ def analyze_gaps(scored_data: AccessibilityScoreDataset) -> GapAnalysis:
                     nearest_accessible_station_id=record.nearest_accessible_station_id,
                     nearest_accessible_station_name=record.nearest_accessible_station_name,
                     nearest_accessible_distance_meters=record.nearest_accessible_distance_meters,
-                    gap_score=0.0 if record.has_accessible_station else record.need_score,
+                    gap_score=0.0
+                    if record.has_accessible_station
+                    else record.need_score,
                     gap_label="covered" if record.has_accessible_station else "gap",
                 )
                 for record in scored_data.records

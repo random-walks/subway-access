@@ -44,4 +44,6 @@ def test_unimplemented_surfaces_fail_loudly() -> None:
         m.compute_reliability({}, {}, TimeWindow(days=30))
 
     with pytest.raises(NotImplementedError, match="export_station_metrics"):
-        m.export_station_metrics({}, ExportTarget(format="csv", output_path=Path("stations.csv")))
+        m.export_station_metrics(
+            {}, ExportTarget(format="csv", output_path=Path("stations.csv"))
+        )

@@ -41,24 +41,6 @@ classifiers = [
 dynamic = ["version"]
 dependencies = []
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/subway_access"]
-
-[tool.hatch.build.targets.sdist]
-include = [
-  "/src/subway_access",
-  "/tests",
-  "/README.md",
-  "/LICENSE",
-  "/Makefile",
-  "/CODE_OF_CONDUCT.md",
-  "/SECURITY.md",
-  "/docs",
-  "/scripts",
-  "/mkdocs.yml",
-  "/.readthedocs.yaml",
-]
-
 [project.scripts]
 subway-access = "subway_access.cli:main"
 
@@ -101,6 +83,24 @@ default-groups = ["dev"]
 [tool.hatch]
 version.source = "vcs"
 build.hooks.vcs.version-file = "src/subway_access/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/subway_access"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src/subway_access",
+  "/tests",
+  "/README.md",
+  "/LICENSE",
+  "/Makefile",
+  "/CODE_OF_CONDUCT.md",
+  "/SECURITY.md",
+  "/docs",
+  "/scripts",
+  "/mkdocs.yml",
+  "/.readthedocs.yaml",
+]
 
 [tool.hatch.envs.default]
 dependency-groups = ["dev"]

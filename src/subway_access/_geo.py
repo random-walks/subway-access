@@ -22,7 +22,6 @@ except ImportError:  # pragma: no cover - fallback until toolkit release adoptio
     _POSITIVE_RADIUS_MESSAGE = "Catchment radius must be positive."
     _MINIMUM_SIDES_MESSAGE = "Catchment polygon needs at least 8 sides."
 
-
     def haversine_distance_meters(
         latitude_a: float,
         longitude_a: float,
@@ -39,12 +38,8 @@ except ImportError:  # pragma: no cover - fallback until toolkit release adoptio
         delta_lat = lat2 - lat1
         delta_lon = lon2 - lon1
 
-        hav = (
-            sin(delta_lat / 2) ** 2
-            + cos(lat1) * cos(lat2) * sin(delta_lon / 2) ** 2
-        )
+        hav = sin(delta_lat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(delta_lon / 2) ** 2
         return 2 * EARTH_RADIUS_METERS * asin(sqrt(hav))
-
 
     def walk_radius_meters(minutes: int) -> float:
         """Convert walking minutes into the v0.1 Euclidean radius."""
@@ -52,7 +47,6 @@ except ImportError:  # pragma: no cover - fallback until toolkit release adoptio
         if minutes <= 0:
             raise ValueError(_POSITIVE_MINUTES_MESSAGE)
         return minutes * METERS_PER_MINUTE_WALKING
-
 
     def build_circle_polygon(
         latitude: float,

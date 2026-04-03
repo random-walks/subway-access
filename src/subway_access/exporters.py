@@ -17,8 +17,7 @@ if TYPE_CHECKING:
 def _validate_target_format(target: ExportTarget, *, expected_format: str) -> Path:
     if target.format.lower() != expected_format:
         message = (
-            f"Expected export target format {expected_format!r}, got "
-            f"{target.format!r}."
+            f"Expected export target format {expected_format!r}, got {target.format!r}."
         )
         raise ValueError(message)
 
@@ -98,7 +97,9 @@ def export_gap_table(data: GapAnalysis, target: ExportTarget) -> Path:
                     "poverty_rate": f"{record.poverty_rate:.4f}",
                     "total_population": record.total_population,
                     "need_score": f"{record.need_score:.4f}",
-                    "has_accessible_station": str(record.has_accessible_station).lower(),
+                    "has_accessible_station": str(
+                        record.has_accessible_station
+                    ).lower(),
                     "accessible_station_count": record.accessible_station_count,
                     "nearest_accessible_station_id": record.nearest_accessible_station_id
                     or "",

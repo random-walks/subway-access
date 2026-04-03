@@ -144,7 +144,9 @@ def main() -> int:
             )
 
         symbol = getattr(module, symbol_name)
-        origin_module = import_map.get(symbol_name, getattr(symbol, "__module__", module_name))
+        origin_module = import_map.get(
+            symbol_name, getattr(symbol, "__module__", module_name)
+        )
         if symbol_name == "__version__":
             origin_module = "subway_access._version"
 

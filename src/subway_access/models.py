@@ -182,7 +182,9 @@ class StationDataset:
         unknown_ids = sorted(set(status_by_station).difference(station_ids))
         if unknown_ids:
             joined_ids = ", ".join(unknown_ids)
-            message = f"Accessibility data references unknown station IDs: {joined_ids}."
+            message = (
+                f"Accessibility data references unknown station IDs: {joined_ids}."
+            )
             raise ValueError(message)
 
         merged = tuple(
@@ -228,9 +230,7 @@ class CatchmentDataset:
     def radius_by_station_id(self) -> dict[str, float]:
         """Return catchment radius values keyed by station identifier."""
 
-        return {
-            feature.station_id: feature.radius_meters for feature in self.features
-        }
+        return {feature.station_id: feature.radius_meters for feature in self.features}
 
 
 @dataclass(frozen=True, slots=True)

@@ -22,9 +22,14 @@ def main() -> None:
     fallback_cli = shutil.which("subway-access")
     if fallback_cli is not None:
         cli_candidates.append(Path(fallback_cli))
-    cli_path = next((candidate for candidate in cli_candidates if candidate.exists()), cli_candidates[0])
+    cli_path = next(
+        (candidate for candidate in cli_candidates if candidate.exists()),
+        cli_candidates[0],
+    )
     if not cli_path.exists():
-        raise SystemExit("Installed package is missing the `subway-access` console script.")
+        raise SystemExit(
+            "Installed package is missing the `subway-access` console script."
+        )
 
     subprocess.run([str(cli_path), "--help"], check=True)
 

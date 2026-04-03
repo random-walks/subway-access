@@ -36,7 +36,9 @@ def _resolve_source(source: str | Path) -> Path:
     return Path(source).expanduser().resolve()
 
 
-def _load_csv_rows(source: str | Path, *, required_columns: tuple[str, ...]) -> list[dict[str, str]]:
+def _load_csv_rows(
+    source: str | Path, *, required_columns: tuple[str, ...]
+) -> list[dict[str, str]]:
     path = _resolve_source(source)
     with path.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
@@ -53,7 +55,9 @@ def _load_csv_rows(source: str | Path, *, required_columns: tuple[str, ...]) -> 
         return [dict(row) for row in reader]
 
 
-def _parse_accessibility_label(raw_value: str, *, path: Path, station_id: str) -> AccessibilityLabel:
+def _parse_accessibility_label(
+    raw_value: str, *, path: Path, station_id: str
+) -> AccessibilityLabel:
     value = raw_value.strip().lower()
     if value not in _VALID_ACCESSIBILITY_STATUSES:
         valid_values = ", ".join(_VALID_ACCESSIBILITY_STATUSES)
@@ -87,7 +91,9 @@ def _parse_int(value: int | str, *, field_name: str, path: Path, row_id: str) ->
         raise ValueError(message) from exc
 
 
-def _ensure_unique_ids(records: list[dict[str, str]], *, id_field: str, path: Path) -> None:
+def _ensure_unique_ids(
+    records: list[dict[str, str]], *, id_field: str, path: Path
+) -> None:
     seen_ids: set[str] = set()
     duplicates: set[str] = set()
     for record in records:
@@ -123,10 +129,16 @@ def load_gtfs(source: str | Path = DEFAULT_STATIONS_FIXTURE) -> StationDataset:
             name=row["name"].strip(),
             borough=row["borough"].strip(),
             latitude=_parse_float(
-                row["latitude"], field_name="latitude", path=path, row_id=row["station_id"]
+                row["latitude"],
+                field_name="latitude",
+                path=path,
+                row_id=row["station_id"],
             ),
             longitude=_parse_float(
-                row["longitude"], field_name="longitude", path=path, row_id=row["station_id"]
+                row["longitude"],
+                field_name="longitude",
+                path=path,
+                row_id=row["station_id"],
             ),
         )
         for row in rows

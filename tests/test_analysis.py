@@ -99,9 +99,7 @@ def test_duplicate_station_ids_raise_value_error(tmp_path: Path) -> None:
 def test_generate_catchments_and_gap_scoring() -> None:
     station_data = load_gtfs().with_accessibility(load_accessibility_status())
     demographics = load_census_data()
-    catchments = generate_catchments(
-        station_data, CatchmentRequest(minutes=10)
-    )
+    catchments = generate_catchments(station_data, CatchmentRequest(minutes=10))
     scores = score_accessibility(station_data, catchments, demographics)
     gaps = analyze_gaps(scores)
 
@@ -123,12 +121,12 @@ def test_generate_catchments_and_gap_scoring() -> None:
 def test_exporters_write_expected_gap_and_geojson_outputs(tmp_path: Path) -> None:
     station_data = load_gtfs().with_accessibility(load_accessibility_status())
     demographics = load_census_data()
-    catchments = generate_catchments(
-        station_data, CatchmentRequest(minutes=10)
-    )
+    catchments = generate_catchments(station_data, CatchmentRequest(minutes=10))
     gaps = analyze_gaps(score_accessibility(station_data, catchments, demographics))
 
-    geojson_target = ExportTarget(format="geojson", output_path=tmp_path / "catchments.geojson")
+    geojson_target = ExportTarget(
+        format="geojson", output_path=tmp_path / "catchments.geojson"
+    )
     csv_target = ExportTarget(format="csv", output_path=tmp_path / "gaps.csv")
     geojson_path = export_catchments_geojson(catchments, geojson_target)
     csv_path = export_gap_table(gaps, csv_target)
@@ -150,7 +148,9 @@ def test_exporters_write_expected_gap_and_geojson_outputs(tmp_path: Path) -> Non
     assert rows[0]["gap_label"] == "gap"
 
 
-def test_cli_demo_writes_outputs(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+def test_cli_demo_writes_outputs(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
     exit_code = main(["demo", "--output-dir", str(tmp_path), "--minutes", "10"])
     captured = capsys.readouterr()
 
