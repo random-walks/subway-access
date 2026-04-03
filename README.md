@@ -90,7 +90,8 @@ isochrone model. Reliability-aware analysis remains future work.
 
 ## Documentation
 
-- Hosted docs: [subway-access.readthedocs.io](https://subway-access.readthedocs.io/)
+- Hosted docs:
+  [subway-access.readthedocs.io](https://subway-access.readthedocs.io/)
 - Local preview: `make docs`
 - Strict docs build: `make docs-build`
 

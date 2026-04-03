@@ -35,6 +35,7 @@ policy, planning, journalism, and reproducible civic-tech workflows.
 
 ## Docs Paths
 
-- Hosted docs: [subway-access.readthedocs.io](https://subway-access.readthedocs.io/)
+- Hosted docs:
+  [subway-access.readthedocs.io](https://subway-access.readthedocs.io/)
 - Local preview: `make docs`
 - Strict docs build: `make docs-build`

@@ -1,7 +1,7 @@
 # API overview
 
-The public API now mixes a small implemented v0.1 slice with explicit
-typed placeholders for planned later capabilities.
+The public API now mixes a small implemented v0.1 slice with explicit typed
+placeholders for planned later capabilities.
 
 ## Implemented in v0.1
 
@@ -25,8 +25,8 @@ These callables remain intentionally unimplemented and continue to raise
 - reliability scoring
 - station metrics export
 
-That split is intentional: the public surface should stay honest about what
-is real today versus still planned.
+That split is intentional: the public surface should stay honest about what is
+real today versus still planned.
 
 ## Models
 

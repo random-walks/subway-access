@@ -1,15 +1,15 @@
 # subway-access
 
-`subway-access` is a Python-first toolkit for measuring how accessible NYC subway
-service really is once you account for walking distance and neighborhood need.
+`subway-access` is a Python-first toolkit for measuring how accessible NYC
+subway service really is once you account for walking distance and neighborhood
+need.
 
 ## Implemented in v0.1
 
 The current release includes one real, deterministic happy path:
 
 - load a small packaged station dataset plus ADA status rows
-- generate first-pass Euclidean catchments from a fixed walking-speed
-  assumption
+- generate first-pass Euclidean catchments from a fixed walking-speed assumption
 - load tract-level demographic fixture data
 - compute tract-level need and accessibility gap outputs
 - export catchments to GeoJSON and gaps to CSV
@@ -17,9 +17,9 @@ The current release includes one real, deterministic happy path:
 
 ## Planned later
 
-The project still aims to move beyond binary ADA labels toward
-reliability-aware analysis, but the following surfaces remain intentionally
-unimplemented placeholders:
+The project still aims to move beyond binary ADA labels toward reliability-aware
+analysis, but the following surfaces remain intentionally unimplemented
+placeholders:
 
 - outage loading
 - pedestrian network loading

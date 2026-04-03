@@ -7,16 +7,16 @@
         "tract_id": "36061000100",
         "borough": "Manhattan",
         "tract_name": "Lower East Side Core",
-        "centroid_latitude": 40.7180,
-        "centroid_longitude": -73.9890,
+        "centroid_latitude": 40.718,
+        "centroid_longitude": -73.989,
         "disability_rate": 0.11,
-        "senior_rate": 0.10,
+        "senior_rate": 0.1,
         "poverty_rate": 0.19,
         "population": 5200
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-73.9890, 40.7180]
+        "coordinates": [-73.989, 40.718]
       }
     },
     {
@@ -25,8 +25,8 @@
         "tract_id": "36061000200",
         "borough": "Manhattan",
         "tract_name": "Two Bridges",
-        "centroid_latitude": 40.7130,
-        "centroid_longitude": -73.9870,
+        "centroid_latitude": 40.713,
+        "centroid_longitude": -73.987,
         "disability_rate": 0.17,
         "senior_rate": 0.16,
         "poverty_rate": 0.27,
@@ -34,7 +34,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [-73.9870, 40.7130]
+        "coordinates": [-73.987, 40.713]
       }
     },
     {

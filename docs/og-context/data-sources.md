@@ -22,7 +22,8 @@ can be tested end to end without requiring live feed access.
 
 - prefer official or well-documented public sources
 - document all joins between station, complex, stop, and tract identifiers
-- keep methodology explicit when historical outage data must be collected rather than downloaded as a clean archive
+- keep methodology explicit when historical outage data must be collected rather
+  than downloaded as a clean archive
 
 ## Early Technical Notes
 

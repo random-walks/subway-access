@@ -30,13 +30,17 @@ This repo uses trusted publishing through `.github/workflows/cd.yml` and the
 
 Before the first public release, complete these one-time steps:
 
-1. Create or verify the PyPI account that will own `subway-access`, and enable 2FA.
+1. Create or verify the PyPI account that will own `subway-access`, and enable
+   2FA.
 2. Create or verify a TestPyPI account if you want a dry run first.
-3. Add a pending trusted publisher for project `subway-access` on TestPyPI and PyPI using:
-  - Owner: `random-walks`
-  - Repository: `subway-access`
-  - Workflow: `.github/workflows/cd.yml`
-  - Environment: `pypi`
+3. Add a pending trusted publisher for project `subway-access` on TestPyPI and
+   PyPI using:
+
+- Owner: `random-walks`
+- Repository: `subway-access`
+- Workflow: `.github/workflows/cd.yml`
+- Environment: `pypi`
+
 4. Create the `pypi` environment in GitHub.
 5. Set `PYPI_PUBLISH_ENABLED=true` when you are ready to allow publishing.
 
@@ -49,4 +53,3 @@ The standard production path is:
 3. optionally run the `CD` workflow against TestPyPI first
 4. publish the matching GitHub Release
 5. let the `release.published` trigger publish to real PyPI
-

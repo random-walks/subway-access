@@ -98,5 +98,5 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         return run_demo(args.output_dir, minutes=args.minutes)
     except ValueError as exc:
-        parser._print_message(f"{parser.prog}: error: {exc}\n", sys.stderr)
+        sys.stderr.write(f"{parser.prog}: error: {exc}\n")
         raise SystemExit(2) from exc

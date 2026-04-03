@@ -8,7 +8,8 @@ analysis path and a larger explicit roadmap.
 - `subway_access.loaders`: fixture and file loading entry points
 - `subway_access.processors`: catchment generation, scoring, and gap analysis
 - `subway_access.exporters`: GeoJSON and CSV outputs
-- `subway_access.models`: typed data contracts for requests, datasets, and exports
+- `subway_access.models`: typed data contracts for requests, datasets, and
+  exports
 - `subway_access.cli`: installed demo workflow
 
 ## Current data flow
