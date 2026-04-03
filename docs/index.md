@@ -1,46 +1,40 @@
 # subway-access
 
-`subway-access` is a Python-first toolkit for measuring how accessible NYC subway
-service really is once you account for walking distance and neighborhood need.
+`subway-access` is a Python toolkit for reproducible NYC subway accessibility
+analysis.
 
-## Implemented in v0.1
+It is designed to answer a practical question: which neighborhoods have weak
+access to accessible stations today, and how can that gap be measured with a
+small, transparent workflow?
 
-The current release includes one real, deterministic happy path:
+## What ships now
 
-- load a small packaged station dataset plus ADA status rows
-- generate first-pass Euclidean catchments from a fixed walking-speed
-  assumption
+The current `0.1` line provides one honest end-to-end slice:
+
+- load a narrow GTFS-like station dataset
+- load ADA accessibility status rows
 - load tract-level demographic fixture data
-- compute tract-level need and accessibility gap outputs
-- export catchments to GeoJSON and gaps to CSV
-- run the full flow from the `subway-access demo` CLI command
+- generate Euclidean first-pass walk catchments
+- score tract accessibility coverage
+- export GeoJSON and CSV outputs
+- run the packaged demo from the installed `subway-access` CLI
 
-## Planned later
+## What does not ship yet
 
-The project still aims to move beyond binary ADA labels toward
-reliability-aware analysis, but the following surfaces remain intentionally
-unimplemented placeholders:
+These surfaces remain explicit placeholders so the roadmap stays visible:
 
-- outage loading
-- pedestrian network loading
+- outage ingestion
+- pedestrian-network routing
 - reliability scoring
-- advanced routing and travel-time modeling
-- broader station metrics exports
+- station-level metrics export
 
-## Project Focus
+## Positioning
 
-- move past binary ADA labels toward reliability-aware analysis
-- connect station accessibility with who lives nearby
-- keep outputs useful for both policy work and reproducible research
-- make borough-scale workflows easy before expanding to richer dashboards
+This package is not a trip planner. It is a transparent analysis toolkit for
+policy, planning, journalism, and reproducible civic-tech workflows.
 
-## Read Next
+## Docs Paths
 
-- [Project brief](project-brief.md)
-- [Data sources](data-sources.md)
-- [MVP roadmap](mvp-roadmap.md)
-- [Python API](api.md)
-- [Agent kickoff TODO](agent-kickoff-todo.md)
-- [Agent handoff prompt](agent-handoff-prompt.md)
-- [Original seed spec](notes/original-spec.md)
-- [Gap explination](notes/gap-explination.md)
+- Hosted docs: [subway-access.readthedocs.io](https://subway-access.readthedocs.io/)
+- Local preview: `make docs`
+- Strict docs build: `make docs-build`

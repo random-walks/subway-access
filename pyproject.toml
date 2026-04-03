@@ -6,17 +6,27 @@ build-backend = "hatchling.build"
 [project]
 name = "subway-access"
 authors = [
-  { name = "random-walks", email = "blaise@buenaola.io" },
+  { name = "Blaise Albis-Burdige" },
 ]
 description = "Spatial analysis toolkit for evaluating NYC subway accessibility, reliability, and equity gaps."
 readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
 requires-python = ">=3.10"
+keywords = [
+  "nyc",
+  "subway",
+  "accessibility",
+  "transit",
+  "civic-tech",
+  "open-data",
+  "geospatial",
+]
 classifiers = [
-  "Development Status :: 1 - Planning",
+  "Development Status :: 4 - Beta",
   "Intended Audience :: Science/Research",
   "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
@@ -25,7 +35,6 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
-  "Programming Language :: Python :: 3.14",
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
@@ -41,7 +50,13 @@ include = [
   "/tests",
   "/README.md",
   "/LICENSE",
+  "/Makefile",
+  "/CODE_OF_CONDUCT.md",
+  "/SECURITY.md",
   "/docs",
+  "/scripts",
+  "/mkdocs.yml",
+  "/.readthedocs.yaml",
 ]
 
 [project.scripts]
@@ -49,6 +64,8 @@ subway-access = "subway_access.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/random-walks/subway-access"
+"Documentation" = "https://subway-access.readthedocs.io/"
+Portfolio = "https://blaiseab.com/"
 "Bug Tracker" = "https://github.com/random-walks/subway-access/issues"
 Discussions = "https://github.com/random-walks/subway-access/discussions"
 Changelog = "https://github.com/random-walks/subway-access/releases"
@@ -74,7 +91,11 @@ docs = [
     "mkdocs>=1.1.2",
     "mkdocstrings-python>=1.18.2",
     "pyyaml>=6.0.1",
+    "ruff>=0.12",
 ]
+
+[tool.uv]
+default-groups = ["dev"]
 
 
 [tool.hatch]

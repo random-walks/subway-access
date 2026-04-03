@@ -1,9 +1,10 @@
 site_name: subway-access
 site_url: https://subway-access.readthedocs.io/
-site_author: "random-walks"
+site_author: "Blaise Albis-Burdige"
 
-repo_name: "random-walks/subway_access"
+repo_name: "random-walks/subway-access"
 repo_url: "https://github.com/random-walks/subway-access"
+exclude_docs: og-context/
 
 theme:
   name: material
@@ -29,6 +30,13 @@ theme:
         icon: material/weather-night
         name: Switch to dark mode
 
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+
 plugins:
   autorefs: {}
   mkdocstrings:
@@ -37,7 +45,6 @@ plugins:
         paths: [.]
         inventories:
           - https://docs.python.org/3/objects.inv
-          - https://docs.pydantic.dev/latest/objects.inv
         options:
           members_order: source
           separate_signature: true
@@ -49,13 +56,10 @@ plugins:
 
 nav:
   - Home: index.md
-  - Usage: usage.md
-  - Project Brief: project-brief.md
-  - Data Sources: data-sources.md
-  - MVP Roadmap: mvp-roadmap.md
-  - Agent Kickoff TODO: agent-kickoff-todo.md
-  - Agent Handoff Prompt: agent-handoff-prompt.md
-  - Python API: api.md
-  - Notes:
-      - Original Spec: notes/original-spec.md
-      - Gap explination: notes/gap-explination.md
+  - Getting Started: getting-started.md
+  - CLI Reference: cli.md
+  - Architecture: architecture.md
+  - API Reference: api.md
+  - Contributing: contributing.md
+  - Releasing: releasing.md
+  - Changelog: changelog.md

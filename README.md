@@ -5,80 +5,47 @@
 [![PyPI version][pypi-version]][pypi-link]
 [![PyPI platforms][pypi-platforms]][pypi-link]
 
-`subway-access` is a Python-first toolkit for making subway accessibility gaps
-visible at the neighborhood level.
+`subway-access` is a Python toolkit for reproducible NYC subway accessibility
+analysis.
 
-The v0.1 foundation deliberately implements only a narrow, honest slice of the
-seeded vision:
+It is designed to measure neighborhood access to accessible stations with a
+small, transparent workflow that is easy to inspect, test, and extend.
+
+## What ships in the `0.1` line
+
+The current release deliberately implements one narrow, honest slice:
 
 - load a small station dataset plus ADA status data
 - generate first-pass Euclidean walk catchments
 - join tract-level demographics
 - export one tract accessibility-gap table plus catchment GeoJSON
+- run the full fixture-backed workflow from the installed CLI
 
-It does **not** pretend to ship advanced routing, travel-time modeling, or
-reliability analysis yet. Those surfaces remain explicit typed placeholders that
-raise `NotImplementedError`.
+It does **not** pretend to ship outage-aware reliability scoring, pedestrian
+network routing, or richer station-level metrics yet. Those surfaces remain
+explicit typed placeholders that raise `NotImplementedError`.
 
 ## Why this exists
 
-Official MTA and NYC data can tell you whether a station is marked accessible,
-and live feeds can tell you when equipment is out of service. What is much
-harder to answer is whether neighborhoods with high disability, age, and
-poverty burdens have good access to accessible stations in practice.
+Official MTA and NYC data can tell you whether a station is nominally
+accessible, but the policy question is broader: which neighborhoods have weak
+access to accessible transit in practice?
 
-This project is meant to grow into a reusable analysis toolkit rather than a
-one-off notebook or trip planner.
-
-## Implemented now in v0.1
-
-- `load_gtfs()` for a narrow GTFS-like station CSV
-- `load_accessibility_status()` for station ADA status rows
-- `load_census_data()` for tract centroid + demographic GeoJSON
-- `generate_catchments()` using a documented Euclidean first pass
-- `score_accessibility()` for tract-level joins against accessible stations
-- `analyze_gaps()` for a basic tract accessibility-gap output
-- `export_catchments_geojson()` and `export_gap_table()`
-- `subway-access demo` CLI command backed by packaged fixture data
-
-## Planned later
-
-These public surfaces stay importable but intentionally fail loudly because they
-are not honestly implemented yet:
-
-- `load_outages()`
-- `load_pedestrian_network()`
-- `compute_reliability()`
-- `export_station_metrics()`
-
-## Methodology for the implemented slice
-
-The current release uses a simple, deterministic methodology:
-
-1. load stations and ADA status
-2. mark missing ADA rows as `unknown`
-3. create circular walk catchments using a fixed walking speed
-4. test each tract centroid against accessible-station catchments
-5. compute a tract need score from disability, senior, and poverty rates
-6. assign a basic gap score when high-need tracts have no accessible station in
-   catchment
-
-This is intentionally a **first-pass Euclidean approximation**, not a network
-isochrone model. The roadmap still treats pedestrian-network routing and outage
-reliability as future work.
+This repo aims to grow into a reusable analysis toolkit rather than a notebook
+dump or trip planner.
 
 ## Quickstart
 
-Install in editable mode for development:
+Install:
 
 ```bash
-python -m pip install -e .
+pip install subway-access
 ```
 
 Run the packaged demo workflow:
 
 ```bash
-python -m subway_access.cli demo --output-dir ./demo-output --minutes 10
+subway-access demo --output-dir demo-output --minutes 10
 ```
 
 This writes:
@@ -86,23 +53,55 @@ This writes:
 - `demo-output/catchments.geojson`
 - `demo-output/accessibility-gaps.csv`
 
-## Seeded sources of truth
+## Python example
 
-The seeded docs remain the source of truth for scope and positioning:
+```python
+from subway_access import (
+    CatchmentRequest,
+    analyze_gaps,
+    generate_catchments,
+    load_accessibility_status,
+    load_census_data,
+    load_gtfs,
+    score_accessibility,
+)
 
-- `docs/notes/original-spec.md`
-- `docs/notes/gap-explination.md`
-- `docs/mvp-roadmap.md`
-- `docs/agent-kickoff-todo.md`
+stations = load_gtfs().with_accessibility(load_accessibility_status())
+demographics = load_census_data()
+catchments = generate_catchments(stations, CatchmentRequest(minutes=10))
+scores = score_accessibility(stations, catchments, demographics)
+gaps = analyze_gaps(scores)
+print(len(gaps.records))
+```
+
+## Current methodology
+
+The implemented `0.1` workflow is intentionally simple and reproducible:
+
+1. load stations and ADA status
+2. create circular walk catchments using a fixed walking speed
+3. test each tract centroid against accessible-station catchments
+4. compute a tract need score from disability, senior, and poverty rates
+5. assign a basic gap score when high-need tracts have no accessible station in
+   catchment
+
+This is intentionally a **first-pass Euclidean approximation**, not a network
+isochrone model. Reliability-aware analysis remains future work.
+
+## Documentation
+
+- Hosted docs: [subway-access.readthedocs.io](https://subway-access.readthedocs.io/)
+- Local preview: `make docs`
+- Strict docs build: `make docs-build`
 
 ## Development
 
 ```bash
-python -m pip install -e . pytest pytest-cov ruff mypy
-python -m ruff check src tests
-python -m mypy src tests
-python -m pytest
-python -m mkdocs build
+make install-dev
+make test
+make lint
+make docs-build
+make ci
 ```
 
 ## License

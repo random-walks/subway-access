@@ -1,29 +1,22 @@
-See the [Scientific Python Developer Guide][spc-dev-intro] for a detailed
-description of best practices for developing scientific packages.
+See the [Scientific Python Developer Guide][spc-dev-intro] for broader
+background on Python package maintenance.
 
 [spc-dev-intro]: https://learn.scientific-python.org/development/
 
 # Quick development
 
-The fastest way to start with development is to use nox. If you don't have nox,
-you can use `uvx nox` to run it without installing, or `uv tool install nox`. If
-you don't have uv, you can
-[install it a variety of ways](https://docs.astral.sh/uv/getting-started/installation/),
-including with pip, pipx, brew, and just downloading the binary (single file).
+The fastest way to start with development is to use the repo Makefile:
 
-To use, run `nox`. This will lint and test using every installed version of
-Python on your system, skipping ones that are not installed. You can also run
-specific jobs:
-
-```console
-$ nox -s lint  # Lint only
-$ nox -s tests  # Python tests
-$ nox -s docs  # Build and serve the docs
-$ nox -s build  # Make an SDist and wheel
+```bash
+make install-dev
+make test
+make lint
+make docs-build
+make ci
 ```
 
-Nox handles everything for you, including setting up an temporary virtual
-environment for each run.
+`nox` is still available for repository hygiene hooks and focused sessions, but
+`make` is the primary local interface so it matches CI.
 
 # Setting up a development environment manually
 
@@ -35,23 +28,21 @@ uv sync
 
 # Pre-commit
 
-You should prepare pre-commit or prek, which will help you by checking that
-commits pass required checks:
+Install `pre-commit` to run the same hygiene checks used in CI:
 
 ```bash
 uv tool install pre-commit # or brew install pre-commit on macOS
-pre-commit install # Will install a pre-commit hook into the git repo
+pre-commit install
 ```
 
-You can also/alternatively run `pre-commit run` (changes only) or
-`pre-commit run --all-files` to check even without installing the hook.
+You can also run `pre-commit run --all-files`.
 
 # Testing
 
 Use pytest to run the unit checks:
 
 ```bash
-uv run pytest
+make test
 ```
 
 # Coverage
@@ -59,7 +50,7 @@ uv run pytest
 Use pytest-cov to generate coverage reports:
 
 ```bash
-uv run pytest --cov=subway-access
+uv run pytest --cov=subway_access
 ```
 
 # Building docs
@@ -67,11 +58,11 @@ uv run pytest --cov=subway-access
 You can build and serve the docs using:
 
 ```bash
-nox -s docs
+make docs
 ```
 
 You can build the docs only with:
 
 ```bash
-nox -s docs --non-interactive
+make docs-build
 ```

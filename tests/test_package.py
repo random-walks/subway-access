@@ -15,7 +15,7 @@ from subway_access.models import (
 
 
 def test_version() -> None:
-    assert importlib.metadata.version("subway_access") == m.__version__
+    assert importlib.metadata.version("subway-access") == m.__version__
 
 
 def test_planned_surface_is_importable() -> None:
