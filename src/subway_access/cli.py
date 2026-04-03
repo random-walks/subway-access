@@ -15,6 +15,11 @@ from .processors import analyze_gaps, generate_catchments, score_accessibility
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
+try:
+    from ._version import version as _VERSION
+except ImportError:  # pragma: no cover - fallback for editable installs
+    _VERSION = "0+unknown"
+
 
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
@@ -22,6 +27,11 @@ def _build_parser() -> argparse.ArgumentParser:
         description=(
             "Run the fixture-backed v0.1 subway accessibility demo workflow."
         ),
+    )
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"%(prog)s {_VERSION}",
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 

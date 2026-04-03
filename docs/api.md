@@ -1,49 +1,12 @@
-# API overview
+# API Reference
 
-The public API now mixes a small implemented v0.1 slice with explicit
-typed placeholders for planned later capabilities.
+The stable public surface for this package is the top-level `subway_access`
+namespace.
 
-## Implemented in v0.1
+This page is generated from that namespace so the published docs, package
+exports, and API audit stay aligned.
 
-- station loading from a narrow GTFS-like CSV fixture
-- ADA status loading
-- tract demographic loading from a centroid-based GeoJSON fixture
-- Euclidean first-pass catchment generation
-- tract accessibility scoring
-- tract accessibility gap analysis
-- GeoJSON catchment export
-- CSV accessibility-gap export
-- `subway-access demo` CLI workflow
+Underscore-prefixed modules are internal implementation details and are not part
+of the supported public contract.
 
-## Still planned later
-
-These callables remain intentionally unimplemented and continue to raise
-`NotImplementedError`:
-
-- outage loading
-- pedestrian network loading
-- reliability scoring
-- station metrics export
-
-That split is intentional: the public surface should stay honest about what
-is real today versus still planned.
-
-## Models
-
-::: subway_access.models
-
-## Loaders
-
-::: subway_access.loaders
-
-## Processors
-
-::: subway_access.processors
-
-## Exporters
-
-::: subway_access.exporters
-
-## CLI
-
-::: subway_access.cli
+::: subway_access
