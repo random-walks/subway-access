@@ -99,8 +99,7 @@ isochrone model. Reliability-aware analysis remains future work.
 
 ## Quick links
 
-Docs:
-[Home](https://subway-access.readthedocs.io/en/latest/),
+Docs: [Home](https://subway-access.readthedocs.io/en/latest/),
 [Getting Started](https://subway-access.readthedocs.io/en/latest/getting-started/),
 [CLI Reference](https://subway-access.readthedocs.io/en/latest/cli/),
 [Architecture](https://subway-access.readthedocs.io/en/latest/architecture/),
