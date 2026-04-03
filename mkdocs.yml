@@ -59,7 +59,7 @@ nav:
   - Getting Started: getting-started.md
   - CLI Reference: cli.md
   - Architecture: architecture.md
-  - API Reference: api.md
+  - Python API: api.md
   - Contributing: contributing.md
   - Releasing: releasing.md
   - Changelog: changelog.md

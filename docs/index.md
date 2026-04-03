@@ -3,6 +3,8 @@
 `subway-access` is a Python toolkit for reproducible NYC subway accessibility
 analysis.
 
+Authored by [Blaise Albis-Burdige](https://blaiseab.com/).
+
 It is designed to answer a practical question: which neighborhoods have weak
 access to accessible stations today, and how can that gap be measured with a
 small, transparent workflow?
@@ -39,3 +41,14 @@ policy, planning, journalism, and reproducible civic-tech workflows.
   [subway-access.readthedocs.io](https://subway-access.readthedocs.io/)
 - Local preview: `make docs`
 - Strict docs build: `make docs-build`
+
+## Choose Your Path
+
+- Start with [Getting Started](getting-started.md) for installation and the
+  first fixture-backed run.
+- Use [CLI Reference](cli.md) for repeatable command-line usage.
+- Use [Architecture](architecture.md) to understand the current data flow and
+  shared geography boundaries.
+- Use [Python API](api.md) for the complete public package surface.
+- Use [Contributing](contributing.md) if you are maintaining or extending the
+  repo.

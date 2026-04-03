@@ -23,26 +23,21 @@ make docs-build
 make smoke-dist
 ```
 
-## Trusted publishing setup
+That covers:
 
-This repo uses trusted publishing through `.github/workflows/cd.yml` and the
-`pypi` GitHub environment.
+- lint, typing, and public API checks
+- docs build validation
+- source and wheel builds
+- installed-wheel smoke testing for the CLI and packaged demo workflow
 
-Before the first public release, complete these one-time steps:
+## Publishing configuration
 
-1. Create or verify the PyPI account that will own `subway-access`, and enable
-   2FA.
-2. Create or verify a TestPyPI account if you want a dry run first.
-3. Add a pending trusted publisher for project `subway-access` on TestPyPI and
-   PyPI using:
+This repo publishes through `.github/workflows/cd.yml` using GitHub trusted
+publishing and the `pypi` environment.
 
-- Owner: `random-walks`
-- Repository: `subway-access`
-- Workflow: `.github/workflows/cd.yml`
-- Environment: `pypi`
-
-4. Create the `pypi` environment in GitHub.
-5. Set `PYPI_PUBLISH_ENABLED=true` when you are ready to allow publishing.
+Repository-admin setup such as PyPI project creation, trusted publisher
+registration, and Read the Docs project linking is managed manually outside the
+repo and is intentionally not duplicated here.
 
 ## Release path
 
@@ -53,3 +48,19 @@ The standard production path is:
 3. optionally run the `CD` workflow against TestPyPI first
 4. publish the matching GitHub Release
 5. let the `release.published` trigger publish to real PyPI
+
+If you prefer the manual route, run the `CD` workflow from the same tag with:
+
+- `publish=true`
+- `repository=pypi`
+
+## Post-release verification
+
+After the release lands on PyPI:
+
+1. Install `subway-access` from PyPI in a clean environment.
+2. Run `subway-access --help`.
+3. Run `subway-access demo --output-dir demo-output --minutes 10`.
+4. Confirm the PyPI project page renders the README correctly.
+5. Confirm the docs site, GitHub release notes, and repo sidebar links reflect
+   the release.
