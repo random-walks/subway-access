@@ -7,6 +7,12 @@ same implementations locally as a fallback.
 
 from __future__ import annotations
 
+__all__ = [
+    "build_circle_polygon",
+    "haversine_distance_meters",
+    "walk_radius_meters",
+]
+
 try:
     from nyc_geo_toolkit import (
         build_circle_polygon,

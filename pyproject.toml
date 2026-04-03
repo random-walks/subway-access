@@ -145,6 +145,10 @@ module = "subway_access.*"
 disallow_untyped_defs = true
 disallow_incomplete_defs = true
 
+[[tool.mypy.overrides]]
+module = "nyc_geo_toolkit"
+ignore_missing_imports = true
+
 
 [tool.ruff]
 show-fixes = true

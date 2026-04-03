@@ -5,7 +5,7 @@ from __future__ import annotations
 import csv
 import json
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, cast
+from typing import TYPE_CHECKING, Any
 
 from ._fixtures import (
     DEFAULT_ACCESSIBILITY_FIXTURE,
@@ -66,7 +66,7 @@ def _parse_accessibility_label(
             f"Expected one of: {valid_values}."
         )
         raise ValueError(message)
-    return cast("AccessibilityLabel", value)
+    return value
 
 
 def _parse_float(value: str, *, field_name: str, path: Path, row_id: str) -> float:
