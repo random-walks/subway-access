@@ -44,8 +44,10 @@ except ImportError:  # pragma: no cover - fallback until toolkit release adoptio
         delta_lat = lat2 - lat1
         delta_lon = lon2 - lon1
 
-        hav = sin(delta_lat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(delta_lon / 2) ** 2
-        return 2 * EARTH_RADIUS_METERS * asin(sqrt(hav))
+        haversine_term = (
+            sin(delta_lat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(delta_lon / 2) ** 2
+        )
+        return 2 * EARTH_RADIUS_METERS * asin(sqrt(haversine_term))
 
     def walk_radius_meters(minutes: int) -> float:
         """Convert walking minutes into the v0.1 Euclidean radius."""
