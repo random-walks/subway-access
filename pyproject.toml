@@ -197,11 +197,13 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["T20"]
-"noxfile.py" = ["T20"]
+"noxfile.py" = ["EXE001", "T20"]
 "docs/examples/**" = ["T20"]
 "src/subway_access/_version.py" = ["Q000", "RUF022"]
+"src/subway_access/__main__.py" = ["I001"]
 "src/subway_access/cli.py" = ["T20"]
 "src/subway_access/_not_implemented.py" = ["EM"]
+"scripts/*.py" = ["EM", "TRY", "F541"]
 
 
 [tool.pylint]
