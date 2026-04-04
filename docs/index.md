@@ -17,6 +17,7 @@ The current package provides a real-data fetch/cache workflow:
 - fetch ACS tract-level demographics for a selected NYC study area
 - cache a reusable local snapshot bundle
 - run Euclidean first-pass accessibility and reliability analysis
+- cache local OSM walking graphs for advanced network analysis
 - export GeoJSON and CSV outputs, including station metrics
 - run the snapshot and analysis flow from the installed `subway-access` CLI
 

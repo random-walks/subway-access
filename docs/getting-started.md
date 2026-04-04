@@ -8,6 +8,12 @@ This guide shows the fastest path to the current `subway-access` workflow.
 pip install subway-access
 ```
 
+For the full plotting + network layer:
+
+```bash
+pip install "subway-access[all]"
+```
+
 For local development:
 
 ```bash
@@ -57,6 +63,14 @@ gaps = analysis.analyze_gaps(scores)
 print(len(gaps.records), len(reliability.records))
 ```
 
+## Add The Network Layer
+
+The advanced path builds on the same cached snapshot:
+
+1. fetch or reuse the official MTA + ACS cache
+2. build or reuse a cached OSM walking graph for the same study area
+3. compare Euclidean coverage to network-based accessibility
+
 ## Current methodology
 
 The current flow is intentionally explicit and reproducible:
@@ -65,7 +79,7 @@ The current flow is intentionally explicit and reproducible:
 2. fetch official MTA and Census records into a local cache
 3. load those cached records back into typed in-memory datasets
 4. generate Euclidean walk catchments from a fixed walking speed
-5. test tract centroids against those catchments
+5. optionally compare that baseline against cached OSM walking graphs
 6. compute need, reliability, and gap metrics
 
 This is a documented first pass, not a claim of full routing realism.

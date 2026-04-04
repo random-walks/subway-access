@@ -3,11 +3,15 @@
 from __future__ import annotations
 
 from ._core import (
+    AccessibilityComparisonDataset,
+    AccessibilityComparisonRecord,
     AccessibilityDataset,
     AccessibilityLabel,
     AccessibilityQuery,
     AccessibilityScoreDataset,
     AccessibilityStatus,
+    AccessibilitySummaryDataset,
+    AccessibilitySummaryRecord,
     CatchmentDataset,
     CatchmentFeature,
     CatchmentRequest,
@@ -17,6 +21,7 @@ from ._core import (
     ExportTarget,
     GapAnalysis,
     GapRecord,
+    NetworkGraphSnapshot,
     OutageDataset,
     OutageRecord,
     OutageStatus,
@@ -35,11 +40,15 @@ from ._core import (
 )
 
 __all__ = [
+    "AccessibilityComparisonDataset",
+    "AccessibilityComparisonRecord",
     "AccessibilityDataset",
     "AccessibilityLabel",
     "AccessibilityQuery",
     "AccessibilityScoreDataset",
     "AccessibilityStatus",
+    "AccessibilitySummaryDataset",
+    "AccessibilitySummaryRecord",
     "CatchmentDataset",
     "CatchmentFeature",
     "CatchmentRequest",
@@ -49,6 +58,7 @@ __all__ = [
     "ExportTarget",
     "GapAnalysis",
     "GapRecord",
+    "NetworkGraphSnapshot",
     "OutageDataset",
     "OutageRecord",
     "OutageStatus",

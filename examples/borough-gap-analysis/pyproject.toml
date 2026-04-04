@@ -3,7 +3,7 @@ name = "subway-access-borough-gap-analysis"
 version = "0.0.0"
 description = "Borough-scale gap analysis example for subway-access."
 requires-python = ">=3.10"
-dependencies = ["subway-access"]
+dependencies = ["subway-access[plotting]"]
 
 [tool.uv.sources]
 subway-access = { path = "../..", editable = true }

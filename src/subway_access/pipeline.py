@@ -17,10 +17,16 @@ from shapely.geometry import Point, shape
 from shapely.ops import unary_union
 
 from .io import (
+    fetch_walk_graph as io_fetch_walk_graph,
+)
+from .io import (
     load_accessibility_status,
     load_census_data,
     load_gtfs,
     load_outages,
+)
+from .io import (
+    load_cached_walk_graph as io_load_cached_walk_graph,
 )
 from .io._acs import (
     ACS_5YEAR_YEAR,
@@ -41,11 +47,18 @@ from .io._mta import (
     fetch_mta_gtfs_archive,
     fetch_mta_station_catalog,
 )
-from .models import AccessibilityQuery, DataSourceMetadata, StudyAreaSnapshot
+from .models import (
+    AccessibilityQuery,
+    DataSourceMetadata,
+    NetworkGraphSnapshot,
+    StudyAreaSnapshot,
+)
 
 __all__ = [
     "fetch_study_area_snapshot",
+    "fetch_walk_graph",
     "load_cached_snapshot",
+    "load_cached_walk_graph",
 ]
 
 _BOROUGH_BY_COUNTY = {
@@ -215,6 +228,10 @@ def load_cached_snapshot(cache_dir: str | Path) -> StudyAreaSnapshot:
         demographics=demographics,
         outages=outages,
         metadata=metadata,
+        generated_at=datetime.fromisoformat(
+            json.loads(paths["metadata"].read_text(encoding="utf-8"))["generated_at"]
+        ),
+        cache_dir=cache_root,
     )
 
 
@@ -345,3 +362,28 @@ def fetch_study_area_snapshot(
     }
     write_json(paths["metadata"], metadata_payload)
     return load_cached_snapshot(cache_root)
+
+
+def fetch_walk_graph(
+    query: AccessibilityQuery,
+    *,
+    cache_dir: str | Path,
+    refresh: bool = False,
+    buffer_meters: int = 0,
+) -> NetworkGraphSnapshot:
+    """Fetch and cache an OSM walking graph for a study area."""
+
+    return io_fetch_walk_graph(
+        query,
+        cache_dir=cache_dir,
+        refresh=refresh,
+        buffer_meters=buffer_meters,
+    )
+
+
+def load_cached_walk_graph(
+    cache_dir: str | Path,
+) -> tuple[Any, NetworkGraphSnapshot]:
+    """Load a cached OSM walking graph and its typed metadata."""
+
+    return io_load_cached_walk_graph(cache_dir)

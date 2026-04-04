@@ -30,13 +30,25 @@ consumer references, not package fixtures.
 
 ## Start Here
 
+### Beginner
+
 - `examples/fetch-borough-snapshot/`: first live/official cache-building example
-- `examples/borough-gap-analysis/`: borough-scale tract gap story on real public
-  data
+- `examples/borough-gap-analysis/`: borough-scale gap story with tracked charts
+
+### Intermediate
+
 - `examples/outage-reliability-report/`: real monthly availability and
   reliability story
-- `examples/network-access-comparison/`: Euclidean vs network comparison
-  workflow
+- `examples/multi-borough-access-profile/`: borough-level EDA across Manhattan,
+  Brooklyn, and Queens
+
+### Advanced
+
+- `examples/network-access-comparison/`: Euclidean vs cached OSM walking-graph
+  comparison
+
+### Template
+
 - `examples/example-template/`: scaffold for future examples
 
 ## Local Repo Usage

@@ -26,6 +26,7 @@ from ._mta import (
     fetch_mta_gtfs_archive,
     fetch_mta_station_catalog,
 )
+from ._osm import OSM_SOURCE_URL, fetch_walk_graph, load_cached_walk_graph
 
 __all__ = [
     "ACS_5YEAR_YEAR",
@@ -33,6 +34,7 @@ __all__ = [
     "MTA_EQUIPMENT_ASSET_API_URL",
     "MTA_GTFS_STATIC_URL",
     "MTA_SUBWAY_STATIONS_API_URL",
+    "OSM_SOURCE_URL",
     "build_outage_snapshot_rows",
     "build_station_snapshot_rows",
     "cache_timestamp",
@@ -42,7 +44,9 @@ __all__ = [
     "fetch_mta_gtfs_archive",
     "fetch_mta_station_catalog",
     "fetch_nyc_acs_tract_estimates",
+    "fetch_walk_graph",
     "load_accessibility_status",
+    "load_cached_walk_graph",
     "load_census_data",
     "load_gtfs",
     "load_outages",

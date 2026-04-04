@@ -24,12 +24,18 @@ and a real-data snapshot workflow.
 4. `pipeline.load_cached_snapshot()` loads those cache files back into typed
    datasets.
 5. `analysis.generate_catchments()` builds first-pass circle polygons.
-6. `analysis.score_accessibility()` joins station coverage to tract demand.
-7. `analysis.compute_reliability()` scores stations from public availability
+6. `pipeline.fetch_walk_graph()` can cache an OSM walking graph for the same
+   study area.
+7. `analysis.score_accessibility()` joins station coverage to tract demand.
+8. `analysis.score_accessibility_network()` compares the Euclidean baseline to
+   network travel.
+9. `analysis.compute_reliability()` scores stations from public availability
    history.
-8. `analysis.analyze_gaps()` ranks uncovered tracts.
-9. `analysis.build_station_metrics()` aggregates station-level metrics.
-10. `export.export_catchments_geojson()`, `export.export_gap_table()`, and
+10. `analysis.compare_accessibility_models()` and
+    `analysis.summarize_accessibility_by_group()` produce richer rollups.
+11. `analysis.analyze_gaps()` ranks uncovered tracts.
+12. `analysis.build_station_metrics()` aggregates station-level metrics.
+13. `export.export_catchments_geojson()`, `export.export_gap_table()`, and
     `export.export_station_metrics()` write outputs.
 
 ## Geography and shared foundations
@@ -39,6 +45,7 @@ synthetic fixtures. The intended consumer pattern is:
 
 - fetch official public records once
 - pin a local cache snapshot
+- optionally pin a local OSM walking graph
 - reload it in memory for analysis and export
 - update tracked reports intentionally, not implicitly
 
@@ -48,11 +55,7 @@ package.
 
 ## Planned expansion
 
-The near-term roadmap grows from Euclidean coverage toward:
+The package now grows along two explicit tracks:
 
-- network-based walking catchments
-- richer geography rollups
-- true network-based isochrone generation
-
-The package already supports official-data fetch/cache flows, while the heavier
-network routing layer remains a distinct next step.
+- Euclidean accessibility as a documented baseline
+- network-based walking graphs and comparison outputs as the advanced path

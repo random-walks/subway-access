@@ -3,7 +3,7 @@ name = "subway-access-network-access-comparison"
 version = "0.0.0"
 description = "Euclidean versus OSM network comparison for subway-access."
 requires-python = ">=3.10"
-dependencies = ["osmnx>=2.0.1", "scikit-learn>=1.6", "subway-access"]
+dependencies = ["subway-access[all]"]
 
 [tool.uv.sources]
 subway-access = { path = "../..", editable = true }

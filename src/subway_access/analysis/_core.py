@@ -26,6 +26,8 @@ from ..models import (
 )
 from ._geo import build_circle_polygon, haversine_distance_meters, walk_radius_meters
 
+_METERS_PER_MINUTE = 80.0
+
 
 def generate_catchments(
     station_data: StationDataset,
@@ -109,6 +111,11 @@ def score_accessibility(
                 nearest_accessible_station_id=nearest_station_id,
                 nearest_accessible_station_name=nearest_station_name,
                 nearest_accessible_distance_meters=nearest_distance,
+                nearest_accessible_path_meters=nearest_distance,
+                nearest_accessible_travel_minutes=None
+                if nearest_distance is None
+                else nearest_distance / _METERS_PER_MINUTE,
+                analysis_method="euclidean",
             )
         )
 
@@ -200,8 +207,26 @@ def compute_reliability(
     as_of = outage_data.recommended_as_of()
     outage_minutes = outage_data.outage_minutes_by_station(window, as_of=as_of)
     outage_counts = outage_data.outage_count_by_station(window, as_of=as_of)
+    total_outages = outage_data.outage_total_by_station(window, as_of=as_of)
+    scheduled_outages = outage_data.scheduled_outage_total_by_station(
+        window,
+        as_of=as_of,
+    )
+    unscheduled_outages = outage_data.unscheduled_outage_total_by_station(
+        window,
+        as_of=as_of,
+    )
+    availability_ratios = outage_data.mean_availability_ratio_by_station(
+        window,
+        as_of=as_of,
+    )
     station_ids = sorted(
-        set(status_by_station) | set(outage_minutes) | set(outage_counts)
+        set(status_by_station)
+        | set(outage_minutes)
+        | set(outage_counts)
+        | set(total_outages)
+        | set(scheduled_outages)
+        | set(unscheduled_outages)
     )
     total_minutes = window.total_minutes
 
@@ -229,6 +254,10 @@ def compute_reliability(
                     score=reliability_score,
                     ada_status=ada_status,
                 ),
+                total_outages=total_outages.get(station_id, 0),
+                scheduled_outages=scheduled_outages.get(station_id, 0),
+                unscheduled_outages=unscheduled_outages.get(station_id, 0),
+                mean_availability_ratio=availability_ratios.get(station_id),
             )
         )
 
@@ -242,6 +271,7 @@ def build_station_metrics(
     *,
     reliability: ReliabilityDataset | None = None,
     pedestrian_network: PedestrianNetworkDataset | None = None,
+    analysis_method: str = "euclidean",
 ) -> StationMetricDataset:
     """Aggregate station-level metrics for reporting and export."""
 
@@ -308,6 +338,7 @@ def build_station_metrics(
                 network_connection_count=network_counts.get(station.station_id, 0),
                 daytime_routes=station.daytime_routes,
                 structure=station.structure,
+                analysis_method=analysis_method,
             )
         )
 

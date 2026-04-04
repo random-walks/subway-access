@@ -19,6 +19,7 @@
   GTFS stop IDs, route labels, and station coordinates
 - the public asset inventory and monthly availability history are auth-free and
   currently power reliability scoring
+- cached OSM walking graphs now power the advanced network comparison layer
 - the auth-gated real-time elevator/escalator current-outage feed still exists
   through the MTA developer program, but the public first-pass workflow uses the
   historical availability dataset instead
@@ -37,6 +38,8 @@
 
 - the current public workflow still uses Euclidean catchments around station
   points rather than network isochrones
+- advanced examples now compare that baseline against cached local OSM walking
+  graphs
 - station catalog `station_id` aligns most directly with elevator-history
   `station_mrn`; `complex_id` aligns with `station_complex_mrn`
 - ADA values from the station catalog use `0`/`1`/`2` and should be documented

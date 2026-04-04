@@ -12,6 +12,10 @@ The supported public contract is now subpackage-first:
 The root `subway_access` namespace is intentionally minimal and only exposes
 `__version__`.
 
+The advanced network layer lives alongside the baseline analysis surfaces under
+`subway_access.analysis`, while graph cache helpers live under
+`subway_access.io` and `subway_access.pipeline`.
+
 ## Root
 
 ::: subway_access

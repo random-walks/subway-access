@@ -3,12 +3,15 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+import matplotlib.pyplot as plt
+
 from subway_access import analysis, export, models, pipeline
 
 ROOT = Path(__file__).resolve().parent
 CACHE_DIR = ROOT / "cache"
 ARTIFACTS_DIR = ROOT / "artifacts"
 REPORTS_DIR = ROOT / "reports"
+FIGURES_DIR = REPORTS_DIR / "figures"
 
 
 def cache_path(name: str) -> Path:
@@ -26,16 +29,21 @@ def report_path(name: str) -> Path:
     return REPORTS_DIR / name
 
 
+def figure_path(name: str) -> Path:
+    FIGURES_DIR.mkdir(parents=True, exist_ok=True)
+    return FIGURES_DIR / name
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Run borough-scale accessibility gap analysis on official cached data.",
     )
     parser.add_argument("--geography", default="borough")
-    parser.add_argument("--value", default="Manhattan")
+    parser.add_argument("--value", default="Brooklyn")
     parser.add_argument(
         "--cache-dir",
         type=Path,
-        default=cache_path("manhattan-snapshot"),
+        default=cache_path("brooklyn-snapshot"),
     )
     parser.add_argument("--availability-months", type=int, default=12)
     parser.add_argument("--minutes", type=int, default=10)
@@ -44,12 +52,80 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _plot_top_gap_tracts(gaps: models.GapAnalysis) -> Path:
+    top_rows = [record for record in gaps.records if record.gap_label == "gap"][:15]
+    path = figure_path("top-gap-tracts.png")
+
+    labels = [record.tract_id for record in top_rows]
+    values = [record.gap_score for record in top_rows]
+    figure, axes = plt.subplots(figsize=(11, 6))
+    axes.barh(labels, values, color="#e45756")
+    axes.invert_yaxis()
+    axes.set_xlabel("Gap score")
+    axes.set_title("Highest-need uncovered tracts")
+    figure.tight_layout()
+    figure.savefig(path, dpi=180)
+    plt.close(figure)
+    return path
+
+
+def _plot_need_vs_travel(scores: models.AccessibilityScoreDataset) -> Path:
+    path = figure_path("need-vs-travel.png")
+    covered = [
+        record
+        for record in scores.records
+        if record.nearest_accessible_travel_minutes is not None
+    ]
+    figure, axes = plt.subplots(figsize=(8, 6))
+    axes.scatter(
+        [record.nearest_accessible_travel_minutes for record in covered],
+        [record.need_score for record in covered],
+        c=[
+            "#4c78a8" if record.has_accessible_station else "#e45756"
+            for record in covered
+        ],
+        alpha=0.8,
+    )
+    axes.set_xlabel("Nearest accessible travel minutes (Euclidean baseline)")
+    axes.set_ylabel("Need score")
+    axes.set_title("Need vs nearest-access travel time")
+    figure.tight_layout()
+    figure.savefig(path, dpi=180)
+    plt.close(figure)
+    return path
+
+
+def _plot_travel_histogram(scores: models.AccessibilityScoreDataset) -> Path:
+    path = figure_path("travel-minutes-histogram.png")
+    values = [
+        record.nearest_accessible_travel_minutes
+        for record in scores.records
+        if record.nearest_accessible_travel_minutes is not None
+    ]
+    figure, axes = plt.subplots(figsize=(8, 5))
+    axes.hist(values, bins=18, color="#72b7b2", edgecolor="white")
+    axes.set_xlabel("Nearest accessible travel minutes")
+    axes.set_ylabel("Tract count")
+    axes.set_title("Distribution of nearest accessible travel time")
+    figure.tight_layout()
+    figure.savefig(path, dpi=180)
+    plt.close(figure)
+    return path
+
+
 def write_report(
     query: models.AccessibilityQuery,
+    scores: models.AccessibilityScoreDataset,
     gaps: models.GapAnalysis,
     output_csv: Path,
 ) -> Path:
-    top_gap = gaps.records[0]
+    summary = analysis.summarize_accessibility_by_group(scores).records[0]
+    uncovered = [record for record in gaps.records if record.gap_label == "gap"]
+    top_gap = uncovered[0]
+    top_gap_chart = _plot_top_gap_tracts(gaps)
+    need_chart = _plot_need_vs_travel(scores)
+    travel_chart = _plot_travel_histogram(scores)
+
     report = f"""# Borough Gap Analysis Tearsheet
 
 ## Query
@@ -59,10 +135,27 @@ def write_report(
 
 ## Snapshot
 
-- Tracts scored: {len(gaps.records)}
+- Tracts scored: {summary.tract_count}
+- Uncovered tracts: {summary.uncovered_tract_count}
+- Coverage rate: {summary.coverage_rate:.1%}
+- Uncovered population: {summary.uncovered_population:,}
+- Highest gap tract: `{top_gap.tract_id}` ({top_gap.tract_name})
 - Highest gap score: {top_gap.gap_score:.4f}
-- Top gap tract: `{top_gap.tract_id}` ({top_gap.tract_name})
-- Nearest accessible station: {top_gap.nearest_accessible_station_name}
+- Nearest accessible station for top gap: {top_gap.nearest_accessible_station_name}
+
+## Figures
+
+### Top gap tracts
+
+![Top gap tracts](./figures/{top_gap_chart.name})
+
+### Need vs nearest-access travel time
+
+![Need vs travel](./figures/{need_chart.name})
+
+### Distribution of nearest-access travel time
+
+![Travel histogram](./figures/{travel_chart.name})
 
 ## Artifact
 
@@ -103,7 +196,7 @@ def main() -> None:
     )
     report_file: Path | None = None
     if args.publish_report:
-        report_file = write_report(query, gaps, gaps_path)
+        report_file = write_report(query, scores, gaps, gaps_path)
 
     print("Borough Gap Analysis")
     print("--------------------")

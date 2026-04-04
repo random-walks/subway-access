@@ -1,0 +1,9 @@
+[project]
+name = "subway-access-multi-borough-access-profile"
+version = "0.0.0"
+description = "Multi-borough accessibility profile and EDA example for subway-access."
+requires-python = ">=3.10"
+dependencies = ["subway-access[plotting]"]
+
+[tool.uv.sources]
+subway-access = { path = "../..", editable = true }

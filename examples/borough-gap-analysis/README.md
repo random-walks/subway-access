@@ -23,3 +23,6 @@ uv run python main.py --publish-report
 - `artifacts/catchments.geojson`
 - `artifacts/borough-accessibility-gaps.csv`
 - `reports/borough-gap-analysis-tearsheet.md` when `--publish-report` is used
+- `reports/figures/top-gap-tracts.png`
+- `reports/figures/need-vs-travel.png`
+- `reports/figures/travel-minutes-histogram.png`
