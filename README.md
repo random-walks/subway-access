@@ -13,19 +13,20 @@ Authored by [Blaise Albis-Burdige](https://blaiseab.com/).
 It is designed to measure neighborhood access to accessible stations with a
 small, transparent workflow that is easy to inspect, test, and extend.
 
-## What ships in the `0.1` line
+## What ships in the current line
 
-The current release deliberately implements one narrow, honest slice:
+The current package now includes a full sample-backed analysis slice:
 
-- load a small station dataset plus ADA status data
+- load packaged station, ADA, tract, outage, and pedestrian-network fixtures
 - generate first-pass Euclidean walk catchments
-- join tract-level demographics
-- export one tract accessibility-gap table plus catchment GeoJSON
-- run the full fixture-backed workflow from the installed CLI
+- score tract accessibility gaps
+- compute rolling station reliability from outage history
+- export catchment GeoJSON, tract gap CSV, and station metrics CSV or GeoJSON
+- run the full workflow from the installed CLI
 
-It does **not** pretend to ship outage-aware reliability scoring, pedestrian
-network routing, or richer station-level metrics yet. Those surfaces remain
-explicit typed placeholders that raise `NotImplementedError`.
+The routing model is still intentionally simple. Catchments remain Euclidean
+buffers, while the pedestrian network is currently used for richer examples and
+station-metrics context rather than full isochrone generation.
 
 ## Why this exists
 
@@ -54,41 +55,58 @@ This writes:
 
 - `demo-output/catchments.geojson`
 - `demo-output/accessibility-gaps.csv`
+- `demo-output/station-metrics.csv`
+
+## Examples
+
+`examples/` now follows the same self-contained project pattern used by
+`nyc311`. Each example folder has its own `pyproject.toml`, `README.md`,
+`.gitignore`, `main.py`, and tracked `reports/` output.
+
+Start with:
+
+- `examples/quickstart-demo/`
+- `examples/borough-gap-analysis/`
+- `examples/catchment-map/`
+- `examples/example-template/`
 
 ## Python example
 
 ```python
-from subway_access import (
-    CatchmentRequest,
-    analyze_gaps,
-    generate_catchments,
-    load_accessibility_status,
-    load_census_data,
-    load_gtfs,
-    score_accessibility,
-)
+from subway_access import analysis, io, models
 
-stations = load_gtfs().with_accessibility(load_accessibility_status())
-demographics = load_census_data()
-catchments = generate_catchments(stations, CatchmentRequest(minutes=10))
-scores = score_accessibility(stations, catchments, demographics)
-gaps = analyze_gaps(scores)
-print(len(gaps.records))
+stations = io.load_gtfs().with_accessibility(io.load_accessibility_status())
+demographics = io.load_census_data()
+outages = io.load_outages()
+catchments = analysis.generate_catchments(
+    stations,
+    models.CatchmentRequest(minutes=10),
+)
+scores = analysis.score_accessibility(stations, catchments, demographics)
+reliability = analysis.compute_reliability(
+    stations,
+    outages,
+    models.TimeWindow(days=30),
+)
+gaps = analysis.analyze_gaps(scores)
+print(len(gaps.records), len(reliability.records))
 ```
 
 ## Current methodology
 
-The implemented `0.1` workflow is intentionally simple and reproducible:
+The current workflow is intentionally simple and reproducible:
 
 1. load stations and ADA status
 2. create circular walk catchments using a fixed walking speed
 3. test each tract centroid against accessible-station catchments
 4. compute a tract need score from disability, senior, and poverty rates
-5. assign a basic gap score when high-need tracts have no accessible station in
+5. compute rolling reliability from outage events
+6. assign a basic gap score when high-need tracts have no accessible station in
    catchment
+7. aggregate station-level coverage and reliability metrics
 
-This is intentionally a **first-pass Euclidean approximation**, not a network
-isochrone model. Reliability-aware analysis remains future work.
+This is intentionally a **first-pass Euclidean approximation**, not a full
+network-isochrone model.
 
 ## Documentation
 

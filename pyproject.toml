@@ -39,7 +39,9 @@ classifiers = [
   "Typing :: Typed",
 ]
 dynamic = ["version"]
-dependencies = []
+dependencies = [
+  "nyc-geo-toolkit>=0.1.5",
+]
 
 [project.scripts]
 subway-access = "subway_access.cli:main"
@@ -201,13 +203,12 @@ ignore = [
 # typing-modules = ["subway_access._compat.typing"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["T20"]
+"tests/**" = ["T20", "TC001", "TC002", "TC003"]
 "noxfile.py" = ["EXE001", "T20"]
-"docs/examples/**" = ["T20"]
+"examples/**" = ["T20"]
 "src/subway_access/_version.py" = ["Q000", "RUF022"]
 "src/subway_access/__main__.py" = ["I001"]
-"src/subway_access/cli.py" = ["T20"]
-"src/subway_access/_not_implemented.py" = ["EM"]
+"src/subway_access/cli/_main.py" = ["T20"]
 "scripts/*.py" = ["EM", "TRY", "F541"]
 
 
@@ -217,6 +218,7 @@ ignore-paths = [".*/_version.py"]
 reports.output-format = "colorized"
 similarities.ignore-imports = "yes"
 messages_control.disable = [
+  "duplicate-code",
   "design",
   "fixme",
   "line-too-long",

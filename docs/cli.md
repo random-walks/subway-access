@@ -15,15 +15,17 @@ Arguments:
 
 - `--output-dir`: directory where the GeoJSON and CSV outputs will be written
 - `--minutes`: positive integer walking threshold for the first-pass catchment
+- `--reliability-window-days`: rolling outage window used for reliability scoring
 
 Outputs:
 
 - `catchments.geojson`
 - `accessibility-gaps.csv`
+- `station-metrics.csv`
 
 ## Exit behavior
 
 - invalid arguments return a CLI error with exit code `2`
 - successful runs return `0`
-- unimplemented future workflows are intentionally not exposed through the CLI
-  yet
+- invalid values for catchment or reliability windows return a CLI error with
+  exit code `2`

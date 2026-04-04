@@ -1,0 +1,60 @@
+version = 1
+revision = 3
+requires-python = ">=3.10"
+
+[[package]]
+name = "nyc-geo-toolkit"
+version = "0.1.5"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/14/3c/f3d5d85c75e3bd663eb64a7744fe6d4e4aacef56188031e6d5b80d6421c4/nyc_geo_toolkit-0.1.5.tar.gz", hash = "sha256:3b8036a750d3adb2615f430f9849fdf4a33e44ec207af30207aee04a623fbbbe", size = 8658910, upload-time = "2026-04-03T16:34:07.99Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7f/e6/fa61d06ec102f09618bd9260f45b9380b1198418db3886e69981abf8de88/nyc_geo_toolkit-0.1.5-py3-none-any.whl", hash = "sha256:8038ae6e412c3e019b7ed591ec1908d8ad0b35fb72b082e0a9c2fa69525d002c", size = 8549097, upload-time = "2026-04-03T16:34:05.574Z" },
+]
+
+[[package]]
+name = "subway-access"
+source = { editable = "../../" }
+dependencies = [
+    { name = "nyc-geo-toolkit" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "nyc-geo-toolkit", specifier = ">=0.1.5" }]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "mypy", specifier = ">=1.19.1" },
+    { name = "pylint", specifier = ">=3.3" },
+    { name = "pytest", specifier = ">=9" },
+    { name = "pytest-cov", specifier = ">=7" },
+    { name = "ruff", specifier = ">=0.15.8" },
+]
+docs = [
+    { name = "markdown", specifier = ">=3.9" },
+    { name = "mdx-include", specifier = ">=1.4.2" },
+    { name = "mkdocs", specifier = ">=1.1.2" },
+    { name = "mkdocs-material", specifier = ">=9.1.19" },
+    { name = "mkdocstrings-python", specifier = ">=1.18.2" },
+    { name = "pyyaml", specifier = ">=6.0.1" },
+    { name = "ruff", specifier = ">=0.12" },
+]
+lint = [
+    { name = "mypy", specifier = ">=1.19.1" },
+    { name = "pylint", specifier = ">=3.3" },
+    { name = "ruff", specifier = ">=0.15.8" },
+]
+test = [
+    { name = "pytest", specifier = ">=9" },
+    { name = "pytest-cov", specifier = ">=7" },
+]
+
+[[package]]
+name = "subway-access-catchment-map"
+version = "0.0.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "subway-access" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "subway-access", editable = "../../" }]

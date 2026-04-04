@@ -1,0 +1,9 @@
+[project]
+name = "subway-access-catchment-map"
+version = "0.0.0"
+description = "Mapping-oriented catchment export example for subway-access."
+requires-python = ">=3.10"
+dependencies = ["subway-access"]
+
+[tool.uv.sources]
+subway-access = { path = "../..", editable = true }

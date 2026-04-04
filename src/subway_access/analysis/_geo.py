@@ -1,8 +1,7 @@
-"""Compatibility wrappers for the v0.1 Euclidean catchment workflow.
+"""Geodesy helpers for catchment generation.
 
-The preferred home for these helpers is `nyc-geo-toolkit`. Until the next
-toolkit release is adopted here as a hard dependency, `subway-access` keeps the
-same implementations locally as a fallback.
+The preferred implementation lives in ``nyc-geo-toolkit``. ``subway-access``
+keeps a local fallback so the core workflow still works in a fresh source tree.
 """
 
 from __future__ import annotations
@@ -15,11 +14,15 @@ __all__ = [
 
 try:
     from nyc_geo_toolkit import (
-        build_circle_polygon,
-        haversine_distance_meters,
-        walk_radius_meters,
+        build_circle_polygon as _toolkit_build_circle_polygon,
     )
-except ImportError:  # pragma: no cover - fallback until toolkit release adoption
+    from nyc_geo_toolkit import (
+        haversine_distance_meters as _toolkit_haversine_distance_meters,
+    )
+    from nyc_geo_toolkit import (
+        walk_radius_meters as _toolkit_walk_radius_meters,
+    )
+except ImportError:  # pragma: no cover - fallback until dependency is installed
     from math import asin, atan2, cos, degrees, pi, radians, sin, sqrt
 
     EARTH_RADIUS_METERS = 6_371_000.0
@@ -28,7 +31,7 @@ except ImportError:  # pragma: no cover - fallback until toolkit release adoptio
     _POSITIVE_RADIUS_MESSAGE = "Catchment radius must be positive."
     _MINIMUM_SIDES_MESSAGE = "Catchment polygon needs at least 8 sides."
 
-    def haversine_distance_meters(
+    def _local_haversine_distance_meters(
         latitude_a: float,
         longitude_a: float,
         latitude_b: float,
@@ -49,21 +52,21 @@ except ImportError:  # pragma: no cover - fallback until toolkit release adoptio
         )
         return 2 * EARTH_RADIUS_METERS * asin(sqrt(haversine_term))
 
-    def walk_radius_meters(minutes: int) -> float:
-        """Convert walking minutes into the v0.1 Euclidean radius."""
+    def _local_walk_radius_meters(minutes: int) -> float:
+        """Convert walking minutes into the first-pass Euclidean radius."""
 
         if minutes <= 0:
             raise ValueError(_POSITIVE_MINUTES_MESSAGE)
         return minutes * METERS_PER_MINUTE_WALKING
 
-    def build_circle_polygon(
+    def _local_build_circle_polygon(
         latitude: float,
         longitude: float,
         radius_meters: float,
         *,
         sides: int = 24,
     ) -> tuple[tuple[float, float], ...]:
-        """Build a simple lon/lat polygon approximating a circle around a point."""
+        """Build a lon/lat polygon approximating a circle around a point."""
 
         if radius_meters <= 0:
             raise ValueError(_POSITIVE_RADIUS_MESSAGE)
@@ -88,3 +91,38 @@ except ImportError:  # pragma: no cover - fallback until toolkit release adoptio
 
         points.append(points[0])
         return tuple(points)
+
+    haversine_distance_meters = _local_haversine_distance_meters
+    walk_radius_meters = _local_walk_radius_meters
+    build_circle_polygon = _local_build_circle_polygon
+else:  # pragma: no cover - exercised via dependency integration
+
+    def haversine_distance_meters(
+        latitude_a: float,
+        longitude_a: float,
+        latitude_b: float,
+        longitude_b: float,
+    ) -> float:
+        return _toolkit_haversine_distance_meters(
+            latitude_a,
+            longitude_a,
+            latitude_b,
+            longitude_b,
+        )
+
+    def walk_radius_meters(minutes: int) -> float:
+        return _toolkit_walk_radius_meters(float(minutes))
+
+    def build_circle_polygon(
+        latitude: float,
+        longitude: float,
+        radius_meters: float,
+        *,
+        sides: int = 24,
+    ) -> tuple[tuple[float, float], ...]:
+        return _toolkit_build_circle_polygon(
+            latitude,
+            longitude,
+            radius_meters,
+            sides=sides,
+        )

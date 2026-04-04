@@ -32,17 +32,17 @@ real today versus still planned.
 
 ::: subway_access.models
 
-## Loaders
+## IO
 
-::: subway_access.loaders
+::: subway_access.io
 
-## Processors
+## Analysis
 
-::: subway_access.processors
+::: subway_access.analysis
 
-## Exporters
+## Export
 
-::: subway_access.exporters
+::: subway_access.export
 
 ## CLI
 

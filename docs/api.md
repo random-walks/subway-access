@@ -1,12 +1,41 @@
 # API Reference
 
-The stable public surface for this package is the top-level `subway_access`
-namespace.
+The supported public contract is now subpackage-first:
 
-This page is generated from that namespace so the published docs, package
-exports, and API audit stay aligned.
+- `subway_access.models`
+- `subway_access.io`
+- `subway_access.analysis`
+- `subway_access.export`
+- `subway_access.samples`
+- `subway_access.cli`
 
-Underscore-prefixed modules are internal implementation details and are not part
-of the supported public contract.
+The root `subway_access` namespace is intentionally minimal and only exposes
+`__version__`.
+
+## Root
 
 ::: subway_access
+
+## Models
+
+::: subway_access.models
+
+## IO
+
+::: subway_access.io
+
+## Analysis
+
+::: subway_access.analysis
+
+## Export
+
+::: subway_access.export
+
+## Samples
+
+::: subway_access.samples
+
+## CLI
+
+::: subway_access.cli

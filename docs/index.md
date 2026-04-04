@@ -11,24 +11,15 @@ small, transparent workflow?
 
 ## What ships now
 
-The current `0.1` line provides one honest end-to-end slice:
+The current package provides a complete sample-backed analysis slice:
 
-- load a narrow GTFS-like station dataset
-- load ADA accessibility status rows
-- load tract-level demographic fixture data
+- load narrow GTFS-like station data plus ADA status rows
+- load tract-level demographic, outage, and pedestrian-network fixtures
 - generate Euclidean first-pass walk catchments
-- score tract accessibility coverage
-- export GeoJSON and CSV outputs
+- score tract accessibility coverage and gaps
+- compute rolling reliability from outage history
+- export GeoJSON and CSV outputs, including station metrics
 - run the packaged demo from the installed `subway-access` CLI
-
-## What does not ship yet
-
-These surfaces remain explicit placeholders so the roadmap stays visible:
-
-- outage ingestion
-- pedestrian-network routing
-- reliability scoring
-- station-level metrics export
 
 ## Positioning
 
@@ -46,6 +37,7 @@ policy, planning, journalism, and reproducible civic-tech workflows.
 
 - Start with [Getting Started](getting-started.md) for installation and the
   first fixture-backed run.
+- Browse the repo-level `examples/` folders for report-rich consumer workflows.
 - Use [CLI Reference](cli.md) for repeatable command-line usage.
 - Use [Architecture](architecture.md) to understand the current data flow and
   shared geography boundaries.

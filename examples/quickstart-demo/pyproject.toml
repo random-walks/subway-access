@@ -1,0 +1,9 @@
+[project]
+name = "subway-access-quickstart-demo"
+version = "0.0.0"
+description = "Quickstart demo for the subway-access package."
+requires-python = ">=3.10"
+dependencies = ["subway-access"]
+
+[tool.uv.sources]
+subway-access = { path = "../..", editable = true }
