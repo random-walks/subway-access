@@ -1,0 +1,77 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061001300",
+        "tract_name": "Census Tract 13; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.709149961893345,
+        "centroid_longitude": -74.01298625852819,
+        "disability_rate": 0.0071,
+        "senior_rate": 0.026624464717929622,
+        "poverty_rate": 0.0581,
+        "population": 5371
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.01298625852819, 40.709149961893345]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061001501",
+        "tract_name": "Census Tract 15.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.709146424637204,
+        "centroid_longitude": -74.00364187557639,
+        "disability_rate": 0.0581,
+        "senior_rate": 0.2263083451202263,
+        "poverty_rate": 0.0497,
+        "population": 7777
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.00364187557639, 40.709146424637204]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061001502",
+        "tract_name": "Census Tract 15.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.70699154646996,
+        "centroid_longitude": -74.00492583033773,
+        "disability_rate": 0.0416,
+        "senior_rate": 0.02486741308190925,
+        "poverty_rate": 0.0561,
+        "population": 8485
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.00492583033773, 40.70699154646996]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061002100",
+        "tract_name": "Census Tract 21; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71432866591733,
+        "centroid_longitude": -74.01005917981915,
+        "disability_rate": 0.0149,
+        "senior_rate": 0.06822759315206445,
+        "poverty_rate": 0.0141,
+        "population": 7944
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-74.01005917981915, 40.71432866591733]
+      }
+    }
+  ]
+}

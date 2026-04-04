@@ -1,0 +1,62 @@
+[
+  {
+    "station_id": "21",
+    "station_complex_id": "624",
+    "equipment_id": "EL22X",
+    "equipment_type": "elevator",
+    "status": "resolved",
+    "started_at": "2026-02-01T00:00:00+00:00",
+    "ended_at": "2026-02-28T23:59:59+00:00",
+    "description": "Monthly availability snapshot for CORTLANDTST-BWY-R",
+    "availability_ratio": 1.0,
+    "outage_minutes_override": 0,
+    "total_outages": "0",
+    "scheduled_outages": "0",
+    "unscheduled_outages": "0"
+  },
+  {
+    "station_id": "23",
+    "station_complex_id": "635",
+    "equipment_id": "ES312",
+    "equipment_type": "escalator",
+    "status": "resolved",
+    "started_at": "2026-02-01T00:00:00+00:00",
+    "ended_at": "2026-02-28T23:59:59+00:00",
+    "description": "Monthly availability snapshot for WHITEHALLST-SOUTHFERRY-BWY-R",
+    "availability_ratio": 0.9015128968253968,
+    "outage_minutes_override": 3971,
+    "total_outages": "8",
+    "scheduled_outages": "4",
+    "unscheduled_outages": "4"
+  },
+  {
+    "station_id": "105",
+    "station_complex_id": "622",
+    "equipment_id": "EL743",
+    "equipment_type": "elevator",
+    "status": "resolved",
+    "started_at": "2026-01-01T00:00:00+00:00",
+    "ended_at": "2026-01-31T23:59:59+00:00",
+    "description": "Monthly availability snapshot for CHAMBERSST-JAM-J/Z",
+    "availability_ratio": 0.9787186379928315,
+    "outage_minutes_override": 950,
+    "total_outages": "4",
+    "scheduled_outages": "1",
+    "unscheduled_outages": "3"
+  },
+  {
+    "station_id": "105",
+    "station_complex_id": "622",
+    "equipment_id": "EL742",
+    "equipment_type": "elevator",
+    "status": "resolved",
+    "started_at": "2026-02-01T00:00:00+00:00",
+    "ended_at": "2026-02-28T23:59:59+00:00",
+    "description": "Monthly availability snapshot for CHAMBERSST-JAM-J/Z",
+    "availability_ratio": 0.9928075396825397,
+    "outage_minutes_override": 290,
+    "total_outages": "1",
+    "scheduled_outages": "1",
+    "unscheduled_outages": "0"
+  }
+]

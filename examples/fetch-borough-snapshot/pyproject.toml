@@ -1,0 +1,9 @@
+[project]
+name = "subway-access-fetch-borough-snapshot"
+version = "0.0.0"
+description = "Official-data borough snapshot example for subway-access."
+requires-python = ">=3.10"
+dependencies = ["subway-access"]
+
+[tool.uv.sources]
+subway-access = { path = "../..", editable = true }

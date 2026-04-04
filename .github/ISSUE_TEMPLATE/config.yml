@@ -1,0 +1,10 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/random-walks/subway-access/discussions
+    about:
+      Use GitHub Discussions for broader usage questions, idea discussion, and
+      workflow help.
+  - name: Security reports
+    url: mailto:blaise@buenaola.io
+    about: Report suspected vulnerabilities privately by email.

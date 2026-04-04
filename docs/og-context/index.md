@@ -1,5 +1,9 @@
 # subway-access
 
+> This section contains internal project context and agent-oriented notes. It is
+> kept in the repo for maintainers and automation, not as stable user-facing
+> documentation.
+
 `subway-access` is a Python-first toolkit for measuring how accessible NYC
 subway service really is once you account for walking distance and neighborhood
 need.

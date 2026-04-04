@@ -11,24 +11,14 @@ small, transparent workflow?
 
 ## What ships now
 
-The current `0.1` line provides one honest end-to-end slice:
+The current package provides a real-data fetch/cache workflow:
 
-- load a narrow GTFS-like station dataset
-- load ADA accessibility status rows
-- load tract-level demographic fixture data
-- generate Euclidean first-pass walk catchments
-- score tract accessibility coverage
-- export GeoJSON and CSV outputs
-- run the packaged demo from the installed `subway-access` CLI
-
-## What does not ship yet
-
-These surfaces remain explicit placeholders so the roadmap stays visible:
-
-- outage ingestion
-- pedestrian-network routing
-- reliability scoring
-- station-level metrics export
+- fetch official MTA station, equipment, and availability data
+- fetch ACS tract-level demographics for a selected NYC study area
+- cache a reusable local snapshot bundle
+- run Euclidean first-pass accessibility and reliability analysis
+- export GeoJSON and CSV outputs, including station metrics
+- run the snapshot and analysis flow from the installed `subway-access` CLI
 
 ## Positioning
 
@@ -45,7 +35,8 @@ policy, planning, journalism, and reproducible civic-tech workflows.
 ## Choose Your Path
 
 - Start with [Getting Started](getting-started.md) for installation and the
-  first fixture-backed run.
+  first real snapshot run.
+- Browse the repo-level `examples/` folders for report-rich consumer workflows.
 - Use [CLI Reference](cli.md) for repeatable command-line usage.
 - Use [Architecture](architecture.md) to understand the current data flow and
   shared geography boundaries.

@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-04-04T18:09:46.330714+00:00",
+  "query": {
+    "geography": "borough",
+    "value": "Manhattan"
+  },
+  "sources": [
+    {
+      "name": "mta_station_catalog",
+      "source_url": "https://data.ny.gov/resource/39hk-dx4f.json",
+      "cache_path": "tests/data/real_snapshot/stations.csv",
+      "refreshed_at": "2026-04-04T18:09:46.330714+00:00",
+      "record_count": 5,
+      "notes": "Small real Manhattan slice for test coverage."
+    },
+    {
+      "name": "mta_availability_history",
+      "source_url": "https://data.ny.gov/resource/rc78-7x78.json",
+      "cache_path": "tests/data/real_snapshot/outages.json",
+      "refreshed_at": "2026-04-04T18:09:46.330714+00:00",
+      "record_count": 4,
+      "notes": "Small real Manhattan availability slice for test coverage."
+    },
+    {
+      "name": "acs_tract_demographics",
+      "source_url": "https://api.census.gov/data/2023/acs/acs5 and https://api.census.gov/data/2023/acs/acs5/subject",
+      "cache_path": "tests/data/real_snapshot/tracts.geojson",
+      "refreshed_at": "2026-04-04T18:09:46.330714+00:00",
+      "record_count": 4,
+      "notes": "Small real Manhattan ACS slice for test coverage."
+    }
+  ],
+  "include_gtfs_archive": false,
+  "gtfs_archive_path": null,
+  "gtfs_archive_url": null
+}
