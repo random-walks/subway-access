@@ -1,9 +1,9 @@
 # Borough Gap Analysis
 
-This example turns the packaged sample data into a borough-level tearsheet.
+This example turns a real borough snapshot into a gap-analysis tearsheet.
 
-It keeps the workflow small and deterministic while showing how to filter the
-analysis story to one geography.
+It reuses the official-data cache pattern and then exports real borough-scale
+gap outputs for a selected study area.
 
 ## Run
 
@@ -12,7 +12,14 @@ uv sync
 uv run python main.py
 ```
 
+To update the tracked report:
+
+```bash
+uv run python main.py --publish-report
+```
+
 ## Outputs
 
-- `artifacts/manhattan-accessibility-gaps.csv`
-- `reports/borough-gap-analysis-tearsheet.md`
+- `artifacts/catchments.geojson`
+- `artifacts/borough-accessibility-gaps.csv`
+- `reports/borough-gap-analysis-tearsheet.md` when `--publish-report` is used

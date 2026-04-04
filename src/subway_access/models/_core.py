@@ -1,4 +1,4 @@
-"""Typed models for the refactored ``subway-access`` package."""
+"""Typed models for the real-data ``subway-access`` package."""
 
 from __future__ import annotations
 
@@ -10,7 +10,12 @@ from typing import TYPE_CHECKING, Literal
 if TYPE_CHECKING:
     from pathlib import Path
 
-AccessibilityLabel = Literal["accessible", "not_accessible", "unknown"]
+AccessibilityLabel = Literal[
+    "accessible",
+    "partially_accessible",
+    "not_accessible",
+    "unknown",
+]
 EquipmentType = Literal["elevator", "escalator", "station", "platform", "unknown"]
 OutageStatus = Literal["active", "resolved", "scheduled", "unknown"]
 
@@ -80,6 +85,16 @@ class Station:
     borough: str
     latitude: float
     longitude: float
+    complex_id: str | None = None
+    gtfs_stop_id: str | None = None
+    daytime_routes: tuple[str, ...] = ()
+    division: str | None = None
+    line: str | None = None
+    structure: str | None = None
+    north_direction_label: str | None = None
+    south_direction_label: str | None = None
+    accessibility_notes: str = ""
+    source: str = ""
     ada_status: AccessibilityLabel = "unknown"
 
     @property
@@ -88,6 +103,12 @@ class Station:
 
         return self.ada_status == "accessible"
 
+    @property
+    def is_partially_accessible(self) -> bool:
+        """Return whether the station has partial accessibility coverage."""
+
+        return self.ada_status == "partially_accessible"
+
 
 @dataclass(frozen=True, slots=True)
 class AccessibilityStatus:
@@ -95,6 +116,8 @@ class AccessibilityStatus:
 
     station_id: str
     ada_status: AccessibilityLabel
+    notes: str = ""
+    source: str = ""
 
 
 @dataclass(frozen=True, slots=True)
@@ -183,6 +206,12 @@ class OutageRecord:
     ended_at: datetime | None
     description: str = ""
     source: str = ""
+    station_complex_id: str | None = None
+    total_outages: int | None = None
+    scheduled_outages: int | None = None
+    unscheduled_outages: int | None = None
+    availability_ratio: float | None = None
+    outage_minutes_override: int | None = None
 
     def overlap_minutes(
         self, window: TimeWindow, *, as_of: datetime | None = None
@@ -197,6 +226,18 @@ class OutageRecord:
         overlap_end = min(event_end, window_end)
         if overlap_end <= overlap_start:
             return 0
+        if self.outage_minutes_override is not None:
+            total_duration_minutes = max(
+                int((event_end - event_start).total_seconds() // 60),
+                1,
+            )
+            overlap_duration_minutes = int(
+                (overlap_end - overlap_start).total_seconds() // 60
+            )
+            return int(
+                self.outage_minutes_override
+                * (overlap_duration_minutes / total_duration_minutes)
+            )
         return int((overlap_end - overlap_start).total_seconds() // 60)
 
 
@@ -210,6 +251,9 @@ class PedestrianConnection:
     walk_minutes: float
     distance_meters: float
     geometry: tuple[tuple[float, float], ...] = ()
+    from_kind: str = "station"
+    to_kind: str = "station"
+    travel_mode: str = "walk"
 
 
 @dataclass(frozen=True, slots=True)
@@ -248,6 +292,8 @@ class StationMetricRecord:
     reliability_label: str | None
     outage_minutes: int | None
     network_connection_count: int
+    daytime_routes: tuple[str, ...] = ()
+    structure: str | None = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -372,16 +418,31 @@ class OutageDataset:
 
 
 @dataclass(frozen=True, slots=True)
+class DataSourceMetadata:
+    """Metadata describing one cached or fetched public dataset."""
+
+    name: str
+    source_url: str
+    cache_path: Path
+    refreshed_at: datetime
+    record_count: int
+    notes: str = ""
+
+
+@dataclass(frozen=True, slots=True)
 class PedestrianNetworkDataset:
     """Loaded pedestrian connections used for richer examples and metrics."""
 
     connections: tuple[PedestrianConnection, ...]
+    source: str = ""
 
     def connection_count_by_station(self) -> dict[str, int]:
         counts: dict[str, int] = defaultdict(int)
         for connection in self.connections:
-            counts[connection.from_station_id] += 1
-            counts[connection.to_station_id] += 1
+            if connection.from_kind == "station":
+                counts[connection.from_station_id] += 1
+            if connection.to_kind == "station":
+                counts[connection.to_station_id] += 1
         return dict(counts)
 
 
@@ -400,3 +461,16 @@ class StationMetricDataset:
     """Export-ready station metrics."""
 
     records: tuple[StationMetricRecord, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class StudyAreaSnapshot:
+    """In-memory snapshot of one real-data accessibility study area."""
+
+    query: AccessibilityQuery
+    stations: StationDataset
+    accessibility: AccessibilityDataset
+    demographics: DemographicDataset
+    outages: OutageDataset
+    metadata: tuple[DataSourceMetadata, ...]
+    pedestrian_network: PedestrianNetworkDataset | None = None

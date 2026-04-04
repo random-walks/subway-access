@@ -1,18 +1,18 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 
-from subway_access import analysis, io, models
+from subway_access import analysis, models, pipeline
+
+TEST_DATA_DIR = Path(__file__).resolve().parent / "data" / "real_snapshot"
 
 
 @dataclass(frozen=True)
-class DemoBundle:
-    """Typed bundle of the sample-backed subway-access workflow."""
+class SnapshotBundle:
+    """Typed bundle built from the committed real-data test snapshot."""
 
-    stations: models.StationDataset
-    demographics: models.DemographicDataset
-    outages: models.OutageDataset
-    pedestrian_network: models.PedestrianNetworkDataset
+    snapshot: models.StudyAreaSnapshot
     catchments: models.CatchmentDataset
     scores: models.AccessibilityScoreDataset
     gaps: models.GapAnalysis
@@ -20,38 +20,31 @@ class DemoBundle:
     station_metrics: models.StationMetricDataset
 
 
-def build_demo_bundle(
-    *,
-    minutes: int = 10,
-    reliability_days: int = 30,
-) -> DemoBundle:
-    stations = io.load_gtfs().with_accessibility(io.load_accessibility_status())
-    demographics = io.load_census_data()
-    outages = io.load_outages()
-    pedestrian_network = io.load_pedestrian_network()
+def build_snapshot_bundle(*, minutes: int = 10, reliability_days: int = 365) -> SnapshotBundle:
+    snapshot = pipeline.load_cached_snapshot(TEST_DATA_DIR)
     catchments = analysis.generate_catchments(
-        stations,
+        snapshot.stations,
         models.CatchmentRequest(minutes=minutes),
     )
-    scores = analysis.score_accessibility(stations, catchments, demographics)
+    scores = analysis.score_accessibility(
+        snapshot.stations,
+        catchments,
+        snapshot.demographics,
+    )
     gaps = analysis.analyze_gaps(scores)
     reliability = analysis.compute_reliability(
-        stations,
-        outages,
+        snapshot.stations,
+        snapshot.outages,
         models.TimeWindow(days=reliability_days),
     )
     station_metrics = analysis.build_station_metrics(
-        stations,
+        snapshot.stations,
         catchments,
         scores,
         reliability=reliability,
-        pedestrian_network=pedestrian_network,
     )
-    return DemoBundle(
-        stations=stations,
-        demographics=demographics,
-        outages=outages,
-        pedestrian_network=pedestrian_network,
+    return SnapshotBundle(
+        snapshot=snapshot,
         catchments=catchments,
         scores=scores,
         gaps=gaps,

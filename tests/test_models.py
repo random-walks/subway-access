@@ -38,3 +38,22 @@ def test_outage_record_overlap_minutes_clips_to_window() -> None:
     )
 
     assert overlap == 2160
+
+
+def test_outage_record_overlap_uses_minutes_override() -> None:
+    record = OutageRecord(
+        station_id="21",
+        equipment_id="EL22X",
+        equipment_type="elevator",
+        status="resolved",
+        started_at=datetime(2026, 2, 1, 0, 0, tzinfo=timezone.utc),
+        ended_at=datetime(2026, 2, 28, 23, 59, 59, tzinfo=timezone.utc),
+        outage_minutes_override=290,
+    )
+
+    overlap = record.overlap_minutes(
+        TimeWindow(days=365),
+        as_of=datetime(2026, 3, 1, 0, 0, tzinfo=timezone.utc),
+    )
+
+    assert overlap == 290

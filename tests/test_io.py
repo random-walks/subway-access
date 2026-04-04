@@ -12,52 +12,54 @@ from subway_access.io import (
     load_outages,
     load_pedestrian_network,
 )
+from tests.helpers import TEST_DATA_DIR
 
 
-def test_loader_happy_path_uses_fixture_defaults() -> None:
-    station_data = load_gtfs()
-    accessibility = load_accessibility_status()
-    demographics = load_census_data()
-    outages = load_outages()
-    network = load_pedestrian_network()
-    merged = station_data.with_accessibility(accessibility)
+def test_loaders_read_committed_real_snapshot_slice() -> None:
+    stations = load_gtfs(TEST_DATA_DIR / "stations.csv")
+    accessibility = load_accessibility_status(TEST_DATA_DIR / "accessibility.csv")
+    demographics = load_census_data(TEST_DATA_DIR / "tracts.geojson")
+    outages = load_outages(TEST_DATA_DIR / "outages.json")
+    merged = stations.with_accessibility(accessibility)
 
-    assert len(station_data.stations) == 3
-    assert merged.as_mapping()["ST001"].ada_status == "accessible"
-    assert merged.as_mapping()["ST002"].ada_status == "not_accessible"
+    assert len(stations.stations) == 5
+    assert merged.as_mapping()["21"].ada_status == "accessible"
+    assert merged.as_mapping()["23"].ada_status == "not_accessible"
     assert len(demographics.tracts) == 4
-    assert len(outages.records) == 3
-    assert len(network.connections) == 3
+    assert len(outages.records) == 4
 
 
 def test_duplicate_station_ids_raise_value_error(tmp_path: Path) -> None:
     station_path = tmp_path / "stations.csv"
     station_path.write_text(
         (
-            "station_id,stop_id,name,borough,latitude,longitude\n"
-            "ST001,A12,Station One,Manhattan,40.75,-73.99\n"
-            "ST001,A13,Station Duplicate,Manhattan,40.76,-73.98\n"
+            "station_id,name,borough,latitude,longitude\n"
+            "21,Cortlandt St,Manhattan,40.710668,-74.011029\n"
+            "21,Cortlandt St Duplicate,Manhattan,40.710668,-74.011029\n"
         ),
         encoding="utf-8",
     )
 
-    with pytest.raises(ValueError, match="duplicate station_id values: ST001"):
+    with pytest.raises(ValueError, match="duplicate station_id values: 21"):
         load_gtfs(station_path)
 
 
-def test_load_outages_accepts_json_payload(tmp_path: Path) -> None:
+def test_load_outages_accepts_json_payload_with_override_fields(tmp_path: Path) -> None:
     outage_path = tmp_path / "outages.json"
     outage_path.write_text(
         json.dumps(
             {
                 "outages": [
                     {
-                        "station_id": "ST001",
-                        "equipment_id": "ELV-01",
+                        "station_id": "21",
+                        "station_complex_id": "624",
+                        "equipment_id": "EL22X",
                         "equipment_type": "elevator",
                         "status": "resolved",
-                        "started_at": "2026-04-01T00:00:00Z",
-                        "ended_at": "2026-04-01T02:30:00Z",
+                        "started_at": "2026-02-01T00:00:00Z",
+                        "ended_at": "2026-02-28T23:59:59Z",
+                        "outage_minutes_override": 120,
+                        "availability_ratio": 0.99,
                     }
                 ]
             }
@@ -67,8 +69,8 @@ def test_load_outages_accepts_json_payload(tmp_path: Path) -> None:
 
     outages = load_outages(outage_path)
 
-    assert len(outages.records) == 1
-    assert outages.records[0].station_id == "ST001"
+    assert outages.records[0].station_complex_id == "624"
+    assert outages.records[0].outage_minutes_override == 120
 
 
 def test_load_pedestrian_network_rejects_non_linestring_geometry(tmp_path: Path) -> None:
@@ -81,14 +83,14 @@ def test_load_pedestrian_network_rejects_non_linestring_geometry(tmp_path: Path)
                     {
                         "type": "Feature",
                         "properties": {
-                            "from_station_id": "ST001",
-                            "to_station_id": "ST002",
+                            "from_station_id": "21",
+                            "to_station_id": "105",
                             "walk_minutes": 5,
                             "distance_meters": 400,
                         },
                         "geometry": {
                             "type": "Point",
-                            "coordinates": [-73.99, 40.75],
+                            "coordinates": [-74.0, 40.71],
                         },
                     }
                 ],

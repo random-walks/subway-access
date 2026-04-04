@@ -6,7 +6,7 @@ The supported public contract is now subpackage-first:
 - `subway_access.io`
 - `subway_access.analysis`
 - `subway_access.export`
-- `subway_access.samples`
+- `subway_access.pipeline`
 - `subway_access.cli`
 
 The root `subway_access` namespace is intentionally minimal and only exposes
@@ -32,9 +32,9 @@ The root `subway_access` namespace is intentionally minimal and only exposes
 
 ::: subway_access.export
 
-## Samples
+## Pipeline
 
-::: subway_access.samples
+::: subway_access.pipeline
 
 ## CLI
 

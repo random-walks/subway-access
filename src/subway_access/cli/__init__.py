@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from ._main import main, run_demo
+from ._main import main, run_analyze_snapshot, run_fetch_snapshot
 
 __all__ = [
     "main",
-    "run_demo",
+    "run_analyze_snapshot",
+    "run_fetch_snapshot",
 ]

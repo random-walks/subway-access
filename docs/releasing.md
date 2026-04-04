@@ -28,7 +28,7 @@ That covers:
 - lint, typing, and public API checks
 - docs build validation
 - source and wheel builds
-- installed-wheel smoke testing for the CLI and packaged demo workflow
+- installed-wheel smoke testing for the CLI and cached real-data workflow
 
 ## Publishing configuration
 
@@ -60,7 +60,8 @@ After the release lands on PyPI:
 
 1. Install `subway-access` from PyPI in a clean environment.
 2. Run `subway-access --help`.
-3. Run `subway-access demo --output-dir demo-output --minutes 10`.
-4. Confirm the PyPI project page renders the README correctly.
-5. Confirm the docs site, GitHub release notes, and repo sidebar links reflect
+3. Run `subway-access fetch-snapshot --geography borough --value Manhattan --cache-dir cache/manhattan`.
+4. Run `subway-access analyze-snapshot --cache-dir cache/manhattan --output-dir artifacts/manhattan`.
+5. Confirm the PyPI project page renders the README correctly.
+6. Confirm the docs site, GitHub release notes, and repo sidebar links reflect
    the release.

@@ -151,6 +151,8 @@ def analyze_gaps(scored_data: AccessibilityScoreDataset) -> GapAnalysis:
 def _reliability_label(*, score: float, ada_status: AccessibilityLabel) -> str:
     if ada_status == "not_accessible":
         return "not_accessible"
+    if ada_status == "partially_accessible":
+        return "partial_access"
     if ada_status == "unknown":
         return "unknown"
     if score >= 0.995:
@@ -298,6 +300,8 @@ def build_station_metrics(
                 if reliability_record is None
                 else reliability_record.outage_minutes,
                 network_connection_count=network_counts.get(station.station_id, 0),
+                daytime_routes=station.daytime_routes,
+                structure=station.structure,
             )
         )
 

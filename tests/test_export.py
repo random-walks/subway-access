@@ -10,54 +10,48 @@ from subway_access.export import (
     export_station_metrics,
 )
 from subway_access.models import ExportTarget
-from tests.helpers import build_demo_bundle
+from tests.helpers import build_snapshot_bundle
 
 
-def test_exporters_write_expected_outputs(tmp_path: Path) -> None:
-    bundle = build_demo_bundle()
-    catchments = bundle.catchments
-    gaps = bundle.gaps
-    station_metrics = bundle.station_metrics
+def test_exporters_write_expected_outputs_from_real_slice(tmp_path: Path) -> None:
+    bundle = build_snapshot_bundle()
 
-    geojson_target = ExportTarget(
-        format="geojson",
-        output_path=tmp_path / "catchments.geojson",
+    catchment_path = export_catchments_geojson(
+        bundle.catchments,
+        ExportTarget(format="geojson", output_path=tmp_path / "catchments.geojson"),
     )
-    gap_csv_target = ExportTarget(format="csv", output_path=tmp_path / "gaps.csv")
-    station_csv_target = ExportTarget(
-        format="csv",
-        output_path=tmp_path / "station-metrics.csv",
+    gap_path = export_gap_table(
+        bundle.gaps,
+        ExportTarget(format="csv", output_path=tmp_path / "gaps.csv"),
     )
-    station_geojson_target = ExportTarget(
-        format="geojson",
-        output_path=tmp_path / "station-metrics.geojson",
+    station_csv_path = export_station_metrics(
+        bundle.station_metrics,
+        ExportTarget(format="csv", output_path=tmp_path / "station-metrics.csv"),
     )
-
-    catchment_path = export_catchments_geojson(catchments, geojson_target)
-    gap_path = export_gap_table(gaps, gap_csv_target)
-    station_csv_path = export_station_metrics(station_metrics, station_csv_target)
     station_geojson_path = export_station_metrics(
-        station_metrics,
-        station_geojson_target,
+        bundle.station_metrics,
+        ExportTarget(format="geojson", output_path=tmp_path / "station-metrics.geojson"),
     )
 
     catchment_payload = json.loads(catchment_path.read_text(encoding="utf-8"))
     assert catchment_payload["type"] == "FeatureCollection"
-    assert len(catchment_payload["features"]) == 3
+    assert len(catchment_payload["features"]) == 5
 
     with gap_path.open(newline="", encoding="utf-8") as handle:
         gap_rows = list(csv.DictReader(handle))
-    assert gap_rows[0]["tract_id"] == "36061000400"
-    assert gap_rows[0]["gap_label"] == "gap"
+    assert gap_rows[0]["tract_id"] == "36061001300"
+    assert gap_rows[0]["gap_label"] == "covered"
 
     with station_csv_path.open(newline="", encoding="utf-8") as handle:
         station_rows = list(csv.DictReader(handle))
-    assert station_rows[0]["station_id"] == "ST001"
-    assert station_rows[0]["reliability_label"] == "strong"
+    assert station_rows[0]["station_id"] == "20"
+    assert "daytime_routes" in station_rows[0]
 
     station_geojson_payload = json.loads(station_geojson_path.read_text(encoding="utf-8"))
     assert [feature["id"] for feature in station_geojson_payload["features"]] == [
-        "ST001",
-        "ST002",
-        "ST003",
+        "20",
+        "21",
+        "22",
+        "23",
+        "105",
     ]

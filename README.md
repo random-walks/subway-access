@@ -11,22 +11,23 @@ analysis.
 Authored by [Blaise Albis-Burdige](https://blaiseab.com/).
 
 It is designed to measure neighborhood access to accessible stations with a
-small, transparent workflow that is easy to inspect, test, and extend.
+small, transparent workflow that is easy to inspect, cache, analyze in memory,
+and extend.
 
 ## What ships in the current line
 
-The current package now includes a full sample-backed analysis slice:
+The current package now includes a real public-data workflow:
 
-- load packaged station, ADA, tract, outage, and pedestrian-network fixtures
-- generate first-pass Euclidean walk catchments
-- score tract accessibility gaps
-- compute rolling station reliability from outage history
-- export catchment GeoJSON, tract gap CSV, and station metrics CSV or GeoJSON
-- run the full workflow from the installed CLI
+- fetch MTA subway stations and ADA status from the public station catalog
+- fetch public elevator and escalator availability history plus asset inventory
+- fetch ACS tract-level demographics for a selected NYC study area
+- cache a reusable local snapshot bundle
+- analyze Euclidean first-pass accessibility gaps and rolling reliability
+- export catchment GeoJSON, tract gap CSV, and station metrics
+- run the snapshot and analysis flow from the installed CLI
 
-The routing model is still intentionally simple. Catchments remain Euclidean
-buffers, while the pedestrian network is currently used for richer examples and
-station-metrics context rather than full isochrone generation.
+The current scoring model is still intentionally a documented first pass:
+Euclidean catchments first, richer network comparisons next.
 
 ## Why this exists
 
@@ -45,17 +46,17 @@ Install:
 pip install subway-access
 ```
 
-Run the packaged demo workflow:
+Fetch a real official-data borough snapshot:
 
 ```bash
-subway-access demo --output-dir demo-output --minutes 10
+subway-access fetch-snapshot --geography borough --value Manhattan --cache-dir cache/manhattan
 ```
 
-This writes:
+Then analyze the cached snapshot:
 
-- `demo-output/catchments.geojson`
-- `demo-output/accessibility-gaps.csv`
-- `demo-output/station-metrics.csv`
+```bash
+subway-access analyze-snapshot --cache-dir cache/manhattan --output-dir artifacts/manhattan
+```
 
 ## Examples
 
@@ -65,27 +66,35 @@ This writes:
 
 Start with:
 
-- `examples/quickstart-demo/`
+- `examples/fetch-borough-snapshot/`
 - `examples/borough-gap-analysis/`
-- `examples/catchment-map/`
+- `examples/outage-reliability-report/`
+- `examples/network-access-comparison/`
 - `examples/example-template/`
 
 ## Python example
 
 ```python
-from subway_access import analysis, io, models
+from pathlib import Path
 
-stations = io.load_gtfs().with_accessibility(io.load_accessibility_status())
-demographics = io.load_census_data()
-outages = io.load_outages()
+from subway_access import analysis, models, pipeline
+
+snapshot = pipeline.fetch_study_area_snapshot(
+    models.AccessibilityQuery(geography="borough", value="Manhattan"),
+    cache_dir=Path("cache/manhattan"),
+)
 catchments = analysis.generate_catchments(
-    stations,
+    snapshot.stations,
     models.CatchmentRequest(minutes=10),
 )
-scores = analysis.score_accessibility(stations, catchments, demographics)
+scores = analysis.score_accessibility(
+    snapshot.stations,
+    catchments,
+    snapshot.demographics,
+)
 reliability = analysis.compute_reliability(
-    stations,
-    outages,
+    snapshot.stations,
+    snapshot.outages,
     models.TimeWindow(days=30),
 )
 gaps = analysis.analyze_gaps(scores)
@@ -94,16 +103,15 @@ print(len(gaps.records), len(reliability.records))
 
 ## Current methodology
 
-The current workflow is intentionally simple and reproducible:
+The current workflow is intentionally explicit and reproducible:
 
-1. load stations and ADA status
-2. create circular walk catchments using a fixed walking speed
-3. test each tract centroid against accessible-station catchments
-4. compute a tract need score from disability, senior, and poverty rates
-5. compute rolling reliability from outage events
-6. assign a basic gap score when high-need tracts have no accessible station in
-   catchment
-7. aggregate station-level coverage and reliability metrics
+1. select a study area through `nyc-geo-toolkit`
+2. fetch official MTA and Census sources into a local cache
+3. load those cached files back into typed in-memory datasets
+4. create Euclidean walk catchments using a fixed walking speed
+5. test tract centroids against accessible-station catchments
+6. compute tract need, rolling reliability, and station metrics
+7. export publishable GeoJSON and CSV outputs
 
 This is intentionally a **first-pass Euclidean approximation**, not a full
 network-isochrone model.

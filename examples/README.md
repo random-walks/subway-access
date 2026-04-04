@@ -1,12 +1,12 @@
 # Examples
 
-`examples/` contains self-contained consumer projects instead of one-off repo
-scripts or notebooks.
+`examples/` contains self-contained consumer projects built around official
+public data, local cache reuse, and tracked reports.
 
 ## Contract
 
 Every example lives in its own semantic-slug folder such as
-`examples/quickstart-demo/`.
+`examples/fetch-borough-snapshot/`.
 
 The canonical starting point for new work is `examples/example-template/`.
 
@@ -22,17 +22,18 @@ Each example must:
 - use an optional tracked `reports/` folder for markdown and report figures that
   should stay in git
 - avoid shared cross-example `utils/`, `data/`, or `output/` directories
-- run from packaged sample data by default unless the README documents a live
-  dependency clearly
+- fetch or reuse official-data cache snapshots instead of relying on packaged
+  synthetic fixtures
 
 Examples are intentionally not part of the main CI runtime path. They are
 consumer references, not package fixtures.
 
 ## Start Here
 
-- `examples/quickstart-demo/`: smallest end-to-end walkthrough
-- `examples/borough-gap-analysis/`: report-focused tract gap story
-- `examples/catchment-map/`: mapping-oriented GeoJSON export workflow
+- `examples/fetch-borough-snapshot/`: first live/official cache-building example
+- `examples/borough-gap-analysis/`: borough-scale tract gap story on real public data
+- `examples/outage-reliability-report/`: real monthly availability and reliability story
+- `examples/network-access-comparison/`: Euclidean vs network comparison workflow
 - `examples/example-template/`: scaffold for future examples
 
 ## Local Repo Usage

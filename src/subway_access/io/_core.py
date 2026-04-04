@@ -1,4 +1,4 @@
-"""Loader entry points for ``subway-access`` datasets."""
+"""Low-level cached snapshot loaders for ``subway-access`` datasets."""
 
 from __future__ import annotations
 
@@ -26,15 +26,9 @@ from ..models import (
     TractDemographics,
 )
 
-_FIXTURES_DIRECTORY = Path(__file__).resolve().parents[1] / "data" / "fixtures"
-DEFAULT_STATIONS_FIXTURE = _FIXTURES_DIRECTORY / "stations.csv"
-DEFAULT_ACCESSIBILITY_FIXTURE = _FIXTURES_DIRECTORY / "accessibility.csv"
-DEFAULT_TRACTS_FIXTURE = _FIXTURES_DIRECTORY / "tracts.geojson"
-DEFAULT_OUTAGES_FIXTURE = _FIXTURES_DIRECTORY / "outages.csv"
-DEFAULT_PEDESTRIAN_NETWORK_FIXTURE = _FIXTURES_DIRECTORY / "pedestrian-network.geojson"
-
 _VALID_ACCESSIBILITY_STATUSES: tuple[AccessibilityLabel, ...] = (
     "accessible",
+    "partially_accessible",
     "not_accessible",
     "unknown",
 )
@@ -190,8 +184,14 @@ def _parse_equipment_type(raw_value: str) -> EquipmentType:
     return value if value in _VALID_EQUIPMENT_TYPES else "unknown"
 
 
-def load_gtfs(source: str | Path = DEFAULT_STATIONS_FIXTURE) -> StationDataset:
-    """Load the narrow GTFS-like station table used by the project examples."""
+def _parse_routes(raw_value: str | None) -> tuple[str, ...]:
+    if raw_value is None:
+        return ()
+    return tuple(route for route in raw_value.replace(",", " ").split() if route)
+
+
+def load_gtfs(source: str | Path) -> StationDataset:
+    """Load a cached real-data station snapshot CSV."""
 
     rows, source_name = _load_csv_rows(
         source,
@@ -216,16 +216,26 @@ def load_gtfs(source: str | Path = DEFAULT_STATIONS_FIXTURE) -> StationDataset:
                 source_name=source_name,
                 row_id=row["station_id"],
             ),
+            complex_id=(row.get("complex_id") or "").strip() or None,
+            gtfs_stop_id=(row.get("gtfs_stop_id") or "").strip() or None,
+            daytime_routes=_parse_routes(row.get("daytime_routes")),
+            division=(row.get("division") or "").strip() or None,
+            line=(row.get("line") or "").strip() or None,
+            structure=(row.get("structure") or "").strip() or None,
+            north_direction_label=(row.get("north_direction_label") or "").strip()
+            or None,
+            south_direction_label=(row.get("south_direction_label") or "").strip()
+            or None,
+            accessibility_notes=(row.get("accessibility_notes") or "").strip(),
+            source=source_name,
         )
         for row in rows
     )
     return StationDataset(stations=stations)
 
 
-def load_accessibility_status(
-    source: str | Path = DEFAULT_ACCESSIBILITY_FIXTURE,
-) -> AccessibilityDataset:
-    """Load station accessibility status keyed by station identifier."""
+def load_accessibility_status(source: str | Path) -> AccessibilityDataset:
+    """Load cached station accessibility status keyed by station identifier."""
 
     rows, source_name = _load_csv_rows(
         source,
@@ -241,14 +251,16 @@ def load_accessibility_status(
                 source_name=source_name,
                 station_id=row["station_id"].strip(),
             ),
+            notes=(row.get("notes") or row.get("ada_direction_notes") or "").strip(),
+            source=source_name,
         )
         for row in rows
     )
     return AccessibilityDataset(statuses=statuses)
 
 
-def load_census_data(source: str | Path = DEFAULT_TRACTS_FIXTURE) -> DemographicDataset:
-    """Load tract-level demographic variables used in need scoring."""
+def load_census_data(source: str | Path) -> DemographicDataset:
+    """Load cached tract-level demographic variables used in need scoring."""
 
     text, source_name = _read_text(source)
     raw_payload = json.loads(text)
@@ -401,11 +413,58 @@ def _normalize_outage_record(
         ),
         description=str(record.get("description") or record.get("message") or "").strip(),
         source=source_name,
+        station_complex_id=str(
+            record.get("station_complex_id")
+            or record.get("stationComplexId")
+            or record.get("station_complex_mrn")
+            or ""
+        ).strip()
+        or None,
+        total_outages=None
+        if record.get("total_outages") is None
+        else _parse_int(
+            record.get("total_outages"),
+            field_name="total_outages",
+            source_name=source_name,
+            row_id=equipment_id,
+        ),
+        scheduled_outages=None
+        if record.get("scheduled_outages") is None
+        else _parse_int(
+            record.get("scheduled_outages"),
+            field_name="scheduled_outages",
+            source_name=source_name,
+            row_id=equipment_id,
+        ),
+        unscheduled_outages=None
+        if record.get("unscheduled_outages") is None
+        else _parse_int(
+            record.get("unscheduled_outages"),
+            field_name="unscheduled_outages",
+            source_name=source_name,
+            row_id=equipment_id,
+        ),
+        availability_ratio=None
+        if record.get("availability_ratio") is None
+        else _parse_float(
+            record.get("availability_ratio"),
+            field_name="availability_ratio",
+            source_name=source_name,
+            row_id=equipment_id,
+        ),
+        outage_minutes_override=None
+        if record.get("outage_minutes_override") is None
+        else _parse_int(
+            record.get("outage_minutes_override"),
+            field_name="outage_minutes_override",
+            source_name=source_name,
+            row_id=equipment_id,
+        ),
     )
 
 
-def load_outages(source: str | Path = DEFAULT_OUTAGES_FIXTURE) -> OutageDataset:
-    """Load elevator or escalator outage history from CSV, JSON, or a URL."""
+def load_outages(source: str | Path) -> OutageDataset:
+    """Load cached elevator availability or outage history from CSV or JSON."""
 
     if not _is_url(source):
         path = _resolve_source(source)
@@ -489,13 +548,14 @@ def _normalize_network_record(
             row_id=connection_id,
         ),
         geometry=geometry,
+        from_kind=str(record.get("from_kind") or "station").strip() or "station",
+        to_kind=str(record.get("to_kind") or "station").strip() or "station",
+        travel_mode=str(record.get("travel_mode") or "walk").strip() or "walk",
     )
 
 
-def load_pedestrian_network(
-    source: str | Path = DEFAULT_PEDESTRIAN_NETWORK_FIXTURE,
-) -> PedestrianNetworkDataset:
-    """Load a simplified pedestrian connection graph from CSV or GeoJSON."""
+def load_pedestrian_network(source: str | Path) -> PedestrianNetworkDataset:
+    """Load a cached pedestrian connection graph from CSV or GeoJSON."""
 
     suffix = ".json" if _is_url(source) else _resolve_source(source).suffix.lower()
 
@@ -513,7 +573,7 @@ def load_pedestrian_network(
             _normalize_network_record(row, source_name=source_name, record_index=index)
             for index, row in enumerate(rows, start=1)
         )
-        return PedestrianNetworkDataset(connections=csv_connections)
+        return PedestrianNetworkDataset(connections=csv_connections, source=source_name)
 
     text, source_name = _read_text(source)
     payload = json.loads(text)
@@ -549,4 +609,4 @@ def load_pedestrian_network(
                 geometry=geometry_points,
             )
         )
-    return PedestrianNetworkDataset(connections=tuple(connections))
+    return PedestrianNetworkDataset(connections=tuple(connections), source=source_name)

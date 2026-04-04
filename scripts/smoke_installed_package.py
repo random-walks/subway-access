@@ -34,16 +34,46 @@ def main() -> None:
     subprocess.run([str(cli_path), "--help"], check=True)
 
     with tempfile.TemporaryDirectory() as temp_dir:
-        output_dir = Path(temp_dir) / "demo-output"
+        cache_dir = Path(temp_dir) / "snapshot-cache"
+        output_dir = Path(temp_dir) / "analysis-output"
         subprocess.run(
-            [str(cli_path), "demo", "--output-dir", str(output_dir), "--minutes", "10"],
+            [
+                str(cli_path),
+                "fetch-snapshot",
+                "--geography",
+                "borough",
+                "--value",
+                "Manhattan",
+                "--cache-dir",
+                str(cache_dir),
+                "--availability-months",
+                "12",
+            ],
+            check=True,
+        )
+        subprocess.run(
+            [
+                str(cli_path),
+                "analyze-snapshot",
+                "--cache-dir",
+                str(cache_dir),
+                "--output-dir",
+                str(output_dir),
+                "--minutes",
+                "10",
+            ],
             check=True,
         )
         catchments_path = output_dir / "catchments.geojson"
         gaps_path = output_dir / "accessibility-gaps.csv"
-        if not catchments_path.is_file() or not gaps_path.is_file():
+        station_metrics_path = output_dir / "station-metrics.csv"
+        if (
+            not catchments_path.is_file()
+            or not gaps_path.is_file()
+            or not station_metrics_path.is_file()
+        ):
             raise SystemExit(
-                "Installed package could not generate the expected demo output files."
+                "Installed package could not generate the expected snapshot output files."
             )
 
     version = subway_access.__version__

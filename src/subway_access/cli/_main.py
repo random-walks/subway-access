@@ -1,4 +1,4 @@
-"""Command-line entry points for the ``subway-access`` demo workflow."""
+"""Command-line entry points for the real-data ``subway-access`` workflows."""
 
 from __future__ import annotations
 
@@ -19,14 +19,8 @@ from ..export import (
     export_gap_table,
     export_station_metrics,
 )
-from ..io import (
-    load_accessibility_status,
-    load_census_data,
-    load_gtfs,
-    load_outages,
-    load_pedestrian_network,
-)
-from ..models import CatchmentRequest, ExportTarget, TimeWindow
+from ..models import AccessibilityQuery, CatchmentRequest, ExportTarget, TimeWindow
+from ..pipeline import fetch_study_area_snapshot, load_cached_snapshot
 
 if TYPE_CHECKING:
     from collections.abc import Sequence
@@ -41,8 +35,8 @@ def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="subway-access",
         description=(
-            "Run the packaged subway accessibility demo workflow with reliability "
-            "and station metrics outputs."
+            "Fetch real official subway accessibility data, cache it locally, "
+            "and analyze it with the subway-access workflow."
         ),
     )
     parser.add_argument(
@@ -52,23 +46,66 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    demo_parser = subparsers.add_parser(
-        "demo",
-        help="Run the packaged fixture workflow and write map/table outputs.",
+    fetch_parser = subparsers.add_parser(
+        "fetch-snapshot",
+        help="Fetch and cache a real-data study-area snapshot.",
     )
-    demo_parser.add_argument(
+    fetch_parser.add_argument(
+        "--geography",
+        required=True,
+        help="Boundary layer to select, such as borough or community_district.",
+    )
+    fetch_parser.add_argument(
+        "--value",
+        required=True,
+        help="Boundary value to load from nyc-geo-toolkit.",
+    )
+    fetch_parser.add_argument(
+        "--cache-dir",
+        type=Path,
+        required=True,
+        help="Directory where the real-data snapshot cache will be written.",
+    )
+    fetch_parser.add_argument(
+        "--availability-months",
+        type=int,
+        default=12,
+        help="Number of months of public availability history to fetch.",
+    )
+    fetch_parser.add_argument(
+        "--refresh",
+        action="store_true",
+        help="Refresh the cache even if the expected files already exist.",
+    )
+    fetch_parser.add_argument(
+        "--skip-gtfs-archive",
+        action="store_true",
+        help="Do not cache the raw GTFS subway archive alongside the snapshot.",
+    )
+
+    analyze_parser = subparsers.add_parser(
+        "analyze-snapshot",
+        help="Analyze a cached real-data snapshot and write outputs.",
+    )
+    analyze_parser.add_argument(
+        "--cache-dir",
+        type=Path,
+        required=True,
+        help="Directory containing a fetched real-data snapshot cache.",
+    )
+    analyze_parser.add_argument(
         "--output-dir",
         type=Path,
         required=True,
-        help="Directory where the demo GeoJSON and CSV outputs will be written.",
+        help="Directory where the analysis GeoJSON and CSV outputs will be written.",
     )
-    demo_parser.add_argument(
+    analyze_parser.add_argument(
         "--minutes",
         type=int,
         default=10,
         help="Walking threshold in minutes for the first-pass catchment.",
     )
-    demo_parser.add_argument(
+    analyze_parser.add_argument(
         "--reliability-window-days",
         type=int,
         default=30,
@@ -77,36 +114,60 @@ def _build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def run_demo(
+def run_fetch_snapshot(
+    cache_dir: Path,
+    *,
+    geography: str,
+    value: str,
+    availability_months: int,
+    refresh: bool,
+    skip_gtfs_archive: bool,
+) -> int:
+    """Fetch and cache a real-data snapshot for one study area."""
+
+    snapshot = fetch_study_area_snapshot(
+        AccessibilityQuery(geography=geography, value=value),
+        cache_dir=cache_dir,
+        refresh=refresh,
+        availability_months=availability_months,
+        include_gtfs_archive=not skip_gtfs_archive,
+    )
+    sys.stdout.write("Fetched subway-access real-data snapshot:\n")
+    sys.stdout.write(f"- Study area: {snapshot.query.geography}={snapshot.query.value}\n")
+    sys.stdout.write(f"- Cache directory: {cache_dir}\n")
+    sys.stdout.write(f"- Stations: {len(snapshot.stations.stations)}\n")
+    sys.stdout.write(f"- Tracts: {len(snapshot.demographics.tracts)}\n")
+    sys.stdout.write(f"- Availability rows: {len(snapshot.outages.records)}\n")
+    return 0
+
+
+def run_analyze_snapshot(
+    cache_dir: Path,
     output_dir: Path,
     *,
     minutes: int,
     reliability_window_days: int,
 ) -> int:
-    """Run the packaged demo analysis and export outputs."""
+    """Analyze a cached snapshot and export real-data outputs."""
 
+    snapshot = load_cached_snapshot(cache_dir)
     if minutes <= 0:
         message = "Catchment minutes must be greater than zero."
         raise ValueError(message)
 
-    stations = load_gtfs().with_accessibility(load_accessibility_status())
-    demographics = load_census_data()
-    outages = load_outages()
-    pedestrian_network = load_pedestrian_network()
-    catchments = generate_catchments(stations, CatchmentRequest(minutes=minutes))
-    scores = score_accessibility(stations, catchments, demographics)
+    catchments = generate_catchments(snapshot.stations, CatchmentRequest(minutes=minutes))
+    scores = score_accessibility(snapshot.stations, catchments, snapshot.demographics)
     gaps = analyze_gaps(scores)
     reliability = compute_reliability(
-        stations,
-        outages,
+        snapshot.stations,
+        snapshot.outages,
         TimeWindow(days=reliability_window_days),
     )
     station_metrics = build_station_metrics(
-        stations,
+        snapshot.stations,
         catchments,
         scores,
         reliability=reliability,
-        pedestrian_network=pedestrian_network,
     )
 
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -124,14 +185,28 @@ def run_demo(
         ExportTarget(format="csv", output_path=station_metrics_path),
     )
 
-    sys.stdout.write("Generated subway-access demo outputs:\n")
+    sys.stdout.write("Generated subway-access snapshot outputs:\n")
+    sys.stdout.write(f"- Study area: {snapshot.query.geography}={snapshot.query.value}\n")
     sys.stdout.write(f"- Catchment GeoJSON: {catchments_path}\n")
     sys.stdout.write(f"- Accessibility gap CSV: {gaps_path}\n")
     sys.stdout.write(f"- Station metrics CSV: {station_metrics_path}\n")
-    sys.stdout.write(
-        f"- Processed {len(stations.stations)} stations and {len(gaps.records)} tracts.\n"
-    )
     return 0
+
+
+def run_demo(
+    output_dir: Path,
+    *,
+    minutes: int,
+    reliability_window_days: int,
+) -> int:
+    """Compatibility wrapper for the old demo command."""
+
+    del output_dir, minutes, reliability_window_days
+    message = (
+        "`subway-access demo` has been replaced by `fetch-snapshot` and "
+        "`analyze-snapshot` for real-data workflows."
+    )
+    raise ValueError(message)
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -141,16 +216,31 @@ def main(argv: Sequence[str] | None = None) -> int:
     command_line = list(argv) if argv is not None else None
     args = parser.parse_args(command_line)
 
-    if args.command != "demo":
+    try:
+        if args.command == "fetch-snapshot":
+            return run_fetch_snapshot(
+                args.cache_dir,
+                geography=args.geography,
+                value=args.value,
+                availability_months=args.availability_months,
+                refresh=args.refresh,
+                skip_gtfs_archive=args.skip_gtfs_archive,
+            )
+        if args.command == "analyze-snapshot":
+            return run_analyze_snapshot(
+                args.cache_dir,
+                args.output_dir,
+                minutes=args.minutes,
+                reliability_window_days=args.reliability_window_days,
+            )
+        if args.command == "demo":
+            return run_demo(
+                args.output_dir,
+                minutes=args.minutes,
+                reliability_window_days=args.reliability_window_days,
+            )
         message = f"Unsupported command: {args.command}"
         raise RuntimeError(message)
-
-    try:
-        return run_demo(
-            args.output_dir,
-            minutes=args.minutes,
-            reliability_window_days=args.reliability_window_days,
-        )
     except ValueError as exc:
         sys.stderr.write(f"{parser.prog}: error: {exc}\n")
         raise SystemExit(2) from exc

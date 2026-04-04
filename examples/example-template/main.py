@@ -16,6 +16,7 @@ def main() -> None:
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
     print(EXAMPLE_TITLE)
     print("This folder is a bootstrap template, not a finished example.")
+    print("Build real cache-backed workflows here, not packaged fixture demos.")
 
 
 if __name__ == "__main__":

@@ -1,4 +1,0 @@
-station_id,ada_status,notes
-ST001,accessible,Elevator access available from street to platform.
-ST002,not_accessible,No step-free path from street to platform.
-ST003,accessible,Recently upgraded accessible station.

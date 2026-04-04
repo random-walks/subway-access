@@ -23,7 +23,7 @@ PUBLIC_MODULES: Final[tuple[str, ...]] = (
     "subway_access.export",
     "subway_access.io",
     "subway_access.models",
-    "subway_access.samples",
+    "subway_access.pipeline",
 )
 DOC_DIRECTIVE_RE: Final[re.Pattern[str]] = re.compile(
     r"^:::\s+(subway_access(?:\.[a-z_]+)?)\s*$"
@@ -53,7 +53,10 @@ def _module_path(module_name: str) -> Path:
     module_parts = module_name.split(".")[1:]
     if not module_parts:
         return PACKAGE_ROOT / "__init__.py"
-    return PACKAGE_ROOT.joinpath(*module_parts, "__init__.py")
+    candidate_dir = PACKAGE_ROOT.joinpath(*module_parts)
+    if candidate_dir.is_dir():
+        return candidate_dir / "__init__.py"
+    return PACKAGE_ROOT.joinpath(*module_parts).with_suffix(".py")
 
 
 def _build_import_map(module_name: str) -> dict[str, str]:

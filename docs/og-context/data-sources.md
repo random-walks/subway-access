@@ -1,43 +1,55 @@
 # Data Sources
 
-## Implemented In v0.1
+## Current Official Inputs
 
-- packaged synthetic station fixture in a GTFS-like CSV shape
-- packaged synthetic ADA status fixture keyed by station ID
-- packaged synthetic tract centroid GeoJSON with demographic rates
+- MTA Subway Stations dataset:
+  `https://data.ny.gov/resource/39hk-dx4f.json`
+- MTA GTFS static subway archive:
+  `https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip`
+- MTA Subway Elevator and Escalator Asset Inventory:
+  `https://data.ny.gov/resource/94fv-bak7.json`
+- MTA NYCT Subway Elevator and Escalator Availability: Beginning 2015:
+  `https://data.ny.gov/resource/rc78-7x78.json`
+- Census ACS 5-year tract counts:
+  `https://api.census.gov/data/2023/acs/acs5`
+- Census ACS 5-year tract subject tables:
+  `https://api.census.gov/data/2023/acs/acs5/subject`
 
-These fixtures are intentionally small and deterministic so the first release
-can be tested end to end without requiring live feed access.
+## Real Workflow Notes
 
-## Planned Official Inputs
-
-- MTA static GTFS station and route data
-- MTA elevator and escalator equipment feeds
-- MTA current outage data
-- official station accessibility datasets
-- Census ACS tract-level demographic tables
-- pedestrian network data from OpenStreetMap or other open street sources
+- the station catalog is the easiest public source for station-level ADA flags,
+  GTFS stop IDs, route labels, and station coordinates
+- the public asset inventory and monthly availability history are auth-free and
+  currently power reliability scoring
+- the auth-gated real-time elevator/escalator current-outage feed still exists
+  through the MTA developer program, but the public first-pass workflow uses the
+  historical availability dataset instead
+- ACS tract centroids are derived by joining Census estimates onto tract
+  geometries packaged in `nyc-geo-toolkit`
+- study-area selection should happen through `nyc-geo-toolkit` boundary layers,
+  not ad-hoc borough lists or hand-written outlines
 
 ## Initial Data Principles
 
 - prefer official or well-documented public sources
 - document all joins between station, complex, stop, and tract identifiers
-- keep methodology explicit when historical outage data must be collected rather
-  than downloaded as a clean archive
+- preserve source URLs, refresh timestamps, and row counts in cache metadata
 
 ## Early Technical Notes
 
-- v0.1 uses Euclidean catchments around station points rather than network
-  isochrones
-- outage history may require local persistence and collection strategy notes
-- station naming crosswalks will matter early
+- the current public workflow still uses Euclidean catchments around station
+  points rather than network isochrones
+- station catalog `station_id` aligns most directly with elevator-history
+  `station_mrn`; `complex_id` aligns with `station_complex_mrn`
+- ADA values from the station catalog use `0`/`1`/`2` and should be documented
+  as not accessible / accessible / partially accessible
 - tract joins currently use tract centroids rather than full polygon overlap
+- OSM-based pedestrian routing is the next layer, not the baseline model
 
 ## Documentation Follow-Up
 
-As the package develops, this page should grow to include:
+## Refresh Cadence To Document
 
-- exact feed URLs
-- refresh cadence
-- field notes for joins
-- caveats around partial accessibility and directionality
+- station catalog and asset inventory refresh from the live public endpoints
+- availability history should be snapshot-pinned with an explicit lookback window
+- ACS release year should stay explicit in cache metadata and reports

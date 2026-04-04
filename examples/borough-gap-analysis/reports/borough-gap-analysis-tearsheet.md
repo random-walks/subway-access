@@ -5,17 +5,13 @@
 - Geography: `borough`
 - Value: `Manhattan`
 
-## Coverage Snapshot
+## Snapshot
 
-- Tracts in borough slice: 4
-- Uncovered tracts: 2
-- Highest gap score: 0.2267
-
-## Top Borough Gap
-
-- Tract: `36061000400` (Alphabet City East)
-- Nearest accessible station: Delancey St / Essex St
+- Tracts scored: 309
+- Highest gap score: 0.2670
+- Top gap tract: `36061030900` (Census Tract 309; New York County; New York)
+- Nearest accessible station: Inwood-207 St
 
 ## Artifact
 
-- CSV export: `manhattan-accessibility-gaps.csv`
+- Gap CSV: `borough-accessibility-gaps.csv`

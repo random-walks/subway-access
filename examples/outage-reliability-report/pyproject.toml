@@ -1,7 +1,7 @@
 [project]
-name = "subway-access-quickstart-demo"
+name = "subway-access-outage-reliability-report"
 version = "0.0.0"
-description = "Quickstart demo for the subway-access package."
+description = "Official-data outage and reliability example for subway-access."
 requires-python = ">=3.10"
 dependencies = ["subway-access"]
 

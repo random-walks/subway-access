@@ -1,0 +1,6 @@
+station_id,name,borough,latitude,longitude,complex_id,gtfs_stop_id,daytime_routes,division,line,structure,north_direction_label,south_direction_label,accessibility_notes
+20,City Hall,Manhattan,40.713282,-74.006978,20,R24,R W,BMT,Broadway,Subway,Uptown,Downtown,
+21,Cortlandt St,Manhattan,40.710668,-74.011029,624,R25,R W,BMT,Broadway,Subway,Uptown,Downtown,
+22,Rector St,Manhattan,40.70722,-74.013342,22,R26,R W,BMT,Broadway,Subway,Uptown,Downtown,
+23,Whitehall St-South Ferry,Manhattan,40.703087,-74.012994,635,R27,R W,BMT,Broadway,Subway,Uptown,Downtown,
+105,Chambers St,Manhattan,40.713243,-74.003401,622,M21,J Z,BMT,Jamaica,Subway,Brooklyn,Downtown,
