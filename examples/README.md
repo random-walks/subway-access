@@ -31,9 +31,12 @@ consumer references, not package fixtures.
 ## Start Here
 
 - `examples/fetch-borough-snapshot/`: first live/official cache-building example
-- `examples/borough-gap-analysis/`: borough-scale tract gap story on real public data
-- `examples/outage-reliability-report/`: real monthly availability and reliability story
-- `examples/network-access-comparison/`: Euclidean vs network comparison workflow
+- `examples/borough-gap-analysis/`: borough-scale tract gap story on real public
+  data
+- `examples/outage-reliability-report/`: real monthly availability and
+  reliability story
+- `examples/network-access-comparison/`: Euclidean vs network comparison
+  workflow
 - `examples/example-template/`: scaffold for future examples
 
 ## Local Repo Usage

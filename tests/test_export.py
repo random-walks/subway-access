@@ -10,7 +10,7 @@ from subway_access.export import (
     export_station_metrics,
 )
 from subway_access.models import ExportTarget
-from tests.helpers import build_snapshot_bundle
+from tests.test_helpers import build_snapshot_bundle
 
 
 def test_exporters_write_expected_outputs_from_real_slice(tmp_path: Path) -> None:

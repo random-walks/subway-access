@@ -34,7 +34,8 @@ make ci
 
 ## Docs and API surface
 
-- `docs/api.md` is generated from the documented `subway_access.*` public modules
+- `docs/api.md` is generated from the documented `subway_access.*` public
+  modules
 - `scripts/audit_public_api.py` checks that the documented public modules and
   `__all__` exports stay aligned
 - archived planning material lives under `docs/og-context/` and should not be

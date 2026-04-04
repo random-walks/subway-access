@@ -11,7 +11,8 @@ and a real-data snapshot workflow.
 - `subway_access.analysis`: catchment generation, scoring, gaps, reliability,
   and station metrics
 - `subway_access.export`: GeoJSON and CSV outputs
-- `subway_access.pipeline`: official-data fetch/cache helpers and snapshot loading
+- `subway_access.pipeline`: official-data fetch/cache helpers and snapshot
+  loading
 - `subway_access.cli`: installed real-data CLI workflows
 
 ## Current data flow
@@ -20,14 +21,16 @@ and a real-data snapshot workflow.
    `nyc-geo-toolkit`.
 2. The pipeline fetches official MTA station, equipment, and availability data.
 3. The pipeline fetches ACS tract-level demographics and writes cache files.
-4. `pipeline.load_cached_snapshot()` loads those cache files back into typed datasets.
+4. `pipeline.load_cached_snapshot()` loads those cache files back into typed
+   datasets.
 5. `analysis.generate_catchments()` builds first-pass circle polygons.
 6. `analysis.score_accessibility()` joins station coverage to tract demand.
-7. `analysis.compute_reliability()` scores stations from public availability history.
+7. `analysis.compute_reliability()` scores stations from public availability
+   history.
 8. `analysis.analyze_gaps()` ranks uncovered tracts.
 9. `analysis.build_station_metrics()` aggregates station-level metrics.
 10. `export.export_catchments_geojson()`, `export.export_gap_table()`, and
-   `export.export_station_metrics()` write outputs.
+    `export.export_station_metrics()` write outputs.
 
 ## Geography and shared foundations
 

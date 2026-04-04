@@ -2,16 +2,14 @@
 
 ## Current Official Inputs
 
-- MTA Subway Stations dataset:
-  `https://data.ny.gov/resource/39hk-dx4f.json`
+- MTA Subway Stations dataset: `https://data.ny.gov/resource/39hk-dx4f.json`
 - MTA GTFS static subway archive:
   `https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip`
 - MTA Subway Elevator and Escalator Asset Inventory:
   `https://data.ny.gov/resource/94fv-bak7.json`
 - MTA NYCT Subway Elevator and Escalator Availability: Beginning 2015:
   `https://data.ny.gov/resource/rc78-7x78.json`
-- Census ACS 5-year tract counts:
-  `https://api.census.gov/data/2023/acs/acs5`
+- Census ACS 5-year tract counts: `https://api.census.gov/data/2023/acs/acs5`
 - Census ACS 5-year tract subject tables:
   `https://api.census.gov/data/2023/acs/acs5/subject`
 
@@ -51,5 +49,6 @@
 ## Refresh Cadence To Document
 
 - station catalog and asset inventory refresh from the live public endpoints
-- availability history should be snapshot-pinned with an explicit lookback window
+- availability history should be snapshot-pinned with an explicit lookback
+  window
 - ACS release year should stay explicit in cache metadata and reports

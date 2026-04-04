@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from tests.helpers import build_snapshot_bundle
+from tests.test_helpers import build_snapshot_bundle
 
 
 def test_generate_catchments_and_accessibility_scores_from_real_slice() -> None:

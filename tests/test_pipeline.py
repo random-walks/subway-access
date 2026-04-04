@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from subway_access import models, pipeline
-from tests.helpers import TEST_DATA_DIR
+from tests.test_helpers import TEST_DATA_DIR
 
 
 def test_load_cached_snapshot_reads_real_slice() -> None:

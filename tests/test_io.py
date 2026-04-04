@@ -12,7 +12,7 @@ from subway_access.io import (
     load_outages,
     load_pedestrian_network,
 )
-from tests.helpers import TEST_DATA_DIR
+from tests.test_helpers import TEST_DATA_DIR
 
 
 def test_loaders_read_committed_real_snapshot_slice() -> None:

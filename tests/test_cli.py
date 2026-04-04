@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from subway_access.cli import main
-from tests.helpers import TEST_DATA_DIR
+from tests.test_helpers import TEST_DATA_DIR
 
 
 def test_cli_analyze_snapshot_writes_outputs(

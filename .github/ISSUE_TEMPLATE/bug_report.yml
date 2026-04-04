@@ -1,6 +1,7 @@
 name: Bug report
 description:
-  Report a reproducible problem with the subway-access package, CLI, docs, or examples.
+  Report a reproducible problem with the subway-access package, CLI, docs, or
+  examples.
 title: "[Bug]: "
 labels:
   - bug
@@ -42,7 +43,8 @@ body:
     attributes:
       label: Environment
       description:
-        Include Python version, install method, OS, and any other relevant context.
+        Include Python version, install method, OS, and any other relevant
+        context.
       placeholder: Python 3.12, uv editable install, macOS 15...
     validations:
       required: true

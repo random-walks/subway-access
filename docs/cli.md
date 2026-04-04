@@ -1,7 +1,6 @@
 # CLI Reference
 
-The installed `subway-access` command now exposes a two-step real-data
-workflow.
+The installed `subway-access` command now exposes a two-step real-data workflow.
 
 ## `subway-access fetch-snapshot`
 
@@ -13,12 +12,15 @@ subway-access fetch-snapshot --geography borough --value Manhattan --cache-dir c
 
 Arguments:
 
-- `--geography`: boundary layer such as `borough`, `community_district`, or `council_district`
+- `--geography`: boundary layer such as `borough`, `community_district`, or
+  `council_district`
 - `--value`: boundary value normalized through `nyc-geo-toolkit`
 - `--cache-dir`: directory where the snapshot cache files will be written
-- `--availability-months`: number of months of public availability history to fetch
+- `--availability-months`: number of months of public availability history to
+  fetch
 - `--refresh`: force a fresh snapshot
-- `--skip-gtfs-archive`: do not cache the raw GTFS subway archive alongside the normalized snapshot
+- `--skip-gtfs-archive`: do not cache the raw GTFS subway archive alongside the
+  normalized snapshot
 
 ## `subway-access analyze-snapshot`
 
@@ -33,7 +35,8 @@ Arguments:
 - `--cache-dir`: directory containing a fetched snapshot bundle
 - `--output-dir`: directory where the analysis outputs will be written
 - `--minutes`: positive integer walking threshold for the first-pass catchment
-- `--reliability-window-days`: rolling outage window used for reliability scoring
+- `--reliability-window-days`: rolling outage window used for reliability
+  scoring
 
 Outputs:
 
@@ -45,4 +48,5 @@ Outputs:
 
 - invalid arguments return a CLI error with exit code `2`
 - successful runs return `0`
-- invalid values for catchment or reliability windows return a CLI error with exit code `2`
+- invalid values for catchment or reliability windows return a CLI error with
+  exit code `2`
