@@ -6,10 +6,10 @@ from pathlib import Path
 
 import networkx as nx
 import osmnx as ox
+from nyc_geo_toolkit import load_nyc_boundaries
 from shapely.geometry import shape
 from shapely.ops import unary_union
 
-from nyc_geo_toolkit import load_nyc_boundaries
 from subway_access import analysis, models, pipeline
 
 ROOT = Path(__file__).resolve().parent
@@ -128,7 +128,9 @@ def main() -> None:
     )
     score_by_tract = {record.tract_id: record for record in scores.records}
 
-    graph = ox.graph_from_polygon(_study_area_shape(query), network_type="walk", simplify=True)
+    graph = ox.graph_from_polygon(
+        _study_area_shape(query), network_type="walk", simplify=True
+    )
     accessible_stations = snapshot.stations.accessible_stations
     station_nodes = {
         station.station_id: ox.distance.nearest_nodes(
@@ -152,11 +154,14 @@ def main() -> None:
             {
                 "tract_id": tract.tract_id,
                 "tract_name": tract.tract_name,
-                "euclidean_has_access": str(euclidean_record.has_accessible_station).lower(),
+                "euclidean_has_access": str(
+                    euclidean_record.has_accessible_station
+                ).lower(),
                 "network_has_access": str(
                     network_minutes is not None and network_minutes <= args.minutes
                 ).lower(),
-                "euclidean_station_id": euclidean_record.nearest_accessible_station_id or "",
+                "euclidean_station_id": euclidean_record.nearest_accessible_station_id
+                or "",
                 "network_station_id": network_station_id or "",
                 "network_minutes": ""
                 if network_minutes is None
@@ -180,7 +185,9 @@ def main() -> None:
     print(f"Study area: {query.geography}={query.value}")
     print(f"Wrote {output_csv}")
     if report_file is None:
-        print("Skipped tracked report generation. Re-run with --publish-report to update reports/.")
+        print(
+            "Skipped tracked report generation. Re-run with --publish-report to update reports/."
+        )
     else:
         print(f"Wrote tracked report: {report_file}")
 

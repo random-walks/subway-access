@@ -94,7 +94,9 @@ def _require_cached_snapshot(paths: dict[str, Path]) -> None:
         raise FileNotFoundError(message)
 
 
-def _selected_boundary_geometry(query: AccessibilityQuery) -> tuple[Any, dict[str, Any]]:
+def _selected_boundary_geometry(
+    query: AccessibilityQuery,
+) -> tuple[Any, dict[str, Any]]:
     boundaries = load_nyc_boundaries(query.geography, values=query.value)
     boundary_shapes = [shape(feature.geometry) for feature in boundaries.features]
     study_area_shape = unary_union(boundary_shapes)
@@ -248,7 +250,9 @@ def fetch_study_area_snapshot(
         station_catalog_rows,
         study_area_shape=study_area_shape,
     )
-    station_rows, accessibility_rows = build_station_snapshot_rows(selected_station_rows)
+    station_rows, accessibility_rows = build_station_snapshot_rows(
+        selected_station_rows
+    )
     write_csv_rows(
         paths["stations"],
         [dict(row) for row in station_rows],
@@ -260,11 +264,7 @@ def fetch_study_area_snapshot(
 
     station_complex_ids = tuple(
         sorted(
-            {
-                str(row["complex_id"])
-                for row in station_rows
-                if row.get("complex_id")
-            }
+            {str(row["complex_id"]) for row in station_rows if row.get("complex_id")}
         )
     )
     asset_rows = fetch_mta_equipment_assets(station_complex_ids=station_complex_ids)
@@ -338,7 +338,9 @@ def fetch_study_area_snapshot(
             for item in metadata
         ],
         "include_gtfs_archive": include_gtfs_archive,
-        "gtfs_archive_path": str(paths["gtfs_archive"]) if include_gtfs_archive else None,
+        "gtfs_archive_path": str(paths["gtfs_archive"])
+        if include_gtfs_archive
+        else None,
         "gtfs_archive_url": MTA_GTFS_STATIC_URL if include_gtfs_archive else None,
     }
     write_json(paths["metadata"], metadata_payload)

@@ -133,7 +133,9 @@ def main() -> None:
     print(f"Study area: {query.geography}={query.value}")
     print(f"Wrote {output_csv}")
     if report_file is None:
-        print("Skipped tracked report generation. Re-run with --publish-report to update reports/.")
+        print(
+            "Skipped tracked report generation. Re-run with --publish-report to update reports/."
+        )
     else:
         print(f"Wrote tracked report: {report_file}")
 

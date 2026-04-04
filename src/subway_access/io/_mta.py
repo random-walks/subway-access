@@ -176,9 +176,15 @@ def build_station_snapshot_rows(
                 "division": str(row.get("division") or "").strip(),
                 "line": str(row.get("line") or "").strip(),
                 "structure": str(row.get("structure") or "").strip(),
-                "north_direction_label": str(row.get("north_direction_label") or "").strip(),
-                "south_direction_label": str(row.get("south_direction_label") or "").strip(),
-                "accessibility_notes": str(row.get("ada_direction_notes") or "").strip(),
+                "north_direction_label": str(
+                    row.get("north_direction_label") or ""
+                ).strip(),
+                "south_direction_label": str(
+                    row.get("south_direction_label") or ""
+                ).strip(),
+                "accessibility_notes": str(
+                    row.get("ada_direction_notes") or ""
+                ).strip(),
             }
         )
         accessibility_rows.append(
@@ -199,7 +205,9 @@ def build_outage_snapshot_rows(
 
     normalized_rows: list[dict[str, Any]] = []
     for row in availability_rows:
-        station_id = str(row.get("station_mrn") or row.get("station_complex_mrn") or "").strip()
+        station_id = str(
+            row.get("station_mrn") or row.get("station_complex_mrn") or ""
+        ).strip()
         equipment_id = str(row.get("equipment_code") or "").strip()
         month_text = str(row.get("month") or "").strip()
         if not station_id or not equipment_id or not month_text:

@@ -20,7 +20,9 @@ class SnapshotBundle:
     station_metrics: models.StationMetricDataset
 
 
-def build_snapshot_bundle(*, minutes: int = 10, reliability_days: int = 365) -> SnapshotBundle:
+def build_snapshot_bundle(
+    *, minutes: int = 10, reliability_days: int = 365
+) -> SnapshotBundle:
     snapshot = pipeline.load_cached_snapshot(TEST_DATA_DIR)
     catchments = analysis.generate_catchments(
         snapshot.stations,

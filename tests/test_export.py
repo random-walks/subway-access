@@ -30,7 +30,9 @@ def test_exporters_write_expected_outputs_from_real_slice(tmp_path: Path) -> Non
     )
     station_geojson_path = export_station_metrics(
         bundle.station_metrics,
-        ExportTarget(format="geojson", output_path=tmp_path / "station-metrics.geojson"),
+        ExportTarget(
+            format="geojson", output_path=tmp_path / "station-metrics.geojson"
+        ),
     )
 
     catchment_payload = json.loads(catchment_path.read_text(encoding="utf-8"))
@@ -47,7 +49,9 @@ def test_exporters_write_expected_outputs_from_real_slice(tmp_path: Path) -> Non
     assert station_rows[0]["station_id"] == "20"
     assert "daytime_routes" in station_rows[0]
 
-    station_geojson_payload = json.loads(station_geojson_path.read_text(encoding="utf-8"))
+    station_geojson_payload = json.loads(
+        station_geojson_path.read_text(encoding="utf-8")
+    )
     assert [feature["id"] for feature in station_geojson_payload["features"]] == [
         "20",
         "21",

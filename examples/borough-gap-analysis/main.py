@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import csv
 from pathlib import Path
 
 from subway_access import analysis, export, models, pipeline
@@ -112,7 +111,9 @@ def main() -> None:
     print(f"Wrote {catchments_path}")
     print(f"Wrote {gaps_path}")
     if report_file is None:
-        print("Skipped tracked report generation. Re-run with --publish-report to update reports/.")
+        print(
+            "Skipped tracked report generation. Re-run with --publish-report to update reports/."
+        )
     else:
         print(f"Wrote tracked report: {report_file}")
 

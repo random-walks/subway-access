@@ -61,7 +61,9 @@ def test_cli_rejects_non_positive_minutes(
     os.getenv("SUBWAY_ACCESS_RUN_LIVE") != "1",
     reason="live snapshot fetch is skipped unless SUBWAY_ACCESS_RUN_LIVE=1",
 )
-def test_cli_fetch_snapshot_live(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+def test_cli_fetch_snapshot_live(
+    tmp_path: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
     exit_code = main(
         [
             "fetch-snapshot",

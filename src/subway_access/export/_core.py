@@ -151,27 +151,31 @@ def export_station_metrics(data: StationMetricDataset, target: ExportTarget) -> 
     rows = [_station_metric_row(record) for record in data.records]
 
     if target.format.lower() == "csv":
-        fieldnames = list(rows[0]) if rows else [
-            "station_id",
-            "station_name",
-            "borough",
-            "latitude",
-            "longitude",
-            "ada_status",
-            "catchment_minutes",
-            "catchment_radius_meters",
-            "covered_tract_count",
-            "covered_population",
-            "nearby_gap_tract_count",
-            "nearby_gap_population",
-            "mean_need_score",
-            "reliability_score",
-            "reliability_label",
-            "outage_minutes",
-            "network_connection_count",
-            "daytime_routes",
-            "structure",
-        ]
+        fieldnames = (
+            list(rows[0])
+            if rows
+            else [
+                "station_id",
+                "station_name",
+                "borough",
+                "latitude",
+                "longitude",
+                "ada_status",
+                "catchment_minutes",
+                "catchment_radius_meters",
+                "covered_tract_count",
+                "covered_population",
+                "nearby_gap_tract_count",
+                "nearby_gap_population",
+                "mean_need_score",
+                "reliability_score",
+                "reliability_label",
+                "outage_minutes",
+                "network_connection_count",
+                "daytime_routes",
+                "structure",
+            ]
+        )
         with output_path.open("w", newline="", encoding="utf-8") as handle:
             writer = csv.DictWriter(handle, fieldnames=fieldnames)
             writer.writeheader()

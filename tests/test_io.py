@@ -73,7 +73,9 @@ def test_load_outages_accepts_json_payload_with_override_fields(tmp_path: Path) 
     assert outages.records[0].outage_minutes_override == 120
 
 
-def test_load_pedestrian_network_rejects_non_linestring_geometry(tmp_path: Path) -> None:
+def test_load_pedestrian_network_rejects_non_linestring_geometry(
+    tmp_path: Path,
+) -> None:
     network_path = tmp_path / "network.geojson"
     network_path.write_text(
         json.dumps(

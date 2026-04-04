@@ -45,7 +45,9 @@ def _read_census_rows(url: str) -> tuple[list[str], list[list[str]]]:
         message = f"Expected the first Census API row to be a header list for {url!r}."
         raise TypeError(message)
     rows = [row for row in payload[1:] if isinstance(row, list)]
-    return [str(value) for value in header], [[str(value) for value in row] for row in rows]
+    return [str(value) for value in header], [
+        [str(value) for value in row] for row in rows
+    ]
 
 
 def _counts_url(county_code: str) -> str:
@@ -106,7 +108,9 @@ def fetch_nyc_acs_tract_estimates(
                 name: subject_row[index] for index, name in enumerate(subject_header)
             }
             total_population = _as_int(row_map["B01003_001E"])
-            senior_population = sum(_as_int(row_map[name]) for name in _SENIOR_VARIABLES)
+            senior_population = sum(
+                _as_int(row_map[name]) for name in _SENIOR_VARIABLES
+            )
             estimates[geoid] = {
                 "tract_id": geoid,
                 "tract_name": row_map["NAME"],

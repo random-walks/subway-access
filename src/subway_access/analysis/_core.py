@@ -200,7 +200,9 @@ def compute_reliability(
     as_of = outage_data.recommended_as_of()
     outage_minutes = outage_data.outage_minutes_by_station(window, as_of=as_of)
     outage_counts = outage_data.outage_count_by_station(window, as_of=as_of)
-    station_ids = sorted(set(status_by_station) | set(outage_minutes) | set(outage_counts))
+    station_ids = sorted(
+        set(status_by_station) | set(outage_minutes) | set(outage_counts)
+    )
     total_minutes = window.total_minutes
 
     records = []
@@ -249,7 +251,9 @@ def build_station_metrics(
         if pedestrian_network is None
         else pedestrian_network.connection_count_by_station()
     )
-    catchment_by_station = {feature.station_id: feature for feature in catchments.features}
+    catchment_by_station = {
+        feature.station_id: feature for feature in catchments.features
+    }
 
     records: list[StationMetricRecord] = []
     for station in station_data.stations:
@@ -266,7 +270,9 @@ def build_station_metrics(
                 and not record.has_accessible_station
             )
         ]
-        mean_need_score = fmean([record.need_score for record in covered]) if covered else 0.0
+        mean_need_score = (
+            fmean([record.need_score for record in covered]) if covered else 0.0
+        )
         reliability_record = reliability_by_station.get(station.station_id)
         catchment = catchment_by_station.get(station.station_id)
         if catchment is None:

@@ -96,10 +96,10 @@ def write_summary_markdown(snapshot: models.StudyAreaSnapshot) -> Path:
         "## Sources",
         "",
     ]
-    for item in snapshot.metadata:
-        lines.append(
-            f"- `{item.name}`: `{item.record_count}` rows from `{item.source_url}`"
-        )
+    lines.extend(
+        f"- `{item.name}`: `{item.record_count}` rows from `{item.source_url}`"
+        for item in snapshot.metadata
+    )
     lines.extend(
         [
             "",
@@ -132,10 +132,10 @@ def write_report(snapshot: models.StudyAreaSnapshot) -> Path:
         "## Source Cadence",
         "",
     ]
-    for item in snapshot.metadata:
-        lines.append(
-            f"- `{item.name}` refreshed at `{item.refreshed_at.isoformat()}` with `{item.record_count}` records."
-        )
+    lines.extend(
+        f"- `{item.name}` refreshed at `{item.refreshed_at.isoformat()}` with `{item.record_count}` records."
+        for item in snapshot.metadata
+    )
     report_file.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return report_file
 
@@ -164,7 +164,9 @@ def main() -> None:
     print(f"Wrote fetch metadata: {metadata_path}")
     print(f"Wrote fetch summary: {summary_path}")
     if report_file is None:
-        print("Skipped tracked report generation. Re-run with --publish-report to update reports/.")  # noqa: T201
+        print(
+            "Skipped tracked report generation. Re-run with --publish-report to update reports/."
+        )
     else:
         print(f"Wrote tracked report: {report_file}")
 

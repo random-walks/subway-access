@@ -266,7 +266,9 @@ def load_census_data(source: str | Path) -> DemographicDataset:
     raw_payload = json.loads(text)
     features = raw_payload.get("features")
     if not isinstance(features, list):
-        message = f"{source_name} must contain a GeoJSON FeatureCollection with features."
+        message = (
+            f"{source_name} must contain a GeoJSON FeatureCollection with features."
+        )
         raise TypeError(message)
 
     tracts: list[TractDemographics] = []
@@ -370,9 +372,15 @@ def _normalize_outage_record(
     if not station_id:
         message = f"{source_name} outage record {record_index} is missing station_id."
         raise ValueError(message)
-    equipment_id = str(
-        record.get("equipment_id") or record.get("equipmentId") or record.get("unit") or ""
-    ).strip() or f"{station_id}-equipment-{record_index}"
+    equipment_id = (
+        str(
+            record.get("equipment_id")
+            or record.get("equipmentId")
+            or record.get("unit")
+            or ""
+        ).strip()
+        or f"{station_id}-equipment-{record_index}"
+    )
     started_raw = str(
         record.get("started_at")
         or record.get("start_time")
@@ -394,7 +402,9 @@ def _normalize_outage_record(
         station_id=station_id,
         equipment_id=equipment_id,
         equipment_type=_parse_equipment_type(
-            str(record.get("equipment_type") or record.get("equipmentType") or "unknown")
+            str(
+                record.get("equipment_type") or record.get("equipmentType") or "unknown"
+            )
         ),
         status=_parse_outage_status(str(record.get("status") or "unknown")),
         started_at=_parse_timestamp(
@@ -411,7 +421,9 @@ def _normalize_outage_record(
             source_name=source_name,
             row_id=equipment_id,
         ),
-        description=str(record.get("description") or record.get("message") or "").strip(),
+        description=str(
+            record.get("description") or record.get("message") or ""
+        ).strip(),
         source=source_name,
         station_complex_id=str(
             record.get("station_complex_id")
@@ -496,7 +508,10 @@ def load_outages(source: str | Path) -> OutageDataset:
     raw_records = payload
     if isinstance(payload, dict):
         raw_records = (
-            payload.get("outages") or payload.get("results") or payload.get("data") or []
+            payload.get("outages")
+            or payload.get("results")
+            or payload.get("data")
+            or []
         )
     if not isinstance(raw_records, list):
         message = f"{source_name} must contain a list of outage records."
@@ -592,9 +607,7 @@ def load_pedestrian_network(source: str | Path) -> PedestrianNetworkDataset:
             continue
         coordinates = geometry.get("coordinates")
         if geometry.get("type") != "LineString" or not isinstance(coordinates, list):
-            message = (
-                f"{source_name} pedestrian connection {index} must use LineString geometry."
-            )
+            message = f"{source_name} pedestrian connection {index} must use LineString geometry."
             raise TypeError(message)
         geometry_points = tuple(
             (float(point[0]), float(point[1]))

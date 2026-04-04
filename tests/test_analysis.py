@@ -20,7 +20,9 @@ def test_generate_catchments_and_accessibility_scores_from_real_slice() -> None:
 
 def test_compute_reliability_uses_real_availability_slice() -> None:
     bundle = build_snapshot_bundle()
-    reliability_by_station = {record.station_id: record for record in bundle.reliability.records}
+    reliability_by_station = {
+        record.station_id: record for record in bundle.reliability.records
+    }
 
     assert reliability_by_station["105"].outage_minutes == 1240
     assert reliability_by_station["105"].reliability_label == "full_service"
@@ -30,7 +32,9 @@ def test_compute_reliability_uses_real_availability_slice() -> None:
 
 def test_build_station_metrics_aggregates_real_snapshot_outputs() -> None:
     bundle = build_snapshot_bundle()
-    metrics_by_station = {record.station_id: record for record in bundle.station_metrics.records}
+    metrics_by_station = {
+        record.station_id: record for record in bundle.station_metrics.records
+    }
 
     assert metrics_by_station["21"].covered_population == 29577
     assert metrics_by_station["105"].covered_population == 24206

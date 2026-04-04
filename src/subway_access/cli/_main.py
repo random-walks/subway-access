@@ -133,7 +133,9 @@ def run_fetch_snapshot(
         include_gtfs_archive=not skip_gtfs_archive,
     )
     sys.stdout.write("Fetched subway-access real-data snapshot:\n")
-    sys.stdout.write(f"- Study area: {snapshot.query.geography}={snapshot.query.value}\n")
+    sys.stdout.write(
+        f"- Study area: {snapshot.query.geography}={snapshot.query.value}\n"
+    )
     sys.stdout.write(f"- Cache directory: {cache_dir}\n")
     sys.stdout.write(f"- Stations: {len(snapshot.stations.stations)}\n")
     sys.stdout.write(f"- Tracts: {len(snapshot.demographics.tracts)}\n")
@@ -155,7 +157,9 @@ def run_analyze_snapshot(
         message = "Catchment minutes must be greater than zero."
         raise ValueError(message)
 
-    catchments = generate_catchments(snapshot.stations, CatchmentRequest(minutes=minutes))
+    catchments = generate_catchments(
+        snapshot.stations, CatchmentRequest(minutes=minutes)
+    )
     scores = score_accessibility(snapshot.stations, catchments, snapshot.demographics)
     gaps = analyze_gaps(scores)
     reliability = compute_reliability(
@@ -186,7 +190,9 @@ def run_analyze_snapshot(
     )
 
     sys.stdout.write("Generated subway-access snapshot outputs:\n")
-    sys.stdout.write(f"- Study area: {snapshot.query.geography}={snapshot.query.value}\n")
+    sys.stdout.write(
+        f"- Study area: {snapshot.query.geography}={snapshot.query.value}\n"
+    )
     sys.stdout.write(f"- Catchment GeoJSON: {catchments_path}\n")
     sys.stdout.write(f"- Accessibility gap CSV: {gaps_path}\n")
     sys.stdout.write(f"- Station metrics CSV: {station_metrics_path}\n")

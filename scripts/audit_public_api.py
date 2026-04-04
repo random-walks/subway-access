@@ -161,7 +161,10 @@ def main() -> int:
         for symbol_name in names:
             if not isinstance(symbol_name, str):
                 raise ValueError(f"{module_name}.__all__ must contain only strings.")
-            if symbol_name.startswith("_") and symbol_name not in ALLOWED_PRIVATE_EXPORTS:
+            if (
+                symbol_name.startswith("_")
+                and symbol_name not in ALLOWED_PRIVATE_EXPORTS
+            ):
                 raise ValueError(
                     f"{module_name}.__all__ must not export private name {symbol_name!r}."
                 )
@@ -182,8 +185,12 @@ def main() -> int:
             if symbol_name in definition_kinds:
                 kind = definition_kinds[symbol_name]
                 if kind == "type_alias":
-                    type_alias_type = getattr(__import__("typing"), "TypeAliasType", None)
-                    if type_alias_type is None or not isinstance(symbol, type_alias_type):
+                    type_alias_type = getattr(
+                        __import__("typing"), "TypeAliasType", None
+                    )
+                    if type_alias_type is None or not isinstance(
+                        symbol, type_alias_type
+                    ):
                         kind = "value"
             elif inspect.isclass(symbol):
                 kind = "class"
