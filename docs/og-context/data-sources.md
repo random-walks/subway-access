@@ -3,12 +3,12 @@
 ## Current Official Inputs
 
 - MTA Subway Stations dataset: `https://data.ny.gov/resource/39hk-dx4f.json`
-- MTA Subway Entrances and Exits (street-level entrance/exit points, GTFS stop ids):
-  `https://data.ny.gov/resource/i9wp-a4ja.json`
+- MTA Subway Entrances and Exits (street-level entrance/exit points, GTFS stop
+  ids): `https://data.ny.gov/resource/i9wp-a4ja.json`
 - MTA GTFS static subway archive:
-  `https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip`
-  (as of early 2026 this zip does **not** ship `pathways.txt` or `locations.txt`; the
-  library still parses those files when a feed includes GTFS-Pathways.)
+  `https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip` (as of early 2026 this
+  zip does **not** ship `pathways.txt` or `locations.txt`; the library still
+  parses those files when a feed includes GTFS-Pathways.)
 - MTA Subway Elevator and Escalator Asset Inventory:
   `https://data.ny.gov/resource/94fv-bak7.json`
 - MTA NYCT Subway Elevator and Escalator Availability: Beginning 2015:

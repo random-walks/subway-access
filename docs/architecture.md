@@ -22,8 +22,8 @@ and a real-data snapshot workflow.
 2. The pipeline fetches official MTA station, equipment, and availability data.
 3. The pipeline fetches MTA subway entrance/exit points and filters them to the
    study area (`entrances.geojson`). When a GTFS zip is present, it optionally
-   parses GTFS-Pathways `pathways.txt` / `locations.txt` into `gtfs-pathways.json`
-   when those files exist in the archive.
+   parses GTFS-Pathways `pathways.txt` / `locations.txt` into
+   `gtfs-pathways.json` when those files exist in the archive.
 4. The pipeline fetches ACS tract-level demographics and writes cache files.
 5. `pipeline.load_cached_snapshot()` loads those cache files back into typed
    datasets (including `EntranceDataset` and optional `GtfsPathwaysSnapshot`).

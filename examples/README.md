@@ -46,8 +46,8 @@ consumer references, not package fixtures.
 
 - `examples/network-access-comparison/`: Euclidean vs cached OSM walking-graph
   comparison
-- `examples/about-the-data/`: NYC-wide public snapshot download (all boroughs) with a
-  data-catalogue tearsheet and light EDA
+- `examples/about-the-data/`: NYC-wide public snapshot download (all boroughs)
+  with a data-catalogue tearsheet and light EDA
 
 ### Template
 
