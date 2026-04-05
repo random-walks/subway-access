@@ -95,8 +95,7 @@ def generate_network_isochrones(
             hull = MultiPoint(coordinates).convex_hull
             if hull.geom_type == "Polygon":
                 polygon = tuple(
-                    (float(lon), float(lat))
-                    for lon, lat in hull.exterior.coords
+                    (float(lon), float(lat)) for lon, lat in hull.exterior.coords
                 )
             else:
                 polygon = build_circle_polygon(
@@ -225,7 +224,9 @@ def compare_accessibility_models(
 ) -> AccessibilityComparisonDataset:
     """Compare tract accessibility results between Euclidean and network models."""
 
-    euclidean_by_tract = {record.tract_id: record for record in euclidean_scores.records}
+    euclidean_by_tract = {
+        record.tract_id: record for record in euclidean_scores.records
+    }
     network_by_tract = {record.tract_id: record for record in network_scores.records}
     tract_ids = sorted(set(euclidean_by_tract) | set(network_by_tract))
     records = []

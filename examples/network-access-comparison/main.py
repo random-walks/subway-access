@@ -93,9 +93,7 @@ def _plot_travel_time_scatter(
         [record.euclidean_travel_minutes for record in rows],
         [record.network_travel_minutes for record in rows],
         c=[
-            "#e45756"
-            if record.coverage_change_label == "euclidean_only"
-            else "#4c78a8"
+            "#e45756" if record.coverage_change_label == "euclidean_only" else "#4c78a8"
             for record in rows
         ],
         alpha=0.75,
@@ -122,7 +120,9 @@ def _plot_top_network_penalties(
         )
         for record in comparison.records
     ]
-    ranked = sorted(rows, key=lambda item: (item[1], item[0].tract_id), reverse=True)[:15]
+    ranked = sorted(rows, key=lambda item: (item[1], item[0].tract_id), reverse=True)[
+        :15
+    ]
     labels = [item[0].tract_id for item in ranked]
     values = [item[1] for item in ranked]
     path = figure_path("top-network-penalties.png")
@@ -147,10 +147,14 @@ def write_report(
     scatter_chart = _plot_travel_time_scatter(comparison)
     penalty_chart = _plot_top_network_penalties(comparison)
     euclidean_only = [
-        record for record in comparison.records if record.coverage_change_label == "euclidean_only"
+        record
+        for record in comparison.records
+        if record.coverage_change_label == "euclidean_only"
     ]
     network_only = [
-        record for record in comparison.records if record.coverage_change_label == "network_only"
+        record
+        for record in comparison.records
+        if record.coverage_change_label == "network_only"
     ]
 
     report = f"""# Network Access Comparison Tearsheet

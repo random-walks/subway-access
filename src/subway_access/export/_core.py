@@ -175,7 +175,7 @@ def export_station_metrics(data: StationMetricDataset, target: ExportTarget) -> 
                 "network_connection_count",
                 "daytime_routes",
                 "structure",
-            "analysis_method",
+                "analysis_method",
             ]
         )
         with output_path.open("w", newline="", encoding="utf-8") as handle:

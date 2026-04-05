@@ -115,8 +115,7 @@ def load_cached_walk_graph(
     graph_path, metadata_path = _graph_paths(cache_root)
     if not graph_path.exists() or not metadata_path.exists():
         message = (
-            f"Missing cached walk graph in {cache_root}. "
-            "Run fetch_walk_graph() first."
+            f"Missing cached walk graph in {cache_root}. Run fetch_walk_graph() first."
         )
         raise FileNotFoundError(message)
     payload = json.loads(metadata_path.read_text(encoding="utf-8"))

@@ -56,14 +56,16 @@ def build_parser() -> argparse.ArgumentParser:
 def _accessible_records(
     reliability: models.ReliabilityDataset,
 ) -> list[models.ReliabilityRecord]:
-    return [record for record in reliability.records if record.ada_status == "accessible"]
+    return [
+        record for record in reliability.records if record.ada_status == "accessible"
+    ]
 
 
 def _plot_lowest_reliability(records: list[models.ReliabilityRecord]) -> Path:
     path = figure_path("lowest-reliability-stations.png")
-    ranked = sorted(records, key=lambda record: (record.reliability_score, record.station_id))[
-        :15
-    ]
+    ranked = sorted(
+        records, key=lambda record: (record.reliability_score, record.station_id)
+    )[:15]
     labels = [record.station_name or record.station_id for record in ranked]
     values = [record.reliability_score for record in ranked]
 
@@ -94,7 +96,9 @@ def _plot_scheduled_vs_unscheduled(records: list[models.ReliabilityRecord]) -> P
 
     figure, axes = plt.subplots(figsize=(11, 6))
     axes.bar(labels, scheduled, label="Scheduled", color="#72b7b2")
-    axes.bar(labels, unscheduled, bottom=scheduled, label="Unscheduled", color="#f58518")
+    axes.bar(
+        labels, unscheduled, bottom=scheduled, label="Unscheduled", color="#f58518"
+    )
     axes.set_ylabel("Outage counts in window")
     axes.set_title("Scheduled vs unscheduled outages")
     axes.tick_params(axis="x", rotation=35)
@@ -134,8 +138,12 @@ def write_report(
         key=lambda record: (record.reliability_score, record.station_id),
     )
     top_fragile = ranked[0]
-    fragile_count = sum(1 for record in accessible_records if record.reliability_label == "fragile")
-    at_risk_count = sum(1 for record in accessible_records if record.reliability_label == "at_risk")
+    fragile_count = sum(
+        1 for record in accessible_records if record.reliability_label == "fragile"
+    )
+    at_risk_count = sum(
+        1 for record in accessible_records if record.reliability_label == "at_risk"
+    )
     low_chart = _plot_lowest_reliability(accessible_records)
     outage_chart = _plot_scheduled_vs_unscheduled(accessible_records)
     availability_chart = _plot_availability_distribution(accessible_records)

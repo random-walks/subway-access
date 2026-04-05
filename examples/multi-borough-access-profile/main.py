@@ -90,7 +90,9 @@ def _profile_rows(
         )
         summary = analysis.summarize_accessibility_by_group(scores).records[0]
         accessible_station_rows = [
-            station for station in snapshot.stations.stations if station.ada_status == "accessible"
+            station
+            for station in snapshot.stations.stations
+            if station.ada_status == "accessible"
         ]
         accessible_share = (
             0.0
@@ -110,7 +112,8 @@ def _profile_rows(
                 "coverage_rate": summary.coverage_rate,
                 "uncovered_population": summary.uncovered_population,
                 "mean_need_score": summary.mean_need_score,
-                "mean_nearest_travel_minutes": summary.mean_nearest_travel_minutes or 0.0,
+                "mean_nearest_travel_minutes": summary.mean_nearest_travel_minutes
+                or 0.0,
                 "accessible_station_share": accessible_share,
                 "mean_accessible_reliability": 0.0
                 if not accessible_reliability
@@ -120,7 +123,9 @@ def _profile_rows(
     return rows
 
 
-def _plot_metric(rows: list[dict[str, object]], *, key: str, title: str, ylabel: str, filename: str) -> Path:
+def _plot_metric(
+    rows: list[dict[str, object]], *, key: str, title: str, ylabel: str, filename: str
+) -> Path:
     path = figure_path(filename)
     labels = [str(row["borough"]) for row in rows]
     values = [float(row[key]) for row in rows]
@@ -169,8 +174,12 @@ def write_report(rows: list[dict[str, object]], output_csv: Path) -> Path:
 ## Summary
 
 - Boroughs compared: {len(rows)}
-- Highest coverage borough: `{max(rows, key=lambda row: row['coverage_rate'])['borough']}`
-- Highest uncovered population borough: `{max(rows, key=lambda row: row['uncovered_population'])['borough']}`
+- Highest coverage borough: `{max(rows, key=lambda row: row[
+            "coverage_rate"
+        ])["borough"]}`
+- Highest uncovered population borough: `{max(rows, key=lambda row: row[
+            "uncovered_population"
+        ])["borough"]}`
 
 ## Figures
 
