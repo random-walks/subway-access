@@ -11,6 +11,8 @@ __pycache__/
 build/
 develop-eggs/
 dist/
+dist-release-check/
+.venv-release-check/
 downloads/
 eggs/
 .eggs/

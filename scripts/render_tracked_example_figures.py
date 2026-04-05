@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Regenerate committed PNG figures under ``examples/*/reports/figures``.
 
 Figures are meant to stay in sync with each example's tearsheet narrative. The

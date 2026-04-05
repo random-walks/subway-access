@@ -5,6 +5,9 @@
 [![PyPI version][pypi-version]][pypi-link]
 [![PyPI platforms][pypi-platforms]][pypi-link]
 
+<!-- Hero: also at docs/images/subway-access-hero.png (relative path works on GitHub). PyPI needs absolute URL. -->
+![NYC subway accessibility snapshot: street entrances, MTA stations, and ACS tract disability (example: Atlantic Brooklyn)](https://raw.githubusercontent.com/random-walks/subway-access/main/docs/images/subway-access-hero.png)
+
 `subway-access` is a Python toolkit for reproducible NYC subway accessibility
 analysis.
 
@@ -26,6 +29,9 @@ The current package now includes a real public-data workflow:
 - compare the Euclidean baseline against cached local OSM walking graphs
 - export catchment GeoJSON, tract gap CSV, and station metrics
 - run the snapshot and analysis flow from the installed CLI
+
+The hero image above is committed as [`docs/images/subway-access-hero.png`](docs/images/subway-access-hero.png)
+(regenerated from [`examples/about-the-data`](examples/about-the-data/) as `map-library-header-horizontal.png` when refreshing that example).
 
 The current scoring model is intentionally staged:
 

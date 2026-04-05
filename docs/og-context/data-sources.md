@@ -3,8 +3,12 @@
 ## Current Official Inputs
 
 - MTA Subway Stations dataset: `https://data.ny.gov/resource/39hk-dx4f.json`
+- MTA Subway Entrances and Exits (street-level entrance/exit points, GTFS stop ids):
+  `https://data.ny.gov/resource/i9wp-a4ja.json`
 - MTA GTFS static subway archive:
   `https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip`
+  (as of early 2026 this zip does **not** ship `pathways.txt` or `locations.txt`; the
+  library still parses those files when a feed includes GTFS-Pathways.)
 - MTA Subway Elevator and Escalator Asset Inventory:
   `https://data.ny.gov/resource/94fv-bak7.json`
 - MTA NYCT Subway Elevator and Escalator Availability: Beginning 2015:
@@ -17,6 +21,9 @@
 
 - the station catalog is the easiest public source for station-level ADA flags,
   GTFS stop IDs, route labels, and station coordinates
+- entrance/exit rows from `i9wp-a4ja` join to the same `gtfs_stop_id` and
+  `station_id` / `complex_id` fields as the catalog; they provide multiple
+  coordinates per complex where the static GTFS parent stop is a single point
 - the public asset inventory and monthly availability history are auth-free and
   currently power reliability scoring
 - cached OSM walking graphs now power the advanced network comparison layer

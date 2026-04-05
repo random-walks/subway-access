@@ -1,5 +1,7 @@
 # subway-access
 
+![NYC subway accessibility snapshot: Open NY street entrances, MTA catalog stops (ADA-colored), and ACS tract disability — example over Atlantic / Downtown Brooklyn (OpenStreetMap basemap).](images/subway-access-hero.png)
+
 `subway-access` is a Python toolkit for reproducible NYC subway accessibility
 analysis.
 

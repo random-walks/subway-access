@@ -178,12 +178,12 @@ def write_report(rows: list[dict[str, object]], output_csv: Path) -> Path:
 ## Summary
 
 - Boroughs compared: {len(rows)}
-- Highest coverage borough: `{max(rows, key=lambda row: row[
-            "coverage_rate"
-        ])["borough"]}`
-- Highest uncovered population borough: `{max(rows, key=lambda row: row[
-            "uncovered_population"
-        ])["borough"]}`
+- Highest coverage borough: `{
+        max(rows, key=lambda row: row["coverage_rate"])["borough"]
+    }`
+- Highest uncovered population borough: `{
+        max(rows, key=lambda row: row["uncovered_population"])["borough"]
+    }`
 
 ## Figures
 
