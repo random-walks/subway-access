@@ -12,9 +12,28 @@ from subway_access.models import (
 )
 
 
+def _metadata_version_matches_package(
+    metadata_version: str, package_version: str
+) -> bool:
+    """Hatch-VCS can append a date segment to the generated ``_version.py`` local
+    part (``+gHASH.dYYYYMMDD``) while editable-install metadata keeps the shorter
+    local part (``+gHASH``). Both describe the same VCS state.
+    """
+    if metadata_version == package_version:
+        return True
+    if "+" not in metadata_version or "+" not in package_version:
+        return False
+    meta_base, meta_local = metadata_version.split("+", 1)
+    pkg_base, pkg_local = package_version.split("+", 1)
+    return meta_base == pkg_base and pkg_local.startswith(meta_local + ".")
+
+
 def test_root_namespace_only_exports_version() -> None:
     assert subway_access.__all__ == ["__version__"]
-    assert importlib.metadata.version("subway-access") == subway_access.__version__
+    assert _metadata_version_matches_package(
+        importlib.metadata.version("subway-access"),
+        subway_access.__version__,
+    )
 
 
 def test_time_window_rejects_non_positive_days() -> None:

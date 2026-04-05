@@ -1,4 +1,4 @@
-.PHONY: help install install-dev test test-optional lint lint-fix format docs docs-build audit clean build smoke-dist ci ci-lint ci-build ci-docs ci-tests
+.PHONY: help install install-dev test test-optional lint lint-fix fmt format-frozen format docs docs-build audit clean build smoke-dist ci ci-lint ci-build ci-docs ci-tests
 
 help:
 	@echo "Available targets:"
@@ -8,6 +8,7 @@ help:
 	@echo "  test-optional Run optional dependency tests"
 	@echo "  lint         Run Ruff, mypy, and the public API audit"
 	@echo "  lint-fix     Apply safe automatic fixes, then run the full lint job"
+	@echo "  fmt          Format Python with Ruff only (frozen lockfile; fast)"
 	@echo "  build        Build the source and wheel distributions"
 	@echo "  smoke-dist   Build release artifacts and smoke-test an installed wheel"
 	@echo "  format       Apply Ruff fixes and formatting"
@@ -40,6 +41,10 @@ lint-fix:
 		mixed-line-ending requirements-txt-fixer trailing-whitespace rst-backticks \
 		rst-directive-colons rst-inline-touching-normal prettier codespell
 	$(MAKE) ci-lint
+
+# Quick: match CI's `ruff format --check` expectations without running the full lint-fix pipeline.
+fmt format-frozen:
+	uv run --frozen ruff format .
 
 ci-lint:
 	uv sync --frozen --group docs --all-extras

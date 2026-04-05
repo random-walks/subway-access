@@ -14,6 +14,10 @@ Install the fuller environment, including docs and test extras:
 make install
 ```
 
+For local network and plotting work, the examples use the package extras in
+their own `pyproject.toml` files. The repo test environment now also includes
+the network stack so the deterministic graph-cache tests run locally and in CI.
+
 ## Common Commands
 
 ```bash
@@ -31,6 +35,7 @@ make ci
 - update docs alongside package exports
 - keep parser-level tests deterministic and local by default
 - prefer committed real snapshot slices over packaged synthetic sample data
+- keep live snapshot and live OSM refresh tests opt-in through env vars
 
 ## Docs and API surface
 

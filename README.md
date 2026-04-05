@@ -5,6 +5,10 @@
 [![PyPI version][pypi-version]][pypi-link]
 [![PyPI platforms][pypi-platforms]][pypi-link]
 
+<!-- Hero: also at docs/images/subway-access-hero.png (relative path works on GitHub). PyPI needs absolute URL. -->
+
+![NYC subway accessibility snapshot: street entrances, MTA stations, and ACS tract disability (example: Atlantic Brooklyn)](https://raw.githubusercontent.com/random-walks/subway-access/main/docs/images/subway-access-hero.png)
+
 `subway-access` is a Python toolkit for reproducible NYC subway accessibility
 analysis.
 
@@ -23,11 +27,20 @@ The current package now includes a real public-data workflow:
 - fetch ACS tract-level demographics for a selected NYC study area
 - cache a reusable local snapshot bundle
 - analyze Euclidean first-pass accessibility gaps and rolling reliability
+- compare the Euclidean baseline against cached local OSM walking graphs
 - export catchment GeoJSON, tract gap CSV, and station metrics
 - run the snapshot and analysis flow from the installed CLI
 
-The current scoring model is still intentionally a documented first pass:
-Euclidean catchments first, richer network comparisons next.
+The hero image above is committed as
+[`docs/images/subway-access-hero.png`](docs/images/subway-access-hero.png)
+(regenerated from [`examples/about-the-data`](examples/about-the-data/) as
+`map-library-header-horizontal.png` when refreshing that example).
+
+The current scoring model is intentionally staged:
+
+- official public data is already real
+- Euclidean catchments remain the baseline comparator
+- cached OSM walking graphs now power the advanced network comparison layer
 
 ## Why this exists
 
@@ -44,6 +57,12 @@ Install:
 
 ```bash
 pip install subway-access
+```
+
+For the full plotting + network stack:
+
+```bash
+pip install "subway-access[all]"
 ```
 
 Fetch a real official-data borough snapshot:
@@ -69,6 +88,7 @@ Start with:
 - `examples/fetch-borough-snapshot/`
 - `examples/borough-gap-analysis/`
 - `examples/outage-reliability-report/`
+- `examples/multi-borough-access-profile/`
 - `examples/network-access-comparison/`
 - `examples/example-template/`
 
@@ -113,8 +133,9 @@ The current workflow is intentionally explicit and reproducible:
 6. compute tract need, rolling reliability, and station metrics
 7. export publishable GeoJSON and CSV outputs
 
-This is intentionally a **first-pass Euclidean approximation**, not a full
-network-isochrone model.
+This is intentionally a staged model rather than a one-shot perfect routing
+claim. Euclidean access remains the baseline, while the advanced examples now
+show how cached OSM walking graphs change the story.
 
 ## Documentation
 

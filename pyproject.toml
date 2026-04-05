@@ -55,11 +55,30 @@ Portfolio = "https://blaiseab.com/"
 Discussions = "https://github.com/random-walks/subway-access/discussions"
 Changelog = "https://github.com/random-walks/subway-access/releases"
 
+[project.optional-dependencies]
+network = [
+  "networkx>=3.4.2",
+  "osmnx>=2.0.6",
+  "scikit-learn>=1.6",
+]
+plotting = [
+  "matplotlib>=3.10",
+]
+all = [
+  "matplotlib>=3.10",
+  "networkx>=3.4.2",
+  "osmnx>=2.0.6",
+  "scikit-learn>=1.6",
+]
+
 
 [dependency-groups]
 test = [
+  "networkx>=3.4.2",
+  "osmnx>=2.0.6",
   "pytest >=9",
   "pytest-cov >=7",
+  "scikit-learn>=1.6",
 ]
 lint = [
   "mypy >=1.19.1",
@@ -157,6 +176,10 @@ ignore_missing_imports = true
 module = ["shapely", "shapely.*"]
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+module = "networkx"
+ignore_missing_imports = true
+
 
 [tool.ruff]
 show-fixes = true
@@ -214,7 +237,7 @@ ignore = [
 "src/subway_access/_version.py" = ["Q000", "RUF022"]
 "src/subway_access/__main__.py" = ["I001"]
 "src/subway_access/cli/_main.py" = ["T20"]
-"scripts/*.py" = ["EM", "TRY", "F541"]
+"scripts/*.py" = ["EM", "TRY", "F541", "T20", "TC003"]
 
 
 [tool.pylint]

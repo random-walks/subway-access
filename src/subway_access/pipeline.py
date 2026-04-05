@@ -17,10 +17,16 @@ from shapely.geometry import Point, shape
 from shapely.ops import unary_union
 
 from .io import (
+    fetch_walk_graph as io_fetch_walk_graph,
+)
+from .io import (
     load_accessibility_status,
     load_census_data,
     load_gtfs,
     load_outages,
+)
+from .io import (
+    load_cached_walk_graph as io_load_cached_walk_graph,
 )
 from .io._acs import (
     ACS_5YEAR_YEAR,
@@ -29,23 +35,40 @@ from .io._acs import (
     fetch_nyc_acs_tract_estimates,
 )
 from .io._cache import cache_timestamp, ensure_directory, write_csv_rows, write_json
+from .io._entrances import entrances_to_geojson, load_entrances
+from .io._gtfs_static import (
+    gtfs_pathways_snapshot_to_json,
+    load_gtfs_pathways_snapshot,
+    parse_gtfs_pathways_zip,
+)
 from .io._mta import (
     MTA_ELEVATOR_AVAILABILITY_API_URL,
     MTA_EQUIPMENT_ASSET_API_URL,
     MTA_GTFS_STATIC_URL,
+    MTA_SUBWAY_ENTRANCES_API_URL,
     MTA_SUBWAY_STATIONS_API_URL,
+    build_entrance_snapshot_rows,
     build_outage_snapshot_rows,
     build_station_snapshot_rows,
     fetch_mta_availability_history,
     fetch_mta_equipment_assets,
     fetch_mta_gtfs_archive,
     fetch_mta_station_catalog,
+    fetch_mta_subway_entrances,
 )
-from .models import AccessibilityQuery, DataSourceMetadata, StudyAreaSnapshot
+from .models import (
+    AccessibilityQuery,
+    DataSourceMetadata,
+    EntranceDataset,
+    NetworkGraphSnapshot,
+    StudyAreaSnapshot,
+)
 
 __all__ = [
     "fetch_study_area_snapshot",
+    "fetch_walk_graph",
     "load_cached_snapshot",
+    "load_cached_walk_graph",
 ]
 
 _BOROUGH_BY_COUNTY = {
@@ -79,6 +102,8 @@ def _snapshot_paths(cache_dir: Path) -> dict[str, Path]:
         "availability": cache_dir / "mta-availability-history.json",
         "station_catalog": cache_dir / "mta-station-catalog.json",
         "gtfs_archive": cache_dir / "gtfs_subway.zip",
+        "entrances": cache_dir / "entrances.geojson",
+        "gtfs_pathways": cache_dir / "gtfs-pathways.json",
     }
 
 
@@ -115,6 +140,36 @@ def _filter_station_rows(
         if longitude is None or latitude is None:
             continue
         point = Point(float(longitude), float(latitude))
+        if study_area_shape.covers(point):
+            selected_rows.append(row)
+    return selected_rows
+
+
+def _filter_entrance_rows(
+    entrance_rows: list[dict[str, Any]],
+    *,
+    study_area_shape: Any,
+) -> list[dict[str, Any]]:
+    """Keep entrance API rows whose coordinates fall inside the study area."""
+
+    selected_rows: list[dict[str, Any]] = []
+    for row in entrance_rows:
+        lat = row.get("entrance_latitude")
+        lon = row.get("entrance_longitude")
+        if lat is None or lon is None:
+            continue
+        try:
+            flat = float(str(lat).strip())
+            flon = float(str(lon).strip())
+        except (TypeError, ValueError):
+            continue
+        geo = row.get("entrance_georeference")
+        if isinstance(geo, dict) and geo.get("type") == "Point":
+            coords = geo.get("coordinates")
+            if isinstance(coords, list) and len(coords) >= 2:
+                flon = float(coords[0])
+                flat = float(coords[1])
+        point = Point(flon, flat)
         if study_area_shape.covers(point):
             selected_rows.append(row)
     return selected_rows
@@ -208,6 +263,13 @@ def load_cached_snapshot(cache_dir: str | Path) -> StudyAreaSnapshot:
     stations = load_gtfs(paths["stations"]).with_accessibility(accessibility)
     demographics = load_census_data(paths["tracts"])
     outages = load_outages(paths["outages"])
+    if paths["entrances"].exists():
+        entrances = load_entrances(paths["entrances"])
+    else:
+        entrances = EntranceDataset(entrances=())
+    gtfs_pathways = None
+    if paths["gtfs_pathways"].exists():
+        gtfs_pathways = load_gtfs_pathways_snapshot(paths["gtfs_pathways"])
     return StudyAreaSnapshot(
         query=query,
         stations=stations,
@@ -215,6 +277,12 @@ def load_cached_snapshot(cache_dir: str | Path) -> StudyAreaSnapshot:
         demographics=demographics,
         outages=outages,
         metadata=metadata,
+        entrances=entrances,
+        gtfs_pathways=gtfs_pathways,
+        generated_at=datetime.fromisoformat(
+            json.loads(paths["metadata"].read_text(encoding="utf-8"))["generated_at"]
+        ),
+        cache_dir=cache_root,
     )
 
 
@@ -278,8 +346,24 @@ def fetch_study_area_snapshot(
     write_json(paths["availability"], availability_rows)
     write_json(paths["outages"], build_outage_snapshot_rows(availability_rows))
 
+    entrance_catalog_rows = fetch_mta_subway_entrances()
+    selected_entrance_rows = _filter_entrance_rows(
+        entrance_catalog_rows,
+        study_area_shape=study_area_shape,
+    )
+    normalized_entrances = build_entrance_snapshot_rows(selected_entrance_rows)
+    write_json(paths["entrances"], entrances_to_geojson(normalized_entrances))
+
+    pathways_snapshot = None
     if include_gtfs_archive:
         fetch_mta_gtfs_archive(paths["gtfs_archive"], refresh=refresh)
+        if paths["gtfs_archive"].exists():
+            pathways_snapshot = parse_gtfs_pathways_zip(paths["gtfs_archive"])
+            if pathways_snapshot is not None:
+                write_json(
+                    paths["gtfs_pathways"],
+                    gtfs_pathways_snapshot_to_json(pathways_snapshot),
+                )
 
     tract_features = _selected_tract_features(query, study_area_shape=study_area_shape)
     tract_geoids = tuple(feature.geography_value for feature in tract_features)
@@ -290,7 +374,7 @@ def fetch_study_area_snapshot(
     }
     write_json(paths["tracts"], tract_payload)
 
-    metadata = (
+    metadata_items: list[DataSourceMetadata] = [
         DataSourceMetadata(
             name="mta_station_catalog",
             source_url=MTA_SUBWAY_STATIONS_API_URL,
@@ -315,6 +399,14 @@ def fetch_study_area_snapshot(
             notes=f"Monthly availability rows since {start_month.isoformat()}.",
         ),
         DataSourceMetadata(
+            name="mta_subway_entrances",
+            source_url=MTA_SUBWAY_ENTRANCES_API_URL,
+            cache_path=paths["entrances"],
+            refreshed_at=datetime.fromisoformat(refreshed_at),
+            record_count=len(normalized_entrances),
+            notes="Filtered in memory against the selected study area boundary.",
+        ),
+        DataSourceMetadata(
             name="acs_tract_demographics",
             source_url=f"{ACS_COUNTS_API_URL} and {ACS_SUBJECT_API_URL}",
             cache_path=paths["tracts"],
@@ -322,7 +414,20 @@ def fetch_study_area_snapshot(
             record_count=len(tract_payload["features"]),
             notes=f"ACS 5-year {ACS_5YEAR_YEAR} estimates merged to NYC tract centroids.",
         ),
-    )
+    ]
+    if pathways_snapshot is not None:
+        metadata_items.append(
+            DataSourceMetadata(
+                name="gtfs_pathways_static",
+                source_url=MTA_GTFS_STATIC_URL,
+                cache_path=paths["gtfs_pathways"],
+                refreshed_at=datetime.fromisoformat(refreshed_at),
+                record_count=len(pathways_snapshot.pathways)
+                + len(pathways_snapshot.locations),
+                notes="Parsed from GTFS zip when pathways.txt or locations.txt exists.",
+            ),
+        )
+    metadata = tuple(metadata_items)
     metadata_payload = {
         "generated_at": refreshed_at,
         "query": asdict(query),
@@ -345,3 +450,28 @@ def fetch_study_area_snapshot(
     }
     write_json(paths["metadata"], metadata_payload)
     return load_cached_snapshot(cache_root)
+
+
+def fetch_walk_graph(
+    query: AccessibilityQuery,
+    *,
+    cache_dir: str | Path,
+    refresh: bool = False,
+    buffer_meters: int = 0,
+) -> NetworkGraphSnapshot:
+    """Fetch and cache an OSM walking graph for a study area."""
+
+    return io_fetch_walk_graph(
+        query,
+        cache_dir=cache_dir,
+        refresh=refresh,
+        buffer_meters=buffer_meters,
+    )
+
+
+def load_cached_walk_graph(
+    cache_dir: str | Path,
+) -> tuple[Any, NetworkGraphSnapshot]:
+    """Load a cached OSM walking graph and its typed metadata."""
+
+    return io_load_cached_walk_graph(cache_dir)

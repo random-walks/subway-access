@@ -14,13 +14,13 @@ Every well-formed example should include:
 - `.gitignore`
 - `README.md`
 - `main.py`
-- optional tracked `reports/`
+- tracked `reports/` with at least one `reports/figures/*.png` chart
 - optional ignored `cache/`
 - optional ignored `artifacts/`
 
 ## Shipping Checklist
 
-- the example imports only `subway_access.*`
+- the example imports only `subway_access.*` (template may use only matplotlib)
 - `uv sync` and `uv run python main.py` work from the example folder
 - the example fetches or reuses official public-data cache files rather than
   packaged synthetic fixtures

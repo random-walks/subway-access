@@ -1,5 +1,7 @@
 # subway-access
 
+![NYC subway accessibility snapshot: Open NY street entrances, MTA catalog stops (ADA-colored), and ACS tract disability — example over Atlantic / Downtown Brooklyn (OpenStreetMap basemap).](images/subway-access-hero.png)
+
 `subway-access` is a Python toolkit for reproducible NYC subway accessibility
 analysis.
 
@@ -17,6 +19,7 @@ The current package provides a real-data fetch/cache workflow:
 - fetch ACS tract-level demographics for a selected NYC study area
 - cache a reusable local snapshot bundle
 - run Euclidean first-pass accessibility and reliability analysis
+- cache local OSM walking graphs for advanced network analysis
 - export GeoJSON and CSV outputs, including station metrics
 - run the snapshot and analysis flow from the installed `subway-access` CLI
 

@@ -20,16 +20,26 @@ and a real-data snapshot workflow.
 1. `pipeline.fetch_study_area_snapshot()` selects a study area through
    `nyc-geo-toolkit`.
 2. The pipeline fetches official MTA station, equipment, and availability data.
-3. The pipeline fetches ACS tract-level demographics and writes cache files.
-4. `pipeline.load_cached_snapshot()` loads those cache files back into typed
-   datasets.
-5. `analysis.generate_catchments()` builds first-pass circle polygons.
-6. `analysis.score_accessibility()` joins station coverage to tract demand.
-7. `analysis.compute_reliability()` scores stations from public availability
-   history.
-8. `analysis.analyze_gaps()` ranks uncovered tracts.
-9. `analysis.build_station_metrics()` aggregates station-level metrics.
-10. `export.export_catchments_geojson()`, `export.export_gap_table()`, and
+3. The pipeline fetches MTA subway entrance/exit points and filters them to the
+   study area (`entrances.geojson`). When a GTFS zip is present, it optionally
+   parses GTFS-Pathways `pathways.txt` / `locations.txt` into
+   `gtfs-pathways.json` when those files exist in the archive.
+4. The pipeline fetches ACS tract-level demographics and writes cache files.
+5. `pipeline.load_cached_snapshot()` loads those cache files back into typed
+   datasets (including `EntranceDataset` and optional `GtfsPathwaysSnapshot`).
+6. `analysis.generate_catchments()` builds first-pass circle polygons.
+7. `pipeline.fetch_walk_graph()` can cache an OSM walking graph for the same
+   study area.
+8. `analysis.score_accessibility()` joins station coverage to tract demand.
+9. `analysis.score_accessibility_network()` compares the Euclidean baseline to
+   network travel.
+10. `analysis.compute_reliability()` scores stations from public availability
+    history.
+11. `analysis.compare_accessibility_models()` and
+    `analysis.summarize_accessibility_by_group()` produce richer rollups.
+12. `analysis.analyze_gaps()` ranks uncovered tracts.
+13. `analysis.build_station_metrics()` aggregates station-level metrics.
+14. `export.export_catchments_geojson()`, `export.export_gap_table()`, and
     `export.export_station_metrics()` write outputs.
 
 ## Geography and shared foundations
@@ -39,6 +49,7 @@ synthetic fixtures. The intended consumer pattern is:
 
 - fetch official public records once
 - pin a local cache snapshot
+- optionally pin a local OSM walking graph
 - reload it in memory for analysis and export
 - update tracked reports intentionally, not implicitly
 
@@ -48,11 +59,7 @@ package.
 
 ## Planned expansion
 
-The near-term roadmap grows from Euclidean coverage toward:
+The package now grows along two explicit tracks:
 
-- network-based walking catchments
-- richer geography rollups
-- true network-based isochrone generation
-
-The package already supports official-data fetch/cache flows, while the heavier
-network routing layer remains a distinct next step.
+- Euclidean accessibility as a documented baseline
+- network-based walking graphs and comparison outputs as the advanced path

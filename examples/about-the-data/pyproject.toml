@@ -1,0 +1,13 @@
+[project]
+name = "subway-access-about-the-data"
+version = "0.0.0"
+description = "NYC-wide data catalogue and maximum public snapshot download for subway-access."
+requires-python = ">=3.10"
+dependencies = [
+    "subway-access[all]",
+    "geopandas>=1.0",
+    "contextily>=1.6",
+]
+
+[tool.uv.sources]
+subway-access = { path = "../..", editable = true }

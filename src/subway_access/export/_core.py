@@ -141,6 +141,7 @@ def _station_metric_row(record: StationMetricRecord) -> dict[str, object]:
         "network_connection_count": record.network_connection_count,
         "daytime_routes": " ".join(record.daytime_routes),
         "structure": record.structure,
+        "analysis_method": record.analysis_method,
     }
 
 
@@ -174,6 +175,7 @@ def export_station_metrics(data: StationMetricDataset, target: ExportTarget) -> 
                 "network_connection_count",
                 "daytime_routes",
                 "structure",
+                "analysis_method",
             ]
         )
         with output_path.open("w", newline="", encoding="utf-8") as handle:

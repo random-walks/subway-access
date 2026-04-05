@@ -30,6 +30,16 @@ That covers:
 - source and wheel builds
 - installed-wheel smoke testing for the CLI and cached real-data workflow
 
+### README / PyPI hero image
+
+The project README and [docs home](index.md) show a wide map at
+`docs/images/subway-access-hero.png`. PyPI renders the image via a **raw GitHub
+URL** in `README.md` (pointing at `main`); after you change the PNG, merge to
+`main` so the link matches. To refresh the graphic, run the
+`examples/about-the-data` example and copy
+`reports/figures/map-library-header-horizontal.png` over
+`docs/images/subway-access-hero.png`.
+
 ## Publishing configuration
 
 This repo publishes through `.github/workflows/cd.yml` using GitHub trusted

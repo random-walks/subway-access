@@ -10,8 +10,16 @@ uv sync
 uv run python main.py
 ```
 
-To update the tracked report:
+Tracked `reports/` refresh on every run by default. To skip:
 
 ```bash
-uv run python main.py --publish-report
+uv run python main.py --no-publish-report
 ```
+
+## Outputs
+
+- `artifacts/station-reliability.csv`
+- `reports/outage-reliability-report-tearsheet.md`
+- `reports/figures/lowest-reliability-stations.png`
+- `reports/figures/scheduled-vs-unscheduled.png`
+- `reports/figures/availability-distribution.png`

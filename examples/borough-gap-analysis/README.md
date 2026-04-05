@@ -12,14 +12,17 @@ uv sync
 uv run python main.py
 ```
 
-To update the tracked report:
+Tracked `reports/` refresh on every run by default. To skip:
 
 ```bash
-uv run python main.py --publish-report
+uv run python main.py --no-publish-report
 ```
 
 ## Outputs
 
 - `artifacts/catchments.geojson`
 - `artifacts/borough-accessibility-gaps.csv`
-- `reports/borough-gap-analysis-tearsheet.md` when `--publish-report` is used
+- `reports/borough-gap-analysis-tearsheet.md`
+- `reports/figures/top-gap-tracts.png`
+- `reports/figures/need-vs-travel.png`
+- `reports/figures/travel-minutes-histogram.png`

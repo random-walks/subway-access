@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import calendar
+import hashlib
 import json
 from datetime import date, datetime, timezone
 from typing import TYPE_CHECKING, Any
@@ -13,6 +14,7 @@ if TYPE_CHECKING:
     from pathlib import Path
 
 MTA_SUBWAY_STATIONS_API_URL = "https://data.ny.gov/resource/39hk-dx4f.json"
+MTA_SUBWAY_ENTRANCES_API_URL = "https://data.ny.gov/resource/i9wp-a4ja.json"
 MTA_EQUIPMENT_ASSET_API_URL = "https://data.ny.gov/resource/94fv-bak7.json"
 MTA_ELEVATOR_AVAILABILITY_API_URL = "https://data.ny.gov/resource/rc78-7x78.json"
 MTA_GTFS_STATIC_URL = "https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip"
@@ -77,6 +79,91 @@ def fetch_mta_station_catalog(*, limit: int = 2000) -> list[dict[str, Any]]:
         order="station_id",
     )
     return _read_json(url)
+
+
+def fetch_mta_subway_entrances(*, limit: int = 5000) -> list[dict[str, Any]]:
+    """Fetch MTA subway entrance and exit points (NYC Transit) from Open NY."""
+
+    url = _build_socrata_url(
+        MTA_SUBWAY_ENTRANCES_API_URL,
+        limit=limit,
+        order="station_id",
+    )
+    return _read_json(url)
+
+
+def _entrance_stable_id(row: dict[str, Any]) -> str:
+    """Stable id for an entrance row (API has no primary key)."""
+
+    key = "|".join(
+        [
+            str(row.get("station_id", "")),
+            str(row.get("gtfs_stop_id", "")),
+            str(row.get("entrance_latitude", "")),
+            str(row.get("entrance_longitude", "")),
+            str(row.get("entrance_type", "")),
+        ]
+    )
+    return hashlib.sha256(key.encode()).hexdigest()[:20]
+
+
+def _parse_yes_no(value: object) -> bool:
+    return str(value or "").strip().upper() == "YES"
+
+
+def build_entrance_snapshot_rows(
+    entrance_rows: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Normalize raw entrance API rows into cacheable property dicts (with latitude/longitude).
+
+    Join keys: ``station_id`` (MTA station id), ``complex_id``, ``gtfs_stop_id`` (parent stop).
+    """
+
+    normalized: list[dict[str, Any]] = []
+    for row in entrance_rows:
+        lat = row.get("entrance_latitude")
+        lon = row.get("entrance_longitude")
+        if lat is None or lon is None:
+            continue
+        try:
+            flat = float(str(lat).strip())
+            flon = float(str(lon).strip())
+        except (TypeError, ValueError):
+            continue
+        geo = row.get("entrance_georeference")
+        if isinstance(geo, dict) and geo.get("type") == "Point":
+            coords = geo.get("coordinates")
+            if isinstance(coords, list) and len(coords) >= 2:
+                flon = float(coords[0])
+                flat = float(coords[1])
+        row_for_id = {
+            **row,
+            "entrance_latitude": str(flat),
+            "entrance_longitude": str(flon),
+        }
+        normalized.append(
+            {
+                "entrance_id": _entrance_stable_id(row_for_id),
+                "station_id": str(row.get("station_id") or "").strip(),
+                "complex_id": str(row.get("complex_id") or "").strip() or None,
+                "gtfs_stop_id": str(row.get("gtfs_stop_id") or "").strip() or None,
+                "stop_name": str(row.get("stop_name") or "").strip(),
+                "constituent_station_name": str(
+                    row.get("constituent_station_name") or ""
+                ).strip(),
+                "borough": str(row.get("borough") or "").strip(),
+                "division": str(row.get("division") or "").strip() or None,
+                "line": str(row.get("line") or "").strip() or None,
+                "daytime_routes": str(row.get("daytime_routes") or "").strip(),
+                "entrance_type": str(row.get("entrance_type") or "").strip(),
+                "entry_allowed": _parse_yes_no(row.get("entry_allowed")),
+                "exit_allowed": _parse_yes_no(row.get("exit_allowed")),
+                "latitude": flat,
+                "longitude": flon,
+                "source": "mta_subway_entrances",
+            }
+        )
+    return normalized
 
 
 def fetch_mta_equipment_assets(

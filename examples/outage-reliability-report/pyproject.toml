@@ -3,7 +3,7 @@ name = "subway-access-outage-reliability-report"
 version = "0.0.0"
 description = "Official-data outage and reliability example for subway-access."
 requires-python = ">=3.10"
-dependencies = ["subway-access"]
+dependencies = ["subway-access[plotting]"]
 
 [tool.uv.sources]
 subway-access = { path = "../..", editable = true }

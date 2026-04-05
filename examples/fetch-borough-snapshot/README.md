@@ -22,8 +22,18 @@ To force a fresh snapshot:
 uv run python main.py --refresh
 ```
 
-To update the tracked report:
+Tracked `reports/` (including charts) refresh on every run by default. To skip:
 
 ```bash
-uv run python main.py --publish-report
+uv run python main.py --no-publish-report
 ```
+
+## Outputs
+
+- `cache/<study-area>/...` local official-data snapshot files
+- `artifacts/fetch-metadata.json`
+- `artifacts/fetch-summary.md`
+- `reports/fetch-borough-snapshot-tearsheet.md`
+- `reports/figures/accessibility-status.png`
+- `reports/figures/top-routes.png`
+- `reports/figures/station-structures.png`

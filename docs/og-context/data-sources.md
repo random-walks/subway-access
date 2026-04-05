@@ -3,8 +3,12 @@
 ## Current Official Inputs
 
 - MTA Subway Stations dataset: `https://data.ny.gov/resource/39hk-dx4f.json`
+- MTA Subway Entrances and Exits (street-level entrance/exit points, GTFS stop
+  ids): `https://data.ny.gov/resource/i9wp-a4ja.json`
 - MTA GTFS static subway archive:
-  `https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip`
+  `https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip` (as of early 2026 this
+  zip does **not** ship `pathways.txt` or `locations.txt`; the library still
+  parses those files when a feed includes GTFS-Pathways.)
 - MTA Subway Elevator and Escalator Asset Inventory:
   `https://data.ny.gov/resource/94fv-bak7.json`
 - MTA NYCT Subway Elevator and Escalator Availability: Beginning 2015:
@@ -17,8 +21,12 @@
 
 - the station catalog is the easiest public source for station-level ADA flags,
   GTFS stop IDs, route labels, and station coordinates
+- entrance/exit rows from `i9wp-a4ja` join to the same `gtfs_stop_id` and
+  `station_id` / `complex_id` fields as the catalog; they provide multiple
+  coordinates per complex where the static GTFS parent stop is a single point
 - the public asset inventory and monthly availability history are auth-free and
   currently power reliability scoring
+- cached OSM walking graphs now power the advanced network comparison layer
 - the auth-gated real-time elevator/escalator current-outage feed still exists
   through the MTA developer program, but the public first-pass workflow uses the
   historical availability dataset instead
@@ -37,6 +45,8 @@
 
 - the current public workflow still uses Euclidean catchments around station
   points rather than network isochrones
+- advanced examples now compare that baseline against cached local OSM walking
+  graphs
 - station catalog `station_id` aligns most directly with elevator-history
   `station_mrn`; `complex_id` aligns with `station_complex_mrn`
 - ADA values from the station catalog use `0`/`1`/`2` and should be documented
