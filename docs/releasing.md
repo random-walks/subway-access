@@ -4,9 +4,9 @@ This guide covers the current PyPI release workflow for `subway-access`.
 
 ## Release discipline
 
-- Current release line: `0.1.x`
 - Version source: git tags via Hatch VCS
-- Preferred publish trigger: GitHub Release publication
+- Preferred publish trigger: GitHub Release publication (fires
+  `release: published` → PyPI)
 
 Patch releases in the `0.1.x` line should stay backward-compatible. Cut a new
 minor release when the documented workflow, dependency expectations, or public
@@ -53,13 +53,31 @@ repo and is intentionally not duplicated here.
 
 The standard production path is:
 
-1. create the final release tag, for example `0.1.0`
-2. push the tag
-3. optionally run the `CD` workflow against TestPyPI first
-4. publish the matching GitHub Release
-5. let the `release.published` trigger publish to real PyPI
+1. create the final release tag on `main`, for example `0.3.0`
+2. `git push origin <tag>`
+3. publish the GitHub Release for that tag (this triggers CD → PyPI when trusted
+   publishing is enabled)
 
-If you prefer the manual route, run the `CD` workflow from the same tag with:
+**CLI (same outcome as the Releases UI):** with the
+[GitHub CLI](https://cli.github.com/) authenticated (`gh auth login`),
+
+```bash
+gh release create <tag> --verify-tag --title "<tag>" --generate-notes
+```
+
+Example after pushing tag `0.3.0`:
+
+```bash
+git push origin 0.3.0
+gh release create 0.3.0 --verify-tag --title "0.3.0" --generate-notes
+```
+
+Optionally run the `CD` workflow against TestPyPI first (workflow dispatch).
+Then confirm the `release.published` workflow run finished and the artifact is
+on PyPI.
+
+If you prefer publishing without `gh release`, run the `CD` workflow from the
+same tag with:
 
 - `publish=true`
 - `repository=pypi`
