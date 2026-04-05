@@ -279,7 +279,7 @@ def write_report(
                 [
                     "### Horizontal banner (README / PyPI header image)",
                     "",
-                    "Wide **~3.2 km × 720 m** view centered on **Atlantic / Downtown Brooklyn / Fort Greene** "
+                    "Wide **~3.2 km x 720 m** view centered on **Atlantic / Downtown Brooklyn / Fort Greene** "
                     "(many subway lines; tracts show ACS disability variation). Same layers as the zoom "
                     "maps: OSM roads, tract **viridis** choropleth with **colorbar**, entrance→station "
                     "links, large title and legends — intended for copying into project README or PyPI.",

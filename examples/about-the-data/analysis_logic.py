@@ -14,11 +14,11 @@ from typing import TYPE_CHECKING
 import download_logic
 import geopandas as gpd
 import matplotlib.pyplot as plt
-from matplotlib.ticker import StrMethodFormatter
 import pandas as pd
-from matplotlib.lines import Line2D
 from matplotlib import colors
 from matplotlib.cm import ScalarMappable
+from matplotlib.lines import Line2D
+from matplotlib.ticker import StrMethodFormatter
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from nyc_geo_toolkit import load_nyc_census_tracts
 from shapely.geometry import LineString, Point, box, shape
@@ -26,6 +26,11 @@ from shapely.ops import unary_union
 
 from subway_access import analysis as sa_analysis
 from subway_access import pipeline
+
+try:
+    import contextily as ctx
+except ImportError:
+    ctx = None  # type: ignore[assignment,misc]
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -365,15 +370,15 @@ def _station_catalog_gdf(
     for borough in boroughs:
         bdir = download_logic.borough_cache_dir(cache_root, borough)
         snapshot = pipeline.load_cached_snapshot(bdir)
-        for st in snapshot.stations.stations:
-            records.append(
-                {
-                    "geometry": Point(st.longitude, st.latitude),
-                    "gtfs_stop_id": str(st.gtfs_stop_id).strip() if st.gtfs_stop_id else "",
-                    "ada_status": str(st.ada_status),
-                    "name": st.name,
-                }
-            )
+        records.extend(
+            {
+                "geometry": Point(st.longitude, st.latitude),
+                "gtfs_stop_id": str(st.gtfs_stop_id).strip() if st.gtfs_stop_id else "",
+                "ada_status": str(st.ada_status),
+                "name": st.name,
+            }
+            for st in snapshot.stations.stations
+        )
     if not records:
         return gpd.GeoDataFrame(geometry=[], crs="EPSG:4326")
     return gpd.GeoDataFrame(records, crs="EPSG:4326")
@@ -389,7 +394,7 @@ def _geodesic_buffer_polygon(lon: float, lat: float, buffer_meters: float):
 
 
 def _geodesic_bbox_polygon(lon: float, lat: float, width_m: float, height_m: float):
-    """Axis-aligned rectangle in Web Mercator (wide = east–west span), returned in EPSG:4326."""
+    """Axis-aligned rectangle in Web Mercator (wide = east-west span), returned in EPSG:4326."""
 
     g = gpd.GeoDataFrame({"geometry": [Point(lon, lat)]}, crs="EPSG:4326").to_crs("EPSG:3857")
     gx, gy = g.geometry.iloc[0].x, g.geometry.iloc[0].y
@@ -539,23 +544,25 @@ def _plot_combined_entrances_stations_map(
             markersize=8,
         ),
     ]
-    for status in (
-        "accessible",
-        "partially_accessible",
-        "not_accessible",
-        "unknown",
-    ):
-        legend_handles.append(
+    legend_handles.extend(
+        [
             Line2D(
                 [0],
                 [0],
                 marker="o",
                 linestyle="",
                 color=_ADA_COLORS[status],
-                label=f"Entrance — {status.replace('_', ' ')}",
+                label=f"Entrance - {status.replace('_', ' ')}",
                 markersize=8,
             )
-        )
+            for status in (
+                "accessible",
+                "partially_accessible",
+                "not_accessible",
+                "unknown",
+            )
+        ]
+    )
     if not equipment.empty:
         legend_handles.append(
             Line2D(
@@ -597,15 +604,10 @@ def _plot_grand_army_plaza_zoom(
 ) -> None:
     """Zoom: Web Mercator + optional OSM basemap; tract disability; links; large scatter markers.
 
-    Plotting in EPSG:4326 with ``aspect=equal`` distorts east–west vs north–south scale at NYC
+    Plotting in EPSG:4326 with ``aspect=equal`` distorts east-west vs north-south scale at NYC
     latitudes, so entrances no longer line up with real geometry. Everything is drawn in
     **EPSG:3857** so positions match streets when a basemap is used.
     """
-
-    try:
-        import contextily as ctx
-    except ImportError:
-        ctx = None  # type: ignore[assignment]
 
     zoom_poly = _geodesic_buffer_polygon(
         _GRAND_ARMY_PLAZA_LON,
@@ -657,7 +659,7 @@ def _plot_grand_army_plaza_zoom(
                 zorder=0,
                 attribution_size=6,
             )
-        except Exception:
+        except (OSError, RuntimeError, ValueError):
             gpd.GeoDataFrame({"geometry": [zoom_poly_wm]}, crs=crs_wm).plot(
                 ax=axes,
                 color="#f2f2f2",
@@ -835,11 +837,6 @@ def _plot_library_header_horizontal(
     Atlantic / Downtown Brooklyn / Fort Greene strip — dense subway coverage and tract spread.
     """
 
-    try:
-        import contextily as ctx
-    except ImportError:
-        ctx = None  # type: ignore[assignment]
-
     bbox_4326 = _geodesic_bbox_polygon(
         _LIB_HEADER_LON,
         _LIB_HEADER_LAT,
@@ -885,7 +882,7 @@ def _plot_library_header_horizontal(
                 zorder=0,
                 attribution_size=5,
             )
-        except Exception:
+        except (OSError, RuntimeError, ValueError):
             gpd.GeoDataFrame({"geometry": [bbox_wm]}, crs=crs_wm).plot(
                 ax=ax,
                 color="#f0f0f0",
@@ -1554,7 +1551,7 @@ def entrance_layer_figures(
             0.5,
             0.55,
             "No entrances carry a non-empty gtfs_stop_id,\n"
-            "so a per–parent-stop distribution cannot be built.",
+            "so a per-parent-stop distribution cannot be built.",
             ha="center",
             va="center",
             fontsize=11,
