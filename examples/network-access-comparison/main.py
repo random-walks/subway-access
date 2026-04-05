@@ -51,7 +51,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--refresh", action="store_true")
     parser.add_argument("--refresh-graph", action="store_true")
     parser.add_argument("--graph-buffer-meters", type=int, default=250)
-    parser.add_argument("--publish-report", action="store_true")
+    parser.add_argument(
+        "--no-publish-report",
+        action="store_true",
+        help="Skip updating tracked reports/ and figures/ (faster local iteration).",
+    )
     return parser
 
 
@@ -293,7 +297,7 @@ def main() -> None:
             )
 
     report_file: Path | None = None
-    if args.publish_report:
+    if not args.no_publish_report:
         report_file = write_report(comparison, graph_snapshot, output_csv)
 
     print("Network Access Comparison")
@@ -306,7 +310,7 @@ def main() -> None:
     print(f"Wrote {output_csv}")
     if report_file is None:
         print(
-            "Skipped tracked report generation. Re-run with --publish-report to update reports/."
+            "Skipped tracked report generation (--no-publish-report). Default is to refresh reports/."
         )
     else:
         print(f"Wrote tracked report: {report_file}")

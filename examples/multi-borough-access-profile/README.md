@@ -17,16 +17,16 @@ To refresh the cached borough snapshots:
 uv run python main.py --refresh
 ```
 
-To update the tracked report and figures:
+Tracked `reports/` (including figures) refresh on every run by default. To skip:
 
 ```bash
-uv run python main.py --publish-report
+uv run python main.py --no-publish-report
 ```
 
 ## Outputs
 
 - `artifacts/borough-profile.csv`
-- `reports/multi-borough-access-profile-tearsheet.md` when `--publish-report` is used
+- `reports/multi-borough-access-profile-tearsheet.md`
 - `reports/figures/coverage-rate-by-borough.png`
 - `reports/figures/uncovered-population-by-borough.png`
 - `reports/figures/accessible-station-share-by-borough.png`

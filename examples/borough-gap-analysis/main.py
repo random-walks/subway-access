@@ -48,7 +48,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--availability-months", type=int, default=12)
     parser.add_argument("--minutes", type=int, default=10)
     parser.add_argument("--refresh", action="store_true")
-    parser.add_argument("--publish-report", action="store_true")
+    parser.add_argument(
+        "--no-publish-report",
+        action="store_true",
+        help="Skip updating tracked reports/ and figures/ (faster local iteration).",
+    )
     return parser
 
 
@@ -195,7 +199,7 @@ def main() -> None:
         models.ExportTarget("csv", artifact_path("borough-accessibility-gaps.csv")),
     )
     report_file: Path | None = None
-    if args.publish_report:
+    if not args.no_publish_report:
         report_file = write_report(query, scores, gaps, gaps_path)
 
     print("Borough Gap Analysis")
@@ -205,7 +209,7 @@ def main() -> None:
     print(f"Wrote {gaps_path}")
     if report_file is None:
         print(
-            "Skipped tracked report generation. Re-run with --publish-report to update reports/."
+            "Skipped tracked report generation (--no-publish-report). Default is to refresh reports/."
         )
     else:
         print(f"Wrote tracked report: {report_file}")

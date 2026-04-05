@@ -3,7 +3,7 @@ name = "subway-access-example-template"
 version = "0.0.0"
 description = "Bootstrap template for self-contained subway-access examples."
 requires-python = ">=3.10"
-dependencies = ["subway-access"]
+dependencies = ["subway-access[plotting]"]
 
 [tool.uv.sources]
 subway-access = { path = "../..", editable = true }

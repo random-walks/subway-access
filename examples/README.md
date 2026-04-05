@@ -19,8 +19,8 @@ Each example must:
 - import only `subway_access.*` as an installed package
 - keep caches under `cache/`
 - keep scratch and intermediate outputs under ignored `artifacts/`
-- use an optional tracked `reports/` folder for markdown and report figures that
-  should stay in git
+- use a tracked `reports/` folder for markdown; include **at least one** chart
+  under `reports/figures/*.png` so the repo stays visually legible on GitHub
 - avoid shared cross-example `utils/`, `data/`, or `output/` directories
 - fetch or reuse official-data cache snapshots instead of relying on packaged
   synthetic fixtures
@@ -63,3 +63,16 @@ uv run python main.py
 The local `pyproject.toml` points to the repo root as an editable path
 dependency so the example imports `subway_access` exactly the way an external
 consumer would while still tracking local source edits.
+
+## Tracked figures
+
+Examples default to refreshing `reports/` (including `figures/`) on every run.
+Use `--no-publish-report` for faster iteration when you do not want to touch
+tracked files.
+
+To regenerate all example PNGs from the repo root (uses `artifacts/*.csv` when
+present, otherwise embedded fallbacks that match the tearsheets):
+
+```bash
+uv run --extra plotting python scripts/render_tracked_example_figures.py
+```

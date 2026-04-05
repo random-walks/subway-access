@@ -237,7 +237,7 @@ ignore = [
 "src/subway_access/_version.py" = ["Q000", "RUF022"]
 "src/subway_access/__main__.py" = ["I001"]
 "src/subway_access/cli/_main.py" = ["T20"]
-"scripts/*.py" = ["EM", "TRY", "F541"]
+"scripts/*.py" = ["EM", "TRY", "F541", "T20", "TC003"]
 
 
 [tool.pylint]

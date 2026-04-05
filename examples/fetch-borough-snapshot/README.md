@@ -22,10 +22,10 @@ To force a fresh snapshot:
 uv run python main.py --refresh
 ```
 
-To update the tracked report:
+Tracked `reports/` (including charts) refresh on every run by default. To skip:
 
 ```bash
-uv run python main.py --publish-report
+uv run python main.py --no-publish-report
 ```
 
 ## Outputs

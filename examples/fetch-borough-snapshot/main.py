@@ -54,7 +54,11 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--availability-months", type=int, default=12)
     parser.add_argument("--refresh", action="store_true")
-    parser.add_argument("--publish-report", action="store_true")
+    parser.add_argument(
+        "--no-publish-report",
+        action="store_true",
+        help="Skip updating tracked reports/ and figures/ (faster local iteration).",
+    )
     parser.add_argument("--skip-gtfs-archive", action="store_true")
     return parser
 
@@ -265,7 +269,7 @@ def main() -> None:
     metadata_path = write_metadata_json(snapshot)
     summary_path = write_summary_markdown(snapshot)
     report_file: Path | None = None
-    if args.publish_report:
+    if not args.no_publish_report:
         report_file = write_report(snapshot)
 
     print("Fetch Borough Snapshot")
@@ -278,7 +282,7 @@ def main() -> None:
     print(f"Wrote fetch summary: {summary_path}")
     if report_file is None:
         print(
-            "Skipped tracked report generation. Re-run with --publish-report to update reports/."
+            "Skipped tracked report generation (--no-publish-report). Default is to refresh reports/."
         )
     else:
         print(f"Wrote tracked report: {report_file}")
