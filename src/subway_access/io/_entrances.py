@@ -82,9 +82,7 @@ def entrances_to_geojson(rows: list[dict[str, Any]]) -> dict[str, Any]:
         lon = row.get("longitude")
         if lat is None or lon is None:
             continue
-        props = {
-            k: v for k, v in row.items() if k not in ("latitude", "longitude")
-        }
+        props = {k: v for k, v in row.items() if k not in ("latitude", "longitude")}
         features.append(
             {
                 "type": "Feature",

@@ -396,7 +396,9 @@ def _geodesic_buffer_polygon(lon: float, lat: float, buffer_meters: float):
 def _geodesic_bbox_polygon(lon: float, lat: float, width_m: float, height_m: float):
     """Axis-aligned rectangle in Web Mercator (wide = east-west span), returned in EPSG:4326."""
 
-    g = gpd.GeoDataFrame({"geometry": [Point(lon, lat)]}, crs="EPSG:4326").to_crs("EPSG:3857")
+    g = gpd.GeoDataFrame({"geometry": [Point(lon, lat)]}, crs="EPSG:4326").to_crs(
+        "EPSG:3857"
+    )
     gx, gy = g.geometry.iloc[0].x, g.geometry.iloc[0].y
     half_w, half_h = width_m / 2.0, height_m / 2.0
     rect = box(gx - half_w, gy - half_h, gx + half_w, gy + half_h)
@@ -618,9 +620,11 @@ def _plot_grand_army_plaza_zoom(
     catalog = _station_catalog_gdf(cache_root, ("Brooklyn",)).to_crs(crs_wm)
     entrances = _entrances_gdf(cache_root, ("Brooklyn",)).to_crs(crs_wm)
 
-    zoom_poly_wm = gpd.GeoDataFrame({"geometry": [zoom_poly]}, crs="EPSG:4326").to_crs(
-        crs_wm
-    ).geometry.iloc[0]
+    zoom_poly_wm = (
+        gpd.GeoDataFrame({"geometry": [zoom_poly]}, crs="EPSG:4326")
+        .to_crs(crs_wm)
+        .geometry.iloc[0]
+    )
 
     # ``intersects`` keeps entrances on the study-area edge; ``within`` can drop boundary points.
     catalog_z = catalog[catalog.intersects(zoom_poly_wm)].copy()
@@ -1205,7 +1209,9 @@ def station_equipment_map_figures(
 
     cache_root = cache_root.expanduser().resolve()
     figures_dir.mkdir(parents=True, exist_ok=True)
-    gtfs_zip = download_logic.borough_cache_dir(cache_root, boroughs[0]) / "gtfs_subway.zip"
+    gtfs_zip = (
+        download_logic.borough_cache_dir(cache_root, boroughs[0]) / "gtfs_subway.zip"
+    )
 
     borough_polys: list[tuple[str, object]] = []
     for borough in boroughs:
@@ -1569,7 +1575,9 @@ def entrance_layer_figures(
     labels_nice = [s.replace("_", " ").title() for s in order]
     values = [ada_entrance_counts.get(s, 0) for s in order]
     colors = [_ADA_COLORS[s] for s in order]
-    bars = axes2.bar(labels_nice, values, color=colors, edgecolor="white", linewidth=0.6)
+    bars = axes2.bar(
+        labels_nice, values, color=colors, edgecolor="white", linewidth=0.6
+    )
     axes2.set_ylabel("Entrance points")
     axes2.set_title("ADA status at each Open NY entrance (from station catalog join)")
     axes2.yaxis.set_major_formatter(StrMethodFormatter("{x:,.0f}"))
@@ -1620,7 +1628,9 @@ def entrance_layer_figures(
     types_labels = [t[0][:48] + ("…" if len(t[0]) > 48 else "") for t in most_common]
     types_vals = [t[1] for t in most_common]
     y_pos = range(len(types_labels))
-    axes4.barh(list(y_pos), types_vals, color="#72b7b2", edgecolor="white", linewidth=0.5)
+    axes4.barh(
+        list(y_pos), types_vals, color="#72b7b2", edgecolor="white", linewidth=0.5
+    )
     axes4.set_yticks(list(y_pos))
     axes4.set_yticklabels(types_labels, fontsize=8)
     axes4.invert_yaxis()

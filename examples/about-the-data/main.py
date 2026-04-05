@@ -406,7 +406,9 @@ def main() -> None:
         if station_map_paths.grand_army_plaza_zoom is not None:
             print(f"  Grand Army Plaza zoom: {station_map_paths.grand_army_plaza_zoom}")
         if station_map_paths.library_header_horizontal is not None:
-            print(f"  Library header (horizontal): {station_map_paths.library_header_horizontal}")
+            print(
+                f"  Library header (horizontal): {station_map_paths.library_header_horizontal}"
+            )
     if entrance_paths is not None:
         print(f"  Entrances per stop: {entrance_paths.per_stop_distribution}")
         print(f"  Entrances ADA: {entrance_paths.ada_by_entrance}")
