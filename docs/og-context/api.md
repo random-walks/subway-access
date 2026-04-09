@@ -1,32 +1,25 @@
 # API overview
 
-The public API now mixes a small implemented v0.1 slice with explicit typed
-placeholders for planned later capabilities.
+The public API spans 10 subpackages with 123 public symbols covering the full
+data pipeline from live ingestion through research-grade analysis.
 
-## Implemented in v0.1
+## Implemented
 
-- station loading from a narrow GTFS-like CSV fixture
-- ADA status loading
-- tract demographic loading from a centroid-based GeoJSON fixture
-- Euclidean first-pass catchment generation
-- tract accessibility scoring
+- station loading from official MTA station catalog API
+- ADA status loading and merging
+- elevator/escalator availability history and outage loading
+- pedestrian network loading (CSV and GeoJSON)
+- street entrance and GTFS-Pathways loading
+- tract demographic loading from ACS 5-year estimates
+- Euclidean and OSM-network walk catchment generation
+- tract accessibility scoring via composable factor pipeline
 - tract accessibility gap analysis
-- GeoJSON catchment export
-- CSV accessibility-gap export
-- `subway-access demo` CLI workflow
-
-## Still planned later
-
-These callables remain intentionally unimplemented and continue to raise
-`NotImplementedError`:
-
-- outage loading
-- pedestrian network loading
-- reliability scoring
-- station metrics export
-
-That split is intentional: the public surface should stay honest about what is
-real today versus still planned.
+- rolling station reliability scoring from outage history
+- station-level metrics combining coverage, need, and reliability
+- borough and group-level summary aggregation
+- GeoJSON catchment export, CSV gap export, and station metrics export
+- `subway-access fetch-snapshot` and `subway-access analyze-snapshot` CLI
+- temporal panel infrastructure for longitudinal analysis
 
 ## Models
 

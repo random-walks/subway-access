@@ -1,52 +1,66 @@
 # Usage
 
-## Implemented v0.1 demo workflow
+## Real-data workflow
 
-`subway-access` now ships one real, deterministic workflow built around packaged
-fixture data:
+`subway-access` ships a two-step CLI workflow built on live MTA and Census data:
 
-1. load a small GTFS-like station table
-2. load station-level ADA status
-3. generate Euclidean first-pass catchments
-4. join tract centroids with demographic rates
-5. compute a tract-level accessibility gap output
-6. export catchments as GeoJSON and gaps as CSV
-
-Run it with:
+### 1. Fetch a study-area snapshot
 
 ```bash
-python -m subway_access demo --output-dir demo-output
+subway-access fetch-snapshot --geography borough --value Manhattan --cache-dir cache/manhattan
 ```
 
-You can also change the first-pass walk threshold:
+This fetches official MTA stations, ADA status, elevator availability history,
+equipment assets, street entrances, and ACS tract demographics into a reusable
+local cache.
+
+### 2. Analyze the cached snapshot
 
 ```bash
-python -m subway_access demo --output-dir demo-output --minutes 10
+subway-access analyze-snapshot --cache-dir cache/manhattan --output-dir artifacts/manhattan
 ```
 
 The command writes:
 
 - `catchments.geojson`
 - `accessibility-gaps.csv`
+- `station-metrics.csv`
+
+You can change the walk threshold and reliability window:
+
+```bash
+subway-access analyze-snapshot --cache-dir cache/manhattan --output-dir artifacts/manhattan --minutes 10 --reliability-window-days 365
+```
+
+## Python API
+
+```python
+from pathlib import Path
+from subway_access import analysis, models, pipeline
+
+snapshot = pipeline.fetch_study_area_snapshot(
+    models.AccessibilityQuery(geography="borough", value="Manhattan"),
+    cache_dir=Path("cache/manhattan"),
+)
+catchments = analysis.generate_catchments(
+    snapshot.stations, models.CatchmentRequest(minutes=10),
+)
+scores = analysis.score_accessibility(
+    snapshot.stations, catchments, snapshot.demographics,
+)
+reliability = analysis.compute_reliability(
+    snapshot.stations, snapshot.outages, models.TimeWindow(days=30),
+)
+gaps = analysis.analyze_gaps(scores)
+```
 
 ## Current methodology
 
-The implemented v0.1 slice intentionally uses the simplest honest method from
-the roadmap:
-
-- station coverage is based on a Euclidean walking-radius approximation
-- tract access is based on tract centroids
-- need score is the mean of disability, senior, and poverty rates
-- gap score is the need score for uncovered tracts and `0` for covered tracts
-
-This is a documented first pass, not a claim of full routing realism.
-
-## Still planned later
-
-The following surfaces remain explicit placeholders and raise
-`NotImplementedError`:
-
-- outage loading
-- pedestrian network loading
-- reliability computation
-- station metrics export
+- Euclidean walking-radius catchments as the documented baseline
+- OSM-network walk isochrones available for comparison
+- tract access based on tract centroids
+- need score computed via composable factor pipeline (disability, senior,
+  poverty rates)
+- gap score is the need score for uncovered tracts, `0` for covered tracts
+- rolling station reliability scored from public elevator availability history
+- station metrics combine coverage, need, and reliability into a single export

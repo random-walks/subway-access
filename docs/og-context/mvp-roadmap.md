@@ -1,36 +1,43 @@
 # MVP Roadmap
 
-## Implemented in v0.1 foundation
+## Implemented through v0.4
 
-- load a small GTFS-like station fixture plus separate ADA status fixture
-- merge station and ADA status into a typed station dataset
-- create first-pass Euclidean catchments using a documented fixed walking speed
-- join tract-level disability, age, and poverty indicators from a packaged
-  GeoJSON fixture
-- compute a basic tract accessibility gap score
-- export map-friendly GeoJSON and tract-level CSV outputs
-- run the real happy path with `subway-access demo --output-dir <path>`
+- fetch official MTA station catalog, ADA status, elevator/escalator
+  availability history, equipment assets, street entrances, and GTFS-Pathways
+  from live public APIs
+- fetch ACS 5-year tract-level demographics (disability, senior, poverty rates)
+- cache reusable local snapshot bundles per study area
+- merge station and ADA status into typed station datasets
+- create Euclidean catchments using a documented fixed walking speed
+- generate OSM-network walk isochrones for comparison
+- join tract-level disability, age, and poverty indicators
+- compute tract accessibility gap scores
+- compute rolling station reliability from outage history
+- build station-level metrics combining coverage, need, and reliability
+- export map-friendly GeoJSON, tract-level CSV, and station metric outputs
+- composable factor pipeline (NeedScore, Coverage, GapScore,
+  NearestStationDistance, StationCount, ReliabilityWeightedCoverage, and custom
+  factors via subclassing)
+- temporal panel infrastructure (multi-vintage ACS, upgrade timelines,
+  treatment/control splitting, spatial weights)
+- borough and group-level summary aggregation
+- council district and community district study areas via `nyc-geo-toolkit`
+- run the full workflow from the installed `subway-access` CLI
+  (`fetch-snapshot` and `analyze-snapshot`)
 
-## Still planned after v0.1
+## Still planned
 
-- direct ingestion from official live MTA feeds
-- street-network isochrone catchments
-- elevator and escalator outage integration
-- historical reliability scoring
-- council district and community district rollups
 - public-facing notebook and dashboard reporting
-
-## v0.1 Non-Goals
-
-- perfect routing realism on day one
-- advanced travel-time or network analysis
-- claiming reliability modeling before outage history is implemented
 - fully polished public dashboard UX
+
+## Non-Goals
+
+- perfect routing realism
+- advanced travel-time or multi-modal network analysis beyond walking
 
 ## Release Philosophy
 
 The first release should prove the analytical frame clearly: reliable
 accessibility is different from nominal accessibility, and that difference can
-be measured with public data. This foundation intentionally implements only a
-deterministic, fixture-backed happy path and leaves later ambitions as explicit
-placeholders rather than partially faked features.
+be measured with public data. The package now implements the full pipeline from
+live data ingestion through research-grade panel analysis.
