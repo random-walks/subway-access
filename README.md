@@ -23,8 +23,7 @@ Authored by [Blaise Albis-Burdige](https://blaiseab.com/).
 - Fetch MTA subway stations, ADA status, elevator/escalator availability
   history, equipment assets, street-level entrances, and GTFS-Pathways from
   public APIs
-- Fetch ACS 5-year tract-level demographics (disability, senior, poverty
-  rates)
+- Fetch ACS 5-year tract-level demographics (disability, senior, poverty rates)
 - Cache reusable local snapshot bundles per study area
 - Run the full workflow from the installed `subway-access` CLI
 
@@ -117,10 +116,10 @@ print(len(gaps.records), len(reliability.records))
 
 ## Factor pipeline
 
-The composable factor pipeline lets you build custom classification models
-that run in a single pass over every tract. Each `Factor` receives row-level
-context (tract demographics, station data, catchments, and an extensible
-extras slot for external data) and returns a typed value.
+The composable factor pipeline lets you build custom classification models that
+run in a single pass over every tract. Each `Factor` receives row-level context
+(tract demographics, station data, catchments, and an extensible extras slot for
+external data) and returns a typed value.
 
 ```python
 from subway_access.factors import (
@@ -152,14 +151,15 @@ contexts = [
 
 # Run all factors across all tracts.
 result = pipe.run(contexts)
-result.to_records()     # tuple of dicts
-result.to_dataframe()   # pandas DataFrame (optional dep)
+result.to_records()  # tuple of dicts
+result.to_dataframe()  # pandas DataFrame (optional dep)
 ```
 
 Custom factors are simple subclasses:
 
 ```python
 from subway_access.factors import Factor, FactorContext
+
 
 class HousingCostFactor(Factor):
     name = "median_rent"
@@ -207,12 +207,11 @@ timeline = build_upgrade_timeline(
 # Construct the panel (tract x year).
 panel = build_panel_dataset(vintage_estimates, station_locations, timeline)
 panel.treatment_group()  # tracts that gained accessibility
-panel.control_group()    # tracts that did not
-panel.to_dataframe()     # pandas DataFrame with (unit_id, period) index
+panel.control_group()  # tracts that did not
+panel.to_dataframe()  # pandas DataFrame with (unit_id, period) index
 ```
 
-The
-[accessibility-change-over-time](examples/accessibility-change-over-time/)
+The [accessibility-change-over-time](examples/accessibility-change-over-time/)
 example builds a full 5-borough panel (2,317 tracts x 7 years = 16,219
 observations) and produces a research report with treatment-vs-control balance
 checks, spatial weights, and model specification.
@@ -222,19 +221,19 @@ checks, spatial weights, and model specification.
 `examples/` follows a self-contained project pattern. Each folder has its own
 `pyproject.toml`, `README.md`, `main.py`, and tracked `reports/` output.
 
-- [`fetch-borough-snapshot/`](examples/fetch-borough-snapshot/) -- minimal
-  data fetch
-- [`borough-gap-analysis/`](examples/borough-gap-analysis/) -- gap scoring
-  and visualization
-- [`outage-reliability-report/`](examples/outage-reliability-report/) --
-  station reliability analysis
+- [`fetch-borough-snapshot/`](examples/fetch-borough-snapshot/) -- minimal data
+  fetch
+- [`borough-gap-analysis/`](examples/borough-gap-analysis/) -- gap scoring and
+  visualization
+- [`outage-reliability-report/`](examples/outage-reliability-report/) -- station
+  reliability analysis
 - [`multi-borough-access-profile/`](examples/multi-borough-access-profile/) --
   cross-borough comparison
 - [`network-access-comparison/`](examples/network-access-comparison/) --
   Euclidean vs OSM walking network
-- [**`accessibility-change-over-time/`**](examples/accessibility-change-over-time/) --
-  full research pipeline with factor analysis, geographic maps, temporal panel,
-  diagnostic checks, and auto-generated report
+- [**`accessibility-change-over-time/`**](examples/accessibility-change-over-time/)
+  -- full research pipeline with factor analysis, geographic maps, temporal
+  panel, diagnostic checks, and auto-generated report
   ([sample report](examples/accessibility-change-over-time/reports/accessibility-change-report.md))
 - [`example-template/`](examples/example-template/) -- bootstrap template for
   new examples
@@ -255,10 +254,10 @@ The workflow is intentionally explicit and reproducible:
 7. Optionally build a temporal panel for causal analysis
 8. Export publishable GeoJSON, CSV, and markdown outputs
 
-Euclidean access remains the documented baseline. The network comparison
-layer shows how real walking routes change the coverage picture. The factor
-pipeline and temporal panel support research-grade analysis on top of the
-same data foundation.
+Euclidean access remains the documented baseline. The network comparison layer
+shows how real walking routes change the coverage picture. The factor pipeline
+and temporal panel support research-grade analysis on top of the same data
+foundation.
 
 ## Documentation
 
@@ -267,8 +266,7 @@ same data foundation.
 - Local preview: `make docs`
 - Strict docs build: `make docs-build`
 
-Quick links:
-[Home](https://subway-access.readthedocs.io/en/latest/),
+Quick links: [Home](https://subway-access.readthedocs.io/en/latest/),
 [Getting Started](https://subway-access.readthedocs.io/en/latest/getting-started/),
 [CLI Reference](https://subway-access.readthedocs.io/en/latest/cli/),
 [Architecture](https://subway-access.readthedocs.io/en/latest/architecture/),
