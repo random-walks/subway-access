@@ -15,20 +15,20 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import contextlib
 import csv
 import hashlib
 import json
-import math
 import re
-from collections import defaultdict
 from datetime import date, datetime, timezone
 from pathlib import Path
-from statistics import mean, median, stdev
+from statistics import median, stdev
 
 import geopandas as gpd
-import matplotlib
+import matplotlib as mpl
 
-matplotlib.use("Agg")
+mpl.use("Agg")
+import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 from nyc_geo_toolkit import load_nyc_census_tracts
 from shapely.geometry import shape
@@ -47,8 +47,6 @@ from subway_access.factors import (
     StationCountFactor,
 )
 from subway_access.temporal import (
-    PanelDataset,
-    StationUpgradeRecord,
     UpgradeTimeline,
     build_distance_weights,
     build_panel_dataset,
@@ -88,7 +86,8 @@ def _mean(v: list[float]) -> float:
 
 def _extract_provenance(snapshots: dict) -> dict[str, str]:
     """Extract data provenance dates from the first snapshot's metadata."""
-    report_date = date.today().strftime("%B %-d, %Y")
+    today = datetime.now(tz=timezone.utc).date()
+    report_date = today.strftime("%B %-d, %Y")
     snapshot_date = report_date
     avail_start = "unknown"
     avail_end = report_date
@@ -200,7 +199,7 @@ def run_borough_analysis(snapshots, minutes, window_days):
 
         total = len(records)
         covered = sum(1 for r in records if r["has_accessible_station"])
-        gap_pop = sum(t.total_population for t, r in zip(snap.demographics.tracts, records) if not r["has_accessible_station"])
+        gap_pop = sum(t.total_population for t, r in zip(snap.demographics.tracts, records, strict=True) if not r["has_accessible_station"])
         total_pop = sum(t.total_population for t in snap.demographics.tracts)
         dists = [r["nearest_accessible_distance_meters"] for r in records if r["nearest_accessible_distance_meters"] > 0]
         acc_rel = [r for r in rel.records if r.ada_status == "accessible"]
@@ -234,7 +233,7 @@ def build_panel(snapshots, years, minutes):
     span = hi - lo + 1
     for s in all_st:
         if s.ada_status == "accessible":
-            h = int(hashlib.md5(s.station_id.encode()).hexdigest(), 16)  # noqa: S324
+            h = int(hashlib.md5(s.station_id.encode()).hexdigest(), 16)
             known[s.station_id] = lo + (h % span)
     recs = []
     seen = set()
@@ -271,7 +270,7 @@ def build_tract_geodataframe(snapshots, summaries):
     geoid_to_data = {}
     for borough, s in summaries.items():
         snap = snapshots[borough]
-        for tract, rec in zip(snap.demographics.tracts, s["records"]):
+        for tract, rec in zip(snap.demographics.tracts, s["records"], strict=True):
             geoid_to_data[tract.tract_id] = {
                 "borough": borough,
                 "need_score": rec["need_score"],
@@ -310,7 +309,7 @@ def _fig_coverage_by_borough(summaries):
     ax.set_ylabel("Tract coverage rate (%)")
     ax.set_title("Figure 1. Accessible station coverage by borough (10-min walk)")
     ax.set_ylim(0, 100)
-    for bar, rate in zip(bars, rates):
+    for bar, rate in zip(bars, rates, strict=True):
         ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 1.5,
                 f"{rate:.0%}", ha="center", fontsize=10, fontweight="bold")
     fig.tight_layout()
@@ -370,11 +369,9 @@ def _fig_choropleth_gap(gdf):
         vmin=0.0, vmax=max(0.15, float(plot_gdf["gap_score"].max())),
     )
     if ctx is not None:
-        try:
+        with contextlib.suppress(OSError, RuntimeError, ValueError):
             ctx.add_basemap(ax, crs="EPSG:3857",
                             source=ctx.providers.CartoDB.Positron, alpha=0.4, zorder=0)
-        except Exception:
-            pass
     ax.set_title("Figure 4. Accessibility gap score by census tract", fontsize=13)
     ax.set_axis_off()
     fig.tight_layout()
@@ -389,7 +386,6 @@ def _fig_choropleth_coverage(gdf):
     plot_gdf["coverage_label"] = plot_gdf["has_accessible_station"].map({True: "Covered", False: "Gap"})
     fig, ax = plt.subplots(figsize=(12, 14))
     colors = {"Covered": "#4c78a8", "Gap": "#e45756"}
-    import matplotlib.patches as mpatches
     handles = []
     for label, color in colors.items():
         sub = plot_gdf[plot_gdf["coverage_label"] == label]
@@ -397,11 +393,9 @@ def _fig_choropleth_coverage(gdf):
         handles.append(mpatches.Patch(color=color, label=label))
     ax.legend(handles=handles, fontsize=11, loc="lower left")
     if ctx is not None:
-        try:
+        with contextlib.suppress(OSError, RuntimeError, ValueError):
             ctx.add_basemap(ax, crs="EPSG:3857",
                             source=ctx.providers.CartoDB.Positron, alpha=0.3, zorder=0)
-        except Exception:
-            pass
     ax.set_title("Figure 5. Accessible station coverage status by census tract", fontsize=13)
     ax.set_axis_off()
     fig.tight_layout()
@@ -424,7 +418,7 @@ def _fig_coverage_over_time(panel):
     ax.set_ylabel("Tract coverage rate (%)")
     ax.set_title("Figure 6. Accessibility coverage progression over panel window")
     ax.set_ylim(0, max(rates) * 1.15)
-    for yr, r in zip(years, rates):
+    for yr, r in zip(years, rates, strict=True):
         ax.annotate(f"{r:.1f}%", (yr, r), textcoords="offset points", xytext=(0, 10), ha="center", fontsize=9)
     fig.tight_layout()
     fig.savefig(path, dpi=180)
@@ -487,7 +481,7 @@ def _fig_distance_decay(gdf):
     valid["dist_bin"] = valid["nearest_distance_m"].apply(
         lambda d: next((labels[i] for i in range(len(bins) - 1) if bins[i] <= d < bins[i + 1]), labels[-1])
     )
-    bin_order = {l: i for i, l in enumerate(labels)}
+    bin_order = {lab: i for i, lab in enumerate(labels)}
     grouped = valid.groupby("dist_bin").agg(
         coverage_rate=("has_accessible_station", "mean"),
         tract_count=("has_accessible_station", "count"),
@@ -600,19 +594,22 @@ def write_report(summaries, panel, gdf, weights, years, boroughs, minutes, figs,
     mean_nbrs = sum(len(n) for n in weights.values()) / len(weights) if weights else 0
 
     # Fragile stations.
-    fragile = []
-    for b, s in summaries.items():
-        for r in s["reliability"].records:
-            if r.ada_status == "accessible" and r.reliability_label == "fragile":
-                fragile.append((b, r))
-    fragile.sort(key=lambda x: x[1].reliability_score)
+    fragile = sorted(
+        [
+            (b, r)
+            for b, s in summaries.items()
+            for r in s["reliability"].records
+            if r.ada_status == "accessible" and r.reliability_label == "fragile"
+        ],
+        key=lambda x: x[1].reliability_score,
+    )
 
     # Diagnostics.
     need_vals = gdf["need_score"].dropna().tolist()
     dist_vals = [d for d in gdf["nearest_distance_m"].dropna().tolist() if d > 0]
     gap_vals = [g for g in gdf["gap_score"].dropna().tolist() if g > 0]
 
-    L = []  # noqa: N806
+    L = []
     def _w(s):
         L.append(s)
 
@@ -627,7 +624,7 @@ def write_report(summaries, panel, gdf, weights, years, boroughs, minutes, figs,
     _w(f"| **Stations & ADA status** | MTA Open Data, fetched {pv['snapshot_date']} |")
     _w(f"| **Outage observation window** | {pv['avail_window']} (12 months) |")
     _w(f"| **Demographics** | ACS 5-year estimates, {pv['acs_vintage']} vintage (survey period {pv['acs_survey_period']}) |")
-    _w(f"| **Census tract boundaries** | 2020 vintage (nyc-geo-toolkit) |")
+    _w("| **Census tract boundaries** | 2020 vintage (nyc-geo-toolkit) |")
     _w(f"| **Tracts analyzed** | {tot_tr:,} |")
     _w(f"| **Panel periods** | {len(panel.periods)} ({min(years)}\u2013{max(years)}) |")
     _w("")
@@ -847,7 +844,7 @@ def write_report(summaries, panel, gdf, weights, years, boroughs, minutes, figs,
     _w("")
     _w("3. **Reliability undermines nominal progress.** "
        f"Even among accessible stations, {len(fragile)} have fragile elevator service (<95% uptime). "
-       "A station that is \"accessible\" on paper but has broken elevators 40% of the time is not meaningfully accessible. "
+       'A station that is "accessible" on paper but has broken elevators 40% of the time is not meaningfully accessible. '
        "Capital investment in new ADA stations must be paired with maintenance funding.")
     _w("")
     _w("4. **Treatment targeting is directionally correct.** "
@@ -910,7 +907,7 @@ def main():
     print()
 
     print("Step 3: Panel dataset...")
-    panel, timeline = build_panel(snapshots, years, args.minutes)
+    panel, _timeline = build_panel(snapshots, years, args.minutes)
     print(f"  {len(panel.observations):,} obs, {len(panel.unit_ids):,} tracts, "
           f"{len(panel.treatment_group().unit_ids):,} treatment / {len(panel.control_group().unit_ids):,} control")
     print()

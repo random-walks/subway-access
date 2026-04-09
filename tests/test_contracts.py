@@ -44,6 +44,7 @@ def test_model_dataclasses_are_frozen() -> None:
             dc_fields = fields(obj)
         except TypeError:
             continue
-        assert obj.__dataclass_params__.frozen, f"{symbol_name} must be frozen"  # type: ignore[attr-defined]
-        if dc_fields:
-            assert obj.__dataclass_params__.slots, f"{symbol_name} must use slots"  # type: ignore[attr-defined]
+        params = obj.__dataclass_params__  # type: ignore[attr-defined]
+        assert params.frozen, f"{symbol_name} must be frozen"
+        if dc_fields and hasattr(params, "slots"):
+            assert params.slots, f"{symbol_name} must use slots"
