@@ -56,9 +56,7 @@ class NeedScoreFactor(Factor):
     def compute(self, context: FactorContext) -> float:
         tract = context.tract
         if self._weights is None:
-            return fmean(
-                (tract.disability_rate, tract.senior_rate, tract.poverty_rate)
-            )
+            return fmean((tract.disability_rate, tract.senior_rate, tract.poverty_rate))
         result = 0.0
         rates = {
             "disability": tract.disability_rate,

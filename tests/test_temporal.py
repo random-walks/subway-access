@@ -96,9 +96,7 @@ class TestBuildUpgradeTimeline:
                 ),
             )
         )
-        timeline = build_upgrade_timeline(
-            stations, known_upgrades={"S1": 2019}
-        )
+        timeline = build_upgrade_timeline(stations, known_upgrades={"S1": 2019})
         assert len(timeline.records) == 1
         assert timeline.records[0].upgrade_year == 2019
 

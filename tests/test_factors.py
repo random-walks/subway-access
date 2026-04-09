@@ -94,12 +94,16 @@ def _make_context(
 
 class TestNeedScoreFactor:
     def test_default_equal_weights(self) -> None:
-        ctx = _make_context(tract=_make_tract(disability_rate=0.10, senior_rate=0.20, poverty_rate=0.30))
+        ctx = _make_context(
+            tract=_make_tract(disability_rate=0.10, senior_rate=0.20, poverty_rate=0.30)
+        )
         result = NeedScoreFactor().compute(ctx)
         assert result == pytest.approx(0.20)
 
     def test_custom_weights(self) -> None:
-        ctx = _make_context(tract=_make_tract(disability_rate=1.0, senior_rate=0.0, poverty_rate=0.0))
+        ctx = _make_context(
+            tract=_make_tract(disability_rate=1.0, senior_rate=0.0, poverty_rate=0.0)
+        )
         result = NeedScoreFactor(weights={"disability": 1.0}).compute(ctx)
         assert result == pytest.approx(1.0)
 
@@ -188,9 +192,16 @@ class TestPipeline:
         assert len(result.columns["need_score"]) == 1
 
     def test_multiple_factors(self) -> None:
-        pipe = Pipeline().add(NeedScoreFactor()).add(CoverageFactor()).add(StationCountFactor())
+        pipe = (
+            Pipeline()
+            .add(NeedScoreFactor())
+            .add(CoverageFactor())
+            .add(StationCountFactor())
+        )
         ctx1 = _make_context(tract=_make_tract(tract_id="T1"))
-        ctx2 = _make_context(tract=_make_tract(tract_id="T2", latitude=41.0, longitude=-74.5))
+        ctx2 = _make_context(
+            tract=_make_tract(tract_id="T2", latitude=41.0, longitude=-74.5)
+        )
         result = pipe.run([ctx1, ctx2])
         assert result.tract_ids == ("T1", "T2")
         assert len(result.columns) == 3
