@@ -47,7 +47,7 @@ def build_distance_weights(
                 latitude_b=lat_b,
                 longitude_b=lon_b,
             )
-            if distance <= threshold_meters and distance > 0:
+            if 0 < distance <= threshold_meters:
                 weight = 1.0 / distance
                 raw_weights[uid_a][uid_b] = weight
                 raw_weights[uid_b][uid_a] = weight
