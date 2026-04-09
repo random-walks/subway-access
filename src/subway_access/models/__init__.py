@@ -2,44 +2,60 @@
 
 from __future__ import annotations
 
-from ._core import (
-    AccessibilityComparisonDataset,
-    AccessibilityComparisonRecord,
-    AccessibilityDataset,
+from ._common import (
     AccessibilityLabel,
     AccessibilityQuery,
-    AccessibilityScoreDataset,
-    AccessibilityStatus,
-    AccessibilitySummaryDataset,
-    AccessibilitySummaryRecord,
-    CatchmentDataset,
-    CatchmentFeature,
-    CatchmentRequest,
-    DataSourceMetadata,
-    DemographicDataset,
+    EquipmentType,
+    OutageStatus,
+)
+from ._entrance import (
     Entrance,
     EntranceDataset,
-    EquipmentType,
-    ExportTarget,
-    GapAnalysis,
-    GapRecord,
     GtfsLocation,
     GtfsPathway,
     GtfsPathwaysSnapshot,
-    NetworkGraphSnapshot,
-    OutageDataset,
-    OutageRecord,
-    OutageStatus,
-    PedestrianConnection,
-    PedestrianNetworkDataset,
-    ReliabilityDataset,
-    ReliabilityRecord,
-    Station,
-    StationDataset,
+)
+from ._gap import (
+    GapAnalysis,
+    GapRecord,
+)
+from ._metric import (
+    CatchmentDataset,
+    CatchmentFeature,
+    CatchmentRequest,
     StationMetricDataset,
     StationMetricRecord,
-    StudyAreaSnapshot,
+)
+from ._network import (
+    AccessibilityComparisonDataset,
+    AccessibilityComparisonRecord,
+    NetworkGraphSnapshot,
+    PedestrianConnection,
+    PedestrianNetworkDataset,
+)
+from ._outage import (
+    OutageDataset,
+    OutageRecord,
+    ReliabilityDataset,
+    ReliabilityRecord,
     TimeWindow,
+)
+from ._snapshot import (
+    AccessibilitySummaryDataset,
+    AccessibilitySummaryRecord,
+    DataSourceMetadata,
+    ExportTarget,
+    StudyAreaSnapshot,
+)
+from ._station import (
+    AccessibilityDataset,
+    AccessibilityStatus,
+    Station,
+    StationDataset,
+)
+from ._tract import (
+    AccessibilityScoreDataset,
+    DemographicDataset,
     TractAccessibilityRecord,
     TractDemographics,
 )

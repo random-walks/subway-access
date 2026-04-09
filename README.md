@@ -10,56 +10,64 @@
 ![NYC subway accessibility snapshot: street entrances, MTA stations, and ACS tract disability (example: Atlantic Brooklyn)](https://raw.githubusercontent.com/random-walks/subway-access/main/docs/images/subway-access-hero.png)
 
 `subway-access` is a Python toolkit for reproducible NYC subway accessibility
-analysis.
+analysis. It fetches live MTA and Census data, scores every census tract for
+accessible-station coverage, measures elevator reliability, and produces
+research-ready panel datasets -- all from a single `pip install`.
 
 Authored by [Blaise Albis-Burdige](https://blaiseab.com/).
 
-It is designed to measure neighborhood access to accessible stations with a
-small, transparent workflow that is easy to inspect, cache, analyze in memory,
-and extend.
+## What ships in the package
 
-## What ships in the current line
+**Data pipeline:**
 
-The current package now includes a real public-data workflow:
+- Fetch MTA subway stations, ADA status, elevator/escalator availability
+  history, equipment assets, street-level entrances, and GTFS-Pathways from
+  public APIs
+- Fetch ACS 5-year tract-level demographics (disability, senior, poverty rates)
+- Cache reusable local snapshot bundles per study area
+- Run the full workflow from the installed `subway-access` CLI
 
-- fetch MTA subway stations and ADA status from the public station catalog
-- fetch public elevator and escalator availability history plus asset inventory
-- fetch ACS tract-level demographics for a selected NYC study area
-- cache a reusable local snapshot bundle
-- analyze Euclidean first-pass accessibility gaps and rolling reliability
-- compare the Euclidean baseline against cached local OSM walking graphs
-- export catchment GeoJSON, tract gap CSV, and station metrics
-- run the snapshot and analysis flow from the installed CLI
+**Analysis:**
 
-The hero image above is committed as
-[`docs/images/subway-access-hero.png`](docs/images/subway-access-hero.png)
-(regenerated from [`examples/about-the-data`](examples/about-the-data/) as
-`map-library-header-horizontal.png` when refreshing that example).
+- Euclidean and OSM-network walk catchments
+- Tract-level accessibility gap scoring and rolling station reliability
+- Station-level metrics combining coverage, need, and reliability
+- Borough and group-level summary aggregation
+- Export to GeoJSON, CSV, and station metric formats
 
-The current scoring model is intentionally staged:
+**Composable factor pipeline** (v0.4):
 
-- official public data is already real
-- Euclidean catchments remain the baseline comparator
-- cached OSM walking graphs now power the advanced network comparison layer
+- Class-based `Factor` / `Pipeline` system inspired by Quantopian's Zipline
+- 7 built-in factors: NeedScore, Coverage, GapScore, NearestStationDistance,
+  NearestStationTravelMinutes, StationCount, ReliabilityWeightedCoverage
+- Custom factors via subclassing -- bring in external data (housing costs,
+  economic indicators) as first-class inputs
+- `PipelineResult` with `.to_records()` and optional `.to_dataframe()`
 
-## Why this exists
+**Temporal panel infrastructure** (v0.4):
 
-Official MTA and NYC data can tell you whether a station is nominally
-accessible, but the policy question is broader: which neighborhoods have weak
-access to accessible transit in practice?
+- Multi-vintage ACS fetcher for longitudinal demographic data
+- Station ADA upgrade timeline construction
+- Geographic panel dataset builder (tract x year) with treatment/control
+  splitting
+- Distance-based spatial weights matrix with PySAL bridge
 
-This repo aims to grow into a reusable analysis toolkit rather than a notebook
-dump or trip planner.
+**Helpers** (v0.4):
+
+- Multi-borough snapshot iteration with independent caching
+- Generic CSV export from frozen dataclasses with auto fieldnames
+- Metadata and markdown report writing utilities
+
+**10 public modules, 123 public symbols** across `models`, `io`, `analysis`,
+`factors`, `helpers`, `export`, `pipeline`, `temporal`, and `cli`.
 
 ## Quickstart
-
-Install:
 
 ```bash
 pip install subway-access
 ```
 
-For the full plotting + network stack:
+For the full plotting + geographic + network stack:
 
 ```bash
 pip install "subway-access[all]"
@@ -76,21 +84,6 @@ Then analyze the cached snapshot:
 ```bash
 subway-access analyze-snapshot --cache-dir cache/manhattan --output-dir artifacts/manhattan
 ```
-
-## Examples
-
-`examples/` now follows the same self-contained project pattern used by
-`nyc311`. Each example folder has its own `pyproject.toml`, `README.md`,
-`.gitignore`, `main.py`, and tracked `reports/` output.
-
-Start with:
-
-- `examples/fetch-borough-snapshot/`
-- `examples/borough-gap-analysis/`
-- `examples/outage-reliability-report/`
-- `examples/multi-borough-access-profile/`
-- `examples/network-access-comparison/`
-- `examples/example-template/`
 
 ## Python example
 
@@ -121,21 +114,150 @@ gaps = analysis.analyze_gaps(scores)
 print(len(gaps.records), len(reliability.records))
 ```
 
-## Current methodology
+## Factor pipeline
 
-The current workflow is intentionally explicit and reproducible:
+The composable factor pipeline lets you build custom classification models that
+run in a single pass over every tract. Each `Factor` receives row-level context
+(tract demographics, station data, catchments, and an extensible extras slot for
+external data) and returns a typed value.
 
-1. select a study area through `nyc-geo-toolkit`
-2. fetch official MTA and Census sources into a local cache
-3. load those cached files back into typed in-memory datasets
-4. create Euclidean walk catchments using a fixed walking speed
-5. test tract centroids against accessible-station catchments
-6. compute tract need, rolling reliability, and station metrics
-7. export publishable GeoJSON and CSV outputs
+```python
+from subway_access.factors import (
+    CoverageFactor,
+    FactorContext,
+    GapScoreFactor,
+    NearestStationDistanceFactor,
+    NeedScoreFactor,
+    Pipeline,
+    ReliabilityWeightedCoverageFactor,
+    StationCountFactor,
+)
 
-This is intentionally a staged model rather than a one-shot perfect routing
-claim. Euclidean access remains the baseline, while the advanced examples now
-show how cached OSM walking graphs change the story.
+# Compose a pipeline from built-in factors.
+pipe = (
+    Pipeline()
+    .add(NeedScoreFactor())
+    .add(CoverageFactor())
+    .add(GapScoreFactor())
+    .add(NearestStationDistanceFactor())
+    .add(StationCountFactor())
+)
+
+# Build contexts from a loaded snapshot.
+contexts = [
+    FactorContext(tract=t, stations=snapshot.stations, catchments=catchments)
+    for t in snapshot.demographics.tracts
+]
+
+# Run all factors across all tracts.
+result = pipe.run(contexts)
+result.to_records()  # tuple of dicts
+result.to_dataframe()  # pandas DataFrame (optional dep)
+```
+
+Custom factors are simple subclasses:
+
+```python
+from subway_access.factors import Factor, FactorContext
+
+
+class HousingCostFactor(Factor):
+    name = "median_rent"
+    dtype = "float"
+
+    def __init__(self, rents: dict[str, float]) -> None:
+        self._rents = rents
+
+    def compute(self, context: FactorContext) -> float:
+        return self._rents.get(context.tract.tract_id, 0.0)
+```
+
+Add reliability weighting to distinguish nominal from effective coverage:
+
+```python
+# Build reliability scores from outage data.
+reliability = analysis.compute_reliability(
+    snapshot.stations, snapshot.outages, models.TimeWindow(days=365)
+)
+rel_scores = {r.station_id: r.reliability_score for r in reliability.records}
+
+# Add reliability-weighted coverage to the pipeline.
+pipe = pipe.add(ReliabilityWeightedCoverageFactor(rel_scores))
+```
+
+For a full worked example using the factor pipeline across all five boroughs
+with geographic choropleths, diagnostic checks, and auto-generated reporting,
+see
+[`examples/accessibility-change-over-time/`](examples/accessibility-change-over-time/).
+
+## Temporal panel
+
+Build geographic panel datasets for difference-in-differences or spatial
+autoregressive panel estimation:
+
+```python
+from subway_access.temporal import build_panel_dataset, build_upgrade_timeline
+
+# Build an upgrade timeline from station data + known upgrade years.
+timeline = build_upgrade_timeline(
+    snapshot.stations,
+    known_upgrades={"station_1": 2019, "station_2": 2021},
+)
+
+# Construct the panel (tract x year).
+panel = build_panel_dataset(vintage_estimates, station_locations, timeline)
+panel.treatment_group()  # tracts that gained accessibility
+panel.control_group()  # tracts that did not
+panel.to_dataframe()  # pandas DataFrame with (unit_id, period) index
+```
+
+The [accessibility-change-over-time](examples/accessibility-change-over-time/)
+example builds a full 5-borough panel (2,317 tracts x 7 years = 16,219
+observations) and produces a research report with treatment-vs-control balance
+checks, spatial weights, and model specification.
+
+## Examples
+
+`examples/` follows a self-contained project pattern. Each folder has its own
+`pyproject.toml`, `README.md`, `main.py`, and tracked `reports/` output.
+
+- [`fetch-borough-snapshot/`](examples/fetch-borough-snapshot/) -- minimal data
+  fetch
+- [`borough-gap-analysis/`](examples/borough-gap-analysis/) -- gap scoring and
+  visualization
+- [`outage-reliability-report/`](examples/outage-reliability-report/) -- station
+  reliability analysis
+- [`multi-borough-access-profile/`](examples/multi-borough-access-profile/) --
+  cross-borough comparison
+- [`network-access-comparison/`](examples/network-access-comparison/) --
+  Euclidean vs OSM walking network
+- [**`accessibility-change-over-time/`**](examples/accessibility-change-over-time/)
+  -- full research pipeline with factor analysis, geographic maps, temporal
+  panel, diagnostic checks, and auto-generated report
+  ([sample report](examples/accessibility-change-over-time/reports/accessibility-change-report.md))
+- [`example-template/`](examples/example-template/) -- bootstrap template for
+  new examples
+
+## Methodology
+
+The workflow is intentionally explicit and reproducible:
+
+1. Select a study area through `nyc-geo-toolkit` (borough, community district,
+   council district)
+2. Fetch official MTA and Census sources into a local cache
+3. Load cached files into typed, frozen in-memory datasets
+4. Generate Euclidean walk catchments (800 m / 10-min default) or OSM network
+   isochrones
+5. Score tract centroids against accessible-station catchments via the factor
+   pipeline
+6. Compute tract need, rolling reliability, and station metrics
+7. Optionally build a temporal panel for causal analysis
+8. Export publishable GeoJSON, CSV, and markdown outputs
+
+Euclidean access remains the documented baseline. The network comparison layer
+shows how real walking routes change the coverage picture. The factor pipeline
+and temporal panel support research-grade analysis on top of the same data
+foundation.
 
 ## Documentation
 
@@ -144,9 +266,7 @@ show how cached OSM walking graphs change the story.
 - Local preview: `make docs`
 - Strict docs build: `make docs-build`
 
-## Quick links
-
-Docs: [Home](https://subway-access.readthedocs.io/en/latest/),
+Quick links: [Home](https://subway-access.readthedocs.io/en/latest/),
 [Getting Started](https://subway-access.readthedocs.io/en/latest/getting-started/),
 [CLI Reference](https://subway-access.readthedocs.io/en/latest/cli/),
 [Architecture](https://subway-access.readthedocs.io/en/latest/architecture/),
@@ -158,11 +278,12 @@ Docs: [Home](https://subway-access.readthedocs.io/en/latest/),
 ## Development
 
 ```bash
-make install-dev
-make test
-make lint
-make docs-build
-make ci
+make install      # full contributor environment with all extras
+make test         # pytest suite
+make lint         # ruff + mypy + public API audit
+make check        # lint + tests (pre-push gate)
+make docs-build   # strict mkdocs build
+make ci           # full local CI equivalent
 ```
 
 ## License

@@ -1,0 +1,310 @@
+tract_id,tract_name,borough,disability_rate,senior_rate,poverty_rate,total_population,need_score,has_accessible_station,accessible_station_count,nearest_accessible_station_id,nearest_accessible_station_name,nearest_accessible_distance_meters,gap_score,gap_label
+36061030900,Census Tract 309; New York County; New York,Manhattan,0.2690,0.1249,0.4070,10529,0.2670,false,0,143,Inwood-207 St,1188.21,0.2670,gap
+36061000600,Census Tract 6; New York County; New York,Manhattan,0.1208,0.2650,0.3660,10179,0.2506,false,0,410,Canal St,1183.45,0.2506,gap
+36061022500,Census Tract 225; New York County; New York,Manhattan,0.1917,0.2052,0.2454,10605,0.2141,false,0,153,125 St,1423.19,0.2141,gap
+36061013601,Census Tract 136.01; New York County; New York,Manhattan,0.0389,0.5774,0.0027,1711,0.2063,false,0,476,86 St,802.85,0.2063,gap
+36061024302,Census Tract 243.02; New York County; New York,Manhattan,0.1495,0.1218,0.3026,7234,0.1913,false,0,148,168 St,1044.05,0.1913,gap
+36061002400,Census Tract 24; New York County; New York,Manhattan,0.1331,0.2508,0.1811,4019,0.1883,false,0,119,1 Av,1026.86,0.1883,gap
+36061001002,Census Tract 10.02; New York County; New York,Manhattan,0.0910,0.1910,0.2829,6098,0.1883,false,0,119,1 Av,1566.88,0.1883,gap
+36061024100,Census Tract 241; New York County; New York,Manhattan,0.1839,0.2064,0.1622,8068,0.1842,false,0,148,168 St,914.96,0.1842,gap
+36061017000,Census Tract 170; New York County; New York,Manhattan,0.1184,0.1626,0.2591,8746,0.1800,false,0,475,96 St,844.78,0.1800,gap
+36061019300,Census Tract 193; New York County; New York,Manhattan,0.1528,0.1782,0.1958,9652,0.1756,false,0,310,96 St,1139.26,0.1756,gap
+36061018400,Census Tract 184; New York County; New York,Manhattan,0.1477,0.1227,0.2432,7818,0.1712,false,0,392,125 St,800.40,0.1712,gap
+36061000202,Census Tract 2.02; New York County; New York,Manhattan,0.0979,0.2257,0.1724,6934,0.1653,false,0,410,Canal St,1754.36,0.1653,gap
+36061023600,Census Tract 236; New York County; New York,Manhattan,0.1853,0.1624,0.1384,10061,0.1620,false,0,438,135 St,1249.21,0.1620,gap
+36061002201,Census Tract 22.01; New York County; New York,Manhattan,0.1075,0.1990,0.1677,6437,0.1581,false,0,119,1 Av,1316.38,0.1581,gap
+36061022900,Census Tract 229; New York County; New York,Manhattan,0.0966,0.1201,0.2543,8471,0.1570,false,0,438,135 St,1593.82,0.1570,gap
+36061022301,Census Tract 223.01; New York County; New York,Manhattan,0.1246,0.1444,0.2018,7270,0.1569,false,0,153,125 St,1137.86,0.1569,gap
+36061001401,Census Tract 14.01; New York County; New York,Manhattan,0.0681,0.3862,0.0138,3395,0.1560,false,0,410,Canal St,1157.11,0.1560,gap
+36061002000,Census Tract 20; New York County; New York,Manhattan,0.1179,0.1690,0.1788,4793,0.1552,false,0,119,1 Av,1276.04,0.1552,gap
+36061016800,Census Tract 168; New York County; New York,Manhattan,0.0880,0.2458,0.1317,4755,0.1552,false,0,475,96 St,829.77,0.1552,gap
+36061013502,Census Tract 135.02; New York County; New York,Manhattan,0.0994,0.2440,0.1146,5828,0.1527,false,0,315,59 St-Columbus Circle,901.76,0.1527,gap
+36061019900,Census Tract 199; New York County; New York,Manhattan,0.0770,0.2368,0.1395,9013,0.1511,false,0,153,125 St,1336.56,0.1511,gap
+36061001402,Census Tract 14.02; New York County; New York,Manhattan,0.0752,0.2638,0.1111,3449,0.1500,false,0,408,Bleecker St,1191.61,0.1500,gap
+36061018000,Census Tract 180; New York County; New York,Manhattan,0.0831,0.1207,0.2396,6621,0.1478,false,0,392,125 St,1095.63,0.1478,gap
+36061017401,Census Tract 174.01; New York County; New York,Manhattan,0.1104,0.1888,0.1383,5218,0.1458,false,0,475,96 St,1181.21,0.1458,gap
+36061014200,Census Tract 142; New York County; New York,Manhattan,0.0229,0.3793,0.0242,4092,0.1421,false,0,476,86 St,814.48,0.1421,gap
+36061023700,Census Tract 237; New York County; New York,Manhattan,0.0880,0.1412,0.1965,6578,0.1419,false,0,148,168 St,1233.49,0.1419,gap
+36061001200,Census Tract 12; New York County; New York,Manhattan,0.0570,0.2917,0.0696,4364,0.1394,false,0,408,Bleecker St,1536.20,0.1394,gap
+36061021900,Census Tract 219; New York County; New York,Manhattan,0.0756,0.0972,0.2327,5400,0.1352,false,0,153,125 St,810.62,0.1352,gap
+36061017100,Census Tract 171; New York County; New York,Manhattan,0.0762,0.1976,0.1239,8327,0.1326,false,0,310,96 St,895.45,0.1326,gap
+36061019500,Census Tract 195; New York County; New York,Manhattan,0.0698,0.2186,0.1064,7457,0.1316,false,0,310,96 St,1080.66,0.1316,gap
+36061022700,Census Tract 227; New York County; New York,Manhattan,0.0733,0.1783,0.1262,5694,0.1259,false,0,438,135 St,1083.22,0.1259,gap
+36061018600,Census Tract 186; New York County; New York,Manhattan,0.0911,0.1032,0.1776,6009,0.1240,false,0,392,125 St,1163.23,0.1240,gap
+36061003002,Census Tract 30.02; New York County; New York,Manhattan,0.0477,0.2267,0.0824,2964,0.1189,false,0,408,Bleecker St,811.34,0.1189,gap
+36061002601,Census Tract 26.01; New York County; New York,Manhattan,0.0960,0.1185,0.1419,4329,0.1188,false,0,119,1 Av,941.43,0.1188,gap
+36061017200,Census Tract 172; New York County; New York,Manhattan,0.0832,0.1272,0.1455,4967,0.1186,false,0,475,96 St,1070.69,0.1186,gap
+36061023100,Census Tract 231; New York County; New York,Manhattan,0.0652,0.1180,0.1687,6824,0.1173,false,0,438,135 St,1319.86,0.1173,gap
+36061022302,Census Tract 223.02; New York County; New York,Manhattan,0.0508,0.1915,0.0749,2998,0.1057,false,0,153,125 St,1102.08,0.1057,gap
+36061013501,Census Tract 135.01; New York County; New York,Manhattan,0.0570,0.2103,0.0381,5154,0.1018,false,0,315,59 St-Columbus Circle,1040.15,0.1018,gap
+36061024000,Census Tract 240; New York County; New York,Manhattan,0.0719,0.0811,0.1513,2366,0.1014,false,0,392,125 St,1825.02,0.1014,gap
+36061023501,Census Tract 235.01; New York County; New York,Manhattan,0.0945,0.0936,0.1159,7177,0.1013,false,0,148,168 St,1318.06,0.1013,gap
+36061000201,Census Tract 2.01; New York County; New York,Manhattan,0.0227,0.1476,0.1337,2568,0.1013,false,0,410,Canal St,1433.02,0.1013,gap
+36061023502,Census Tract 235.02; New York County; New York,Manhattan,0.0329,0.1832,0.0786,1872,0.0982,false,0,148,168 St,1426.55,0.0982,gap
+36061021800,Census Tract 218; New York County; New York,Manhattan,0.0871,0.0971,0.1060,5931,0.0967,false,0,153,125 St,877.08,0.0967,gap
+36061023400,Census Tract 234; New York County; New York,Manhattan,0.0610,0.0704,0.1574,5244,0.0963,false,0,438,135 St,1070.93,0.0963,gap
+36061023300,Census Tract 233; New York County; New York,Manhattan,0.0763,0.0890,0.1231,7181,0.0961,false,0,148,168 St,1616.10,0.0961,gap
+36061023900,Census Tract 239; New York County; New York,Manhattan,0.0834,0.1571,0.0446,2992,0.0950,false,0,148,168 St,940.52,0.0950,gap
+36061016900,Census Tract 169; New York County; New York,Manhattan,0.0397,0.1858,0.0570,8202,0.0942,false,0,310,96 St,972.31,0.0942,gap
+36061023802,Census Tract 238.02; New York County; New York,Manhattan,0.0311,0.2114,0.0323,5094,0.0916,false,0,477,72 St,1185.93,0.0916,gap
+36061017800,Census Tract 178; New York County; New York,Manhattan,0.0432,0.1123,0.1186,4050,0.0914,false,0,392,125 St,1092.38,0.0914,gap
+36061021600,Census Tract 216; New York County; New York,Manhattan,0.0720,0.0624,0.1367,9151,0.0904,false,0,153,125 St,1172.89,0.0904,gap
+36061006200,Census Tract 62; New York County; New York,Manhattan,0.0488,0.1466,0.0719,4303,0.0891,false,0,405,23 St-Baruch College,1026.11,0.0891,gap
+36061019000,Census Tract 190; New York County; New York,Manhattan,0.0349,0.1645,0.0667,3849,0.0887,false,0,392,125 St,877.85,0.0887,gap
+36061007002,Census Tract 70.02; New York County; New York,Manhattan,0.0317,0.1741,0.0237,3676,0.0765,false,0,405,23 St-Baruch College,829.78,0.0765,gap
+36061003700,Census Tract 37; New York County; New York,Manhattan,0.0264,0.1808,0.0123,3528,0.0732,false,0,167,W 4 St-Wash Sq,895.03,0.0732,gap
+36061017402,Census Tract 174.02; New York County; New York,Manhattan,0.0394,0.1060,0.0448,2529,0.0634,false,0,392,125 St,1146.27,0.0634,gap
+36061020500,Census Tract 205; New York County; New York,Manhattan,0.0237,0.1440,0.0202,5606,0.0626,false,0,153,125 St,1079.79,0.0626,gap
+36061001001,Census Tract 10.01; New York County; New York,Manhattan,0.0134,0.1686,0.0055,1720,0.0625,false,0,119,1 Av,1877.52,0.0625,gap
+36061019702,Census Tract 197.02; New York County; New York,Manhattan,0.0441,0.1015,0.0389,2660,0.0615,false,0,153,125 St,1099.54,0.0615,gap
+36061003001,Census Tract 30.01; New York County; New York,Manhattan,0.0428,0.0734,0.0656,4073,0.0606,false,0,408,Bleecker St,856.76,0.0606,gap
+36061007001,Census Tract 70.01; New York County; New York,Manhattan,0.0264,0.1447,0.0103,4195,0.0605,false,0,405,23 St-Baruch College,961.27,0.0605,gap
+36061012902,Census Tract 129.02; New York County; New York,Manhattan,0.0258,0.0948,0.0378,2647,0.0528,false,0,163,42 St-Port Authority Bus Terminal,992.63,0.0528,gap
+36061006900,Census Tract 69; New York County; New York,Manhattan,0.0094,0.1358,0.0095,2570,0.0516,false,0,167,W 4 St-Wash Sq,829.87,0.0516,gap
+36061025900,Census Tract 259; New York County; New York,Manhattan,0.0351,0.0365,0.0779,4713,0.0498,false,0,438,135 St,1007.97,0.0498,gap
+36061002202,Census Tract 22.02; New York County; New York,Manhattan,0.0240,0.0810,0.0342,2407,0.0464,false,0,119,1 Av,1078.63,0.0464,gap
+36061019701,Census Tract 197.01; New York County; New York,Manhattan,0.0061,0.0791,0.0311,999,0.0388,false,0,153,125 St,876.52,0.0388,gap
+36061020300,Census Tract 203; New York County; New York,Manhattan,0.0106,0.0560,0.0221,3930,0.0296,false,0,153,125 St,821.82,0.0296,gap
+36061009901,Census Tract 99.01; New York County; New York,Manhattan,0.0138,0.0451,0.0093,1884,0.0227,false,0,166,14 St,881.79,0.0227,gap
+36061020101,Census Tract 201.01; New York County; New York,Manhattan,0.0024,0.0471,0.0170,1976,0.0222,false,0,153,125 St,841.36,0.0222,gap
+36061000500,Census Tract 5; New York County; New York,Manhattan,0.0000,0.0000,0.0000,0,0.0000,false,0,330,South Ferry,1484.16,0.0000,gap
+36061000700,Census Tract 7; New York County; New York,Manhattan,0.0094,0.0394,0.0376,9008,0.0288,true,7,332,Fulton St,452.87,0.0000,covered
+36061000800,Census Tract 8; New York County; New York,Manhattan,0.0837,0.2241,0.2301,8889,0.1793,true,1,105,Chambers St,765.89,0.0000,covered
+36061000900,Census Tract 9; New York County; New York,Manhattan,0.0074,0.0602,0.0167,1860,0.0281,true,2,330,South Ferry,320.35,0.0000,covered
+36061001300,Census Tract 13; New York County; New York,Manhattan,0.0071,0.0266,0.0581,5371,0.0306,true,10,21,Cortlandt St,236.03,0.0000,covered
+36061001501,Census Tract 15.01; New York County; New York,Manhattan,0.0581,0.2263,0.0497,7777,0.1114,true,9,332,Fulton St,248.71,0.0000,covered
+36061001502,Census Tract 15.02; New York County; New York,Manhattan,0.0416,0.0249,0.0561,8485,0.0409,true,8,332,Fulton St,303.16,0.0000,covered
+36061001600,Census Tract 16; New York County; New York,Manhattan,0.0645,0.2780,0.0765,7040,0.1397,true,1,410,Canal St,664.02,0.0000,covered
+36061001800,Census Tract 18; New York County; New York,Manhattan,0.0785,0.2101,0.0917,6702,0.1268,true,1,410,Canal St,788.52,0.0000,covered
+36061002100,Census Tract 21; New York County; New York,Manhattan,0.0149,0.0682,0.0141,7944,0.0324,true,10,327,Chambers St,144.23,0.0000,covered
+36061002500,Census Tract 25; New York County; New York,Manhattan,0.1050,0.2659,0.2350,5070,0.2020,true,5,105,Chambers St,533.51,0.0000,covered
+36061002602,Census Tract 26.02; New York County; New York,Manhattan,0.0736,0.1696,0.0543,3431,0.0992,true,1,119,1 Av,772.80,0.0000,covered
+36061002700,Census Tract 27; New York County; New York,Manhattan,0.0257,0.3367,0.0113,1191,0.1246,true,6,105,Chambers St,377.37,0.0000,covered
+36061002800,Census Tract 28; New York County; New York,Manhattan,0.1522,0.2013,0.1194,6234,0.1576,true,1,119,1 Av,609.63,0.0000,covered
+36061002901,Census Tract 29.01; New York County; New York,Manhattan,0.0088,0.1559,0.0087,789,0.0578,true,9,105,Chambers St,129.02,0.0000,covered
+36061002902,Census Tract 29.02; New York County; New York,Manhattan,0.0486,0.3332,0.1108,3832,0.1642,true,3,410,Canal St,420.46,0.0000,covered
+36061003100,Census Tract 31; New York County; New York,Manhattan,0.0110,0.0473,0.0211,2770,0.0265,true,10,105,Chambers St,232.54,0.0000,covered
+36061003200,Census Tract 32; New York County; New York,Manhattan,0.0810,0.1725,0.1120,7740,0.1218,true,1,119,1 Av,625.46,0.0000,covered
+36061003300,Census Tract 33; New York County; New York,Manhattan,0.0133,0.1177,0.0119,5574,0.0476,true,5,327,Chambers St,459.05,0.0000,covered
+36061003400,Census Tract 34; New York County; New York,Manhattan,0.0574,0.0908,0.1075,6474,0.0852,true,1,119,1 Av,216.98,0.0000,covered
+36061003601,Census Tract 36.01; New York County; New York,Manhattan,0.0628,0.2133,0.0512,2935,0.1091,true,2,408,Bleecker St,498.44,0.0000,covered
+36061003602,Census Tract 36.02; New York County; New York,Manhattan,0.0328,0.1716,0.0848,3461,0.0964,true,2,408,Bleecker St,404.78,0.0000,covered
+36061003800,Census Tract 38; New York County; New York,Manhattan,0.0716,0.1863,0.1377,7393,0.1319,true,3,408,Bleecker St,546.91,0.0000,covered
+36061003900,Census Tract 39; New York County; New York,Manhattan,0.0748,0.2246,0.0748,6180,0.1247,true,1,327,Chambers St,604.91,0.0000,covered
+36061004001,Census Tract 40.01; New York County; New York,Manhattan,0.0297,0.1425,0.0324,3615,0.0682,true,3,119,1 Av,286.31,0.0000,covered
+36061004002,Census Tract 40.02; New York County; New York,Manhattan,0.0378,0.0507,0.1083,6250,0.0656,true,3,119,1 Av,471.36,0.0000,covered
+36061004100,Census Tract 41; New York County; New York,Manhattan,0.0643,0.1632,0.0904,6815,0.1060,true,3,410,Canal St,297.43,0.0000,covered
+36061004200,Census Tract 42; New York County; New York,Manhattan,0.0101,0.0813,0.0342,5302,0.0419,true,4,117,14 St-Union Sq,355.99,0.0000,covered
+36061004300,Census Tract 43; New York County; New York,Manhattan,0.0378,0.1677,0.0627,3590,0.0894,true,3,230,Broadway-Lafayette St,227.96,0.0000,covered
+36061004400,Census Tract 44; New York County; New York,Manhattan,0.0990,0.1652,0.1476,16684,0.1373,true,1,119,1 Av,425.17,0.0000,covered
+36061004500,Census Tract 45; New York County; New York,Manhattan,0.0036,0.1834,0.0082,1047,0.0651,true,3,410,Canal St,207.82,0.0000,covered
+36061004700,Census Tract 47; New York County; New York,Manhattan,0.0025,0.1340,0.0124,2619,0.0496,true,3,410,Canal St,460.72,0.0000,covered
+36061004800,Census Tract 48; New York County; New York,Manhattan,0.0422,0.1728,0.0489,6660,0.0880,true,4,119,1 Av,365.32,0.0000,covered
+36061004900,Census Tract 49; New York County; New York,Manhattan,0.0355,0.2053,0.0299,4568,0.0902,true,3,230,Broadway-Lafayette St,360.73,0.0000,covered
+36061005000,Census Tract 50; New York County; New York,Manhattan,0.0239,0.1659,0.0353,4780,0.0750,true,5,15,14 St-Union Sq,285.73,0.0000,covered
+36061005200,Census Tract 52; New York County; New York,Manhattan,0.0099,0.1368,0.0102,3349,0.0523,true,5,15,14 St-Union Sq,188.98,0.0000,covered
+36061005400,Census Tract 54; New York County; New York,Manhattan,0.0490,0.2411,0.0366,4721,0.1089,true,8,229,14 St,222.93,0.0000,covered
+36061005501,Census Tract 55.01; New York County; New York,Manhattan,0.0308,0.1114,0.0586,5581,0.0669,true,3,230,Broadway-Lafayette St,274.32,0.0000,covered
+36061005502,Census Tract 55.02; New York County; New York,Manhattan,0.0227,0.1495,0.0195,1933,0.0639,true,2,408,Bleecker St,74.66,0.0000,covered
+36061005600,Census Tract 56; New York County; New York,Manhattan,0.0429,0.1395,0.0793,4071,0.0872,true,2,405,23 St-Baruch College,222.25,0.0000,covered
+36061005700,Census Tract 57; New York County; New York,Manhattan,0.0251,0.2304,0.0168,2865,0.0908,true,5,408,Bleecker St,433.70,0.0000,covered
+36061005800,Census Tract 58; New York County; New York,Manhattan,0.0245,0.0537,0.0576,4412,0.0453,true,4,405,23 St-Baruch College,492.49,0.0000,covered
+36061005900,Census Tract 59; New York County; New York,Manhattan,0.0378,0.2007,0.0233,5098,0.0873,true,7,117,14 St-Union Sq,505.61,0.0000,covered
+36061006000,Census Tract 60; New York County; New York,Manhattan,0.0589,0.2411,0.0168,5279,0.1056,true,1,119,1 Av,592.85,0.0000,covered
+36061006100,Census Tract 61; New York County; New York,Manhattan,0.0220,0.1718,0.0217,4970,0.0718,true,5,117,14 St-Union Sq,180.36,0.0000,covered
+36061006300,Census Tract 63; New York County; New York,Manhattan,0.0511,0.2584,0.0258,5843,0.1118,true,7,116,6 Av,324.10,0.0000,covered
+36061006400,Census Tract 64; New York County; New York,Manhattan,0.0690,0.1569,0.1416,7939,0.1225,true,3,405,23 St-Baruch College,541.85,0.0000,covered
+36061006500,Census Tract 65; New York County; New York,Manhattan,0.0175,0.1226,0.0352,5227,0.0584,true,3,167,W 4 St-Wash Sq,274.76,0.0000,covered
+36061006600,Census Tract 66; New York County; New York,Manhattan,0.0968,0.2160,0.0646,11510,0.1258,true,1,405,23 St-Baruch College,621.13,0.0000,covered
+36061006700,Census Tract 67; New York County; New York,Manhattan,0.0392,0.2135,0.0190,4928,0.0906,true,1,167,W 4 St-Wash Sq,370.63,0.0000,covered
+36061006800,Census Tract 68; New York County; New York,Manhattan,0.0539,0.1155,0.0550,7144,0.0748,true,2,405,23 St-Baruch College,221.66,0.0000,covered
+36061007100,Census Tract 71; New York County; New York,Manhattan,0.0266,0.1394,0.0229,5364,0.0630,true,8,322,14 St,265.57,0.0000,covered
+36061007200,Census Tract 72; New York County; New York,Manhattan,0.0319,0.1024,0.0403,7224,0.0582,true,3,405,23 St-Baruch College,736.80,0.0000,covered
+36061007300,Census Tract 73; New York County; New York,Manhattan,0.0078,0.1062,0.0612,5744,0.0584,true,5,167,W 4 St-Wash Sq,362.85,0.0000,covered
+36061007400,Census Tract 74; New York County; New York,Manhattan,0.0209,0.1018,0.0702,5257,0.0643,true,4,12,34 St-Herald Sq,495.41,0.0000,covered
+36061007500,Census Tract 75; New York County; New York,Manhattan,0.0570,0.2522,0.0243,3814,0.1112,true,2,167,W 4 St-Wash Sq,730.94,0.0000,covered
+36061007600,Census Tract 76; New York County; New York,Manhattan,0.0266,0.0754,0.0355,2455,0.0458,true,5,12,34 St-Herald Sq,229.22,0.0000,covered
+36061007700,Census Tract 77; New York County; New York,Manhattan,0.0443,0.1506,0.0290,5584,0.0746,true,6,115,8 Av,197.78,0.0000,covered
+36061007800,Census Tract 78; New York County; New York,Manhattan,0.0470,0.1474,0.0545,8412,0.0830,true,2,465,Grand Central-42 St,579.29,0.0000,covered
+36061007900,Census Tract 79; New York County; New York,Manhattan,0.0316,0.2136,0.0334,4514,0.0929,true,3,115,8 Av,488.55,0.0000,covered
+36061008000,Census Tract 80; New York County; New York,Manhattan,0.0265,0.1771,0.0385,5292,0.0807,true,3,465,Grand Central-42 St,277.10,0.0000,covered
+36061008100,Census Tract 81; New York County; New York,Manhattan,0.0323,0.1755,0.0295,6331,0.0791,true,5,322,14 St,250.92,0.0000,covered
+36061008200,Census Tract 82; New York County; New York,Manhattan,0.0087,0.1001,0.0259,3346,0.0449,true,9,469,Grand Central-42 St,278.47,0.0000,covered
+36061008300,Census Tract 83; New York County; New York,Manhattan,0.0679,0.2315,0.0712,3629,0.1235,true,3,166,14 St,274.29,0.0000,covered
+36061008400,Census Tract 84; New York County; New York,Manhattan,0.0173,0.1470,0.0130,1660,0.0591,true,13,11,Times Sq-42 St,374.81,0.0000,covered
+36061008601,Census Tract 86.01; New York County; New York,Manhattan,0.0168,0.1173,0.0547,3197,0.0629,true,1,465,Grand Central-42 St,752.01,0.0000,covered
+36061008602,Census Tract 86.02; New York County; New York,Manhattan,0.0000,0.0000,0.0000,0,0.0000,true,1,465,Grand Central-42 St,744.57,0.0000,covered
+36061008603,Census Tract 86.03; New York County; New York,Manhattan,0.0419,0.4177,0.0233,5188,0.1610,true,2,275,Lexington Av/53 St,554.25,0.0000,covered
+36061008700,Census Tract 87; New York County; New York,Manhattan,0.0213,0.0828,0.0677,5712,0.0573,true,5,166,14 St,423.12,0.0000,covered
+36061008800,Census Tract 88; New York County; New York,Manhattan,0.0468,0.2280,0.0763,7096,0.1170,true,3,465,Grand Central-42 St,375.52,0.0000,covered
+36061008900,Census Tract 89; New York County; New York,Manhattan,0.0384,0.1766,0.0760,5849,0.0970,true,3,166,14 St,424.64,0.0000,covered
+36061009000,Census Tract 90; New York County; New York,Manhattan,0.0528,0.2389,0.0688,7308,0.1202,true,5,401,51 St,518.07,0.0000,covered
+36061009100,Census Tract 91; New York County; New York,Manhattan,0.1002,0.1345,0.1280,6445,0.1209,true,3,166,14 St,692.96,0.0000,covered
+36061009200,Census Tract 92; New York County; New York,Manhattan,0.0050,0.1186,0.0075,1408,0.0437,true,6,465,Grand Central-42 St,269.64,0.0000,covered
+36061009300,Census Tract 93; New York County; New York,Manhattan,0.1444,0.2161,0.1204,9699,0.1603,true,1,166,14 St,695.09,0.0000,covered
+36061009400,Census Tract 94; New York County; New York,Manhattan,0.0000,0.0000,0.0016,77,0.0005,true,8,469,Grand Central-42 St,299.19,0.0000,covered
+36061009500,Census Tract 95; New York County; New York,Manhattan,0.0137,0.0997,0.0259,3482,0.0464,true,4,318,34 St-Penn Station,398.99,0.0000,covered
+36061009600,Census Tract 96; New York County; New York,Manhattan,0.0082,0.0717,0.0085,474,0.0295,true,10,225,47-50 Sts-Rockefeller Ctr,257.14,0.0000,covered
+36061009700,Census Tract 97; New York County; New York,Manhattan,0.0764,0.4061,0.0800,4477,0.1875,true,3,164,34 St-Penn Station,558.95,0.0000,covered
+36061009800,Census Tract 98; New York County; New York,Manhattan,0.0945,0.1825,0.1106,8389,0.1292,true,2,275,Lexington Av/53 St,223.89,0.0000,covered
+36061009902,Census Tract 99.02; New York County; New York,Manhattan,0.0188,0.0272,0.0290,3890,0.0250,true,1,471,34 St-Hudson Yards,489.30,0.0000,covered
+36061009903,Census Tract 99.03; New York County; New York,Manhattan,0.0021,0.1206,0.0069,1061,0.0432,true,1,471,34 St-Hudson Yards,55.79,0.0000,covered
+36061010000,Census Tract 100; New York County; New York,Manhattan,0.0060,0.1950,0.0050,1651,0.0687,true,2,401,51 St,121.21,0.0000,covered
+36061010100,Census Tract 101; New York County; New York,Manhattan,0.0122,0.0489,0.0308,1923,0.0306,true,7,318,34 St-Penn Station,82.05,0.0000,covered
+36061010200,Census Tract 102; New York County; New York,Manhattan,0.0022,0.5328,0.0017,244,0.1789,true,4,401,51 St,334.29,0.0000,covered
+36061010300,Census Tract 103; New York County; New York,Manhattan,0.0038,0.0840,0.0122,3083,0.0333,true,3,164,34 St-Penn Station,322.58,0.0000,covered
+36061010400,Census Tract 104; New York County; New York,Manhattan,0.0075,0.2948,0.0027,960,0.1017,true,3,225,47-50 Sts-Rockefeller Ctr,387.54,0.0000,covered
+36061010601,Census Tract 106.01; New York County; New York,Manhattan,0.0526,0.3076,0.0204,7562,0.1269,true,2,275,Lexington Av/53 St,629.81,0.0000,covered
+36061010602,Census Tract 106.02; New York County; New York,Manhattan,0.0215,0.1247,0.0445,5006,0.0636,true,2,222,Roosevelt Island,520.13,0.0000,covered
+36061010801,Census Tract 108.01; New York County; New York,Manhattan,0.0277,0.1856,0.0219,3476,0.0784,true,3,275,Lexington Av/53 St,247.18,0.0000,covered
+36061010802,Census Tract 108.02; New York County; New York,Manhattan,0.0271,0.5278,0.0386,4094,0.1978,true,3,275,Lexington Av/53 St,469.94,0.0000,covered
+36061010803,Census Tract 108.03; New York County; New York,Manhattan,0.0177,0.2478,0.0105,1840,0.0920,true,3,275,Lexington Av/53 St,372.40,0.0000,covered
+36061010900,Census Tract 109; New York County; New York,Manhattan,0.0022,0.0600,0.0085,200,0.0236,true,9,318,34 St-Penn Station,237.91,0.0000,covered
+36061011000,Census Tract 110; New York County; New York,Manhattan,0.0555,0.1944,0.0202,6955,0.0900,true,3,223,Lexington Av/63 St,372.83,0.0000,covered
+36061011100,Census Tract 111; New York County; New York,Manhattan,0.0537,0.0885,0.0721,4767,0.0714,true,8,164,34 St-Penn Station,311.78,0.0000,covered
+36061011201,Census Tract 112.01; New York County; New York,Manhattan,0.0143,0.2842,0.0126,950,0.1037,true,5,9,57 St-7 Av,453.85,0.0000,covered
+36061011202,Census Tract 112.02; New York County; New York,Manhattan,0.0043,0.5365,0.0007,520,0.1805,true,4,223,Lexington Av/63 St,554.62,0.0000,covered
+36061011203,Census Tract 112.03; New York County; New York,Manhattan,0.0087,0.2602,0.0026,1053,0.0905,true,3,275,Lexington Av/53 St,410.45,0.0000,covered
+36061011300,Census Tract 113; New York County; New York,Manhattan,0.0019,0.2951,0.0075,122,0.1015,true,11,317,Times Sq-42 St,65.39,0.0000,covered
+36061011401,Census Tract 114.01; New York County; New York,Manhattan,0.0084,0.3524,0.0045,1138,0.1218,true,2,223,Lexington Av/63 St,369.70,0.0000,covered
+36061011402,Census Tract 114.02; New York County; New York,Manhattan,0.0199,0.2917,0.0066,2283,0.1061,true,3,223,Lexington Av/63 St,160.91,0.0000,covered
+36061011500,Census Tract 115; New York County; New York,Manhattan,0.0460,0.0858,0.0911,3929,0.0743,true,8,163,42 St-Port Authority Bus Terminal,321.61,0.0000,covered
+36061011600,Census Tract 116; New York County; New York,Manhattan,0.0447,0.1695,0.0348,3346,0.0830,true,2,222,Roosevelt Island,531.84,0.0000,covered
+36061011700,Census Tract 117; New York County; New York,Manhattan,0.0372,0.0378,0.0456,5051,0.0402,true,1,471,34 St-Hudson Yards,475.24,0.0000,covered
+36061011800,Census Tract 118; New York County; New York,Manhattan,0.1476,0.2185,0.0604,9462,0.1422,true,3,399,68 St-Hunter College,407.48,0.0000,covered
+36061011900,Census Tract 119; New York County; New York,Manhattan,0.0600,0.5187,0.0561,1174,0.2116,true,7,468,Times Sq-42 St,149.13,0.0000,covered
+36061012000,Census Tract 120; New York County; New York,Manhattan,0.0263,0.3520,0.0299,3199,0.1361,true,3,399,68 St-Hunter College,154.75,0.0000,covered
+36061012101,Census Tract 121.01; New York County; New York,Manhattan,0.0403,0.1698,0.0898,3110,0.1000,true,6,163,42 St-Port Authority Bus Terminal,205.75,0.0000,covered
+36061012102,Census Tract 121.02; New York County; New York,Manhattan,0.1520,0.4186,0.0556,4850,0.2087,true,4,163,42 St-Port Authority Bus Terminal,438.74,0.0000,covered
+36061012200,Census Tract 122; New York County; New York,Manhattan,0.0322,0.3551,0.0057,3008,0.1310,true,2,399,68 St-Hunter College,346.81,0.0000,covered
+36061012400,Census Tract 124; New York County; New York,Manhattan,0.0729,0.2321,0.0508,9788,0.1186,true,1,477,72 St,451.44,0.0000,covered
+36061012500,Census Tract 125; New York County; New York,Manhattan,0.0302,0.1590,0.0369,2635,0.0754,true,7,225,47-50 Sts-Rockefeller Ctr,273.18,0.0000,covered
+36061012601,Census Tract 126.01; New York County; New York,Manhattan,0.0365,0.1826,0.0336,7288,0.0842,true,2,477,72 St,123.89,0.0000,covered
+36061012602,Census Tract 126.02; New York County; New York,Manhattan,0.0235,0.2347,0.0122,4550,0.0901,true,3,477,72 St,109.74,0.0000,covered
+36061012700,Census Tract 127; New York County; New York,Manhattan,0.0658,0.1244,0.0688,6786,0.0863,true,4,163,42 St-Port Authority Bus Terminal,548.32,0.0000,covered
+36061012800,Census Tract 128; New York County; New York,Manhattan,0.0333,0.3653,0.0241,4914,0.1409,true,2,477,72 St,387.68,0.0000,covered
+36061012901,Census Tract 129.01; New York County; New York,Manhattan,0.0295,0.0374,0.0356,7091,0.0342,true,1,471,34 St-Hudson Yards,794.99,0.0000,covered
+36061013000,Census Tract 130; New York County; New York,Manhattan,0.0296,0.3811,0.0297,3272,0.1468,true,2,399,68 St-Hunter College,516.09,0.0000,covered
+36061013100,Census Tract 131; New York County; New York,Manhattan,0.0378,0.1867,0.0388,3235,0.0878,true,5,9,57 St-7 Av,294.68,0.0000,covered
+36061013201,Census Tract 132.01; New York County; New York,Manhattan,0.0359,0.1459,0.0060,2316,0.0626,true,1,477,72 St,535.31,0.0000,covered
+36061013202,Census Tract 132.02; New York County; New York,Manhattan,0.0358,0.2406,0.0423,3649,0.1062,true,1,477,72 St,741.84,0.0000,covered
+36061013203,Census Tract 132.03; New York County; New York,Manhattan,0.0049,0.1216,0.1182,4291,0.0816,true,2,477,72 St,567.83,0.0000,covered
+36061013300,Census Tract 133; New York County; New York,Manhattan,0.0336,0.1432,0.0768,6510,0.0845,true,3,9,57 St-7 Av,621.33,0.0000,covered
+36061013400,Census Tract 134; New York County; New York,Manhattan,0.0646,0.1548,0.1296,10647,0.1163,true,3,477,72 St,374.66,0.0000,covered
+36061013602,Census Tract 136.02; New York County; New York,Manhattan,0.0553,0.1718,0.0139,6244,0.0803,true,1,476,86 St,723.07,0.0000,covered
+36061013603,Census Tract 136.03; New York County; New York,Manhattan,0.0334,0.3249,0.0214,4426,0.1266,true,2,476,86 St,567.06,0.0000,covered
+36061013604,Census Tract 136.04; New York County; New York,Manhattan,0.0225,0.2205,0.0125,3488,0.0852,true,1,476,86 St,517.89,0.0000,covered
+36061013700,Census Tract 137; New York County; New York,Manhattan,0.0727,0.2563,0.0626,6352,0.1305,true,4,9,57 St-7 Av,70.61,0.0000,covered
+36061013800,Census Tract 138; New York County; New York,Manhattan,0.0432,0.2118,0.0753,11868,0.1101,true,2,476,86 St,371.68,0.0000,covered
+36061013900,Census Tract 139; New York County; New York,Manhattan,0.1943,0.2264,0.0644,9316,0.1617,true,4,315,59 St-Columbus Circle,372.63,0.0000,covered
+36061014000,Census Tract 140; New York County; New York,Manhattan,0.0551,0.2320,0.0414,7932,0.1095,true,2,476,86 St,583.67,0.0000,covered
+36061014300,Census Tract 143; New York County; New York,Manhattan,0.0000,0.0000,0.0000,0,0.0000,false,0,476,86 St,1266.56,0.0000,gap
+36061014401,Census Tract 144.01; New York County; New York,Manhattan,0.0257,0.2662,0.0132,4718,0.1017,true,1,476,86 St,463.06,0.0000,covered
+36061014402,Census Tract 144.02; New York County; New York,Manhattan,0.0478,0.1907,0.0356,7257,0.0914,true,1,476,86 St,572.93,0.0000,covered
+36061014500,Census Tract 145; New York County; New York,Manhattan,0.0358,0.1919,0.0336,6857,0.0871,true,4,315,59 St-Columbus Circle,263.88,0.0000,covered
+36061014601,Census Tract 146.01; New York County; New York,Manhattan,0.0185,0.1917,0.0340,3621,0.0814,true,1,476,86 St,83.89,0.0000,covered
+36061014602,Census Tract 146.02; New York County; New York,Manhattan,0.1228,0.2951,0.0647,8543,0.1609,true,2,476,86 St,123.37,0.0000,covered
+36061014700,Census Tract 147; New York County; New York,Manhattan,0.0255,0.0535,0.0168,3044,0.0319,true,3,314,66 St-Lincoln Center,602.94,0.0000,covered
+36061014801,Census Tract 148.01; New York County; New York,Manhattan,0.0278,0.2547,0.0061,2858,0.0962,true,1,476,86 St,376.02,0.0000,covered
+36061014802,Census Tract 148.02; New York County; New York,Manhattan,0.0344,0.1955,0.0412,6377,0.0904,true,2,476,86 St,419.86,0.0000,covered
+36061014900,Census Tract 149; New York County; New York,Manhattan,0.0370,0.2750,0.0389,5873,0.1170,true,4,314,66 St-Lincoln Center,123.28,0.0000,covered
+36061015001,Census Tract 150.01; New York County; New York,Manhattan,0.0244,0.3112,0.0071,2018,0.1142,true,1,476,86 St,681.27,0.0000,covered
+36061015002,Census Tract 150.02; New York County; New York,Manhattan,0.0383,0.3903,0.0150,4558,0.1479,true,1,476,86 St,707.32,0.0000,covered
+36061015101,Census Tract 151.01; New York County; New York,Manhattan,0.0502,0.2308,0.1301,2860,0.1370,true,4,314,66 St-Lincoln Center,403.52,0.0000,covered
+36061015102,Census Tract 151.02; New York County; New York,Manhattan,0.0722,0.0445,0.1897,8963,0.1021,true,1,314,66 St-Lincoln Center,737.85,0.0000,covered
+36061015200,Census Tract 152; New York County; New York,Manhattan,0.1306,0.2325,0.1516,8240,0.1716,true,2,475,96 St,555.56,0.0000,covered
+36061015301,Census Tract 153.01; New York County; New York,Manhattan,0.0242,0.2627,0.0215,4698,0.1028,true,4,314,66 St-Lincoln Center,266.14,0.0000,covered
+36061015302,Census Tract 153.02; New York County; New York,Manhattan,0.0633,0.1576,0.0277,5570,0.0829,true,3,314,66 St-Lincoln Center,224.04,0.0000,covered
+36061015401,Census Tract 154.01; New York County; New York,Manhattan,0.0757,0.2022,0.0303,4986,0.1027,true,2,476,86 St,325.48,0.0000,covered
+36061015402,Census Tract 154.02; New York County; New York,Manhattan,0.0202,0.1731,0.0264,3841,0.0732,true,2,475,96 St,314.57,0.0000,covered
+36061015403,Census Tract 154.03; New York County; New York,Manhattan,0.0727,0.2722,0.0430,5015,0.1293,true,2,475,96 St,306.01,0.0000,covered
+36061015501,Census Tract 155.01; New York County; New York,Manhattan,0.0304,0.3379,0.0508,5057,0.1397,true,2,313,72 St,319.03,0.0000,covered
+36061015502,Census Tract 155.02; New York County; New York,Manhattan,0.0474,0.2765,0.0791,5475,0.1343,true,2,313,72 St,516.25,0.0000,covered
+36061015601,Census Tract 156.01; New York County; New York,Manhattan,0.0506,0.1210,0.0506,4992,0.0741,true,2,475,96 St,88.39,0.0000,covered
+36061015602,Census Tract 156.02; New York County; New York,Manhattan,0.0346,0.1234,0.0476,2139,0.0685,true,1,475,96 St,118.65,0.0000,covered
+36061015700,Census Tract 157; New York County; New York,Manhattan,0.0749,0.1651,0.0685,10613,0.1028,true,2,313,72 St,291.79,0.0000,covered
+36061015801,Census Tract 158.01; New York County; New York,Manhattan,0.0424,0.2242,0.0357,5384,0.1008,true,2,475,96 St,416.93,0.0000,covered
+36061015802,Census Tract 158.02; New York County; New York,Manhattan,0.0227,0.1380,0.0302,4397,0.0636,true,1,475,96 St,371.94,0.0000,covered
+36061015900,Census Tract 159; New York County; New York,Manhattan,0.0782,0.2313,0.0574,9202,0.1223,true,2,313,72 St,253.90,0.0000,covered
+36061016001,Census Tract 160.01; New York County; New York,Manhattan,0.0245,0.3315,0.0054,3029,0.1205,true,1,475,96 St,703.30,0.0000,covered
+36061016002,Census Tract 160.02; New York County; New York,Manhattan,0.0303,0.3061,0.0171,3133,0.1178,true,1,475,96 St,677.83,0.0000,covered
+36061016100,Census Tract 161; New York County; New York,Manhattan,0.0373,0.1737,0.0361,6177,0.0824,true,1,313,72 St,435.24,0.0000,covered
+36061016200,Census Tract 162; New York County; New York,Manhattan,0.1607,0.2626,0.3736,8862,0.2656,true,1,475,96 St,748.37,0.0000,covered
+36061016300,Census Tract 163; New York County; New York,Manhattan,0.0774,0.2447,0.0430,7013,0.1217,true,1,313,72 St,487.92,0.0000,covered
+36061016400,Census Tract 164; New York County; New York,Manhattan,0.1870,0.1437,0.2895,7850,0.2067,true,1,475,96 St,439.71,0.0000,covered
+36061016500,Census Tract 165; New York County; New York,Manhattan,0.0850,0.2646,0.0747,7253,0.1414,true,1,313,72 St,730.14,0.0000,covered
+36061016600,Census Tract 166; New York County; New York,Manhattan,0.0980,0.1025,0.1605,6011,0.1203,true,1,475,96 St,571.22,0.0000,covered
+36061016700,Census Tract 167; New York County; New York,Manhattan,0.0616,0.2213,0.0381,7504,0.1070,true,1,313,72 St,762.67,0.0000,covered
+36061017300,Census Tract 173; New York County; New York,Manhattan,0.1045,0.2516,0.0402,8764,0.1321,true,1,310,96 St,689.74,0.0000,covered
+36061017500,Census Tract 175; New York County; New York,Manhattan,0.1147,0.2918,0.0275,10151,0.1447,true,1,310,96 St,586.41,0.0000,covered
+36061017700,Census Tract 177; New York County; New York,Manhattan,0.0914,0.2366,0.1047,9586,0.1442,true,1,310,96 St,471.43,0.0000,covered
+36061017900,Census Tract 179; New York County; New York,Manhattan,0.0590,0.1301,0.0872,9319,0.0921,true,1,310,96 St,302.66,0.0000,covered
+36061018100,Census Tract 181; New York County; New York,Manhattan,0.1232,0.3343,0.0408,8339,0.1661,true,1,310,96 St,414.10,0.0000,covered
+36061018200,Census Tract 182; New York County; New York,Manhattan,0.1864,0.1180,0.2563,7175,0.1869,true,1,392,125 St,739.35,0.0000,covered
+36061018300,Census Tract 183; New York County; New York,Manhattan,0.0966,0.1930,0.1390,8493,0.1429,true,1,310,96 St,218.81,0.0000,covered
+36061018500,Census Tract 185; New York County; New York,Manhattan,0.0605,0.2671,0.0218,4950,0.1165,true,1,310,96 St,506.06,0.0000,covered
+36061018700,Census Tract 187; New York County; New York,Manhattan,0.0703,0.1866,0.0723,10321,0.1097,true,1,310,96 St,464.70,0.0000,covered
+36061018800,Census Tract 188; New York County; New York,Manhattan,0.0582,0.0749,0.1762,5071,0.1031,true,1,392,125 St,727.92,0.0000,covered
+36061018900,Census Tract 189; New York County; New York,Manhattan,0.1380,0.2250,0.3727,10371,0.2452,true,1,310,96 St,778.16,0.0000,covered
+36061019100,Census Tract 191; New York County; New York,Manhattan,0.1150,0.2753,0.0675,8670,0.1526,true,1,310,96 St,768.03,0.0000,covered
+36061019200,Census Tract 192; New York County; New York,Manhattan,0.0828,0.1249,0.2161,4365,0.1413,true,1,392,125 St,797.99,0.0000,covered
+36061019400,Census Tract 194; New York County; New York,Manhattan,0.1251,0.1620,0.2155,6487,0.1675,true,1,392,125 St,455.81,0.0000,covered
+36061019600,Census Tract 196; New York County; New York,Manhattan,0.0705,0.2710,0.1339,4067,0.1585,true,1,392,125 St,169.26,0.0000,covered
+36061019800,Census Tract 198; New York County; New York,Manhattan,0.0212,0.2289,0.0204,2534,0.0902,true,1,392,125 St,403.09,0.0000,covered
+36061020000,Census Tract 200; New York County; New York,Manhattan,0.0498,0.2079,0.0449,2954,0.1009,true,1,392,125 St,668.82,0.0000,covered
+36061020102,Census Tract 201.02; New York County; New York,Manhattan,0.0417,0.0967,0.0645,4045,0.0676,true,1,153,125 St,764.45,0.0000,covered
+36061020600,Census Tract 206; New York County; New York,Manhattan,0.0352,0.0985,0.0987,3411,0.0775,true,2,392,125 St,472.55,0.0000,covered
+36061020701,Census Tract 207.01; New York County; New York,Manhattan,0.0130,0.0707,0.0509,2856,0.0449,true,1,153,125 St,566.95,0.0000,covered
+36061020800,Census Tract 208; New York County; New York,Manhattan,0.0304,0.0998,0.1107,5573,0.0803,true,2,438,135 St,519.86,0.0000,covered
+36061020901,Census Tract 209.01; New York County; New York,Manhattan,0.0577,0.1059,0.1226,3382,0.0954,true,1,153,125 St,229.41,0.0000,covered
+36061021000,Census Tract 210; New York County; New York,Manhattan,0.1396,0.1714,0.2327,6324,0.1812,true,1,438,135 St,446.60,0.0000,covered
+36061021100,Census Tract 211; New York County; New York,Manhattan,0.1358,0.1587,0.2462,10222,0.1802,true,1,153,125 St,786.29,0.0000,covered
+36061021200,Census Tract 212; New York County; New York,Manhattan,0.0419,0.2186,0.0922,4905,0.1176,true,1,438,135 St,157.83,0.0000,covered
+36061021303,Census Tract 213.03; New York County; New York,Manhattan,0.0902,0.1218,0.1283,6381,0.1134,true,1,153,125 St,390.46,0.0000,covered
+36061021400,Census Tract 214; New York County; New York,Manhattan,0.0540,0.2440,0.0665,2902,0.1215,true,1,438,135 St,551.09,0.0000,covered
+36061021500,Census Tract 215; New York County; New York,Manhattan,0.0347,0.1090,0.0693,4054,0.0710,true,2,153,125 St,361.60,0.0000,covered
+36061021703,Census Tract 217.03; New York County; New York,Manhattan,0.0032,0.0000,0.0000,211,0.0011,true,1,153,125 St,788.39,0.0000,covered
+36061022000,Census Tract 220; New York County; New York,Manhattan,0.0497,0.1439,0.1023,6102,0.0986,true,1,153,125 St,608.91,0.0000,covered
+36061022102,Census Tract 221.02; New York County; New York,Manhattan,0.0149,0.0541,0.0219,2365,0.0303,true,1,438,135 St,670.76,0.0000,covered
+36061022200,Census Tract 222; New York County; New York,Manhattan,0.0422,0.1017,0.0687,3501,0.0709,true,1,153,125 St,429.34,0.0000,covered
+36061022400,Census Tract 224; New York County; New York,Manhattan,0.1171,0.1223,0.1918,6931,0.1437,true,2,153,125 St,453.38,0.0000,covered
+36061022600,Census Tract 226; New York County; New York,Manhattan,0.0731,0.0988,0.1139,5052,0.0953,true,2,438,135 St,351.38,0.0000,covered
+36061022800,Census Tract 228; New York County; New York,Manhattan,0.1371,0.1732,0.1299,6548,0.1467,true,1,438,135 St,281.37,0.0000,covered
+36061023000,Census Tract 230; New York County; New York,Manhattan,0.1716,0.1676,0.3399,9357,0.2264,true,1,438,135 St,474.70,0.0000,covered
+36061023200,Census Tract 232; New York County; New York,Manhattan,0.1567,0.0660,0.4415,9279,0.2214,true,1,438,135 St,761.58,0.0000,covered
+36061023803,Census Tract 238.03; New York County; New York,Manhattan,0.0431,0.2584,0.0446,3514,0.1154,true,1,222,Roosevelt Island,453.06,0.0000,covered
+36061023804,Census Tract 238.04; New York County; New York,Manhattan,0.0033,0.0614,0.0524,3390,0.0390,true,1,222,Roosevelt Island,422.47,0.0000,covered
+36061024200,Census Tract 242; New York County; New York,Manhattan,0.0912,0.1053,0.1764,5603,0.1243,true,1,392,125 St,317.33,0.0000,covered
+36061024301,Census Tract 243.01; New York County; New York,Manhattan,0.0909,0.1299,0.0684,4596,0.0964,true,1,148,168 St,531.95,0.0000,covered
+36061024500,Census Tract 245; New York County; New York,Manhattan,0.3453,0.1685,0.3933,13985,0.3024,true,1,148,168 St,502.69,0.0000,covered
+36061024700,Census Tract 247; New York County; New York,Manhattan,0.1866,0.3104,0.1137,6135,0.2036,true,1,148,168 St,621.20,0.0000,covered
+36061024900,Census Tract 249; New York County; New York,Manhattan,0.0185,0.2611,0.0075,1061,0.0957,true,1,148,168 St,315.86,0.0000,covered
+36061025100,Census Tract 251; New York County; New York,Manhattan,0.0546,0.1460,0.0708,2698,0.0905,true,2,148,168 St,53.24,0.0000,covered
+36061025300,Census Tract 253; New York County; New York,Manhattan,0.1494,0.1871,0.1434,10195,0.1600,true,2,148,168 St,261.60,0.0000,covered
+36061025500,Census Tract 255; New York County; New York,Manhattan,0.0791,0.1396,0.0582,5474,0.0923,true,2,147,175 St,415.67,0.0000,covered
+36061025700,Census Tract 257; New York County; New York,Manhattan,0.0390,0.0824,0.0678,4601,0.0631,true,1,153,125 St,331.02,0.0000,covered
+36061026100,Census Tract 261; New York County; New York,Manhattan,0.2329,0.1488,0.3547,11613,0.2455,true,3,147,175 St,476.29,0.0000,covered
+36061026300,Census Tract 263; New York County; New York,Manhattan,0.1424,0.1502,0.2111,7997,0.1679,true,3,147,175 St,197.83,0.0000,covered
+36061026500,Census Tract 265; New York County; New York,Manhattan,0.1198,0.1075,0.0785,8036,0.1019,true,2,147,175 St,251.78,0.0000,covered
+36061026700,Census Tract 267; New York County; New York,Manhattan,0.0125,0.0755,0.0195,2053,0.0358,true,1,146,181 St,799.65,0.0000,covered
+36061026900,Census Tract 269; New York County; New York,Manhattan,0.1179,0.1443,0.1153,7676,0.1258,true,1,146,181 St,601.74,0.0000,covered
+36061027100,Census Tract 271; New York County; New York,Manhattan,0.0656,0.1489,0.0936,7583,0.1027,true,2,146,181 St,310.33,0.0000,covered
+36061027300,Census Tract 273; New York County; New York,Manhattan,0.0469,0.1171,0.0284,7317,0.0641,true,2,146,181 St,258.57,0.0000,covered
+36061027500,Census Tract 275; New York County; New York,Manhattan,0.0625,0.2289,0.0198,3089,0.1037,true,1,146,181 St,381.86,0.0000,covered
+36061027700,Census Tract 277; New York County; New York,Manhattan,0.0744,0.2472,0.1396,6698,0.1537,true,1,299,Dyckman St,586.34,0.0000,covered
+36061027900,Census Tract 279; New York County; New York,Manhattan,0.1372,0.1163,0.1148,10035,0.1228,true,2,146,181 St,706.00,0.0000,covered
+36061028100,Census Tract 281; New York County; New York,Manhattan,0.0220,0.1673,0.0158,3222,0.0684,true,1,146,181 St,650.87,0.0000,covered
+36061028300,Census Tract 283; New York County; New York,Manhattan,0.1293,0.2169,0.1327,8132,0.1596,true,1,299,Dyckman St,322.92,0.0000,covered
+36061028500,Census Tract 285; New York County; New York,Manhattan,0.1119,0.2180,0.1954,7712,0.1751,true,1,299,Dyckman St,237.20,0.0000,covered
+36061028700,Census Tract 287; New York County; New York,Manhattan,0.0273,0.1370,0.0427,4001,0.0690,true,1,299,Dyckman St,632.40,0.0000,covered
+36061029100,Census Tract 291; New York County; New York,Manhattan,0.1950,0.1275,0.1775,10831,0.1667,true,2,299,Dyckman St,441.37,0.0000,covered
+36061029300,Census Tract 293; New York County; New York,Manhattan,0.1615,0.1211,0.2137,8677,0.1654,true,2,143,Inwood-207 St,239.37,0.0000,covered
+36061029500,Census Tract 295; New York County; New York,Manhattan,0.1021,0.1522,0.0501,7542,0.1015,true,2,143,Inwood-207 St,428.34,0.0000,covered
+36061029700,Census Tract 297; New York County; New York,Manhattan,0.0000,0.2857,0.0000,14,0.0952,true,1,143,Inwood-207 St,607.33,0.0000,covered
+36061029900,Census Tract 299; New York County; New York,Manhattan,0.0882,0.2490,0.0793,3430,0.1388,true,1,143,Inwood-207 St,439.24,0.0000,covered
+36061030300,Census Tract 303; New York County; New York,Manhattan,0.0465,0.1834,0.0390,3823,0.0896,true,1,143,Inwood-207 St,165.04,0.0000,covered
+36061030700,Census Tract 307; New York County; New York,Manhattan,0.0357,0.1521,0.0076,3906,0.0651,true,1,143,Inwood-207 St,447.11,0.0000,covered
+36061031100,Census Tract 311; New York County; New York,Manhattan,0.0000,0.0000,0.0000,0,0.0000,false,0,147,175 St,801.66,0.0000,gap
+36061031703,Census Tract 317.03; New York County; New York,Manhattan,0.0451,0.1017,0.0381,5960,0.0616,true,5,328,WTC Cortlandt,466.56,0.0000,covered
+36061031704,Census Tract 317.04; New York County; New York,Manhattan,0.0372,0.0809,0.0303,10147,0.0495,true,6,414,Bowling Green,469.04,0.0000,covered
+36061031900,Census Tract 319; New York County; New York,Manhattan,0.0000,0.0000,0.0000,0,0.0000,true,2,330,South Ferry,187.83,0.0000,covered

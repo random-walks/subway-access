@@ -36,7 +36,15 @@ def _validate_target_format(
 
 
 def export_catchments_geojson(data: CatchmentDataset, target: ExportTarget) -> Path:
-    """Export station catchments to GeoJSON for mapping workflows."""
+    """Export station catchments to GeoJSON for mapping workflows.
+
+    Args:
+        data: Generated catchment geometries.
+        target: Export target with format ``"geojson"`` and output path.
+
+    Returns:
+        The resolved output path.
+    """
 
     output_path = _validate_target_format(target, expected_formats=("geojson",))
     payload = {
@@ -66,7 +74,15 @@ def export_catchments_geojson(data: CatchmentDataset, target: ExportTarget) -> P
 
 
 def export_gap_table(data: GapAnalysis, target: ExportTarget) -> Path:
-    """Export tract-level accessibility gap tables."""
+    """Export tract-level accessibility gap tables.
+
+    Args:
+        data: Gap analysis results from ``analyze_gaps``.
+        target: Export target with format ``"csv"`` and output path.
+
+    Returns:
+        The resolved output path.
+    """
 
     output_path = _validate_target_format(target, expected_formats=("csv",))
     fieldnames = [
@@ -146,7 +162,15 @@ def _station_metric_row(record: StationMetricRecord) -> dict[str, object]:
 
 
 def export_station_metrics(data: StationMetricDataset, target: ExportTarget) -> Path:
-    """Export station-level accessibility and reliability metrics."""
+    """Export station-level accessibility and reliability metrics.
+
+    Args:
+        data: Station metric dataset from ``build_station_metrics``.
+        target: Export target with format ``"csv"`` or ``"geojson"``.
+
+    Returns:
+        The resolved output path.
+    """
 
     output_path = _validate_target_format(target, expected_formats=("csv", "geojson"))
     rows = [_station_metric_row(record) for record in data.records]

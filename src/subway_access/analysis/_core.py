@@ -22,18 +22,28 @@ from ..models import (
     StationMetricDataset,
     StationMetricRecord,
     TimeWindow,
-    TractAccessibilityRecord,
 )
-from ._geo import build_circle_polygon, haversine_distance_meters, walk_radius_meters
-
-_METERS_PER_MINUTE = 80.0
+from ._geo import build_circle_polygon, walk_radius_meters
 
 
 def generate_catchments(
     station_data: StationDataset,
     request: CatchmentRequest,
 ) -> CatchmentDataset:
-    """Generate first-pass Euclidean catchments for a walk threshold."""
+    """Generate first-pass Euclidean catchments for a walk threshold.
+
+    Args:
+        station_data: Loaded station rows for the study area.
+        request: Catchment parameters (walk minutes, mode).
+
+    Returns:
+        A ``CatchmentDataset`` with one circular polygon per station.
+
+    Example:
+        >>> catchments = generate_catchments(
+        ...     stations, models.CatchmentRequest(minutes=10)
+        ... )
+    """
 
     radius_meters = walk_radius_meters(request.minutes)
     features = tuple(
@@ -63,67 +73,49 @@ def score_accessibility(
     catchments: CatchmentDataset,
     demographics: DemographicDataset,
 ) -> AccessibilityScoreDataset:
-    """Score tract accessibility using station, catchment, and demographic inputs."""
+    """Score tract accessibility using station, catchment, and demographic inputs.
 
-    radius_by_station_id = catchments.radius_by_station_id()
-    accessible_stations = station_data.accessible_stations
+    For each tract, tests whether its centroid falls within any accessible
+    station's catchment radius and computes a composite need score.
 
-    records: list[TractAccessibilityRecord] = []
-    for tract in demographics.tracts:
-        covering_station_ids: list[str] = []
-        nearest_station_id: str | None = None
-        nearest_station_name: str | None = None
-        nearest_distance: float | None = None
+    Args:
+        station_data: Loaded station rows with ADA status.
+        catchments: Generated catchment geometries.
+        demographics: Tract-level demographic data.
 
-        for station in accessible_stations:
-            distance = haversine_distance_meters(
-                latitude_a=tract.centroid_latitude,
-                longitude_a=tract.centroid_longitude,
-                latitude_b=station.latitude,
-                longitude_b=station.longitude,
-            )
-            if nearest_distance is None or distance < nearest_distance:
-                nearest_distance = distance
-                nearest_station_id = station.station_id
-                nearest_station_name = station.name
+    Returns:
+        An ``AccessibilityScoreDataset`` with one record per tract.
 
-            if distance <= radius_by_station_id[station.station_id]:
-                covering_station_ids.append(station.station_id)
+    Example:
+        >>> scores = score_accessibility(stations, catchments, demographics)
+        >>> scores.records[0].has_accessible_station
+        True
+    """
 
-        need_score = fmean(
-            (tract.disability_rate, tract.senior_rate, tract.poverty_rate)
-        )
-        records.append(
-            TractAccessibilityRecord(
-                tract_id=tract.tract_id,
-                tract_name=tract.tract_name,
-                borough=tract.borough,
-                centroid_latitude=tract.centroid_latitude,
-                centroid_longitude=tract.centroid_longitude,
-                disability_rate=tract.disability_rate,
-                senior_rate=tract.senior_rate,
-                poverty_rate=tract.poverty_rate,
-                total_population=tract.total_population,
-                need_score=need_score,
-                has_accessible_station=bool(covering_station_ids),
-                accessible_station_count=len(covering_station_ids),
-                covering_station_ids=tuple(covering_station_ids),
-                nearest_accessible_station_id=nearest_station_id,
-                nearest_accessible_station_name=nearest_station_name,
-                nearest_accessible_distance_meters=nearest_distance,
-                nearest_accessible_path_meters=nearest_distance,
-                nearest_accessible_travel_minutes=None
-                if nearest_distance is None
-                else nearest_distance / _METERS_PER_MINUTE,
-                analysis_method="euclidean",
-            )
-        )
+    from ..factors._compat import score_tracts_via_factors
 
-    return AccessibilityScoreDataset(records=tuple(records))
+    records = score_tracts_via_factors(station_data, catchments, demographics)
+    return AccessibilityScoreDataset(records=records)
 
 
 def analyze_gaps(scored_data: AccessibilityScoreDataset) -> GapAnalysis:
-    """Identify tracts with high need and weak accessible station coverage."""
+    """Identify tracts with high need and weak accessible station coverage.
+
+    Classifies each tract as ``"covered"`` or ``"gap"`` based on whether
+    it has at least one accessible station in its catchment. Gap score
+    is 0.0 for covered tracts, or the need score for uncovered tracts.
+
+    Args:
+        scored_data: Tract accessibility scores from ``score_accessibility``.
+
+    Returns:
+        A ``GapAnalysis`` with records sorted by gap score descending.
+
+    Example:
+        >>> gaps = analyze_gaps(scores)
+        >>> gaps.records[0].gap_label
+        'gap'
+    """
 
     records = tuple(
         sorted(
@@ -199,7 +191,24 @@ def compute_reliability(
     outage_data: OutageDataset,
     window: TimeWindow,
 ) -> ReliabilityDataset:
-    """Compute a rolling station reliability score from outage history."""
+    """Compute a rolling station reliability score from outage history.
+
+    For each station, calculates the fraction of the time window that
+    was outage-free and assigns a reliability label.
+
+    Args:
+        accessibility_data: Station or accessibility dataset with ADA status.
+        outage_data: Loaded outage events.
+        window: Rolling time window (e.g. 30 days, 365 days).
+
+    Returns:
+        A ``ReliabilityDataset`` with one record per station.
+
+    Example:
+        >>> reliability = compute_reliability(
+        ...     stations, outages, models.TimeWindow(days=30)
+        ... )
+    """
 
     status_by_station, names_by_station, boroughs_by_station = _station_metadata(
         accessibility_data
@@ -273,7 +282,27 @@ def build_station_metrics(
     pedestrian_network: PedestrianNetworkDataset | None = None,
     analysis_method: str = "euclidean",
 ) -> StationMetricDataset:
-    """Aggregate station-level metrics for reporting and export."""
+    """Aggregate station-level metrics for reporting and export.
+
+    Combines coverage counts, population served, need scores, and
+    optional reliability data into one record per station.
+
+    Args:
+        station_data: Loaded station rows.
+        catchments: Generated catchment geometries.
+        scored_data: Tract accessibility scores.
+        reliability: Optional reliability dataset for score/label inclusion.
+        pedestrian_network: Optional pedestrian network for connection counts.
+        analysis_method: Label for the analysis method used.
+
+    Returns:
+        A ``StationMetricDataset`` with one record per station.
+
+    Example:
+        >>> metrics = build_station_metrics(
+        ...     stations, catchments, scores, reliability=reliability
+        ... )
+    """
 
     reliability_by_station = {} if reliability is None else reliability.as_mapping()
     network_counts = (

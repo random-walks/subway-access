@@ -1,4 +1,4 @@
-.PHONY: help install install-dev test test-optional lint lint-fix fmt format-frozen format docs docs-build audit clean build smoke-dist ci ci-lint ci-build ci-docs ci-tests
+.PHONY: help install install-dev test test-optional lint lint-fix fmt format-frozen format docs docs-build audit clean build smoke-dist check ci ci-lint ci-build ci-docs ci-tests
 
 help:
 	@echo "Available targets:"
@@ -16,6 +16,7 @@ help:
 	@echo "  docs-build   Build the docs with strict checks"
 	@echo "  audit        Print the public API audit"
 	@echo "  clean        Remove local caches and build artifacts"
+	@echo "  check        Quick pre-push check (lint + tests only)"
 	@echo "  ci           Run the local GitHub-CI-equivalent job sequence with summary output"
 
 install:
@@ -100,6 +101,10 @@ build:
 
 clean:
 	uv run python scripts/clean.py
+
+check:
+	$(MAKE) lint
+	$(MAKE) test
 
 ci:
 	@set -u; \
