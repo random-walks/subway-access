@@ -1,0 +1,152 @@
+station_id,station_name,borough,latitude,longitude,ada_status,catchment_minutes,catchment_radius_meters,covered_tract_count,covered_population,nearby_gap_tract_count,nearby_gap_population,mean_need_score,reliability_score,reliability_label,outage_minutes,network_connection_count,daytime_routes,structure,analysis_method
+7,Lexington Av/59 St,Manhattan,40.76266,-73.967258,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,43200,0,N R W,Subway,euclidean
+8,5 Av/59 St,Manhattan,40.764811,-73.973347,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,N R W,Subway,euclidean
+9,57 St-7 Av,Manhattan,40.764664,-73.980658,accessible,10,800.0,10,37579,0,0,0.1192,0.9513,at_risk,2102,0,N Q R W,Subway,euclidean
+10,49 St,Manhattan,40.759901,-73.984139,partially_accessible,10,800.0,0,0,0,0,0.0,0.0,partial_access,0,0,N R W,Subway,euclidean
+11,Times Sq-42 St,Manhattan,40.754672,-73.986754,accessible,10,800.0,13,25872,0,0,0.0668,0.9714,at_risk,1236,0,N Q R W,Subway,euclidean
+12,34 St-Herald Sq,Manhattan,40.749567,-73.98795,accessible,10,800.0,10,30081,0,0,0.052,0.9738,at_risk,1133,0,N Q R W,Subway,euclidean
+13,28 St,Manhattan,40.745494,-73.988691,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,R W,Subway,euclidean
+14,23 St,Manhattan,40.741303,-73.989344,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,R W,Subway,euclidean
+15,14 St-Union Sq,Manhattan,40.735736,-73.990568,accessible,10,800.0,15,77971,0,0,0.0806,0.9957,full_service,184,0,N Q R W,Subway,euclidean
+16,8 St-NYU,Manhattan,40.730328,-73.992629,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,R W,Subway,euclidean
+17,Prince St,Manhattan,40.724329,-73.997702,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,R W,Subway,euclidean
+18,Canal St,Manhattan,40.719527,-74.001775,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,R W,Subway,euclidean
+19,Canal St,Manhattan,40.718383,-74.00046,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,N Q,Subway,euclidean
+20,City Hall,Manhattan,40.713282,-74.006978,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,R W,Subway,euclidean
+21,Cortlandt St,Manhattan,40.710668,-74.011029,accessible,10,800.0,8,57462,0,0,0.0477,0.06,fragile,40606,0,R W,Subway,euclidean
+22,Rector St,Manhattan,40.70722,-74.013342,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,R W,Subway,euclidean
+23,Whitehall St-South Ferry,Manhattan,40.703087,-74.012994,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,5535,0,R W,Subway,euclidean
+102,Delancey St-Essex St,Manhattan,40.718315,-73.987437,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,M J Z,Subway,euclidean
+103,Bowery,Manhattan,40.72028,-73.993915,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,3296,0,J Z,Subway,euclidean
+104,Canal St,Manhattan,40.718092,-73.999892,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,J Z,Subway,euclidean
+105,Chambers St,Manhattan,40.713243,-74.003401,accessible,10,800.0,10,52321,0,0,0.0987,0.9819,strong,781,0,J Z,Subway,euclidean
+106,Fulton St,Manhattan,40.710374,-74.007582,accessible,10,800.0,9,48405,0,0,0.0728,0.9704,at_risk,1279,0,J Z,Subway,euclidean
+107,Broad St,Manhattan,40.706476,-74.011056,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,J Z,Subway,euclidean
+115,8 Av,Manhattan,40.739777,-74.002578,accessible,10,800.0,11,57105,0,0,0.0889,0.9737,at_risk,1136,0,L,Subway,euclidean
+116,6 Av,Manhattan,40.737335,-73.996786,accessible,10,800.0,10,52716,0,0,0.0764,0.9731,at_risk,1161,0,L,Subway,euclidean
+117,14 St-Union Sq,Manhattan,40.734789,-73.99073,accessible,10,800.0,12,58817,0,0,0.077,0.9836,strong,710,0,L,Subway,euclidean
+118,3 Av,Manhattan,40.732849,-73.986122,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,L,Subway,euclidean
+119,1 Av,Manhattan,40.730953,-73.981628,accessible,10,800.0,13,87781,7,29803,0.1,0.9446,fragile,2395,0,L,Subway,euclidean
+143,Inwood-207 St,Manhattan,40.868072,-73.919899,accessible,10,800.0,7,38223,1,10529,0.1175,0.9844,strong,672,0,A,Subway,euclidean
+144,Dyckman St,Manhattan,40.865491,-73.927271,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,A,Subway,euclidean
+145,190 St,Manhattan,40.859022,-73.93418,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,1321,0,A,Subway,euclidean
+146,181 St,Manhattan,40.851695,-73.937969,accessible,10,800.0,10,68621,0,0,0.1139,0.8119,fragile,8126,0,A,Subway,euclidean
+147,175 St,Manhattan,40.847391,-73.939704,accessible,10,800.0,8,60913,1,0,0.1281,0.9944,strong,243,0,A,Subway,euclidean
+148,168 St,Manhattan,40.840719,-73.939561,accessible,10,800.0,9,63754,7,41102,0.1616,0.9232,fragile,3316,0,A C,Subway,euclidean
+149,163 St-Amsterdam Av,Manhattan,40.836013,-73.939892,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,C,Subway,euclidean
+150,155 St,Manhattan,40.830518,-73.941514,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,C,Subway,euclidean
+151,145 St,Manhattan,40.824783,-73.944216,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,1460,0,A C,Subway,euclidean
+152,135 St,Manhattan,40.817894,-73.947649,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,C B,Subway,euclidean
+153,125 St,Manhattan,40.811109,-73.952343,accessible,10,800.0,12,57338,12,65539,0.0871,0.9464,fragile,2314,0,A C B D,Subway,euclidean
+154,116 St,Manhattan,40.805085,-73.954882,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,C B,Subway,euclidean
+155,Cathedral Pkwy (110 St),Manhattan,40.800603,-73.958161,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,C B,Subway,euclidean
+156,103 St,Manhattan,40.796092,-73.961454,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,C B,Subway,euclidean
+157,96 St,Manhattan,40.791642,-73.964696,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,C B,Subway,euclidean
+158,86 St,Manhattan,40.785868,-73.968916,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,C B,Subway,euclidean
+159,81 St-Museum of Natural History,Manhattan,40.781433,-73.972143,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,C B,Subway,euclidean
+160,72 St,Manhattan,40.775594,-73.97641,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,C B,Subway,euclidean
+161,59 St-Columbus Circle,Manhattan,40.768296,-73.981736,accessible,10,800.0,11,55265,0,0,0.1024,0.7197,fragile,12107,0,A C B D,Subway,euclidean
+162,50 St,Manhattan,40.762456,-73.985984,partially_accessible,10,800.0,0,0,0,0,0.0,0.0,partial_access,4767,0,C E,Subway,euclidean
+163,42 St-Port Authority Bus Terminal,Manhattan,40.757308,-73.989735,accessible,10,800.0,11,29707,1,2647,0.0947,0.0,fragile,43200,0,A C E,Subway,euclidean
+164,34 St-Penn Station,Manhattan,40.752287,-73.993391,accessible,10,800.0,10,26098,0,0,0.0674,0.5425,fragile,19763,0,A C E,Subway,euclidean
+165,23 St,Manhattan,40.745906,-73.998041,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,C E,Subway,euclidean
+166,14 St,Manhattan,40.740893,-74.00169,accessible,10,800.0,11,63592,1,1884,0.0942,0.9857,strong,619,0,A C E,Subway,euclidean
+167,W 4 St-Wash Sq,Manhattan,40.732338,-74.000495,accessible,10,800.0,11,55018,2,6098,0.0804,0.9187,fragile,3513,0,A C E,Subway,euclidean
+168,Spring St,Manhattan,40.726227,-74.003739,partially_accessible,10,800.0,0,0,0,0,0.0,0.0,partial_access,124,0,C E,Subway,euclidean
+169,Canal St,Manhattan,40.720824,-74.005229,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,A C E,Subway,euclidean
+170,Chambers St,Manhattan,40.714111,-74.008585,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,A C,Subway,euclidean
+171,World Trade Center,Manhattan,40.712582,-74.009781,accessible,10,800.0,9,54817,0,0,0.0509,0.9839,strong,695,0,E,Subway,euclidean
+172,Fulton St,Manhattan,40.710197,-74.007691,accessible,10,800.0,9,48405,0,0,0.0728,0.7991,fragile,8678,0,A C,Subway,euclidean
+220,155 St,Manhattan,40.830135,-73.938209,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,B D,Subway,euclidean
+222,Roosevelt Island,Manhattan,40.759145,-73.95326,accessible,10,800.0,5,22818,0,0,0.0856,0.7741,fragile,9760,0,M,Subway,euclidean
+223,Lexington Av/63 St,Manhattan,40.764629,-73.966113,accessible,10,800.0,14,47534,0,0,0.116,0.6419,fragile,15472,0,M Q,Subway,euclidean
+224,57 St,Manhattan,40.763972,-73.97745,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,M,Subway,euclidean
+225,47-50 Sts-Rockefeller Ctr,Manhattan,40.758663,-73.981329,accessible,10,800.0,13,22401,0,0,0.0941,0.9519,at_risk,2077,0,B D F M,Subway,euclidean
+226,42 St-Bryant Pk,Manhattan,40.754222,-73.984569,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,1729,0,B D F M,Subway,euclidean
+227,34 St-Herald Sq,Manhattan,40.749719,-73.987823,accessible,10,800.0,10,30081,0,0,0.052,0.2339,fragile,33097,0,B D F M,Subway,euclidean
+228,23 St,Manhattan,40.742878,-73.992821,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,F M,Subway,euclidean
+229,14 St,Manhattan,40.738228,-73.996209,accessible,10,800.0,12,62609,0,0,0.0789,0.9625,at_risk,1622,0,F M,Subway,euclidean
+230,Broadway-Lafayette St,Manhattan,40.725297,-73.996204,accessible,10,800.0,13,53132,0,0,0.085,0.9091,fragile,3928,0,B D F M,Subway,euclidean
+231,Grand St,Manhattan,40.718267,-73.993753,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,B D,Subway,euclidean
+232,2 Av,Manhattan,40.723402,-73.989938,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,F,Subway,euclidean
+233,Delancey St-Essex St,Manhattan,40.718611,-73.988114,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,3426,0,F,Subway,euclidean
+234,East Broadway,Manhattan,40.713715,-73.990173,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,1406,0,F,Subway,euclidean
+275,Lexington Av/53 St,Manhattan,40.757552,-73.969055,accessible,10,800.0,15,52048,0,0,0.111,0.0,fragile,43200,0,E F,Subway,euclidean
+276,5 Av/53 St,Manhattan,40.760167,-73.975224,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,4259,0,E F,Subway,euclidean
+277,7 Av,Manhattan,40.762862,-73.981637,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,776,0,E B D,Subway,euclidean
+296,Marble Hill-225 St,Manhattan,40.874561,-73.909831,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Elevated,euclidean
+297,215 St,Manhattan,40.869444,-73.915279,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Elevated,euclidean
+298,207 St,Manhattan,40.864621,-73.918822,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Elevated,euclidean
+299,Dyckman St,Manhattan,40.860531,-73.925536,accessible,10,800.0,8,63628,0,0,0.1392,0.9053,fragile,4091,0,1,Elevated,euclidean
+300,191 St,Manhattan,40.855225,-73.929412,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,8738,0,1,Subway,euclidean
+301,181 St,Manhattan,40.849505,-73.933596,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,3054,0,1,Subway,euclidean
+302,168 St-Washington Hts,Manhattan,40.840556,-73.940133,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,3075,0,1,Subway,euclidean
+303,157 St,Manhattan,40.834041,-73.94489,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+304,145 St,Manhattan,40.826551,-73.95036,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+305,137 St-City College,Manhattan,40.822008,-73.953676,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+306,125 St,Manhattan,40.815581,-73.958372,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,7337,0,1,Elevated,euclidean
+307,116 St-Columbia University,Manhattan,40.807722,-73.96411,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+308,Cathedral Pkwy (110 St),Manhattan,40.803967,-73.966847,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+309,103 St,Manhattan,40.799446,-73.968379,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+310,96 St,Manhattan,40.793919,-73.972323,accessible,10,800.0,10,88964,4,33638,0.1446,0.9176,fragile,3560,0,1 2 3,Subway,euclidean
+311,86 St,Manhattan,40.788644,-73.976218,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+312,79 St,Manhattan,40.783934,-73.979917,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+313,72 St,Manhattan,40.778453,-73.98197,accessible,10,800.0,12,77295,0,0,0.1159,1.0,full_service,0,0,1 2 3,Subway,euclidean
+314,66 St-Lincoln Center,Manhattan,40.77344,-73.982209,accessible,10,800.0,12,77528,0,0,0.1101,0.9935,strong,281,0,1,Subway,euclidean
+315,59 St-Columbus Circle,Manhattan,40.768247,-73.981929,accessible,10,800.0,10,49695,2,10982,0.1044,1.0,full_service,0,0,1,Subway,euclidean
+316,50 St,Manhattan,40.761728,-73.983849,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+317,Times Sq-42 St,Manhattan,40.75529,-73.987495,accessible,10,800.0,13,34976,0,0,0.0859,0.8826,fragile,5073,0,1 2 3,Subway,euclidean
+318,34 St-Penn Station,Manhattan,40.750373,-73.991057,accessible,10,800.0,12,37800,0,0,0.0716,0.9399,fragile,2595,0,1 2 3,Subway,euclidean
+319,28 St,Manhattan,40.747215,-73.993365,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+320,23 St,Manhattan,40.744081,-73.995657,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+321,18 St,Manhattan,40.74104,-73.997871,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+322,14 St,Manhattan,40.737826,-74.000201,accessible,10,800.0,10,53291,0,0,0.0866,0.9864,strong,586,0,1 2 3,Subway,euclidean
+323,Christopher St-Stonewall,Manhattan,40.733422,-74.002906,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+324,Houston St,Manhattan,40.728251,-74.005367,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+325,Canal St,Manhattan,40.722854,-74.006277,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+326,Franklin St,Manhattan,40.719318,-74.006886,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+327,Chambers St,Manhattan,40.715478,-74.009266,accessible,10,800.0,7,34588,0,0,0.0545,0.9515,at_risk,2095,0,1 2 3,Subway,euclidean
+328,WTC Cortlandt,Manhattan,40.711835,-74.012188,accessible,10,800.0,5,37199,0,0,0.0571,0.955,at_risk,1946,0,1,Subway,euclidean
+329,Rector St,Manhattan,40.707513,-74.013783,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,1,Subway,euclidean
+330,South Ferry,Manhattan,40.702068,-74.013664,accessible,10,800.0,5,26386,1,0,0.0274,0.6866,fragile,13540,0,1,Subway,euclidean
+331,Park Place,Manhattan,40.713051,-74.008811,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,854,0,2 3,Subway,euclidean
+332,Fulton St,Manhattan,40.709416,-74.006571,accessible,10,800.0,9,48405,0,0,0.0728,0.987,strong,560,0,2 3,Subway,euclidean
+333,Wall St,Manhattan,40.706821,-74.0091,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,2 3,Subway,euclidean
+392,125 St,Manhattan,40.804138,-73.937594,accessible,10,800.0,10,47240,7,33242,0.123,0.9366,fragile,2737,0,4 5 6,Subway,euclidean
+393,116 St,Manhattan,40.798629,-73.941617,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,6,Subway,euclidean
+394,110 St,Manhattan,40.79502,-73.94425,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,6,Subway,euclidean
+395,103 St,Manhattan,40.7906,-73.947478,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,6,Subway,euclidean
+396,96 St,Manhattan,40.785672,-73.95107,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,6,Subway,euclidean
+397,86 St,Manhattan,40.779492,-73.955589,partially_accessible,10,800.0,0,0,0,0,0.0,0.0,partial_access,1036,0,4 5 6,Subway,euclidean
+398,77 St,Manhattan,40.77362,-73.959874,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,6,Subway,euclidean
+399,68 St-Hunter College,Manhattan,40.768141,-73.96387,accessible,10,800.0,11,56716,0,0,0.1187,0.9894,strong,460,0,6,Subway,euclidean
+400,59 St,Manhattan,40.762526,-73.967967,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,4572,0,4 5 6,Subway,euclidean
+401,51 St,Manhattan,40.757107,-73.97192,accessible,10,800.0,14,36682,0,0,0.1052,0.9704,at_risk,1279,0,6,Subway,euclidean
+402,Grand Central-42 St,Manhattan,40.751776,-73.976848,accessible,10,800.0,9,35073,0,0,0.0643,0.6956,fragile,13152,0,4 5 6,Subway,euclidean
+403,33 St,Manhattan,40.746081,-73.982076,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,6,Subway,euclidean
+404,28 St,Manhattan,40.74307,-73.984264,partially_accessible,10,800.0,0,0,0,0,0.0,0.0,partial_access,210,0,6,Subway,euclidean
+405,23 St-Baruch College,Manhattan,40.739864,-73.986599,accessible,10,800.0,11,67067,3,12174,0.082,0.972,at_risk,1209,0,6,Subway,euclidean
+406,14 St-Union Sq,Manhattan,40.734673,-73.989951,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,19787,0,4 5 6,Subway,euclidean
+407,Astor Pl,Manhattan,40.730054,-73.99107,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,6,Subway,euclidean
+408,Bleecker St,Manhattan,40.725915,-73.994659,accessible,10,800.0,14,58434,4,14850,0.0819,0.9696,at_risk,1312,0,6,Subway,euclidean
+409,Spring St,Manhattan,40.722301,-73.997141,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,6,Subway,euclidean
+410,Canal St,Manhattan,40.718803,-74.000193,accessible,10,800.0,12,46537,4,23076,0.0906,0.9891,strong,470,0,6,Subway,euclidean
+411,Brooklyn Bridge-City Hall,Manhattan,40.713065,-74.004131,accessible,10,800.0,9,43432,0,0,0.0897,0.9569,at_risk,1861,0,4 5 6,Subway,euclidean
+412,Fulton St,Manhattan,40.710368,-74.009509,accessible,10,800.0,9,58251,0,0,0.0488,0.7448,fragile,11026,0,4 5,Subway,euclidean
+413,Wall St,Manhattan,40.707557,-74.011862,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,4 5,Subway,euclidean
+414,Bowling Green,Manhattan,40.704817,-74.014065,accessible,10,800.0,5,26386,0,0,0.0274,0.7938,fragile,8908,0,4 5,Subway,euclidean
+436,Harlem-148 St,Manhattan,40.82388,-73.93647,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,3,Subway,euclidean
+437,145 St,Manhattan,40.820421,-73.936245,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,3,Subway,euclidean
+438,135 St,Manhattan,40.814229,-73.94077,accessible,10,800.0,12,66701,6,41007,0.1261,0.9058,fragile,4070,0,2 3,Subway,euclidean
+439,125 St,Manhattan,40.807754,-73.945495,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,2 3,Subway,euclidean
+440,116 St,Manhattan,40.802098,-73.949625,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,2 3,Subway,euclidean
+441,110 St-Malcolm X Plaza,Manhattan,40.799075,-73.951822,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,2 3,Subway,euclidean
+465,Grand Central-42 St,Manhattan,40.751431,-73.976041,accessible,10,800.0,11,38270,0,0,0.0583,0.8556,fragile,6238,0,7,Subway,euclidean
+466,5 Av,Manhattan,40.753821,-73.981963,not_accessible,10,800.0,0,0,0,0,0.0,0.0,not_accessible,0,0,7,Subway,euclidean
+467,Times Sq-42 St,Manhattan,40.755477,-73.987691,accessible,10,800.0,13,34976,0,0,0.0859,0.9722,at_risk,1202,0,7,Subway,euclidean
+468,Times Sq-42 St,Manhattan,40.755983,-73.986229,accessible,10,800.0,14,36365,0,0,0.0839,1.0,full_service,0,0,S,Subway,euclidean
+469,Grand Central-42 St,Manhattan,40.752769,-73.979189,accessible,10,800.0,10,27957,0,0,0.0809,1.0,full_service,0,0,S,Subway,euclidean
+471,34 St-Hudson Yards,Manhattan,40.755882,-74.00191,accessible,10,800.0,8,33349,0,0,0.0636,0.0,fragile,43200,0,7,Subway,euclidean
+475,96 St,Manhattan,40.784318,-73.947152,accessible,10,800.0,15,82799,4,23686,0.1244,0.778,fragile,9589,0,Q,Subway,euclidean
+476,86 St,Manhattan,40.777891,-73.951787,accessible,10,800.0,21,121304,3,5803,0.1069,0.6002,fragile,17270,0,Q,Subway,euclidean
+477,72 St,Manhattan,40.768799,-73.958424,accessible,10,800.0,15,90948,1,5094,0.1103,0.4829,fragile,22340,0,Q,Subway,euclidean

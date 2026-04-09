@@ -1,0 +1,6494 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061000201",
+        "tract_name": "Census Tract 2.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71189680842479,
+        "centroid_longitude": -73.98583770285269,
+        "disability_rate": 0.0227,
+        "senior_rate": 0.14758566978193147,
+        "poverty_rate": 0.1337,
+        "population": 2568
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98583770285269,
+          40.71189680842479
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061000202",
+        "tract_name": "Census Tract 2.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71213967824348,
+        "centroid_longitude": -73.98132489110331,
+        "disability_rate": 0.0979,
+        "senior_rate": 0.22569945197577157,
+        "poverty_rate": 0.1724,
+        "population": 6934
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98132489110331,
+          40.71213967824348
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061000500",
+        "tract_name": "Census Tract 5; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.6889549543787,
+        "centroid_longitude": -74.01694827880397,
+        "disability_rate": 0.0,
+        "senior_rate": 0.0,
+        "poverty_rate": 0.0,
+        "population": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.01694827880397,
+          40.6889549543787
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061000600",
+        "tract_name": "Census Tract 6; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.711939883465625,
+        "centroid_longitude": -73.98946071857917,
+        "disability_rate": 0.1208,
+        "senior_rate": 0.26495726495726496,
+        "poverty_rate": 0.366,
+        "population": 10179
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98946071857917,
+          40.711939883465625
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061000700",
+        "tract_name": "Census Tract 7; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.705421766258894,
+        "centroid_longitude": -74.00762084080834,
+        "disability_rate": 0.0094,
+        "senior_rate": 0.039409413854351684,
+        "poverty_rate": 0.0376,
+        "population": 9008
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00762084080834,
+          40.705421766258894
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061000800",
+        "tract_name": "Census Tract 8; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71176028236676,
+        "centroid_longitude": -73.99452716405514,
+        "disability_rate": 0.0837,
+        "senior_rate": 0.2240971987850152,
+        "poverty_rate": 0.2301,
+        "population": 8889
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99452716405514,
+          40.71176028236676
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061000900",
+        "tract_name": "Census Tract 9; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7022928425959,
+        "centroid_longitude": -74.00987535113309,
+        "disability_rate": 0.0074,
+        "senior_rate": 0.060215053763440864,
+        "poverty_rate": 0.0167,
+        "population": 1860
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00987535113309,
+          40.7022928425959
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061001001",
+        "tract_name": "Census Tract 10.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.714353045776136,
+        "centroid_longitude": -73.97755211613844,
+        "disability_rate": 0.0134,
+        "senior_rate": 0.1686046511627907,
+        "poverty_rate": 0.0055,
+        "population": 1720
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97755211613844,
+          40.714353045776136
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061001002",
+        "tract_name": "Census Tract 10.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.717314139949266,
+        "centroid_longitude": -73.97695423903943,
+        "disability_rate": 0.091,
+        "senior_rate": 0.19104624467038372,
+        "poverty_rate": 0.2829,
+        "population": 6098
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97695423903943,
+          40.717314139949266
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061001200",
+        "tract_name": "Census Tract 12; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71590674929292,
+        "centroid_longitude": -73.98209313559562,
+        "disability_rate": 0.057,
+        "senior_rate": 0.291704857928506,
+        "poverty_rate": 0.0696,
+        "population": 4364
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98209313559562,
+          40.71590674929292
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061001300",
+        "tract_name": "Census Tract 13; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.709149961893345,
+        "centroid_longitude": -74.01298625852819,
+        "disability_rate": 0.0071,
+        "senior_rate": 0.026624464717929622,
+        "poverty_rate": 0.0581,
+        "population": 5371
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.01298625852819,
+          40.709149961893345
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061001401",
+        "tract_name": "Census Tract 14.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.715160465602665,
+        "centroid_longitude": -73.98733213709276,
+        "disability_rate": 0.0681,
+        "senior_rate": 0.3861561119293078,
+        "poverty_rate": 0.0138,
+        "population": 3395
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98733213709276,
+          40.715160465602665
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061001402",
+        "tract_name": "Census Tract 14.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71751329859788,
+        "centroid_longitude": -73.98588163140285,
+        "disability_rate": 0.0752,
+        "senior_rate": 0.26384459263554655,
+        "poverty_rate": 0.1111,
+        "population": 3449
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98588163140285,
+          40.71751329859788
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061001501",
+        "tract_name": "Census Tract 15.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.709146424637204,
+        "centroid_longitude": -74.00364187557639,
+        "disability_rate": 0.0581,
+        "senior_rate": 0.2263083451202263,
+        "poverty_rate": 0.0497,
+        "population": 7777
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00364187557639,
+          40.709146424637204
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061001502",
+        "tract_name": "Census Tract 15.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.70699154646996,
+        "centroid_longitude": -74.00492583033773,
+        "disability_rate": 0.0416,
+        "senior_rate": 0.02486741308190925,
+        "poverty_rate": 0.0561,
+        "population": 8485
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00492583033773,
+          40.70699154646996
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061001600",
+        "tract_name": "Census Tract 16; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71595722075501,
+        "centroid_longitude": -73.9932663005416,
+        "disability_rate": 0.0645,
+        "senior_rate": 0.2779829545454545,
+        "poverty_rate": 0.0765,
+        "population": 7040
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9932663005416,
+          40.71595722075501
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061001800",
+        "tract_name": "Census Tract 18; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71904611989873,
+        "centroid_longitude": -73.99084216683312,
+        "disability_rate": 0.0785,
+        "senior_rate": 0.21008654133094598,
+        "poverty_rate": 0.0917,
+        "population": 6702
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99084216683312,
+          40.71904611989873
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061002000",
+        "tract_name": "Census Tract 20; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.72040540396637,
+        "centroid_longitude": -73.97566235005674,
+        "disability_rate": 0.1179,
+        "senior_rate": 0.1689964531608596,
+        "poverty_rate": 0.1788,
+        "population": 4793
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97566235005674,
+          40.72040540396637
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061002100",
+        "tract_name": "Census Tract 21; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71432866591733,
+        "centroid_longitude": -74.01005917981915,
+        "disability_rate": 0.0149,
+        "senior_rate": 0.06822759315206445,
+        "poverty_rate": 0.0141,
+        "population": 7944
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.01005917981915,
+          40.71432866591733
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061002201",
+        "tract_name": "Census Tract 22.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71911566546386,
+        "centroid_longitude": -73.9818441595981,
+        "disability_rate": 0.1075,
+        "senior_rate": 0.19900574801926363,
+        "poverty_rate": 0.1677,
+        "population": 6437
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9818441595981,
+          40.71911566546386
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061002202",
+        "tract_name": "Census Tract 22.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.72125969815608,
+        "centroid_longitude": -73.98114118430723,
+        "disability_rate": 0.024,
+        "senior_rate": 0.08101371001246364,
+        "poverty_rate": 0.0342,
+        "population": 2407
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98114118430723,
+          40.72125969815608
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061002400",
+        "tract_name": "Census Tract 24; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.723954227122405,
+        "centroid_longitude": -73.97367781343067,
+        "disability_rate": 0.1331,
+        "senior_rate": 0.25080865887036574,
+        "poverty_rate": 0.1811,
+        "population": 4019
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97367781343067,
+          40.723954227122405
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061002500",
+        "tract_name": "Census Tract 25; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71010959412678,
+        "centroid_longitude": -73.9986074812065,
+        "disability_rate": 0.105,
+        "senior_rate": 0.2658777120315582,
+        "poverty_rate": 0.235,
+        "population": 5070
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9986074812065,
+          40.71010959412678
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061002601",
+        "tract_name": "Census Tract 26.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.72258485161106,
+        "centroid_longitude": -73.97993015392099,
+        "disability_rate": 0.096,
+        "senior_rate": 0.11850311850311851,
+        "poverty_rate": 0.1419,
+        "population": 4329
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97993015392099,
+          40.72258485161106
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061002602",
+        "tract_name": "Census Tract 26.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.72438922415976,
+        "centroid_longitude": -73.97861335594028,
+        "disability_rate": 0.0736,
+        "senior_rate": 0.16962984552608568,
+        "poverty_rate": 0.0543,
+        "population": 3431
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97861335594028,
+          40.72438922415976
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061002700",
+        "tract_name": "Census Tract 27; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71255665587713,
+        "centroid_longitude": -73.99901620026401,
+        "disability_rate": 0.0257,
+        "senior_rate": 0.33669185558354325,
+        "poverty_rate": 0.0113,
+        "population": 1191
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99901620026401,
+          40.71255665587713
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061002800",
+        "tract_name": "Census Tract 28; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.72686095581919,
+        "centroid_longitude": -73.97681304471212,
+        "disability_rate": 0.1522,
+        "senior_rate": 0.2013153673403914,
+        "poverty_rate": 0.1194,
+        "population": 6234
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97681304471212,
+          40.72686095581919
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061002901",
+        "tract_name": "Census Tract 29.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71336651368476,
+        "centroid_longitude": -74.00187896888383,
+        "disability_rate": 0.0088,
+        "senior_rate": 0.155893536121673,
+        "poverty_rate": 0.0087,
+        "population": 789
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00187896888383,
+          40.71336651368476
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061002902",
+        "tract_name": "Census Tract 29.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71516635956866,
+        "centroid_longitude": -73.99882635902398,
+        "disability_rate": 0.0486,
+        "senior_rate": 0.3332463465553236,
+        "poverty_rate": 0.1108,
+        "population": 3832
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99882635902398,
+          40.71516635956866
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061003001",
+        "tract_name": "Census Tract 30.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.72100069561213,
+        "centroid_longitude": -73.98682868648612,
+        "disability_rate": 0.0428,
+        "senior_rate": 0.0734102627056224,
+        "poverty_rate": 0.0656,
+        "population": 4073
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98682868648612,
+          40.72100069561213
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061003002",
+        "tract_name": "Census Tract 30.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.72296015100827,
+        "centroid_longitude": -73.9858559344263,
+        "disability_rate": 0.0477,
+        "senior_rate": 0.22672064777327935,
+        "poverty_rate": 0.0824,
+        "population": 2964
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9858559344263,
+          40.72296015100827
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061003100",
+        "tract_name": "Census Tract 31; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71531057183604,
+        "centroid_longitude": -74.00381559564451,
+        "disability_rate": 0.011,
+        "senior_rate": 0.047292418772563176,
+        "poverty_rate": 0.0211,
+        "population": 2770
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00381559564451,
+          40.71531057183604
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061003200",
+        "tract_name": "Census Tract 32; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.72555328569169,
+        "centroid_longitude": -73.98370701917045,
+        "disability_rate": 0.081,
+        "senior_rate": 0.17248062015503876,
+        "poverty_rate": 0.112,
+        "population": 7740
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98370701917045,
+          40.72555328569169
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061003300",
+        "tract_name": "Census Tract 33; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.718862140224445,
+        "centroid_longitude": -74.00614634387945,
+        "disability_rate": 0.0133,
+        "senior_rate": 0.11768927161822748,
+        "poverty_rate": 0.0119,
+        "population": 5574
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00614634387945,
+          40.718862140224445
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061003400",
+        "tract_name": "Census Tract 34; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7290059085843,
+        "centroid_longitude": -73.98145767700004,
+        "disability_rate": 0.0574,
+        "senior_rate": 0.09082483781278962,
+        "poverty_rate": 0.1075,
+        "population": 6474
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98145767700004,
+          40.7290059085843
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061003601",
+        "tract_name": "Census Tract 36.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7223193278031,
+        "centroid_longitude": -73.99112716459565,
+        "disability_rate": 0.0628,
+        "senior_rate": 0.2132879045996593,
+        "poverty_rate": 0.0512,
+        "population": 2935
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99112716459565,
+          40.7223193278031
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061003602",
+        "tract_name": "Census Tract 36.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.72456037526055,
+        "centroid_longitude": -73.99020046176118,
+        "disability_rate": 0.0328,
+        "senior_rate": 0.17162669748627565,
+        "poverty_rate": 0.0848,
+        "population": 3461
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99020046176118,
+          40.72456037526055
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061003700",
+        "tract_name": "Census Tract 37; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.726278564742216,
+        "centroid_longitude": -74.00748679402459,
+        "disability_rate": 0.0264,
+        "senior_rate": 0.18083900226757368,
+        "poverty_rate": 0.0123,
+        "population": 3528
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00748679402459,
+          40.726278564742216
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061003800",
+        "tract_name": "Census Tract 38; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.727359298239264,
+        "centroid_longitude": -73.9884548847459,
+        "disability_rate": 0.0716,
+        "senior_rate": 0.18625727039091033,
+        "poverty_rate": 0.1377,
+        "population": 7393
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9884548847459,
+          40.727359298239264
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061003900",
+        "tract_name": "Census Tract 39; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.72079553549787,
+        "centroid_longitude": -74.01078075894416,
+        "disability_rate": 0.0748,
+        "senior_rate": 0.22459546925566343,
+        "poverty_rate": 0.0748,
+        "population": 6180
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.01078075894416,
+          40.72079553549787
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061004001",
+        "tract_name": "Census Tract 40.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.730264485229014,
+        "centroid_longitude": -73.98490211935453,
+        "disability_rate": 0.0297,
+        "senior_rate": 0.14246196403872752,
+        "poverty_rate": 0.0324,
+        "population": 3615
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98490211935453,
+          40.730264485229014
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061004002",
+        "tract_name": "Census Tract 40.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.731242302898124,
+        "centroid_longitude": -73.98720895456381,
+        "disability_rate": 0.0378,
+        "senior_rate": 0.05072,
+        "poverty_rate": 0.1083,
+        "population": 6250
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98720895456381,
+          40.731242302898124
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061004100",
+        "tract_name": "Census Tract 41; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.71916368739574,
+        "centroid_longitude": -73.99669598264404,
+        "disability_rate": 0.0643,
+        "senior_rate": 0.16316947909024213,
+        "poverty_rate": 0.0904,
+        "population": 6815
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99669598264404,
+          40.71916368739574
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061004200",
+        "tract_name": "Census Tract 42; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.73175271630731,
+        "centroid_longitude": -73.98939031332907,
+        "disability_rate": 0.0101,
+        "senior_rate": 0.08129007921539042,
+        "poverty_rate": 0.0342,
+        "population": 5302
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98939031332907,
+          40.73175271630731
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061004300",
+        "tract_name": "Census Tract 43; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.723324400824254,
+        "centroid_longitude": -73.99546720645793,
+        "disability_rate": 0.0378,
+        "senior_rate": 0.16768802228412255,
+        "poverty_rate": 0.0627,
+        "population": 3590
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99546720645793,
+          40.723324400824254
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061004400",
+        "tract_name": "Census Tract 44; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.73094817917156,
+        "centroid_longitude": -73.97658211918102,
+        "disability_rate": 0.099,
+        "senior_rate": 0.16524814193239032,
+        "poverty_rate": 0.1476,
+        "population": 16684
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97658211918102,
+          40.73094817917156
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061004500",
+        "tract_name": "Census Tract 45; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7205703301991,
+        "centroid_longitude": -73.99939082193634,
+        "disability_rate": 0.0036,
+        "senior_rate": 0.1833810888252149,
+        "poverty_rate": 0.0082,
+        "population": 1047
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99939082193634,
+          40.7205703301991
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061004700",
+        "tract_name": "Census Tract 47; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.72241867586672,
+        "centroid_longitude": -74.00286273050523,
+        "disability_rate": 0.0025,
+        "senior_rate": 0.13402061855670103,
+        "poverty_rate": 0.0124,
+        "population": 2619
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00286273050523,
+          40.72241867586672
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061004800",
+        "tract_name": "Census Tract 48; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.733840854952284,
+        "centroid_longitude": -73.98369525508906,
+        "disability_rate": 0.0422,
+        "senior_rate": 0.17282282282282282,
+        "poverty_rate": 0.0489,
+        "population": 6660
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98369525508906,
+          40.733840854952284
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061004900",
+        "tract_name": "Census Tract 49; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.72505711415297,
+        "centroid_longitude": -74.00047301720494,
+        "disability_rate": 0.0355,
+        "senior_rate": 0.2053415061295972,
+        "poverty_rate": 0.0299,
+        "population": 4568
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00047301720494,
+          40.72505711415297
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061005000",
+        "tract_name": "Census Tract 50; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.73611417944029,
+        "centroid_longitude": -73.98721373059296,
+        "disability_rate": 0.0239,
+        "senior_rate": 0.16589958158995816,
+        "poverty_rate": 0.0353,
+        "population": 4780
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98721373059296,
+          40.73611417944029
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061005200",
+        "tract_name": "Census Tract 52; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.737433497180454,
+        "centroid_longitude": -73.99045836904692,
+        "disability_rate": 0.0099,
+        "senior_rate": 0.13675724096745298,
+        "poverty_rate": 0.0102,
+        "population": 3349
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99045836904692,
+          40.737433497180454
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061005400",
+        "tract_name": "Census Tract 54; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.73881207757456,
+        "centroid_longitude": -73.99367779126308,
+        "disability_rate": 0.049,
+        "senior_rate": 0.2410506248676128,
+        "poverty_rate": 0.0366,
+        "population": 4721
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99367779126308,
+          40.73881207757456
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061005501",
+        "tract_name": "Census Tract 55.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.72767261050882,
+        "centroid_longitude": -73.99708180819536,
+        "disability_rate": 0.0308,
+        "senior_rate": 0.11144956101057159,
+        "poverty_rate": 0.0586,
+        "population": 5581
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99708180819536,
+          40.72767261050882
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061005502",
+        "tract_name": "Census Tract 55.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7262234966928,
+        "centroid_longitude": -73.99387212712993,
+        "disability_rate": 0.0227,
+        "senior_rate": 0.1495085359544749,
+        "poverty_rate": 0.0195,
+        "population": 1933
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99387212712993,
+          40.7262234966928
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061005600",
+        "tract_name": "Census Tract 56; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7417915338883,
+        "centroid_longitude": -73.98729697760517,
+        "disability_rate": 0.0429,
+        "senior_rate": 0.1395234586096782,
+        "poverty_rate": 0.0793,
+        "population": 4071
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98729697760517,
+          40.7417915338883
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061005700",
+        "tract_name": "Census Tract 57; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.72942038604058,
+        "centroid_longitude": -73.99240209932036,
+        "disability_rate": 0.0251,
+        "senior_rate": 0.23036649214659685,
+        "poverty_rate": 0.0168,
+        "population": 2865
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99240209932036,
+          40.72942038604058
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061005800",
+        "tract_name": "Census Tract 58; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.743151589361055,
+        "centroid_longitude": -73.99051618486989,
+        "disability_rate": 0.0245,
+        "senior_rate": 0.05371713508612874,
+        "poverty_rate": 0.0576,
+        "population": 4412
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99051618486989,
+          40.743151589361055
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061005900",
+        "tract_name": "Census Tract 59; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.73128947735193,
+        "centroid_longitude": -73.99456142703062,
+        "disability_rate": 0.0378,
+        "senior_rate": 0.20066692820714005,
+        "poverty_rate": 0.0233,
+        "population": 5098
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99456142703062,
+          40.73128947735193
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061006000",
+        "tract_name": "Census Tract 60; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.73466830135745,
+        "centroid_longitude": -73.97658160375872,
+        "disability_rate": 0.0589,
+        "senior_rate": 0.2411441560901686,
+        "poverty_rate": 0.0168,
+        "population": 5279
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97658160375872,
+          40.73466830135745
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061006100",
+        "tract_name": "Census Tract 61; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.73370824886976,
+        "centroid_longitude": -73.99232626109233,
+        "disability_rate": 0.022,
+        "senior_rate": 0.17183098591549295,
+        "poverty_rate": 0.0217,
+        "population": 4970
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99232626109233,
+          40.73370824886976
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061006200",
+        "tract_name": "Census Tract 62; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.73892802679,
+        "centroid_longitude": -73.97448262578787,
+        "disability_rate": 0.0488,
+        "senior_rate": 0.14664187775970253,
+        "poverty_rate": 0.0719,
+        "population": 4303
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97448262578787,
+          40.73892802679
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061006300",
+        "tract_name": "Census Tract 63; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.73442086250565,
+        "centroid_longitude": -73.99686272454201,
+        "disability_rate": 0.0511,
+        "senior_rate": 0.25842888926921104,
+        "poverty_rate": 0.0258,
+        "population": 5843
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99686272454201,
+          40.73442086250565
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061006400",
+        "tract_name": "Census Tract 64; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.736938641850486,
+        "centroid_longitude": -73.9814554728241,
+        "disability_rate": 0.069,
+        "senior_rate": 0.15694671873031868,
+        "poverty_rate": 0.1416,
+        "population": 7939
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9814554728241,
+          40.736938641850486
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061006500",
+        "tract_name": "Census Tract 65; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.72996665663551,
+        "centroid_longitude": -73.99957849267085,
+        "disability_rate": 0.0175,
+        "senior_rate": 0.12263248517313947,
+        "poverty_rate": 0.0352,
+        "population": 5227
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99957849267085,
+          40.72996665663551
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061006600",
+        "tract_name": "Census Tract 66; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.74007046684907,
+        "centroid_longitude": -73.9792316412989,
+        "disability_rate": 0.0968,
+        "senior_rate": 0.2159860990443093,
+        "poverty_rate": 0.0646,
+        "population": 11510
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9792316412989,
+          40.74007046684907
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061006700",
+        "tract_name": "Census Tract 67; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.73045257089837,
+        "centroid_longitude": -74.00412224831848,
+        "disability_rate": 0.0392,
+        "senior_rate": 0.21347402597402598,
+        "poverty_rate": 0.019,
+        "population": 4928
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00412224831848,
+          40.73045257089837
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061006800",
+        "tract_name": "Census Tract 68; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7404373295888,
+        "centroid_longitude": -73.98407917314536,
+        "disability_rate": 0.0539,
+        "senior_rate": 0.11548152295632699,
+        "poverty_rate": 0.055,
+        "population": 7144
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98407917314536,
+          40.7404373295888
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061006900",
+        "tract_name": "Census Tract 69; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.73037892162228,
+        "centroid_longitude": -74.00999837604259,
+        "disability_rate": 0.0094,
+        "senior_rate": 0.1357976653696498,
+        "poverty_rate": 0.0095,
+        "population": 2570
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00999837604259,
+          40.73037892162228
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061007001",
+        "tract_name": "Census Tract 70.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.742708363902636,
+        "centroid_longitude": -73.9758243262125,
+        "disability_rate": 0.0264,
+        "senior_rate": 0.14469606674612634,
+        "poverty_rate": 0.0103,
+        "population": 4195
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9758243262125,
+          40.742708363902636
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061007002",
+        "tract_name": "Census Tract 70.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.74367558303791,
+        "centroid_longitude": -73.9781313963454,
+        "disability_rate": 0.0317,
+        "senior_rate": 0.17410228509249184,
+        "poverty_rate": 0.0237,
+        "population": 3676
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9781313963454,
+          40.74367558303791
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061007100",
+        "tract_name": "Census Tract 71; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.73544760170417,
+        "centroid_longitude": -73.99991373358844,
+        "disability_rate": 0.0266,
+        "senior_rate": 0.13944817300521997,
+        "poverty_rate": 0.0229,
+        "population": 5364
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99991373358844,
+          40.73544760170417
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061007200",
+        "tract_name": "Census Tract 72; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.744861365602766,
+        "centroid_longitude": -73.98085592085918,
+        "disability_rate": 0.0319,
+        "senior_rate": 0.10243632336655592,
+        "poverty_rate": 0.0403,
+        "population": 7224
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98085592085918,
+          40.744861365602766
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061007300",
+        "tract_name": "Census Tract 73; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.734115715490866,
+        "centroid_longitude": -74.0041062331331,
+        "disability_rate": 0.0078,
+        "senior_rate": 0.10619777158774374,
+        "poverty_rate": 0.0612,
+        "population": 5744
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.0041062331331,
+          40.734115715490866
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061007400",
+        "tract_name": "Census Tract 74; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.74621511441411,
+        "centroid_longitude": -73.98407566587137,
+        "disability_rate": 0.0209,
+        "senior_rate": 0.10176906981167967,
+        "poverty_rate": 0.0702,
+        "population": 5257
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98407566587137,
+          40.74621511441411
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061007500",
+        "tract_name": "Census Tract 75; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.734386035852545,
+        "centroid_longitude": -74.00873824290711,
+        "disability_rate": 0.057,
+        "senior_rate": 0.25222863135815415,
+        "poverty_rate": 0.0243,
+        "population": 3814
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00873824290711,
+          40.734386035852545
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061007600",
+        "tract_name": "Census Tract 76; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.74756594228956,
+        "centroid_longitude": -73.98729624745371,
+        "disability_rate": 0.0266,
+        "senior_rate": 0.07535641547861507,
+        "poverty_rate": 0.0355,
+        "population": 2455
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98729624745371,
+          40.74756594228956
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061007700",
+        "tract_name": "Census Tract 77; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.73808308577602,
+        "centroid_longitude": -74.00329385357672,
+        "disability_rate": 0.0443,
+        "senior_rate": 0.15060888252148996,
+        "poverty_rate": 0.029,
+        "population": 5584
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00329385357672,
+          40.73808308577602
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061007800",
+        "tract_name": "Census Tract 78; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.74632537305917,
+        "centroid_longitude": -73.9746736597301,
+        "disability_rate": 0.047,
+        "senior_rate": 0.14740846409890632,
+        "poverty_rate": 0.0545,
+        "population": 8412
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9746736597301,
+          40.74632537305917
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061007900",
+        "tract_name": "Census Tract 79; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.739135965887506,
+        "centroid_longitude": -74.00831470683788,
+        "disability_rate": 0.0316,
+        "senior_rate": 0.21355782011519717,
+        "poverty_rate": 0.0334,
+        "population": 4514
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00831470683788,
+          40.739135965887506
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061008000",
+        "tract_name": "Census Tract 80; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.74925841664876,
+        "centroid_longitude": -73.9776523314043,
+        "disability_rate": 0.0265,
+        "senior_rate": 0.17705971277399848,
+        "poverty_rate": 0.0385,
+        "population": 5292
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9776523314043,
+          40.74925841664876
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061008100",
+        "tract_name": "Census Tract 81; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.73980573041201,
+        "centroid_longitude": -73.99877177141194,
+        "disability_rate": 0.0323,
+        "senior_rate": 0.17548570525983256,
+        "poverty_rate": 0.0295,
+        "population": 6331
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99877177141194,
+          40.73980573041201
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061008200",
+        "tract_name": "Census Tract 82; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7506137816858,
+        "centroid_longitude": -73.98087259024274,
+        "disability_rate": 0.0087,
+        "senior_rate": 0.10011954572624028,
+        "poverty_rate": 0.0259,
+        "population": 3346
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98087259024274,
+          40.7506137816858
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061008300",
+        "tract_name": "Census Tract 83; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.74219882313699,
+        "centroid_longitude": -74.00445211268419,
+        "disability_rate": 0.0679,
+        "senior_rate": 0.23146872416643705,
+        "poverty_rate": 0.0712,
+        "population": 3629
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00445211268419,
+          40.74219882313699
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061008400",
+        "tract_name": "Census Tract 84; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.751969911791804,
+        "centroid_longitude": -73.98409384490057,
+        "disability_rate": 0.0173,
+        "senior_rate": 0.14698795180722893,
+        "poverty_rate": 0.013,
+        "population": 1660
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98409384490057,
+          40.751969911791804
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061008601",
+        "tract_name": "Census Tract 86.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.74602686466981,
+        "centroid_longitude": -73.97067382498425,
+        "disability_rate": 0.0168,
+        "senior_rate": 0.11729746637472631,
+        "poverty_rate": 0.0547,
+        "population": 3197
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97067382498425,
+          40.74602686466981
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061008602",
+        "tract_name": "Census Tract 86.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.75034569204894,
+        "centroid_longitude": -73.96731880378569,
+        "disability_rate": 0.0,
+        "senior_rate": 0.0,
+        "poverty_rate": 0.0,
+        "population": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96731880378569,
+          40.75034569204894
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061008603",
+        "tract_name": "Census Tract 86.03; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.75403534491864,
+        "centroid_longitude": -73.96439160907221,
+        "disability_rate": 0.0419,
+        "senior_rate": 0.4176946800308404,
+        "poverty_rate": 0.0233,
+        "population": 5188
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96439160907221,
+          40.75403534491864
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061008700",
+        "tract_name": "Census Tract 87; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.74224335883518,
+        "centroid_longitude": -73.99699453351975,
+        "disability_rate": 0.0213,
+        "senior_rate": 0.08280812324929972,
+        "poverty_rate": 0.0677,
+        "population": 5712
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99699453351975,
+          40.74224335883518
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061008800",
+        "tract_name": "Census Tract 88; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.74949975641135,
+        "centroid_longitude": -73.97238394019523,
+        "disability_rate": 0.0468,
+        "senior_rate": 0.22801578354002255,
+        "poverty_rate": 0.0763,
+        "population": 7096
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97238394019523,
+          40.74949975641135
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061008900",
+        "tract_name": "Census Tract 89; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.74463788718416,
+        "centroid_longitude": -74.00267744796895,
+        "disability_rate": 0.0384,
+        "senior_rate": 0.17661138656180544,
+        "poverty_rate": 0.076,
+        "population": 5849
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00267744796895,
+          40.74463788718416
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061009000",
+        "tract_name": "Census Tract 90; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.752658955170936,
+        "centroid_longitude": -73.97008982222108,
+        "disability_rate": 0.0528,
+        "senior_rate": 0.23891625615763548,
+        "poverty_rate": 0.0688,
+        "population": 7308
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97008982222108,
+          40.752658955170936
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061009100",
+        "tract_name": "Census Tract 91; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.74471843860462,
+        "centroid_longitude": -73.99519664553885,
+        "disability_rate": 0.1002,
+        "senior_rate": 0.13452288595810705,
+        "poverty_rate": 0.128,
+        "population": 6445
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99519664553885,
+          40.74471843860462
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061009200",
+        "tract_name": "Census Tract 92; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7536466773293,
+        "centroid_longitude": -73.97474012123189,
+        "disability_rate": 0.005,
+        "senior_rate": 0.11860795454545454,
+        "poverty_rate": 0.0075,
+        "population": 1408
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97474012123189,
+          40.7536466773293
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061009300",
+        "tract_name": "Census Tract 93; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7471135313637,
+        "centroid_longitude": -74.0008752857359,
+        "disability_rate": 0.1444,
+        "senior_rate": 0.21610475306732652,
+        "poverty_rate": 0.1204,
+        "population": 9699
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.0008752857359,
+          40.7471135313637
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061009400",
+        "tract_name": "Census Tract 94; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.75522698291682,
+        "centroid_longitude": -73.97774408784089,
+        "disability_rate": 0.0,
+        "senior_rate": 0.0,
+        "poverty_rate": 0.0016,
+        "population": 77
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97774408784089,
+          40.75522698291682
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061009500",
+        "tract_name": "Census Tract 95; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.74723661343805,
+        "centroid_longitude": -73.99335783099932,
+        "disability_rate": 0.0137,
+        "senior_rate": 0.0996553704767375,
+        "poverty_rate": 0.0259,
+        "population": 3482
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99335783099932,
+          40.74723661343805
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061009600",
+        "tract_name": "Census Tract 96; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.75637499569666,
+        "centroid_longitude": -73.98088602116579,
+        "disability_rate": 0.0082,
+        "senior_rate": 0.07172995780590717,
+        "poverty_rate": 0.0085,
+        "population": 474
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98088602116579,
+          40.75637499569666
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061009700",
+        "tract_name": "Census Tract 97; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.749640995074984,
+        "centroid_longitude": -73.99903275561103,
+        "disability_rate": 0.0764,
+        "senior_rate": 0.4060754969845879,
+        "poverty_rate": 0.08,
+        "population": 4477
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99903275561103,
+          40.749640995074984
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061009800",
+        "tract_name": "Census Tract 98; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.75578757179025,
+        "centroid_longitude": -73.96777444058857,
+        "disability_rate": 0.0945,
+        "senior_rate": 0.18250089402789366,
+        "poverty_rate": 0.1106,
+        "population": 8389
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96777444058857,
+          40.75578757179025
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061009901",
+        "tract_name": "Census Tract 99.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.747493310957495,
+        "centroid_longitude": -74.00749192381903,
+        "disability_rate": 0.0138,
+        "senior_rate": 0.04511677282377919,
+        "poverty_rate": 0.0093,
+        "population": 1884
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00749192381903,
+          40.747493310957495
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061009902",
+        "tract_name": "Census Tract 99.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.75213531407525,
+        "centroid_longitude": -74.00495639275172,
+        "disability_rate": 0.0188,
+        "senior_rate": 0.02724935732647815,
+        "poverty_rate": 0.029,
+        "population": 3890
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00495639275172,
+          40.75213531407525
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061009903",
+        "tract_name": "Census Tract 99.03; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.75614841492202,
+        "centroid_longitude": -74.00247123013591,
+        "disability_rate": 0.0021,
+        "senior_rate": 0.12064090480678605,
+        "poverty_rate": 0.0069,
+        "population": 1061
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.00247123013591,
+          40.75614841492202
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061010000",
+        "tract_name": "Census Tract 100; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.758064923338324,
+        "centroid_longitude": -73.97123333805082,
+        "disability_rate": 0.006,
+        "senior_rate": 0.19503331314354935,
+        "poverty_rate": 0.005,
+        "population": 1651
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97123333805082,
+          40.758064923338324
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061010100",
+        "tract_name": "Census Tract 101; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.749730799327594,
+        "centroid_longitude": -73.99153675516679,
+        "disability_rate": 0.0122,
+        "senior_rate": 0.048881955278211126,
+        "poverty_rate": 0.0308,
+        "population": 1923
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99153675516679,
+          40.749730799327594
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061010200",
+        "tract_name": "Census Tract 102; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.75942376926727,
+        "centroid_longitude": -73.97444936939087,
+        "disability_rate": 0.0022,
+        "senior_rate": 0.5327868852459017,
+        "poverty_rate": 0.0017,
+        "population": 244
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97444936939087,
+          40.75942376926727
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061010300",
+        "tract_name": "Census Tract 103; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.752133364022946,
+        "centroid_longitude": -73.99721512997657,
+        "disability_rate": 0.0038,
+        "senior_rate": 0.08400908206292572,
+        "poverty_rate": 0.0122,
+        "population": 3083
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99721512997657,
+          40.752133364022946
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061010400",
+        "tract_name": "Census Tract 104; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76077898601415,
+        "centroid_longitude": -73.97767288532968,
+        "disability_rate": 0.0075,
+        "senior_rate": 0.2947916666666667,
+        "poverty_rate": 0.0027,
+        "population": 960
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97767288532968,
+          40.76077898601415
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061010601",
+        "tract_name": "Census Tract 106.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.757385610853646,
+        "centroid_longitude": -73.96158078824946,
+        "disability_rate": 0.0526,
+        "senior_rate": 0.30759058450145466,
+        "poverty_rate": 0.0204,
+        "population": 7562
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96158078824946,
+          40.757385610853646
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061010602",
+        "tract_name": "Census Tract 106.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7604196392498,
+        "centroid_longitude": -73.95920175378666,
+        "disability_rate": 0.0215,
+        "senior_rate": 0.12465041949660408,
+        "poverty_rate": 0.0445,
+        "population": 5006
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95920175378666,
+          40.7604196392498
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061010801",
+        "tract_name": "Census Tract 108.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.75798107921554,
+        "centroid_longitude": -73.96617557672839,
+        "disability_rate": 0.0277,
+        "senior_rate": 0.18555811277330264,
+        "poverty_rate": 0.0219,
+        "population": 3476
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96617557672839,
+          40.75798107921554
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061010802",
+        "tract_name": "Census Tract 108.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.75912247536421,
+        "centroid_longitude": -73.96387512885924,
+        "disability_rate": 0.0271,
+        "senior_rate": 0.5278456277479238,
+        "poverty_rate": 0.0386,
+        "population": 4094
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96387512885924,
+          40.75912247536421
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061010803",
+        "tract_name": "Census Tract 108.03; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7600932102395,
+        "centroid_longitude": -73.96617516906679,
+        "disability_rate": 0.0177,
+        "senior_rate": 0.24782608695652175,
+        "poverty_rate": 0.0105,
+        "population": 1840
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96617516906679,
+          40.7600932102395
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061010900",
+        "tract_name": "Census Tract 109; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.752250673380615,
+        "centroid_longitude": -73.98970307618413,
+        "disability_rate": 0.0022,
+        "senior_rate": 0.06,
+        "poverty_rate": 0.0085,
+        "population": 200
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98970307618413,
+          40.752250673380615
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061011000",
+        "tract_name": "Census Tract 110; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7621469434511,
+        "centroid_longitude": -73.963136676836,
+        "disability_rate": 0.0555,
+        "senior_rate": 0.19439252336448598,
+        "poverty_rate": 0.0202,
+        "population": 6955
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.963136676836,
+          40.7621469434511
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061011100",
+        "tract_name": "Census Tract 111; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.75464732937384,
+        "centroid_longitude": -73.99538896516843,
+        "disability_rate": 0.0537,
+        "senior_rate": 0.08852527795259073,
+        "poverty_rate": 0.0721,
+        "population": 4767
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99538896516843,
+          40.75464732937384
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061011201",
+        "tract_name": "Census Tract 112.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.763977901080615,
+        "centroid_longitude": -73.97534573282562,
+        "disability_rate": 0.0143,
+        "senior_rate": 0.28421052631578947,
+        "poverty_rate": 0.0126,
+        "population": 950
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97534573282562,
+          40.763977901080615
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061011202",
+        "tract_name": "Census Tract 112.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76260394852011,
+        "centroid_longitude": -73.97213117788796,
+        "disability_rate": 0.0043,
+        "senior_rate": 0.5365384615384615,
+        "poverty_rate": 0.0007,
+        "population": 520
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97213117788796,
+          40.76260394852011
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061011203",
+        "tract_name": "Census Tract 112.03; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76124165833162,
+        "centroid_longitude": -73.96891072325586,
+        "disability_rate": 0.0087,
+        "senior_rate": 0.26020892687559355,
+        "poverty_rate": 0.0026,
+        "population": 1053
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96891072325586,
+          40.76124165833162
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061011300",
+        "tract_name": "Census Tract 113; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.754775103114845,
+        "centroid_longitude": -73.98786993559034,
+        "disability_rate": 0.0019,
+        "senior_rate": 0.29508196721311475,
+        "poverty_rate": 0.0075,
+        "population": 122
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98786993559034,
+          40.754775103114845
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061011401",
+        "tract_name": "Census Tract 114.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76484074610393,
+        "centroid_longitude": -73.97049384123372,
+        "disability_rate": 0.0084,
+        "senior_rate": 0.3523725834797891,
+        "poverty_rate": 0.0045,
+        "population": 1138
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97049384123372,
+          40.76484074610393
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061011402",
+        "tract_name": "Census Tract 114.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76348257743046,
+        "centroid_longitude": -73.96727887650732,
+        "disability_rate": 0.0199,
+        "senior_rate": 0.29172141918528255,
+        "poverty_rate": 0.0066,
+        "population": 2283
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96727887650732,
+          40.76348257743046
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061011500",
+        "tract_name": "Census Tract 115; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.75716777967041,
+        "centroid_longitude": -73.99354886241531,
+        "disability_rate": 0.046,
+        "senior_rate": 0.08577246118605243,
+        "poverty_rate": 0.0911,
+        "population": 3929
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99354886241531,
+          40.75716777967041
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061011600",
+        "tract_name": "Census Tract 116; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76339774907266,
+        "centroid_longitude": -73.95614972679205,
+        "disability_rate": 0.0447,
+        "senior_rate": 0.1694560669456067,
+        "poverty_rate": 0.0348,
+        "population": 3346
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95614972679205,
+          40.76339774907266
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061011700",
+        "tract_name": "Census Tract 117; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.75979605078295,
+        "centroid_longitude": -73.99964372495914,
+        "disability_rate": 0.0372,
+        "senior_rate": 0.03781429419916848,
+        "poverty_rate": 0.0456,
+        "population": 5051
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99964372495914,
+          40.75979605078295
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061011800",
+        "tract_name": "Census Tract 118; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76527473659747,
+        "centroid_longitude": -73.96085525416578,
+        "disability_rate": 0.1476,
+        "senior_rate": 0.21845275840202916,
+        "poverty_rate": 0.0604,
+        "population": 9462
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96085525416578,
+          40.76527473659747
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061011900",
+        "tract_name": "Census Tract 119; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.75731518521495,
+        "centroid_longitude": -73.98602477324475,
+        "disability_rate": 0.06,
+        "senior_rate": 0.5187393526405452,
+        "poverty_rate": 0.0561,
+        "population": 1174
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98602477324475,
+          40.75731518521495
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061012000",
+        "tract_name": "Census Tract 120; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76692610086383,
+        "centroid_longitude": -73.96476633494787,
+        "disability_rate": 0.0263,
+        "senior_rate": 0.3519849953110347,
+        "poverty_rate": 0.0299,
+        "population": 3199
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96476633494787,
+          40.76692610086383
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061012101",
+        "tract_name": "Census Tract 121.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.759111885686096,
+        "centroid_longitude": -73.9902792114229,
+        "disability_rate": 0.0403,
+        "senior_rate": 0.16977491961414792,
+        "poverty_rate": 0.0898,
+        "population": 3110
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9902792114229,
+          40.759111885686096
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061012102",
+        "tract_name": "Census Tract 121.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7603075886889,
+        "centroid_longitude": -73.99311908739338,
+        "disability_rate": 0.152,
+        "senior_rate": 0.41855670103092785,
+        "poverty_rate": 0.0556,
+        "population": 4850
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99311908739338,
+          40.7603075886889
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061012200",
+        "tract_name": "Census Tract 122; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76828117783053,
+        "centroid_longitude": -73.96798405103976,
+        "disability_rate": 0.0322,
+        "senior_rate": 0.3550531914893617,
+        "poverty_rate": 0.0057,
+        "population": 3008
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96798405103976,
+          40.76828117783053
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061012400",
+        "tract_name": "Census Tract 124; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76669973226691,
+        "centroid_longitude": -73.95383567247258,
+        "disability_rate": 0.0729,
+        "senior_rate": 0.23212096444626074,
+        "poverty_rate": 0.0508,
+        "population": 9788
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95383567247258,
+          40.76669973226691
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061012500",
+        "tract_name": "Census Tract 125; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.759840640609184,
+        "centroid_longitude": -73.98417553104915,
+        "disability_rate": 0.0302,
+        "senior_rate": 0.15901328273244783,
+        "poverty_rate": 0.0369,
+        "population": 2635
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98417553104915,
+          40.759840640609184
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061012601",
+        "tract_name": "Census Tract 126.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76799408107081,
+        "centroid_longitude": -73.95740673835353,
+        "disability_rate": 0.0365,
+        "senior_rate": 0.18262897914379803,
+        "poverty_rate": 0.0336,
+        "population": 7288
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95740673835353,
+          40.76799408107081
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061012602",
+        "tract_name": "Census Tract 126.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76896733936584,
+        "centroid_longitude": -73.95970802935923,
+        "disability_rate": 0.0235,
+        "senior_rate": 0.2347252747252747,
+        "poverty_rate": 0.0122,
+        "population": 4550
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95970802935923,
+          40.76896733936584
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061012700",
+        "tract_name": "Census Tract 127; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.762238344594536,
+        "centroid_longitude": -73.98985655205378,
+        "disability_rate": 0.0658,
+        "senior_rate": 0.12437371058060713,
+        "poverty_rate": 0.0688,
+        "population": 6786
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98985655205378,
+          40.762238344594536
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061012800",
+        "tract_name": "Census Tract 128; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.77138085073779,
+        "centroid_longitude": -73.96151777175609,
+        "disability_rate": 0.0333,
+        "senior_rate": 0.3652828652828653,
+        "poverty_rate": 0.0241,
+        "population": 4914
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96151777175609,
+          40.77138085073779
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061012901",
+        "tract_name": "Census Tract 129.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.762413367166964,
+        "centroid_longitude": -73.99807086700186,
+        "disability_rate": 0.0295,
+        "senior_rate": 0.03737131575236215,
+        "poverty_rate": 0.0356,
+        "population": 7091
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99807086700186,
+          40.762413367166964
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061012902",
+        "tract_name": "Census Tract 129.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76490386391985,
+        "centroid_longitude": -73.99592643188863,
+        "disability_rate": 0.0258,
+        "senior_rate": 0.09482432942954287,
+        "poverty_rate": 0.0378,
+        "population": 2647
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99592643188863,
+          40.76490386391985
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013000",
+        "tract_name": "Census Tract 130; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7727360449005,
+        "centroid_longitude": -73.96473353312318,
+        "disability_rate": 0.0296,
+        "senior_rate": 0.3811124694376528,
+        "poverty_rate": 0.0297,
+        "population": 3272
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96473353312318,
+          40.7727360449005
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013100",
+        "tract_name": "Census Tract 131; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76234580985471,
+        "centroid_longitude": -73.98235350958423,
+        "disability_rate": 0.0378,
+        "senior_rate": 0.18670788253477588,
+        "poverty_rate": 0.0388,
+        "population": 3235
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98235350958423,
+          40.76234580985471
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013201",
+        "tract_name": "Census Tract 132.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76870128714932,
+        "centroid_longitude": -73.95206875524794,
+        "disability_rate": 0.0359,
+        "senior_rate": 0.1459412780656304,
+        "poverty_rate": 0.006,
+        "population": 2316
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95206875524794,
+          40.76870128714932
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013202",
+        "tract_name": "Census Tract 132.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76983057222756,
+        "centroid_longitude": -73.94972087111294,
+        "disability_rate": 0.0358,
+        "senior_rate": 0.24061386681282543,
+        "poverty_rate": 0.0423,
+        "population": 3649
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94972087111294,
+          40.76983057222756
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013203",
+        "tract_name": "Census Tract 132.03; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.770891199468394,
+        "centroid_longitude": -73.95227305609164,
+        "disability_rate": 0.0049,
+        "senior_rate": 0.1216499650431135,
+        "poverty_rate": 0.1182,
+        "population": 4291
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95227305609164,
+          40.770891199468394
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013300",
+        "tract_name": "Census Tract 133; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.764738102486504,
+        "centroid_longitude": -73.98803496420201,
+        "disability_rate": 0.0336,
+        "senior_rate": 0.14316436251920123,
+        "poverty_rate": 0.0768,
+        "population": 6510
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98803496420201,
+          40.764738102486504
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013400",
+        "tract_name": "Census Tract 134; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.77170205948635,
+        "centroid_longitude": -73.95616561001025,
+        "disability_rate": 0.0646,
+        "senior_rate": 0.15478538555461632,
+        "poverty_rate": 0.1296,
+        "population": 10647
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95616561001025,
+          40.77170205948635
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013501",
+        "tract_name": "Census Tract 135.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.767480043943294,
+        "centroid_longitude": -73.99423854520315,
+        "disability_rate": 0.057,
+        "senior_rate": 0.2103220799379123,
+        "poverty_rate": 0.0381,
+        "population": 5154
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99423854520315,
+          40.767480043943294
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013502",
+        "tract_name": "Census Tract 135.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76999221965781,
+        "centroid_longitude": -73.9923862278664,
+        "disability_rate": 0.0994,
+        "senior_rate": 0.24399450926561428,
+        "poverty_rate": 0.1146,
+        "population": 5828
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9923862278664,
+          40.76999221965781
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013601",
+        "tract_name": "Census Tract 136.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.77201139360241,
+        "centroid_longitude": -73.94625310990146,
+        "disability_rate": 0.0389,
+        "senior_rate": 0.5774400935125658,
+        "poverty_rate": 0.0027,
+        "population": 1711
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94625310990146,
+          40.77201139360241
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013602",
+        "tract_name": "Census Tract 136.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.771869720308175,
+        "centroid_longitude": -73.94854459936019,
+        "disability_rate": 0.0553,
+        "senior_rate": 0.17184497117232544,
+        "poverty_rate": 0.0139,
+        "population": 6244
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94854459936019,
+          40.771869720308175
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013603",
+        "tract_name": "Census Tract 136.03; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.77284119311852,
+        "centroid_longitude": -73.95084767928398,
+        "disability_rate": 0.0334,
+        "senior_rate": 0.324898328061455,
+        "poverty_rate": 0.0214,
+        "population": 4426
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95084767928398,
+          40.77284119311852
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013604",
+        "tract_name": "Census Tract 136.04; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7739562244594,
+        "centroid_longitude": -73.94849633430071,
+        "disability_rate": 0.0225,
+        "senior_rate": 0.22047018348623854,
+        "poverty_rate": 0.0125,
+        "population": 3488
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94849633430071,
+          40.7739562244594
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013700",
+        "tract_name": "Census Tract 137; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7652132764064,
+        "centroid_longitude": -73.9802373570063,
+        "disability_rate": 0.0727,
+        "senior_rate": 0.25629722921914355,
+        "poverty_rate": 0.0626,
+        "population": 6352
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9802373570063,
+          40.7652132764064
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013800",
+        "tract_name": "Census Tract 138; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.774922203707014,
+        "centroid_longitude": -73.95381524470045,
+        "disability_rate": 0.0432,
+        "senior_rate": 0.21183013144590496,
+        "poverty_rate": 0.0753,
+        "population": 11868
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95381524470045,
+          40.774922203707014
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061013900",
+        "tract_name": "Census Tract 139; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76729212378963,
+        "centroid_longitude": -73.98617036402666,
+        "disability_rate": 0.1943,
+        "senior_rate": 0.2263847144697295,
+        "poverty_rate": 0.0644,
+        "population": 9316
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98617036402666,
+          40.76729212378963
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061014000",
+        "tract_name": "Census Tract 140; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.775913970344675,
+        "centroid_longitude": -73.95820819064694,
+        "disability_rate": 0.0551,
+        "senior_rate": 0.23197175995965708,
+        "poverty_rate": 0.0414,
+        "population": 7932
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95820819064694,
+          40.775913970344675
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061014200",
+        "tract_name": "Census Tract 142; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.77727108736528,
+        "centroid_longitude": -73.96142518719608,
+        "disability_rate": 0.0229,
+        "senior_rate": 0.37927663734115347,
+        "poverty_rate": 0.0242,
+        "population": 4092
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96142518719608,
+          40.77727108736528
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061014300",
+        "tract_name": "Census Tract 143; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.78247331813262,
+        "centroid_longitude": -73.96555855134402,
+        "disability_rate": 0.0,
+        "senior_rate": 0.0,
+        "poverty_rate": 0.0,
+        "population": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96555855134402,
+          40.78247331813262
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061014401",
+        "tract_name": "Census Tract 144.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.775250001084764,
+        "centroid_longitude": -73.94753512356952,
+        "disability_rate": 0.0257,
+        "senior_rate": 0.2662144976685036,
+        "poverty_rate": 0.0132,
+        "population": 4718
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94753512356952,
+          40.775250001084764
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061014402",
+        "tract_name": "Census Tract 144.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.776239098005,
+        "centroid_longitude": -73.94534204299646,
+        "disability_rate": 0.0478,
+        "senior_rate": 0.19071241559873225,
+        "poverty_rate": 0.0356,
+        "population": 7257
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94534204299646,
+          40.776239098005
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061014500",
+        "tract_name": "Census Tract 145; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76981842109427,
+        "centroid_longitude": -73.98427708036347,
+        "disability_rate": 0.0358,
+        "senior_rate": 0.19192066501385446,
+        "poverty_rate": 0.0336,
+        "population": 6857
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98427708036347,
+          40.76981842109427
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061014601",
+        "tract_name": "Census Tract 146.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.777191841907296,
+        "centroid_longitude": -73.95216125580154,
+        "disability_rate": 0.0185,
+        "senior_rate": 0.19165976249654793,
+        "poverty_rate": 0.034,
+        "population": 3621
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95216125580154,
+          40.777191841907296
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061014602",
+        "tract_name": "Census Tract 146.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.77881479434525,
+        "centroid_longitude": -73.95097544240276,
+        "disability_rate": 0.1228,
+        "senior_rate": 0.2950953997424792,
+        "poverty_rate": 0.0647,
+        "population": 8543
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95097544240276,
+          40.77881479434525
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061014700",
+        "tract_name": "Census Tract 147; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.77132810957247,
+        "centroid_longitude": -73.98880362588025,
+        "disability_rate": 0.0255,
+        "senior_rate": 0.05354796320630749,
+        "poverty_rate": 0.0168,
+        "population": 3044
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98880362588025,
+          40.77132810957247
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061014801",
+        "tract_name": "Census Tract 148.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.77884100044117,
+        "centroid_longitude": -73.95607288391014,
+        "disability_rate": 0.0278,
+        "senior_rate": 0.2547235829251225,
+        "poverty_rate": 0.0061,
+        "population": 2858
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95607288391014,
+          40.77884100044117
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061014802",
+        "tract_name": "Census Tract 148.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7810925615158,
+        "centroid_longitude": -73.95443072940375,
+        "disability_rate": 0.0344,
+        "senior_rate": 0.19554649521718676,
+        "poverty_rate": 0.0412,
+        "population": 6377
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95443072940375,
+          40.7810925615158
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061014900",
+        "tract_name": "Census Tract 149; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.77235141471382,
+        "centroid_longitude": -73.98248669495912,
+        "disability_rate": 0.037,
+        "senior_rate": 0.2749872296952154,
+        "poverty_rate": 0.0389,
+        "population": 5873
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98248669495912,
+          40.77235141471382
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015001",
+        "tract_name": "Census Tract 150.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.78019611318297,
+        "centroid_longitude": -73.95928355406319,
+        "disability_rate": 0.0244,
+        "senior_rate": 0.311199207135778,
+        "poverty_rate": 0.0071,
+        "population": 2018
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95928355406319,
+          40.78019611318297
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015002",
+        "tract_name": "Census Tract 150.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.78244810184446,
+        "centroid_longitude": -73.95764802981165,
+        "disability_rate": 0.0383,
+        "senior_rate": 0.39030276437033784,
+        "poverty_rate": 0.015,
+        "population": 4558
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95764802981165,
+          40.78244810184446
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015101",
+        "tract_name": "Census Tract 151.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.773839640619265,
+        "centroid_longitude": -73.98697181845769,
+        "disability_rate": 0.0502,
+        "senior_rate": 0.23076923076923078,
+        "poverty_rate": 0.1301,
+        "population": 2860
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98697181845769,
+          40.773839640619265
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015102",
+        "tract_name": "Census Tract 151.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.77429708469148,
+        "centroid_longitude": -73.990897881181,
+        "disability_rate": 0.0722,
+        "senior_rate": 0.0445163449737811,
+        "poverty_rate": 0.1897,
+        "population": 8963
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.990897881181,
+          40.77429708469148
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015200",
+        "tract_name": "Census Tract 152; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.77975383081751,
+        "centroid_longitude": -73.94446783986358,
+        "disability_rate": 0.1306,
+        "senior_rate": 0.2325242718446602,
+        "poverty_rate": 0.1516,
+        "population": 8240
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94446783986358,
+          40.77975383081751
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015301",
+        "tract_name": "Census Tract 153.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7742618746379,
+        "centroid_longitude": -73.97924063098088,
+        "disability_rate": 0.0242,
+        "senior_rate": 0.2626649638143891,
+        "poverty_rate": 0.0215,
+        "population": 4698
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97924063098088,
+          40.7742618746379
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015302",
+        "tract_name": "Census Tract 153.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.77545253396194,
+        "centroid_longitude": -73.98208084314082,
+        "disability_rate": 0.0633,
+        "senior_rate": 0.1576301615798923,
+        "poverty_rate": 0.0277,
+        "population": 5570
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98208084314082,
+          40.77545253396194
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015401",
+        "tract_name": "Census Tract 154.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.780408172550715,
+        "centroid_longitude": -73.94981417189317,
+        "disability_rate": 0.0757,
+        "senior_rate": 0.20216606498194944,
+        "poverty_rate": 0.0303,
+        "population": 4986
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94981417189317,
+          40.780408172550715
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015402",
+        "tract_name": "Census Tract 154.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.78150487784517,
+        "centroid_longitude": -73.94754738052433,
+        "disability_rate": 0.0202,
+        "senior_rate": 0.1731319968758136,
+        "poverty_rate": 0.0264,
+        "population": 3841
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94754738052433,
+          40.78150487784517
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015403",
+        "tract_name": "Census Tract 154.03; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.78247580136016,
+        "centroid_longitude": -73.94985218286001,
+        "disability_rate": 0.0727,
+        "senior_rate": 0.27218344965104685,
+        "poverty_rate": 0.043,
+        "population": 5015
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94985218286001,
+          40.78247580136016
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015501",
+        "tract_name": "Census Tract 155.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.776650958410045,
+        "centroid_longitude": -73.98491820946643,
+        "disability_rate": 0.0304,
+        "senior_rate": 0.33794739964405773,
+        "poverty_rate": 0.0508,
+        "population": 5057
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98491820946643,
+          40.776650958410045
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015502",
+        "tract_name": "Census Tract 155.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.778003200805614,
+        "centroid_longitude": -73.9880723121152,
+        "disability_rate": 0.0474,
+        "senior_rate": 0.2765296803652968,
+        "poverty_rate": 0.0791,
+        "population": 5475
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9880723121152,
+          40.778003200805614
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015601",
+        "tract_name": "Census Tract 156.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.783568627149755,
+        "centroid_longitude": -73.94750231135984,
+        "disability_rate": 0.0506,
+        "senior_rate": 0.12099358974358974,
+        "poverty_rate": 0.0506,
+        "population": 4992
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94750231135984,
+          40.783568627149755
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015602",
+        "tract_name": "Census Tract 156.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.78518163633494,
+        "centroid_longitude": -73.94632436559417,
+        "disability_rate": 0.0346,
+        "senior_rate": 0.12342215988779803,
+        "poverty_rate": 0.0476,
+        "population": 2139
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94632436559417,
+          40.78518163633494
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015700",
+        "tract_name": "Census Tract 157; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.77741706399619,
+        "centroid_longitude": -73.97878605233296,
+        "disability_rate": 0.0749,
+        "senior_rate": 0.16508056157542636,
+        "poverty_rate": 0.0685,
+        "population": 10613
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97878605233296,
+          40.77741706399619
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015801",
+        "tract_name": "Census Tract 158.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.78427785781341,
+        "centroid_longitude": -73.95210371384606,
+        "disability_rate": 0.0424,
+        "senior_rate": 0.22418276374442794,
+        "poverty_rate": 0.0357,
+        "population": 5384
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95210371384606,
+          40.78427785781341
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015802",
+        "tract_name": "Census Tract 158.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.786522558298856,
+        "centroid_longitude": -73.95047444226877,
+        "disability_rate": 0.0227,
+        "senior_rate": 0.1380486695474187,
+        "poverty_rate": 0.0302,
+        "population": 4397
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95047444226877,
+          40.786522558298856
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061015900",
+        "tract_name": "Census Tract 159; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.779650597724775,
+        "centroid_longitude": -73.98453737351406,
+        "disability_rate": 0.0782,
+        "senior_rate": 0.23125407520104324,
+        "poverty_rate": 0.0574,
+        "population": 9202
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98453737351406,
+          40.779650597724775
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061016001",
+        "tract_name": "Census Tract 160.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.78563356128438,
+        "centroid_longitude": -73.95532275819845,
+        "disability_rate": 0.0245,
+        "senior_rate": 0.3314625288874216,
+        "poverty_rate": 0.0054,
+        "population": 3029
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95532275819845,
+          40.78563356128438
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061016002",
+        "tract_name": "Census Tract 160.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.78787914496783,
+        "centroid_longitude": -73.95368639936784,
+        "disability_rate": 0.0303,
+        "senior_rate": 0.3060963932333227,
+        "poverty_rate": 0.0171,
+        "population": 3133
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95368639936784,
+          40.78787914496783
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061016100",
+        "tract_name": "Census Tract 161; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.77994814825808,
+        "centroid_longitude": -73.9771929156556,
+        "disability_rate": 0.0373,
+        "senior_rate": 0.17370892018779344,
+        "poverty_rate": 0.0361,
+        "population": 6177
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9771929156556,
+          40.77994814825808
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061016200",
+        "tract_name": "Census Tract 162; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.787958235826046,
+        "centroid_longitude": -73.93967551770648,
+        "disability_rate": 0.1607,
+        "senior_rate": 0.2625818099751749,
+        "poverty_rate": 0.3736,
+        "population": 8862
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93967551770648,
+          40.787958235826046
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061016300",
+        "tract_name": "Census Tract 163; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.782648474862896,
+        "centroid_longitude": -73.98366748605525,
+        "disability_rate": 0.0774,
+        "senior_rate": 0.244688435762156,
+        "poverty_rate": 0.043,
+        "population": 7013
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98366748605525,
+          40.782648474862896
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061016400",
+        "tract_name": "Census Tract 164; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7877122498368,
+        "centroid_longitude": -73.94447228437214,
+        "disability_rate": 0.187,
+        "senior_rate": 0.14369426751592357,
+        "poverty_rate": 0.2895,
+        "population": 7850
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94447228437214,
+          40.7877122498368
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061016500",
+        "tract_name": "Census Tract 165; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7823577798301,
+        "centroid_longitude": -73.97499829287582,
+        "disability_rate": 0.085,
+        "senior_rate": 0.2645801737212188,
+        "poverty_rate": 0.0747,
+        "population": 7253
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97499829287582,
+          40.7823577798301
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061016600",
+        "tract_name": "Census Tract 166; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.78936979931473,
+        "centroid_longitude": -73.94838363837047,
+        "disability_rate": 0.098,
+        "senior_rate": 0.10247878888704043,
+        "poverty_rate": 0.1605,
+        "population": 6011
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94838363837047,
+          40.78936979931473
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061016700",
+        "tract_name": "Census Tract 167; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.785272976884606,
+        "centroid_longitude": -73.98100654398675,
+        "disability_rate": 0.0616,
+        "senior_rate": 0.22134861407249468,
+        "poverty_rate": 0.0381,
+        "population": 7504
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98100654398675,
+          40.785272976884606
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061016800",
+        "tract_name": "Census Tract 168; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.79106772681953,
+        "centroid_longitude": -73.95135505841158,
+        "disability_rate": 0.088,
+        "senior_rate": 0.2458464773922187,
+        "poverty_rate": 0.1317,
+        "population": 4755
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95135505841158,
+          40.79106772681953
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061016900",
+        "tract_name": "Census Tract 169; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.78519566643168,
+        "centroid_longitude": -73.97311965461937,
+        "disability_rate": 0.0397,
+        "senior_rate": 0.18580833942940747,
+        "poverty_rate": 0.057,
+        "population": 8202
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97311965461937,
+          40.78519566643168
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061017000",
+        "tract_name": "Census Tract 170; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.790902613549804,
+        "centroid_longitude": -73.9421466379258,
+        "disability_rate": 0.1184,
+        "senior_rate": 0.16258861193688542,
+        "poverty_rate": 0.2591,
+        "population": 8746
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9421466379258,
+          40.790902613549804
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061017100",
+        "tract_name": "Census Tract 171; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.787825109535504,
+        "centroid_longitude": -73.97927658993291,
+        "disability_rate": 0.0762,
+        "senior_rate": 0.19755013810495978,
+        "poverty_rate": 0.1239,
+        "population": 8327
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97927658993291,
+          40.787825109535504
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061017200",
+        "tract_name": "Census Tract 172; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.79382483766819,
+        "centroid_longitude": -73.94513296286304,
+        "disability_rate": 0.0832,
+        "senior_rate": 0.12723978256492852,
+        "poverty_rate": 0.1455,
+        "population": 4967
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94513296286304,
+          40.79382483766819
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061017300",
+        "tract_name": "Census Tract 173; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.787770772898504,
+        "centroid_longitude": -73.97123676556012,
+        "disability_rate": 0.1045,
+        "senior_rate": 0.2515974440894569,
+        "poverty_rate": 0.0402,
+        "population": 8764
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97123676556012,
+          40.787770772898504
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061017401",
+        "tract_name": "Census Tract 174.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.79488610383324,
+        "centroid_longitude": -73.9485746198541,
+        "disability_rate": 0.1104,
+        "senior_rate": 0.18876964354158682,
+        "poverty_rate": 0.1383,
+        "population": 5218
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9485746198541,
+          40.79488610383324
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061017402",
+        "tract_name": "Census Tract 174.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.796800616688856,
+        "centroid_longitude": -73.94715935571901,
+        "disability_rate": 0.0394,
+        "senior_rate": 0.10597073942269672,
+        "poverty_rate": 0.0448,
+        "population": 2529
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94715935571901,
+          40.796800616688856
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061017500",
+        "tract_name": "Census Tract 175; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.79040831145806,
+        "centroid_longitude": -73.97752106313935,
+        "disability_rate": 0.1147,
+        "senior_rate": 0.29179391192985915,
+        "poverty_rate": 0.0275,
+        "population": 10151
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97752106313935,
+          40.79040831145806
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061017700",
+        "tract_name": "Census Tract 177; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.79030792356539,
+        "centroid_longitude": -73.96938883010588,
+        "disability_rate": 0.0914,
+        "senior_rate": 0.2365950344252034,
+        "poverty_rate": 0.1047,
+        "population": 9586
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96938883010588,
+          40.79030792356539
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061017800",
+        "tract_name": "Census Tract 178; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.79478094966654,
+        "centroid_longitude": -73.9336405302545,
+        "disability_rate": 0.0432,
+        "senior_rate": 0.11234567901234568,
+        "poverty_rate": 0.1186,
+        "population": 4050
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9336405302545,
+          40.79478094966654
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061017900",
+        "tract_name": "Census Tract 179; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.79294213678507,
+        "centroid_longitude": -73.97567871127079,
+        "disability_rate": 0.059,
+        "senior_rate": 0.13005687305504882,
+        "poverty_rate": 0.0872,
+        "population": 9319
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97567871127079,
+          40.79294213678507
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061018000",
+        "tract_name": "Census Tract 180; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.79440196474434,
+        "centroid_longitude": -73.93959541464997,
+        "disability_rate": 0.0831,
+        "senior_rate": 0.12067663494940341,
+        "poverty_rate": 0.2396,
+        "population": 6621
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93959541464997,
+          40.79440196474434
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061018100",
+        "tract_name": "Census Tract 181; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.79255522156658,
+        "centroid_longitude": -73.96774569584117,
+        "disability_rate": 0.1232,
+        "senior_rate": 0.3343326537954191,
+        "poverty_rate": 0.0408,
+        "population": 8339
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96774569584117,
+          40.79255522156658
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061018200",
+        "tract_name": "Census Tract 182; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.79832019974744,
+        "centroid_longitude": -73.94184675994758,
+        "disability_rate": 0.1864,
+        "senior_rate": 0.11804878048780487,
+        "poverty_rate": 0.2563,
+        "population": 7175
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94184675994758,
+          40.79832019974744
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061018300",
+        "tract_name": "Census Tract 183; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.795514462363506,
+        "centroid_longitude": -73.97384450347215,
+        "disability_rate": 0.0966,
+        "senior_rate": 0.19298245614035087,
+        "poverty_rate": 0.139,
+        "population": 8493
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97384450347215,
+          40.795514462363506
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061018400",
+        "tract_name": "Census Tract 184; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.799685181699616,
+        "centroid_longitude": -73.94506538133845,
+        "disability_rate": 0.1477,
+        "senior_rate": 0.12266564338705552,
+        "poverty_rate": 0.2432,
+        "population": 7818
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94506538133845,
+          40.799685181699616
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061018500",
+        "tract_name": "Census Tract 185; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.794499873868936,
+        "centroid_longitude": -73.96636061302412,
+        "disability_rate": 0.0605,
+        "senior_rate": 0.26707070707070707,
+        "poverty_rate": 0.0218,
+        "population": 4950
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96636061302412,
+          40.794499873868936
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061018600",
+        "tract_name": "Census Tract 186; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.799102258420504,
+        "centroid_longitude": -73.94970712607328,
+        "disability_rate": 0.0911,
+        "senior_rate": 0.10317856548510568,
+        "poverty_rate": 0.1776,
+        "population": 6009
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94970712607328,
+          40.799102258420504
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061018700",
+        "tract_name": "Census Tract 187; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.79809132488264,
+        "centroid_longitude": -73.9720078831162,
+        "disability_rate": 0.0703,
+        "senior_rate": 0.18660982462939638,
+        "poverty_rate": 0.0723,
+        "population": 10321
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9720078831162,
+          40.79809132488264
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061018800",
+        "tract_name": "Census Tract 188; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.797596535043645,
+        "centroid_longitude": -73.93725964440479,
+        "disability_rate": 0.0582,
+        "senior_rate": 0.0749359100769079,
+        "poverty_rate": 0.1762,
+        "population": 5071
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93725964440479,
+          40.797596535043645
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061018900",
+        "tract_name": "Census Tract 189; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.7973303705986,
+        "centroid_longitude": -73.96425159511065,
+        "disability_rate": 0.138,
+        "senior_rate": 0.2249541992093337,
+        "poverty_rate": 0.3727,
+        "population": 10371
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96425159511065,
+          40.7973303705986
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061019000",
+        "tract_name": "Census Tract 190; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80196167399033,
+        "centroid_longitude": -73.9476193440942,
+        "disability_rate": 0.0349,
+        "senior_rate": 0.16445830085736554,
+        "poverty_rate": 0.0667,
+        "population": 3849
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9476193440942,
+          40.80196167399033
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061019100",
+        "tract_name": "Census Tract 191; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.8006328369344,
+        "centroid_longitude": -73.97018015589828,
+        "disability_rate": 0.115,
+        "senior_rate": 0.27531718569780855,
+        "poverty_rate": 0.0675,
+        "population": 8670
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97018015589828,
+          40.8006328369344
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061019200",
+        "tract_name": "Census Tract 192; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.79914622828584,
+        "centroid_longitude": -73.93078271004734,
+        "disability_rate": 0.0828,
+        "senior_rate": 0.12485681557846506,
+        "poverty_rate": 0.2161,
+        "population": 4365
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93078271004734,
+          40.79914622828584
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061019300",
+        "tract_name": "Census Tract 193; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80050464633181,
+        "centroid_longitude": -73.96195526205962,
+        "disability_rate": 0.1528,
+        "senior_rate": 0.17820140903439702,
+        "poverty_rate": 0.1958,
+        "population": 9652
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96195526205962,
+          40.80050464633181
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061019400",
+        "tract_name": "Census Tract 194; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80046753215291,
+        "centroid_longitude": -73.93518292329044,
+        "disability_rate": 0.1251,
+        "senior_rate": 0.1620163403730538,
+        "poverty_rate": 0.2155,
+        "population": 6487
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93518292329044,
+          40.80046753215291
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061019500",
+        "tract_name": "Census Tract 195; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80315575024443,
+        "centroid_longitude": -73.96833063901303,
+        "disability_rate": 0.0698,
+        "senior_rate": 0.21858656296097626,
+        "poverty_rate": 0.1064,
+        "population": 7457
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96833063901303,
+          40.80315575024443
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061019600",
+        "tract_name": "Census Tract 196; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.802807152654836,
+        "centroid_longitude": -73.93857020460203,
+        "disability_rate": 0.0705,
+        "senior_rate": 0.2709613966068355,
+        "poverty_rate": 0.1339,
+        "population": 4067
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93857020460203,
+          40.802807152654836
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061019701",
+        "tract_name": "Census Tract 197.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80531273314378,
+        "centroid_longitude": -73.95940111501564,
+        "disability_rate": 0.0061,
+        "senior_rate": 0.07907907907907907,
+        "poverty_rate": 0.0311,
+        "population": 999
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95940111501564,
+          40.80531273314378
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061019702",
+        "tract_name": "Census Tract 197.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80219105965466,
+        "centroid_longitude": -73.95798715498738,
+        "disability_rate": 0.0441,
+        "senior_rate": 0.10150375939849623,
+        "poverty_rate": 0.0389,
+        "population": 2660
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95798715498738,
+          40.80219105965466
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061019800",
+        "tract_name": "Census Tract 198; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80430457274466,
+        "centroid_longitude": -73.94237803720105,
+        "disability_rate": 0.0212,
+        "senior_rate": 0.22888713496448304,
+        "poverty_rate": 0.0204,
+        "population": 2534
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94237803720105,
+          40.80430457274466
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061019900",
+        "tract_name": "Census Tract 199; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80571198971678,
+        "centroid_longitude": -73.96653281112445,
+        "disability_rate": 0.077,
+        "senior_rate": 0.23676911128370132,
+        "poverty_rate": 0.1395,
+        "population": 9013
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96653281112445,
+          40.80571198971678
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061020000",
+        "tract_name": "Census Tract 200; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80579404364399,
+        "centroid_longitude": -73.94523311233493,
+        "disability_rate": 0.0498,
+        "senior_rate": 0.20785375761679079,
+        "poverty_rate": 0.0449,
+        "population": 2954
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94523311233493,
+          40.80579404364399
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061020101",
+        "tract_name": "Census Tract 201.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80643585617745,
+        "centroid_longitude": -73.96020532785667,
+        "disability_rate": 0.0024,
+        "senior_rate": 0.04706477732793522,
+        "poverty_rate": 0.017,
+        "population": 1976
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96020532785667,
+          40.80643585617745
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061020102",
+        "tract_name": "Census Tract 201.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80505288424457,
+        "centroid_longitude": -73.95664189377851,
+        "disability_rate": 0.0417,
+        "senior_rate": 0.09666254635352287,
+        "poverty_rate": 0.0645,
+        "population": 4045
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95664189377851,
+          40.80505288424457
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061020300",
+        "tract_name": "Census Tract 203; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.808669058235424,
+        "centroid_longitude": -73.9615603388431,
+        "disability_rate": 0.0106,
+        "senior_rate": 0.05597964376590331,
+        "poverty_rate": 0.0221,
+        "population": 3930
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9615603388431,
+          40.808669058235424
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061020500",
+        "tract_name": "Census Tract 205; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.810249544357056,
+        "centroid_longitude": -73.9651228306563,
+        "disability_rate": 0.0237,
+        "senior_rate": 0.14395290759900106,
+        "poverty_rate": 0.0202,
+        "population": 5606
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9651228306563,
+          40.810249544357056
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061020600",
+        "tract_name": "Census Tract 206; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80829130903498,
+        "centroid_longitude": -73.938783414959,
+        "disability_rate": 0.0352,
+        "senior_rate": 0.09850483729111698,
+        "poverty_rate": 0.0987,
+        "population": 3411
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.938783414959,
+          40.80829130903498
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061020701",
+        "tract_name": "Census Tract 207.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80897488587464,
+        "centroid_longitude": -73.95846100695528,
+        "disability_rate": 0.013,
+        "senior_rate": 0.07072829131652661,
+        "poverty_rate": 0.0509,
+        "population": 2856
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95846100695528,
+          40.80897488587464
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061020800",
+        "tract_name": "Census Tract 208; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80964856065301,
+        "centroid_longitude": -73.94200773789119,
+        "disability_rate": 0.0304,
+        "senior_rate": 0.09976673246007536,
+        "poverty_rate": 0.1107,
+        "population": 5573
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94200773789119,
+          40.80964856065301
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061020901",
+        "tract_name": "Census Tract 209.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.81155791323251,
+        "centroid_longitude": -73.95500355976756,
+        "disability_rate": 0.0577,
+        "senior_rate": 0.10585452395032525,
+        "poverty_rate": 0.1226,
+        "population": 3382
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95500355976756,
+          40.81155791323251
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061021000",
+        "tract_name": "Census Tract 210; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.81309481566808,
+        "centroid_longitude": -73.93567919186536,
+        "disability_rate": 0.1396,
+        "senior_rate": 0.17141049968374447,
+        "poverty_rate": 0.2327,
+        "population": 6324
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93567919186536,
+          40.81309481566808
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061021100",
+        "tract_name": "Census Tract 211; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.8143023871444,
+        "centroid_longitude": -73.96067909798688,
+        "disability_rate": 0.1358,
+        "senior_rate": 0.1586773625513598,
+        "poverty_rate": 0.2462,
+        "population": 10222
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96067909798688,
+          40.8143023871444
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061021200",
+        "tract_name": "Census Tract 212; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.8137604015228,
+        "centroid_longitude": -73.93899975369759,
+        "disability_rate": 0.0419,
+        "senior_rate": 0.21855249745158,
+        "poverty_rate": 0.0922,
+        "population": 4905
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93899975369759,
+          40.8137604015228
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061021303",
+        "tract_name": "Census Tract 213.03; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.81456738259713,
+        "centroid_longitude": -73.9531467377666,
+        "disability_rate": 0.0902,
+        "senior_rate": 0.12176774800188059,
+        "poverty_rate": 0.1283,
+        "population": 6381
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9531467377666,
+          40.81456738259713
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061021400",
+        "tract_name": "Census Tract 214; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.8177884918372,
+        "centroid_longitude": -73.93621333261085,
+        "disability_rate": 0.054,
+        "senior_rate": 0.2439696760854583,
+        "poverty_rate": 0.0665,
+        "population": 2902
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93621333261085,
+          40.8177884918372
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061021500",
+        "tract_name": "Census Tract 215; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.813527828787414,
+        "centroid_longitude": -73.94947113498505,
+        "disability_rate": 0.0347,
+        "senior_rate": 0.10902812037493834,
+        "poverty_rate": 0.0693,
+        "population": 4054
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94947113498505,
+          40.813527828787414
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061021600",
+        "tract_name": "Census Tract 216; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.800674818443355,
+        "centroid_longitude": -73.95438475792865,
+        "disability_rate": 0.072,
+        "senior_rate": 0.062397552180089605,
+        "poverty_rate": 0.1367,
+        "population": 9151
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95438475792865,
+          40.800674818443355
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061021703",
+        "tract_name": "Census Tract 217.03; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.81792420603232,
+        "centroid_longitude": -73.94975939490674,
+        "disability_rate": 0.0032,
+        "senior_rate": 0.0,
+        "poverty_rate": 0.0,
+        "population": 211
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94975939490674,
+          40.81792420603232
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061021800",
+        "tract_name": "Census Tract 218; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.803222402393395,
+        "centroid_longitude": -73.95252457078091,
+        "disability_rate": 0.0871,
+        "senior_rate": 0.09711684370257967,
+        "poverty_rate": 0.106,
+        "population": 5931
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95252457078091,
+          40.803222402393395
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061021900",
+        "tract_name": "Census Tract 219; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.8174108649048,
+        "centroid_longitude": -73.9571855272501,
+        "disability_rate": 0.0756,
+        "senior_rate": 0.09722222222222222,
+        "poverty_rate": 0.2327,
+        "population": 5400
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9571855272501,
+          40.8174108649048
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061022000",
+        "tract_name": "Census Tract 220; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80578380514966,
+        "centroid_longitude": -73.95065672104361,
+        "disability_rate": 0.0497,
+        "senior_rate": 0.14388725008194034,
+        "poverty_rate": 0.1023,
+        "population": 6102
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95065672104361,
+          40.80578380514966
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061022102",
+        "tract_name": "Census Tract 221.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.81865504373007,
+        "centroid_longitude": -73.94618566870888,
+        "disability_rate": 0.0149,
+        "senior_rate": 0.054122621564482026,
+        "poverty_rate": 0.0219,
+        "population": 2365
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94618566870888,
+          40.81865504373007
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061022200",
+        "tract_name": "Census Tract 222; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.80834020959579,
+        "centroid_longitude": -73.94878751943222,
+        "disability_rate": 0.0422,
+        "senior_rate": 0.10168523279063124,
+        "poverty_rate": 0.0687,
+        "population": 3501
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94878751943222,
+          40.80834020959579
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061022301",
+        "tract_name": "Census Tract 223.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.82114163528795,
+        "centroid_longitude": -73.95500587705861,
+        "disability_rate": 0.1246,
+        "senior_rate": 0.14442916093535077,
+        "poverty_rate": 0.2018,
+        "population": 7270
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95500587705861,
+          40.82114163528795
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061022302",
+        "tract_name": "Census Tract 223.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.82024335969019,
+        "centroid_longitude": -73.95742555496008,
+        "disability_rate": 0.0508,
+        "senior_rate": 0.1914609739826551,
+        "poverty_rate": 0.0749,
+        "population": 2998
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95742555496008,
+          40.82024335969019
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061022400",
+        "tract_name": "Census Tract 224; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.81112320344459,
+        "centroid_longitude": -73.9469559263831,
+        "disability_rate": 0.1171,
+        "senior_rate": 0.12234886740730054,
+        "poverty_rate": 0.1918,
+        "population": 6931
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9469559263831,
+          40.81112320344459
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061022500",
+        "tract_name": "Census Tract 225; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.8238340179549,
+        "centroid_longitude": -73.9541593127017,
+        "disability_rate": 0.1917,
+        "senior_rate": 0.20518623290900517,
+        "poverty_rate": 0.2454,
+        "population": 10605
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9541593127017,
+          40.8238340179549
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061022600",
+        "tract_name": "Census Tract 226; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.8134351129068,
+        "centroid_longitude": -73.94481139080655,
+        "disability_rate": 0.0731,
+        "senior_rate": 0.09877276326207443,
+        "poverty_rate": 0.1139,
+        "population": 5052
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94481139080655,
+          40.8134351129068
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061022700",
+        "tract_name": "Census Tract 227; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.82296629202769,
+        "centroid_longitude": -73.94646250393994,
+        "disability_rate": 0.0733,
+        "senior_rate": 0.1782578152441166,
+        "poverty_rate": 0.1262,
+        "population": 5694
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94646250393994,
+          40.82296629202769
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061022800",
+        "tract_name": "Census Tract 228; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.8159297032673,
+        "centroid_longitude": -73.9432456253658,
+        "disability_rate": 0.1371,
+        "senior_rate": 0.1731826511912034,
+        "poverty_rate": 0.1299,
+        "population": 6548
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9432456253658,
+          40.8159297032673
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061022900",
+        "tract_name": "Census Tract 229; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.82592574443376,
+        "centroid_longitude": -73.95171761538569,
+        "disability_rate": 0.0966,
+        "senior_rate": 0.12005666391217093,
+        "poverty_rate": 0.2543,
+        "population": 8471
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95171761538569,
+          40.82592574443376
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061023000",
+        "tract_name": "Census Tract 230; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.81847222501773,
+        "centroid_longitude": -73.94138941688477,
+        "disability_rate": 0.1716,
+        "senior_rate": 0.16757507748209896,
+        "poverty_rate": 0.3399,
+        "population": 9357
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94138941688477,
+          40.81847222501773
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061023100",
+        "tract_name": "Census Tract 231; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.825828264044006,
+        "centroid_longitude": -73.9440994359493,
+        "disability_rate": 0.0652,
+        "senior_rate": 0.11796600234466588,
+        "poverty_rate": 0.1687,
+        "population": 6824
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9440994359493,
+          40.825828264044006
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061023200",
+        "tract_name": "Census Tract 232; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.821013620105006,
+        "centroid_longitude": -73.93953129140836,
+        "disability_rate": 0.1567,
+        "senior_rate": 0.06595538312318137,
+        "poverty_rate": 0.4415,
+        "population": 9279
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93953129140836,
+          40.821013620105006
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061023300",
+        "tract_name": "Census Tract 233; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.82850407579478,
+        "centroid_longitude": -73.94997079358902,
+        "disability_rate": 0.0763,
+        "senior_rate": 0.0889848210555633,
+        "poverty_rate": 0.1231,
+        "population": 7181
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94997079358902,
+          40.82850407579478
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061023400",
+        "tract_name": "Census Tract 234; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.82372741272084,
+        "centroid_longitude": -73.93866455994994,
+        "disability_rate": 0.061,
+        "senior_rate": 0.07036613272311212,
+        "poverty_rate": 0.1574,
+        "population": 5244
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93866455994994,
+          40.82372741272084
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061023501",
+        "tract_name": "Census Tract 235.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.82899127039973,
+        "centroid_longitude": -73.941838395121,
+        "disability_rate": 0.0945,
+        "senior_rate": 0.09363243695137244,
+        "poverty_rate": 0.1159,
+        "population": 7177
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.941838395121,
+          40.82899127039973
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061023502",
+        "tract_name": "Census Tract 235.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.827898761173785,
+        "centroid_longitude": -73.93892493133038,
+        "disability_rate": 0.0329,
+        "senior_rate": 0.18322649572649571,
+        "poverty_rate": 0.0786,
+        "population": 1872
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93892493133038,
+          40.827898761173785
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061023600",
+        "tract_name": "Census Tract 236; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.82489462821914,
+        "centroid_longitude": -73.93610615938651,
+        "disability_rate": 0.1853,
+        "senior_rate": 0.16240930325017394,
+        "poverty_rate": 0.1384,
+        "population": 10061
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93610615938651,
+          40.82489462821914
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061023700",
+        "tract_name": "Census Tract 237; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.83144083831046,
+        "centroid_longitude": -73.94759765853001,
+        "disability_rate": 0.088,
+        "senior_rate": 0.14122833688051079,
+        "poverty_rate": 0.1965,
+        "population": 6578
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94759765853001,
+          40.83144083831046
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061023802",
+        "tract_name": "Census Tract 238.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76809092001635,
+        "centroid_longitude": -73.94437269552341,
+        "disability_rate": 0.0311,
+        "senior_rate": 0.21142520612485277,
+        "poverty_rate": 0.0323,
+        "population": 5094
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94437269552341,
+          40.76809092001635
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061023803",
+        "tract_name": "Census Tract 238.03; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.76213252770121,
+        "centroid_longitude": -73.94960231960889,
+        "disability_rate": 0.0431,
+        "senior_rate": 0.25839499146272055,
+        "poverty_rate": 0.0446,
+        "population": 3514
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94960231960889,
+          40.76213252770121
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061023804",
+        "tract_name": "Census Tract 238.04; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.75575728687233,
+        "centroid_longitude": -73.95553078254314,
+        "disability_rate": 0.0033,
+        "senior_rate": 0.06135693215339233,
+        "poverty_rate": 0.0524,
+        "population": 3390
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95553078254314,
+          40.75575728687233
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061023900",
+        "tract_name": "Census Tract 239; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.83233735760787,
+        "centroid_longitude": -73.9410631048182,
+        "disability_rate": 0.0834,
+        "senior_rate": 0.1570855614973262,
+        "poverty_rate": 0.0446,
+        "population": 2992
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9410631048182,
+          40.83233735760787
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061024000",
+        "tract_name": "Census Tract 240; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.79100136668715,
+        "centroid_longitude": -73.92459676909753,
+        "disability_rate": 0.0719,
+        "senior_rate": 0.08114961961115807,
+        "poverty_rate": 0.1513,
+        "population": 2366
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.92459676909753,
+          40.79100136668715
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061024100",
+        "tract_name": "Census Tract 241; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.83412484283559,
+        "centroid_longitude": -73.94606637180841,
+        "disability_rate": 0.1839,
+        "senior_rate": 0.2063708477937531,
+        "poverty_rate": 0.1622,
+        "population": 8068
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94606637180841,
+          40.83412484283559
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061024200",
+        "tract_name": "Census Tract 242; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.805301457983404,
+        "centroid_longitude": -73.93415131895684,
+        "disability_rate": 0.0912,
+        "senior_rate": 0.10530073175084775,
+        "poverty_rate": 0.1764,
+        "population": 5603
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93415131895684,
+          40.805301457983404
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061024301",
+        "tract_name": "Census Tract 243.01; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.835973772728885,
+        "centroid_longitude": -73.93875807485368,
+        "disability_rate": 0.0909,
+        "senior_rate": 0.12989556135770236,
+        "poverty_rate": 0.0684,
+        "population": 4596
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93875807485368,
+          40.835973772728885
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061024302",
+        "tract_name": "Census Tract 243.02; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.83156577155704,
+        "centroid_longitude": -73.93679511487935,
+        "disability_rate": 0.1495,
+        "senior_rate": 0.12178601050594415,
+        "poverty_rate": 0.3026,
+        "population": 7234
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93679511487935,
+          40.83156577155704
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061024500",
+        "tract_name": "Census Tract 245; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.83662494849302,
+        "centroid_longitude": -73.94209531321388,
+        "disability_rate": 0.3453,
+        "senior_rate": 0.16853771898462638,
+        "poverty_rate": 0.3933,
+        "population": 13985
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94209531321388,
+          40.83662494849302
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061024700",
+        "tract_name": "Census Tract 247; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.83834550253589,
+        "centroid_longitude": -73.94624569686643,
+        "disability_rate": 0.1866,
+        "senior_rate": 0.31035044824775876,
+        "poverty_rate": 0.1137,
+        "population": 6135
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94624569686643,
+          40.83834550253589
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061024900",
+        "tract_name": "Census Tract 249; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.83912893163264,
+        "centroid_longitude": -73.93644959499568,
+        "disability_rate": 0.0185,
+        "senior_rate": 0.26107445805843543,
+        "poverty_rate": 0.0075,
+        "population": 1061
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93644959499568,
+          40.83912893163264
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061025100",
+        "tract_name": "Census Tract 251; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.84032601661226,
+        "centroid_longitude": -73.93992262001402,
+        "disability_rate": 0.0546,
+        "senior_rate": 0.14603409933283915,
+        "poverty_rate": 0.0708,
+        "population": 2698
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93992262001402,
+          40.84032601661226
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061025300",
+        "tract_name": "Census Tract 253; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.84289504920374,
+        "centroid_longitude": -73.93837899533463,
+        "disability_rate": 0.1494,
+        "senior_rate": 0.1870524767042668,
+        "poverty_rate": 0.1434,
+        "population": 10195
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93837899533463,
+          40.84289504920374
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061025500",
+        "tract_name": "Census Tract 255; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.84545088353845,
+        "centroid_longitude": -73.94392810083977,
+        "disability_rate": 0.0791,
+        "senior_rate": 0.13956887102667154,
+        "poverty_rate": 0.0582,
+        "population": 5474
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94392810083977,
+          40.84545088353845
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061025700",
+        "tract_name": "Census Tract 257; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.808435836721145,
+        "centroid_longitude": -73.95407385173021,
+        "disability_rate": 0.039,
+        "senior_rate": 0.08237339708758966,
+        "poverty_rate": 0.0678,
+        "population": 4601
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95407385173021,
+          40.808435836721145
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061025900",
+        "tract_name": "Census Tract 259; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.82321397373776,
+        "centroid_longitude": -73.94235701085307,
+        "disability_rate": 0.0351,
+        "senior_rate": 0.036494801612561,
+        "poverty_rate": 0.0779,
+        "population": 4713
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94235701085307,
+          40.82321397373776
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061026100",
+        "tract_name": "Census Tract 261; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.84578451124144,
+        "centroid_longitude": -73.9344549774497,
+        "disability_rate": 0.2329,
+        "senior_rate": 0.14879876001033324,
+        "poverty_rate": 0.3547,
+        "population": 11613
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9344549774497,
+          40.84578451124144
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061026300",
+        "tract_name": "Census Tract 263; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.846822562498254,
+        "centroid_longitude": -73.93747541706709,
+        "disability_rate": 0.1424,
+        "senior_rate": 0.15018131799424783,
+        "poverty_rate": 0.2111,
+        "population": 7997
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93747541706709,
+          40.846822562498254
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061026500",
+        "tract_name": "Census Tract 265; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.84963542480222,
+        "centroid_longitude": -73.94009971353069,
+        "disability_rate": 0.1198,
+        "senior_rate": 0.10751617720258835,
+        "poverty_rate": 0.0785,
+        "population": 8036
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94009971353069,
+          40.84963542480222
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061026700",
+        "tract_name": "Census Tract 267; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.850342080014045,
+        "centroid_longitude": -73.92863151486881,
+        "disability_rate": 0.0125,
+        "senior_rate": 0.0754992693619094,
+        "poverty_rate": 0.0195,
+        "population": 2053
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.92863151486881,
+          40.850342080014045
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061026900",
+        "tract_name": "Census Tract 269; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.85055674168331,
+        "centroid_longitude": -73.93097473840743,
+        "disability_rate": 0.1179,
+        "senior_rate": 0.14434601354872328,
+        "poverty_rate": 0.1153,
+        "population": 7676
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93097473840743,
+          40.85055674168331
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061027100",
+        "tract_name": "Census Tract 271; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.85194197236304,
+        "centroid_longitude": -73.93429388076997,
+        "disability_rate": 0.0656,
+        "senior_rate": 0.1488856653039694,
+        "poverty_rate": 0.0936,
+        "population": 7583
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93429388076997,
+          40.85194197236304
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061027300",
+        "tract_name": "Census Tract 273; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.853978013572174,
+        "centroid_longitude": -73.93738502999382,
+        "disability_rate": 0.0469,
+        "senior_rate": 0.11712450457837911,
+        "poverty_rate": 0.0284,
+        "population": 7317
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93738502999382,
+          40.853978013572174
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061027500",
+        "tract_name": "Census Tract 275; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.85457736051939,
+        "centroid_longitude": -73.94043717229164,
+        "disability_rate": 0.0625,
+        "senior_rate": 0.22887665911298155,
+        "poverty_rate": 0.0198,
+        "population": 3089
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.94043717229164,
+          40.85457736051939
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061027700",
+        "tract_name": "Census Tract 277; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.85544598960474,
+        "centroid_longitude": -73.92738130221885,
+        "disability_rate": 0.0744,
+        "senior_rate": 0.24723798148701104,
+        "poverty_rate": 0.1396,
+        "population": 6698
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.92738130221885,
+          40.85544598960474
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061027900",
+        "tract_name": "Census Tract 279; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.85585890452485,
+        "centroid_longitude": -73.93163203422175,
+        "disability_rate": 0.1372,
+        "senior_rate": 0.11629297458893871,
+        "poverty_rate": 0.1148,
+        "population": 10035
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93163203422175,
+          40.85585890452485
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061028100",
+        "tract_name": "Census Tract 281; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.85696234710474,
+        "centroid_longitude": -73.93459370735414,
+        "disability_rate": 0.022,
+        "senior_rate": 0.16728739913097454,
+        "poverty_rate": 0.0158,
+        "population": 3222
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93459370735414,
+          40.85696234710474
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061028300",
+        "tract_name": "Census Tract 283; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.858910202289266,
+        "centroid_longitude": -73.92872219044716,
+        "disability_rate": 0.1293,
+        "senior_rate": 0.21692080668962124,
+        "poverty_rate": 0.1327,
+        "population": 8132
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.92872219044716,
+          40.858910202289266
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061028500",
+        "tract_name": "Census Tract 285; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.861500369635905,
+        "centroid_longitude": -73.92804855617234,
+        "disability_rate": 0.1119,
+        "senior_rate": 0.21797199170124482,
+        "poverty_rate": 0.1954,
+        "population": 7712
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.92804855617234,
+          40.861500369635905
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061028700",
+        "tract_name": "Census Tract 287; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.86353296839975,
+        "centroid_longitude": -73.93192314252799,
+        "disability_rate": 0.0273,
+        "senior_rate": 0.13696575856035992,
+        "poverty_rate": 0.0427,
+        "population": 4001
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93192314252799,
+          40.86353296839975
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061029100",
+        "tract_name": "Census Tract 291; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.864310958914125,
+        "centroid_longitude": -73.9239340004261,
+        "disability_rate": 0.195,
+        "senior_rate": 0.12750438555996677,
+        "poverty_rate": 0.1775,
+        "population": 10831
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.9239340004261,
+          40.864310958914125
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061029300",
+        "tract_name": "Census Tract 293; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.865925727348554,
+        "centroid_longitude": -73.92011962824972,
+        "disability_rate": 0.1615,
+        "senior_rate": 0.12112481272329147,
+        "poverty_rate": 0.2137,
+        "population": 8677
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.92011962824972,
+          40.865925727348554
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061029500",
+        "tract_name": "Census Tract 295; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.86752298870169,
+        "centroid_longitude": -73.92494089122044,
+        "disability_rate": 0.1021,
+        "senior_rate": 0.15221426677273933,
+        "poverty_rate": 0.0501,
+        "population": 7542
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.92494089122044,
+          40.86752298870169
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061029700",
+        "tract_name": "Census Tract 297; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.87237794077948,
+        "centroid_longitude": -73.92434257954838,
+        "disability_rate": 0.0,
+        "senior_rate": 0.2857142857142857,
+        "poverty_rate": 0.0,
+        "population": 14
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.92434257954838,
+          40.87237794077948
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061029900",
+        "tract_name": "Census Tract 299; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.86477104564931,
+        "centroid_longitude": -73.91702990351284,
+        "disability_rate": 0.0882,
+        "senior_rate": 0.24897959183673468,
+        "poverty_rate": 0.0793,
+        "population": 3430
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.91702990351284,
+          40.86477104564931
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061030300",
+        "tract_name": "Census Tract 303; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.86921963892401,
+        "centroid_longitude": -73.91865439800642,
+        "disability_rate": 0.0465,
+        "senior_rate": 0.1833638503792833,
+        "poverty_rate": 0.039,
+        "population": 3823
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.91865439800642,
+          40.86921963892401
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061030700",
+        "tract_name": "Census Tract 307; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.87126842764146,
+        "centroid_longitude": -73.91667298497578,
+        "disability_rate": 0.0357,
+        "senior_rate": 0.15207373271889402,
+        "poverty_rate": 0.0076,
+        "population": 3906
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.91667298497578,
+          40.87126842764146
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061030900",
+        "tract_name": "Census Tract 309; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.87596551188328,
+        "centroid_longitude": -73.91037371351075,
+        "disability_rate": 0.269,
+        "senior_rate": 0.12489315224617722,
+        "poverty_rate": 0.407,
+        "population": 10529
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.91037371351075,
+          40.87596551188328
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061031100",
+        "tract_name": "Census Tract 311; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.84659959674567,
+        "centroid_longitude": -73.93023096875476,
+        "disability_rate": 0.0,
+        "senior_rate": 0.0,
+        "poverty_rate": 0.0,
+        "population": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93023096875476,
+          40.84659959674567
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061031703",
+        "tract_name": "Census Tract 317.03; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.715406021877,
+        "centroid_longitude": -74.01509446522279,
+        "disability_rate": 0.0451,
+        "senior_rate": 0.10167785234899329,
+        "poverty_rate": 0.0381,
+        "population": 5960
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.01509446522279,
+          40.715406021877
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061031704",
+        "tract_name": "Census Tract 317.04; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.70837887524504,
+        "centroid_longitude": -74.01704591228378,
+        "disability_rate": 0.0372,
+        "senior_rate": 0.08091061397457376,
+        "poverty_rate": 0.0303,
+        "population": 10147
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.01704591228378,
+          40.70837887524504
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "tract_id": "36061031900",
+        "tract_name": "Census Tract 319; New York County; New York",
+        "borough": "Manhattan",
+        "centroid_latitude": 40.70294123533235,
+        "centroid_longitude": -74.01557138609171,
+        "disability_rate": 0.0,
+        "senior_rate": 0.0,
+        "poverty_rate": 0.0,
+        "population": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.01557138609171,
+          40.70294123533235
+        ]
+      }
+    }
+  ]
+}

@@ -21,9 +21,12 @@ PUBLIC_MODULES: Final[tuple[str, ...]] = (
     "subway_access.analysis",
     "subway_access.cli",
     "subway_access.export",
+    "subway_access.factors",
+    "subway_access.helpers",
     "subway_access.io",
     "subway_access.models",
     "subway_access.pipeline",
+    "subway_access.temporal",
 )
 DOC_DIRECTIVE_RE: Final[re.Pattern[str]] = re.compile(
     r"^:::\s+(subway_access(?:\.[a-z_]+)?)\s*$"

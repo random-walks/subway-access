@@ -17,7 +17,23 @@ def summarize_accessibility_by_group(
     *,
     group_by: str = "borough",
 ) -> AccessibilitySummaryDataset:
-    """Summarize tract accessibility results by a record attribute."""
+    """Summarize tract accessibility results by a record attribute.
+
+    Groups scored tracts by the given attribute and computes aggregate
+    coverage rates, population counts, need scores, and travel times.
+
+    Args:
+        scored_data: Tract accessibility scores from ``score_accessibility``.
+        group_by: Attribute name to group by (default ``"borough"``).
+
+    Returns:
+        An ``AccessibilitySummaryDataset`` with one record per group.
+
+    Example:
+        >>> summary = summarize_accessibility_by_group(scores, group_by="borough")
+        >>> summary.records[0].coverage_rate
+        0.72
+    """
 
     grouped = defaultdict(list)
     for record in scored_data.records:

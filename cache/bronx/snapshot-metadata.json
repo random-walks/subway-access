@@ -1,0 +1,52 @@
+{
+  "generated_at": "2026-04-09T17:08:35.292309+00:00",
+  "query": {
+    "geography": "borough",
+    "value": "Bronx"
+  },
+  "sources": [
+    {
+      "name": "mta_station_catalog",
+      "source_url": "https://data.ny.gov/resource/39hk-dx4f.json",
+      "cache_path": "/Users/blaise/Desktop/blaise-oss/subway-access/cache/bronx/mta-station-catalog.json",
+      "refreshed_at": "2026-04-09T17:08:35.292309+00:00",
+      "record_count": 70,
+      "notes": "Filtered in memory against the selected study area boundary."
+    },
+    {
+      "name": "mta_equipment_assets",
+      "source_url": "https://data.ny.gov/resource/94fv-bak7.json",
+      "cache_path": "/Users/blaise/Desktop/blaise-oss/subway-access/cache/bronx/mta-equipment-assets.json",
+      "refreshed_at": "2026-04-09T17:08:35.292309+00:00",
+      "record_count": 69,
+      "notes": ""
+    },
+    {
+      "name": "mta_availability_history",
+      "source_url": "https://data.ny.gov/resource/rc78-7x78.json",
+      "cache_path": "/Users/blaise/Desktop/blaise-oss/subway-access/cache/bronx/mta-availability-history.json",
+      "refreshed_at": "2026-04-09T17:08:35.292309+00:00",
+      "record_count": 618,
+      "notes": "Monthly availability rows since 2025-05-01."
+    },
+    {
+      "name": "mta_subway_entrances",
+      "source_url": "https://data.ny.gov/resource/i9wp-a4ja.json",
+      "cache_path": "/Users/blaise/Desktop/blaise-oss/subway-access/cache/bronx/entrances.geojson",
+      "refreshed_at": "2026-04-09T17:08:35.292309+00:00",
+      "record_count": 251,
+      "notes": "Filtered in memory against the selected study area boundary."
+    },
+    {
+      "name": "acs_tract_demographics",
+      "source_url": "https://api.census.gov/data/2023/acs/acs5 and https://api.census.gov/data/2023/acs/acs5/subject",
+      "cache_path": "/Users/blaise/Desktop/blaise-oss/subway-access/cache/bronx/tracts.geojson",
+      "refreshed_at": "2026-04-09T17:08:35.292309+00:00",
+      "record_count": 360,
+      "notes": "ACS 5-year 2023 estimates merged to NYC tract centroids."
+    }
+  ],
+  "include_gtfs_archive": true,
+  "gtfs_archive_path": "/Users/blaise/Desktop/blaise-oss/subway-access/cache/bronx/gtfs_subway.zip",
+  "gtfs_archive_url": "https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip"
+}
