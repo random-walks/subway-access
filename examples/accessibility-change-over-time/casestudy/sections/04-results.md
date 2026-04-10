@@ -28,16 +28,15 @@ When coverage is recomputed using reliability weighting, Manhattan's tract cover
 
 ### 4.4 Temporal Progression
 
-The simulated temporal panel shows coverage expanding from 8.4% of tracts in 2017 (195 tracts, 860,421 residents) to 39.2% in 2023 (908 tracts, 3,824,813 residents), representing the modeled rollout of ADA upgrades over seven periods (see [Table 4](reports/accessibility-change-report.md#table-4-coverage-progression); [Figure 6](reports/figures/figure-6-coverage-progression.png)). The progression is monotonically increasing by construction, as stations do not lose ADA status once upgraded. While the trajectory illustrates the pace of coverage expansion, the simulated nature of the upgrade timeline limits inference about actual historical trends.
+The temporal panel shows coverage expanding from 16.8% of tracts in 2017 (389 tracts, 1,620,306 residents) to 35.9% in 2023 (831 tracts, 3,519,151 residents), representing the sourced and modeled rollout of ADA upgrades over seven periods (see [Table 4](reports/accessibility-change-report.md#table-4-coverage-progression); [Figure 6](reports/figures/figure-6-coverage-progression.png)). The higher 2017 baseline compared to a fully synthetic timeline reflects the large number of stations that were already accessible before the study window---including Archer Avenue line stations (1988), 63rd Street line stations (1989), and numerous Key Station Program completions from the 1990s--2000s. The progression is monotonically increasing by construction, as stations do not lose ADA status once upgraded.
 
 ### 4.5 Treatment-Control Balance
 
-Welch's *t*-tests (unequal variance) comparing treatment (*n* = 908) and control (*n* = 1,409) tracts reveal statistically significant differences across all four demographic indicators:
+Welch's *t*-tests (unequal variance) comparing treatment (*n* = 831) and control (*n* = 1,486) tracts reveal statistically significant differences across all three primary demographic indicators:
 
-- **Disability rate:** Treatment *M* = .048, Control *M* = .039, difference = +.010, *t* = 6.22, *P* < .001, Cohen's *d* = 0.27 (small).
-- **Senior rate:** Treatment *M* = .151, Control *M* = .162, difference = −.011, *t* = −3.16, *P* = .002, Cohen's *d* = −0.13 (negligible).
-- **Poverty rate:** Treatment *M* = .074, Control *M* = .056, difference = +.018, *t* = 6.75, *P* < .001, Cohen's *d* = 0.29 (small).
-- **Need score:** Treatment *M* = .091, Control *M* = .086, difference = +.006, *t* = 3.18, *P* = .001, Cohen's *d* = 0.14 (negligible).
+- **Disability rate:** Treatment *M* = .049, Control *M* = .039, difference = +.010, *t* = 6.40, *P* < .001, Cohen's *d* = 0.29 (small).
+- **Senior rate:** Treatment *M* = .150, Control *M* = .162, difference = −.012, *t* = −3.34, *P* < .001, Cohen's *d* = −0.14 (negligible).
+- **Poverty rate:** Treatment *M* = .074, Control *M* = .056, difference = +.018, *t* = 6.42, *P* < .001, Cohen's *d* = 0.28 (small).
 
 All effect sizes are small to negligible by conventional benchmarks (Cohen, 1988), but the consistent direction---treatment tracts have higher disability and poverty rates---indicates that ADA upgrades are reaching higher-need neighborhoods. This is directionally consistent with equity objectives. However, the imbalance means that a naive before-after comparison would overstate the benefit of ADA station access; the DiD specification with tract and period fixed effects is necessary to absorb baseline differences (see [Table 5](reports/accessibility-change-report.md#table-5-balance-check); [Figure 7](reports/figures/figure-7-treatment-vs-control-balance.png)).
 
