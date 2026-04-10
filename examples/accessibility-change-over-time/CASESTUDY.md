@@ -297,7 +297,7 @@ Federal ADA enforcement remains relevant. While the MTA has historically operate
 Several extensions would strengthen the present analysis:
 
 1. **Network distance.** Replace Euclidean catchments with street-network walking distances computed via OpenStreetMap (OSMnx; Boeing, 2017) to produce more realistic coverage estimates.
-2. **Actual upgrade dates.** Obtain real MTA Capital Program station upgrade dates via FOIL request to enable credible DiD estimation with causally interpretable treatment effects.
+2. **Complete upgrade dates.** The current timeline covers 101 of 157 stations with sourced dates. A FOIL request to the MTA for Key Station Program completion records would close the remaining 56-station gap and enable fully credible DiD estimation.
 3. **Multi-vintage ACS data.** Fetch actual multi-year ACS vintages (e.g., 2017--2023) via the Census Bureau API to introduce genuine temporal variation in demographic covariates.
 4. **Local spatial association.** Compute Local Indicators of Spatial Association (LISA; Anselin, 1995) to identify specific hot spots and cold spots of accessibility gaps at the tract level.
 5. **Geographically weighted regression.** Estimate spatially varying coefficients (GWR; Fotheringham et al., 2002) to identify neighborhoods where the gap-demographics relationship is strongest.
@@ -380,7 +380,7 @@ Each row in `artifacts/panel-dataset.csv` represents a single tract-year observa
 | Column | Type | Description |
 | :--- | :--- | :--- |
 | `unit_id` | str | Census tract GEOID |
-| `period` | str | Simulated ACS vintage year (2017--2023) |
+| `period` | str | ACS vintage year (2017--2023) |
 | `has_accessible_station` | bool | Treatment indicator |
 | `treatment_year` | int | Year first accessible station opened in catchment |
 | `disability_rate` | float | ACS estimate |

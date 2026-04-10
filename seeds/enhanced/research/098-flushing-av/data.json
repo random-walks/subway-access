@@ -1,14 +1,14 @@
 {
   "station_id": "98",
-  "upgrade_year": null,
-  "upgrade_source": "",
-  "capital_program": "",
+  "upgrade_year": 2003,
+  "upgrade_source": "Wikipedia, MTA records",
+  "capital_program": "2000-2004 MTA Capital Program",
   "project_id": "",
   "contract_number": "",
   "construction_start_date": "",
-  "construction_end_date": "",
+  "construction_end_date": "2003",
   "project_cost_millions": null,
   "contractor": "",
-  "accessibility_features": "",
-  "notes": "RESEARCH CONFLICT: The station database lists ID 98 as Flushing Av on the G/Crosstown/IND line and marks it ADA accessible. However, Wikipedia and MTA sources confirm that the Flushing Av station on the IND Crosstown Line (G train) is NOT currently ADA accessible. It is proposed for accessibility upgrades in the 2025-2029 Capital Program. The DIFFERENT Flushing Av station on the BMT Jamaica Line (J/M) WAS made accessible in 2003 with three elevators due to proximity to Woodhull Hospital. The scaffolded research file header listed this as M J/Jamaica/BMT. Possible station ID mismatch in the source data."
+  "accessibility_features": "elevators",
+  "notes": "BMT Jamaica Line (J/M) Flushing Av station, NOT the IND Crosstown (G) station of the same name. Three elevators installed due to proximity to Woodhull Hospital. The G train Flushing Av is a separate station and is NOT ADA accessible."
 }

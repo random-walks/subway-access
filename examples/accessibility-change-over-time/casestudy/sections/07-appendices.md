@@ -20,7 +20,7 @@ Each row in `artifacts/panel-dataset.csv` represents a single tract-year observa
 | Column | Type | Description |
 | :--- | :--- | :--- |
 | `unit_id` | str | Census tract GEOID |
-| `period` | str | Simulated ACS vintage year (2017--2023) |
+| `period` | str | ACS vintage year (2017--2023) |
 | `has_accessible_station` | bool | Treatment indicator |
 | `treatment_year` | int | Year first accessible station opened in catchment |
 | `disability_rate` | float | ACS estimate |
