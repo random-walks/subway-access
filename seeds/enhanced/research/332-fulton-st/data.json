@@ -1,0 +1,14 @@
+{
+  "station_id": "332",
+  "upgrade_year": 2014,
+  "upgrade_source": "Fulton Center opening, MTA project completion, Wikipedia",
+  "capital_program": "MTA Capital Program",
+  "project_id": "",
+  "contract_number": "",
+  "construction_start_date": "",
+  "construction_end_date": "2014-11",
+  "project_cost_millions": 1400,
+  "contractor": "",
+  "accessibility_features": "elevators, escalators",
+  "notes": "Part of $1.4B Fulton Center project. 15 elevators and 10 escalators installed across complex connecting 5 stations serving 9 lines. Cost is for entire Fulton Center complex shared across station IDs 106, 172, 332, 412."
+}

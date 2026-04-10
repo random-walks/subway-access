@@ -1,0 +1,14 @@
+{
+  "station_id": "330",
+  "upgrade_year": 2009,
+  "upgrade_source": "MTA; Federal 9/11 recovery funding records",
+  "capital_program": "Federal 9/11 recovery funding",
+  "project_id": "",
+  "contract_number": "",
+  "construction_start_date": "",
+  "construction_end_date": "2009-03-16",
+  "project_cost_millions": 530,
+  "contractor": "",
+  "accessibility_features": "2 elevators, 7 escalators, full ADA compliance",
+  "notes": "New station opened March 16, 2009, replacing the old 1905 loop station that could not accommodate full-length trains. Built ADA-accessible from day one with $530 million in federal 9/11 recovery funding. Severely damaged by Hurricane Sandy on October 29, 2012; rebuilt and reopened June 27, 2017. The 2009 date is used as the upgrade year since that is when the station first became accessible."
+}

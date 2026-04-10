@@ -1,0 +1,14 @@
+{
+  "station_id": "360",
+  "upgrade_year": null,
+  "upgrade_source": "",
+  "capital_program": "",
+  "project_id": "",
+  "contract_number": "",
+  "construction_start_date": "",
+  "construction_end_date": "",
+  "project_cost_millions": null,
+  "contractor": "",
+  "accessibility_features": "elevators",
+  "notes": "ADA accessible. Terminal station. Exact year of ADA upgrade unclear from available sources. [CONFIDENCE: LOW]"
+}

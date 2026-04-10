@@ -1,0 +1,14 @@
+{
+  "station_id": "501",
+  "upgrade_year": null,
+  "upgrade_source": "",
+  "capital_program": "",
+  "project_id": "",
+  "contract_number": "",
+  "construction_start_date": "",
+  "construction_end_date": "",
+  "project_cost_millions": null,
+  "contractor": "",
+  "accessibility_features": "Elevators (connecting train level, main floor, and street level), ramps",
+  "notes": "Has elevator connecting train level, main floor, and street level. Exact year of ADA upgrade unclear. Major terminal station. [CONFIDENCE: LOW]"
+}

@@ -1,0 +1,14 @@
+{
+  "station_id": "203",
+  "upgrade_year": null,
+  "upgrade_source": "",
+  "capital_program": "",
+  "project_id": "",
+  "contract_number": "",
+  "construction_start_date": "",
+  "construction_end_date": "",
+  "project_cost_millions": null,
+  "contractor": "",
+  "accessibility_features": "At-grade station with street-level entrance",
+  "notes": "At-grade station with street-level entrance. Accessibility may be inherent to station design rather than a specific upgrade. [CONFIDENCE: LOW]"
+}

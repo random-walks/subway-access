@@ -54,6 +54,7 @@ from subway_access.temporal import (
     build_distance_weights,
     build_panel_dataset,
     build_upgrade_timeline,
+    load_known_upgrades_from_dir,
 )
 
 try:
@@ -261,13 +262,17 @@ def build_panel(snapshots, years, minutes):
         for st in s.stations.stations:
             locs[st.station_id] = (st.latitude, st.longitude)
             all_st.append(st)
-    known = {}
-    lo, hi = min(years), max(years)
-    span = hi - lo + 1
-    for s in all_st:
-        if s.ada_status == "accessible":
-            h = int(hashlib.md5(s.station_id.encode()).hexdigest(), 16)
-            known[s.station_id] = lo + (h % span)
+    # Prefer real upgrade years from enhanced seeds if any are filled in.
+    seeds_dir = ROOT.parents[1] / "seeds" / "enhanced" / "upgrade_templates"
+    known = load_known_upgrades_from_dir(seeds_dir) if seeds_dir.is_dir() else {}
+    if not known:
+        # Fallback: deterministic synthetic timeline (MD5-hash based).
+        lo, hi = min(years), max(years)
+        span = hi - lo + 1
+        for s in all_st:
+            if s.ada_status == "accessible":
+                h = int(hashlib.md5(s.station_id.encode()).hexdigest(), 16)
+                known[s.station_id] = lo + (h % span)
     recs = []
     seen = set()
     for s in snapshots.values():

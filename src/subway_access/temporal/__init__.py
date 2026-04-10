@@ -15,7 +15,11 @@ from ._models import (
 )
 from ._panel import build_panel_dataset
 from ._spatial_weights import build_distance_weights, weights_to_pysal
-from ._upgrade_timeline import build_upgrade_timeline
+from ._upgrade_timeline import (
+    build_upgrade_timeline,
+    load_known_upgrades,
+    load_known_upgrades_from_dir,
+)
 
 __all__ = [
     "AVAILABLE_VINTAGE_YEARS",
@@ -28,5 +32,7 @@ __all__ = [
     "build_upgrade_timeline",
     "fetch_acs_tract_estimates_for_year",
     "fetch_multi_vintage_estimates",
+    "load_known_upgrades",
+    "load_known_upgrades_from_dir",
     "weights_to_pysal",
 ]

@@ -1,0 +1,14 @@
+{
+  "station_id": "174",
+  "upgrade_year": 2010,
+  "upgrade_source": "Station renovation completion, Wikipedia",
+  "capital_program": "MTA Capital Program",
+  "project_id": "",
+  "contract_number": "",
+  "construction_start_date": "",
+  "construction_end_date": "2010-12-10",
+  "project_cost_millions": 164.5,
+  "contractor": "",
+  "accessibility_features": "elevators, escalators",
+  "notes": "Part of $164.5M Jay St-MetroTech renovation connecting two formerly separate stations into a unified complex. Three ADA-compliant elevators and two escalators installed. Cost is for entire complex shared across station IDs 25 and 174."
+}
