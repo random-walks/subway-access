@@ -1,24 +1,38 @@
 # Enhanced Seeds
 
-This directory holds research-grade data templates and enhanced seed files for
-replacing the synthetic (MD5-hashed) ADA upgrade timeline with real historical
-data.
+This directory holds researched ADA upgrade data and per-station research files
+for 157 currently accessible NYC subway stations.
+
+## Current coverage
+
+**100 of 157 stations (63.7%)** have sourced upgrade years traced to MTA press
+releases, Governor's announcements, MTA Capital Program records, Wikipedia
+station articles, and news coverage. The remaining 57 stations — primarily Key
+Station Program stations from the 1990s--2010s — have null upgrade years because
+per-station completion dates were not publicly documented. A FOIL request to the
+MTA for the complete Key Station Program schedule would close this gap.
 
 ## What's here
 
 ### `upgrade_templates/`
 
-Per-borough CSV templates listing every currently ADA-accessible subway station.
-Each row has:
+Per-borough CSV files listing every currently ADA-accessible subway station. Each
+row has:
 
 - **Populated columns** — station ID, name, borough, coordinates, routes, line,
-  division, structure, and current ADA status (all sourced from the live MTA
-  station catalog API).
-- **Empty columns** — fields that would come from a FOIL request, MTA Capital
-  Program reports, or manual research: `upgrade_year`, `upgrade_source`,
-  `capital_program`, `project_id`, `contract_number`, `construction_start_date`,
-  `construction_end_date`, `project_cost_millions`, `contractor`,
-  `accessibility_features`, `notes`.
+  division, structure, current ADA status (from the MTA station catalog API), and
+  researched fields where available: `upgrade_year`, `upgrade_source`,
+  `capital_program`, and others.
+- **Empty columns** — fields still awaiting data for the 57 unresolved stations.
+
+### `research/`
+
+Per-station research folders (`{station_id:03d}-{slug}/`) each containing:
+
+- **`data.json`** — structured data matching the CSV schema (upgrade year,
+  source, capital program, cost, contractor, features, notes).
+- **`research.md`** — citations, links to MTA press releases, Wikipedia articles,
+  and news coverage documenting how each upgrade year was determined.
 
 ### How to fill them in
 

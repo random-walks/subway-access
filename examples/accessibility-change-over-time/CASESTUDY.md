@@ -99,10 +99,10 @@ A station with 50% elevator uptime over the 12-month period contributes 0.50 eff
 
 ### 3.5 Temporal Panel and Difference-in-Differences Specification
 
-To enable future causal analysis, we construct a balanced panel of 2,317 tracts across 7 simulated periods (2017--2023), yielding 16,219 tract-year observations. ADA upgrade years are assigned to currently accessible stations using a deterministic hash function that simulates the MTA Capital Program rollout schedule. Tracts are classified as:
+To enable future causal analysis, we construct a balanced panel of 2,317 tracts across 7 periods (2017--2023), yielding 16,219 tract-year observations. ADA upgrade years are sourced from a station-by-station research effort that compiled actual completion dates from MTA press releases, Governor's announcements, MTA Capital Program records, Wikipedia station articles, and news coverage. Of the 157 currently accessible stations, 100 (63.7%) have sourced upgrade years spanning 1987--2026; the remaining 57 stations---primarily Key Station Program stations from the 1990s--2010s where per-station completion dates were not publicly documented---use a deterministic hash-based fallback that distributes them across the study window. All sourced dates and citations are maintained in per-station research files (`seeds/enhanced/research/`). Tracts are classified as:
 
-- **Treatment** (*n* = 908): tracts that gained an accessible station during the panel window.
-- **Control** (*n* = 1,409): tracts that were never covered in any period.
+- **Treatment** (*n* = 831): tracts that gained an accessible station during the panel window.
+- **Control** (*n* = 1,486): tracts that were never covered in any period.
 
 The DiD specification is:
 
@@ -127,9 +127,9 @@ Y_it = ρ · W · Y_it + β · X_it + δ_i + τ_t + ε_it
 
 where *W* is the row-standardized distance-based spatial weights matrix (2,317 units, mean 47.9 neighbors, 2 km threshold).
 
-**Critical caveat.** The upgrade timeline is simulated, not derived from actual MTA Capital Program records. Consequently, β in this specification is *illustrative*---it demonstrates the econometric framework but does not yield a causally interpretable estimate. Three identifying assumptions merit explicit discussion:
+**Data provenance caveat.** The upgrade timeline is substantially---but not entirely---sourced from public records. Of the 157 accessible stations, 100 have dates traced to official MTA announcements, press releases, or documented construction completions. The remaining 57 use a deterministic hash-based fallback because per-station completion records for the MTA's Key Station Program (1994--2020) were not publicly available at the time of analysis. Consequently, β estimates from this panel should be interpreted with caution: the treatment timing is accurate for the majority of stations but approximate for roughly one-third. A FOIL request to the MTA for the complete Key Station Program completion schedule would close this gap. Three identifying assumptions merit explicit discussion:
 
-1. **Parallel trends.** In the absence of treatment, treated and control tracts would follow the same outcome trajectory. This assumption cannot be verified with the simulated timeline and would require pre-treatment outcome data under actual upgrade dates.
+1. **Parallel trends.** In the absence of treatment, treated and control tracts would follow the same outcome trajectory. Pre-treatment outcome data under the sourced upgrade dates would enable formal testing of this assumption.
 2. **No anticipation.** Units do not change behavior in anticipation of treatment. Since ADA station upgrades are capital projects announced years in advance, household sorting based on announced plans could violate this assumption.
 3. **SUTVA.** One unit's treatment does not affect another unit's outcome. Spatial spillovers---e.g., a new accessible station increasing property values in adjacent tracts---could violate this assumption. The SAR extension partially addresses this concern.
 
@@ -261,7 +261,7 @@ The finding that Queens is the most underserved borough corroborates Baghestani 
 
 The spatial clustering detected by Moran's *I* aligns with the "transit desert" concept advanced by Zhang et al. (2024), who found that economically disadvantaged neighborhoods in the New York metropolitan area were more likely to fall in transit deserts. The present results extend this finding by showing that accessibility gaps are not only associated with demographic disadvantage at the tract level (*R*² = .202) but are also geographically clustered (*I* = .23 for gap scores), suggesting that entire corridors of the city---not just isolated tracts---are systematically underserved.
 
-The treatment-control balance check provides tentative evidence that the MTA's Capital Program is directing ADA upgrades toward higher-need tracts: treatment tracts have modestly but significantly higher disability rates (*d* = 0.27) and poverty rates (*d* = 0.29) than control tracts. This is directionally correct for vertical equity, though the effect sizes are small and the simulated upgrade timeline prevents causal attribution.
+The treatment-control balance check provides tentative evidence that the MTA's Capital Program is directing ADA upgrades toward higher-need tracts: treatment tracts have modestly but significantly higher disability rates and poverty rates than control tracts. This is directionally correct for vertical equity. The sourced upgrade timeline---covering 100 of 157 accessible stations with dates traced to MTA press releases, Capital Program records, and news coverage---lends greater credibility to this finding than the previously synthetic timeline, though the 57 stations with approximate dates introduce residual uncertainty in treatment timing.
 
 ### 5.3 Limitations and Skepticism
 
@@ -271,7 +271,7 @@ Several features of this analysis warrant explicit skepticism.
 
 **The ACS data are stale.** The 2023 five-year ACS estimates reflect survey data collected between 2019 and 2023. As of April 2026, these data are at least three years old. Post-pandemic demographic shifts---including changes in disability prevalence, poverty rates, and residential mobility patterns---may have altered the spatial distribution of need in ways not captured here.
 
-**The simulated upgrade timeline is the critical methodological weakness.** The DiD panel is specified but not causally interpretable because station ADA upgrade years are hash-derived from current status rather than from actual MTA Capital Program records. Real upgrade dates---obtainable via Freedom of Information Law (FOIL) requests or the MTA's capital dashboard---are necessary for credible causal identification. Without them, the panel demonstrates the analytical framework but cannot estimate the actual effect of gaining an accessible station.
+**The upgrade timeline is partially approximate.** Of the 157 accessible stations, 100 have upgrade years sourced from official MTA announcements, press releases, and documented construction completions spanning 1987--2026. The remaining 57---primarily Key Station Program stations from the 1990s--2010s---use approximate dates because per-station completion records were not publicly available. A FOIL request to the MTA for the complete Key Station Program schedule would close this gap and enable fully credible causal identification. The panel is substantially more reliable than a fully synthetic timeline but should not yet be treated as definitive for the ~36% of stations with approximate dates.
 
 **The panel lacks an outcome variable.** The current panel contains treatment indicators and demographic covariates but no outcome variable such as transit ridership, property values, or population change. Defining and linking an appropriate outcome is a prerequisite for DiD estimation.
 

@@ -1,6 +1,6 @@
 # Model Specification
 
-*Auto-generated: April 9, 2026*
+*Auto-generated: April 10, 2026*
 
 This supplementary report details the difference-in-differences (DiD) panel model specification, its identifying assumptions, and pre-estimation diagnostics.
 
@@ -39,10 +39,10 @@ One unit's treatment does not affect another unit's outcome. Spatial spillovers 
 
 | Variable | Treatment | Control | Diff | Cohen's d | t-stat | p-value | |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | :--- |
-| Disability rate | 0.0484 | 0.0389 | +0.0095 | 0.270 | 6.22 | < 0.001 | *** |
-| Senior rate | 0.1512 | 0.1623 | -0.0111 | -0.133 | -3.16 | 0.002 | ** |
-| Poverty rate | 0.0739 | 0.0555 | +0.0184 | 0.292 | 6.75 | < 0.001 | *** |
-| Need score | 0.0912 | 0.0856 | +0.0056 | 0.136 | 3.18 | 0.001 | ** |
+| Disability rate | 0.0491 | 0.0390 | +0.0102 | 0.286 | 6.40 | < 0.001 | *** |
+| Senior rate | 0.1503 | 0.1622 | -0.0119 | -0.143 | -3.34 | < 0.001 | *** |
+| Poverty rate | 0.0743 | 0.0563 | +0.0181 | 0.284 | 6.42 | < 0.001 | *** |
+| Need score | 0.0912 | 0.0858 | +0.0054 | 0.131 | 2.99 | 0.003 | ** |
 
 **Welch's t-test** (unequal variance) used for all comparisons. Cohen's d: |d| < 0.2 = negligible, 0.2-0.5 = small, 0.5-0.8 = medium, > 0.8 = large.
 
@@ -75,3 +75,4 @@ If significant spatial autocorrelation is detected (see [spatial diagnostics](./
 - **Simulated upgrade timeline:** Station ADA upgrade years are hash-derived from current ADA status, not from actual MTA Capital Program records. This means the treatment assignment is artificial and **DiD coefficients would not be causally interpretable**.
 - **Repeated demographics:** ACS estimates are repeated across vintage years (the same 2023 estimates appear in all periods). Production use should fetch actual multi-vintage ACS data via `fetch_multi_vintage_estimates()`.
 - **No outcome variable:** The panel currently has treatment indicators and covariates but no outcome variable (e.g., property values, transit ridership, population change). Defining the outcome requires linking to additional data sources.
+

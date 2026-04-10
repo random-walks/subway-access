@@ -1,6 +1,6 @@
 # Accessibility Change Over Time
 
-*Report generated: April 9, 2026*
+*Report generated: April 10, 2026*
 
 | | |
 | :--- | :--- |
@@ -93,17 +93,17 @@ Nominal coverage counts any ADA station within the catchment. Reliability-weight
 
 | Year | Covered tracts | Rate | Covered pop |
 | :--- | ---: | ---: | ---: |
-| 2017 | 195 | 8.4% | 860,421 |
-| 2018 | 333 | 14.4% | 1,346,266 |
-| 2019 | 428 | 18.5% | 1,716,457 |
-| 2020 | 627 | 27.1% | 2,615,174 |
-| 2021 | 694 | 30.0% | 2,894,529 |
-| 2022 | 792 | 34.2% | 3,345,549 |
-| 2023 | 908 | 39.2% | 3,824,813 |
+| 2017 | 389 | 16.8% | 1,620,306 |
+| 2018 | 417 | 18.0% | 1,704,030 |
+| 2019 | 471 | 20.3% | 1,929,169 |
+| 2020 | 614 | 26.5% | 2,549,087 |
+| 2021 | 674 | 29.1% | 2,797,941 |
+| 2022 | 725 | 31.3% | 3,048,894 |
+| 2023 | 831 | 35.9% | 3,519,151 |
 
 ## Treatment vs control
 
-Treatment: tracts that gained an accessible station during the panel window (908 tracts). Control: tracts with no accessible station coverage in any period (1,409 tracts).
+Treatment: tracts that gained an accessible station during the panel window (831 tracts). Control: tracts with no accessible station coverage in any period (1,486 tracts).
 
 ![Figure 7](./figures/figure-7-treatment-vs-control-balance.png)
 
@@ -111,11 +111,11 @@ Treatment: tracts that gained an accessible station during the panel window (908
 
 | Variable | Treatment | Control | Diff | Cohen's d | p-value | |
 | :--- | ---: | ---: | ---: | ---: | ---: | :--- |
-| Disability rate | 0.0484 | 0.0389 | +0.0095 | 0.270 | < 0.001 | *** |
-| Senior rate | 0.1512 | 0.1623 | -0.0111 | -0.133 | 0.002 | ** |
-| Poverty rate | 0.0739 | 0.0555 | +0.0184 | 0.292 | < 0.001 | *** |
-| Need score | 0.0912 | 0.0856 | +0.0056 | 0.136 | 0.001 | ** |
-| Population | 3,824,813 | 4,682,783 | | | | |
+| Disability rate | 0.0491 | 0.0390 | +0.0102 | 0.286 | < 0.001 | *** |
+| Senior rate | 0.1503 | 0.1622 | -0.0119 | -0.143 | < 0.001 | *** |
+| Poverty rate | 0.0743 | 0.0563 | +0.0181 | 0.284 | < 0.001 | *** |
+| Need score | 0.0912 | 0.0858 | +0.0054 | 0.131 | 0.003 | ** |
+| Population | 3,519,151 | 4,988,445 | | | | |
 
 *Welch's t-test (unequal variance). Cohen's d: |d| < 0.2 negligible, 0.2–0.5 small, 0.5–0.8 medium, > 0.8 large.*
 

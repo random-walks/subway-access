@@ -262,17 +262,20 @@ def build_panel(snapshots, years, minutes):
         for st in s.stations.stations:
             locs[st.station_id] = (st.latitude, st.longitude)
             all_st.append(st)
-    # Prefer real upgrade years from enhanced seeds if any are filled in.
+    # Load real upgrade years from enhanced seeds (100 stations with sourced dates).
     seeds_dir = ROOT.parents[1] / "seeds" / "enhanced" / "upgrade_templates"
     known = load_known_upgrades_from_dir(seeds_dir) if seeds_dir.is_dir() else {}
-    if not known:
-        # Fallback: deterministic synthetic timeline (MD5-hash based).
-        lo, hi = min(years), max(years)
-        span = hi - lo + 1
-        for s in all_st:
-            if s.ada_status == "accessible":
-                h = int(hashlib.md5(s.station_id.encode()).hexdigest(), 16)
-                known[s.station_id] = lo + (h % span)
+    real_count = len(known)
+    # Fill remaining accessible stations (no sourced date) with hash fallback.
+    lo, hi = min(years), max(years)
+    span = hi - lo + 1
+    synth_count = 0
+    for s in all_st:
+        if s.ada_status == "accessible" and s.station_id not in known:
+            h = int(hashlib.md5(s.station_id.encode()).hexdigest(), 16)
+            known[s.station_id] = lo + (h % span)
+            synth_count += 1
+    print(f"  Upgrade timeline: {real_count} sourced + {synth_count} synthetic = {len(known)} total")
     recs = []
     seen = set()
     for s in snapshots.values():
