@@ -1,0 +1,3 @@
+station_id,station_name,borough,latitude,longitude,complex_id,gtfs_stop_id,daytime_routes,line,division,structure,ada_status,upgrade_year,upgrade_source,capital_program,project_id,contract_number,construction_start_date,construction_end_date,project_cost_millions,contractor,accessibility_features,notes
+21,Cortlandt St,Manhattan,40.710668,-74.011029,624,R25,R W,Broadway,BMT,Subway,accessible,,,,,,,,,,,
+105,Chambers St,Manhattan,40.713243,-74.003401,622,M21,J Z,Jamaica,BMT,Subway,accessible,,,,,,,,,,,
