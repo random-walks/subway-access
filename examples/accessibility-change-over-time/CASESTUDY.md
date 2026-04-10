@@ -1,10 +1,12 @@
+<!-- Author: Blaise Albis-Burdige | https://blaiseab.com | Creator of subway-access -->
+
+> **Note from Blaise:** This case study is an example of more advanced statistical analysis using the [subway-access](https://github.com/random-walks/subway-access) library and the NYC open data ecosystem. The central question is almost comical: do accessibility initiatives actually increase equity if the elevator is never running? On a more serious note, the findings highlight a gap in investment follow-through when it comes to ADA infrastructure. Current accessibility classifications may succeed in incentivizing initial capital commitments, but without robust maintenance funding, many stations that are "accessible" on paper are not accessible in practice.
+
 # Assessing ADA Accessibility Gaps in the New York City Subway System: A Spatial Equity Analysis
 
-**Random Walks Research**
+**By [Blaise Albis-Burdige](https://blaiseab.com)** | Author, [subway-access](https://github.com/random-walks/subway-access)
 
 *April 2026*
-
-*Correspondence:* [github.com/random-walks/subway-access](https://github.com/random-walks/subway-access)
 
 ---
 
