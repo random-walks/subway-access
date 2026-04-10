@@ -30,7 +30,10 @@ import matplotlib as mpl
 mpl.use("Agg")
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
+import numpy as np
 from nyc_geo_toolkit import load_nyc_census_tracts
+from scipy import sparse as sp_sparse
+from scipy import stats as sp_stats
 from shapely.geometry import shape
 
 from subway_access import analysis, models, pipeline
@@ -315,6 +318,8 @@ def build_tract_geodataframe(snapshots, summaries):
                 "nearest_distance_m": rec["nearest_accessible_distance_meters"],
                 "station_count": rec["accessible_station_count"],
                 "disability_rate": tract.disability_rate,
+                "senior_rate": tract.senior_rate,
+                "poverty_rate": tract.poverty_rate,
                 "population": tract.total_population,
             }
 
@@ -329,6 +334,217 @@ def build_tract_geodataframe(snapshots, summaries):
         nta_name = feature.properties.get("nta_name", "")
         rows.append({"geoid": geoid, "geometry": geom, "nta_name": nta_name, **data})
     return gpd.GeoDataFrame(rows, crs="EPSG:4326")
+
+
+# ---------------------------------------------------------------------------
+# Statistical analysis helpers
+# ---------------------------------------------------------------------------
+
+
+def _compute_correlations(gdf):
+    """Compute pairwise Pearson correlations with p-values."""
+    variables = [
+        "disability_rate",
+        "senior_rate",
+        "poverty_rate",
+        "need_score",
+        "gap_score",
+        "nearest_distance_m",
+    ]
+    labels = [
+        "Disability",
+        "Senior",
+        "Poverty",
+        "Need score",
+        "Gap score",
+        "Distance (m)",
+    ]
+    data = {v: gdf[v].fillna(0).to_numpy() for v in variables}
+    n = len(variables)
+    r_matrix = np.zeros((n, n))
+    p_matrix = np.ones((n, n))
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                r_matrix[i, j] = 1.0
+                p_matrix[i, j] = 0.0
+            elif j > i:
+                r, p = sp_stats.pearsonr(data[variables[i]], data[variables[j]])
+                r_matrix[i, j] = r
+                r_matrix[j, i] = r
+                p_matrix[i, j] = p
+                p_matrix[j, i] = p
+    return {
+        "variables": variables,
+        "labels": labels,
+        "r_matrix": r_matrix,
+        "p_matrix": p_matrix,
+    }
+
+
+def _compute_spearman(gdf):
+    """Compute pairwise Spearman rank correlations with p-values."""
+    variables = [
+        "disability_rate",
+        "senior_rate",
+        "poverty_rate",
+        "need_score",
+        "gap_score",
+        "nearest_distance_m",
+    ]
+    labels = [
+        "Disability",
+        "Senior",
+        "Poverty",
+        "Need score",
+        "Gap score",
+        "Distance (m)",
+    ]
+    data = {v: gdf[v].fillna(0).to_numpy() for v in variables}
+    n = len(variables)
+    rho_matrix = np.zeros((n, n))
+    p_matrix = np.ones((n, n))
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                rho_matrix[i, j] = 1.0
+                p_matrix[i, j] = 0.0
+            elif j > i:
+                rho, p = sp_stats.spearmanr(data[variables[i]], data[variables[j]])
+                rho_matrix[i, j] = rho
+                rho_matrix[j, i] = rho
+                p_matrix[i, j] = p
+                p_matrix[j, i] = p
+    return {
+        "variables": variables,
+        "labels": labels,
+        "rho_matrix": rho_matrix,
+        "p_matrix": p_matrix,
+    }
+
+
+def _compute_vif(gdf):
+    """Compute variance inflation factors for demographic predictors."""
+    variables = ["disability_rate", "senior_rate", "poverty_rate"]
+    X = gdf[variables].fillna(0).to_numpy()
+    n_vars = X.shape[1]
+    results = []
+    for j in range(n_vars):
+        y_j = X[:, j]
+        X_others = np.delete(X, j, axis=1)
+        X_design = np.column_stack([np.ones(X_others.shape[0]), X_others])
+        beta, _, _, _ = np.linalg.lstsq(X_design, y_j, rcond=None)
+        y_hat = X_design @ beta
+        ss_res = np.sum((y_j - y_hat) ** 2)
+        ss_tot = np.sum((y_j - np.mean(y_j)) ** 2)
+        r_sq = 1.0 - ss_res / ss_tot if ss_tot > 0 else 0.0
+        vif = 1.0 / (1.0 - r_sq) if r_sq < 1.0 else float("inf")
+        results.append((variables[j], vif))
+    return results
+
+
+def _compute_morans_i(values_dict, weights, n_permutations=999):
+    """Compute global Moran's I with permutation inference.
+
+    Uses a sparse weight matrix for fast vectorized computation.
+    Returns dict with I, expected_I, z_score, p_value for each variable.
+    """
+    results = {}
+    unit_ids = sorted(weights.keys())
+    n = len(unit_ids)
+    uid_to_idx = {uid: i for i, uid in enumerate(unit_ids)}
+    rng = np.random.default_rng(42)
+
+    # Build sparse weights matrix once.
+    rows, cols, vals = [], [], []
+    for uid_i in unit_ids:
+        idx_i = uid_to_idx[uid_i]
+        for uid_j, w_ij in weights.get(uid_i, {}).items():
+            idx_j = uid_to_idx.get(uid_j)
+            if idx_j is not None:
+                rows.append(idx_i)
+                cols.append(idx_j)
+                vals.append(w_ij)
+    W = sp_sparse.csr_matrix((vals, (rows, cols)), shape=(n, n))
+    w_sum = W.sum()
+
+    def _moran_stat(z_arr):
+        zz = np.sum(z_arr**2)
+        if zz == 0:
+            return 0.0
+        lag = W.dot(z_arr)
+        return (n / w_sum) * np.dot(z_arr, lag) / zz
+
+    for var_name, values_map in values_dict.items():
+        y = np.array([values_map.get(uid, 0.0) for uid in unit_ids])
+        z = y - np.mean(y)
+        observed_I = _moran_stat(z)
+        expected_I = -1.0 / (n - 1)
+
+        # Permutation inference.
+        perm_Is = np.empty(n_permutations)
+        for k in range(n_permutations):
+            perm_z = rng.permutation(z)
+            perm_Is[k] = _moran_stat(perm_z)
+
+        perm_mean = np.mean(perm_Is)
+        perm_std = np.std(perm_Is, ddof=1)
+        z_score = (observed_I - perm_mean) / perm_std if perm_std > 0 else 0.0
+        # Two-sided pseudo p-value.
+        p_value = (np.sum(np.abs(perm_Is) >= abs(observed_I)) + 1) / (
+            n_permutations + 1
+        )
+
+        results[var_name] = {
+            "I": observed_I,
+            "expected_I": expected_I,
+            "z_score": z_score,
+            "p_value": float(p_value),
+        }
+    return results
+
+
+def _compute_equity_regression(gdf):
+    """OLS: gap_score ~ poverty_rate + disability_rate + senior_rate."""
+    try:
+        import statsmodels.api as sm  # noqa: PLC0415
+    except ImportError:
+        return None
+
+    y = gdf["gap_score"].fillna(0).to_numpy()
+    X = gdf[["poverty_rate", "disability_rate", "senior_rate"]].fillna(0).to_numpy()
+    X = sm.add_constant(X)
+    model = sm.OLS(y, X).fit(cov_type="HC1")
+    return {
+        "params": list(model.params),
+        "bse": list(model.bse),
+        "tvalues": list(model.tvalues),
+        "pvalues": list(model.pvalues),
+        "rsquared": model.rsquared,
+        "rsquared_adj": model.rsquared_adj,
+        "fvalue": model.fvalue,
+        "f_pvalue": model.f_pvalue,
+        "nobs": int(model.nobs),
+        "var_names": ["const", "poverty_rate", "disability_rate", "senior_rate"],
+    }
+
+
+def _sig_stars(p):
+    """Return significance stars for a p-value."""
+    if p < 0.001:
+        return "***"
+    if p < 0.01:
+        return "**"
+    if p < 0.05:
+        return "*"
+    return ""
+
+
+def _fmt_p(p):
+    """Format p-value for display."""
+    if p < 0.001:
+        return "< 0.001"
+    return f"{p:.3f}"
 
 
 # ---------------------------------------------------------------------------
@@ -658,6 +874,170 @@ def _fig_gap_vs_distance(gdf):
     return path
 
 
+def _fig_correlation_heatmap(corr_result):
+    path = _fig("figure-11-correlation-heatmap.png")
+    r = corr_result["r_matrix"]
+    p = corr_result["p_matrix"]
+    labels = corr_result["labels"]
+    n = len(labels)
+    fig, ax = plt.subplots(figsize=(9, 8))
+    im = ax.imshow(r, cmap="RdBu_r", vmin=-1, vmax=1, aspect="auto")
+    plt.colorbar(im, ax=ax, label="Pearson r", shrink=0.8)
+    ax.set_xticks(range(n))
+    ax.set_xticklabels(labels, rotation=45, ha="right", fontsize=10)
+    ax.set_yticks(range(n))
+    ax.set_yticklabels(labels, fontsize=10)
+    for i in range(n):
+        for j in range(n):
+            stars = _sig_stars(p[i, j])
+            txt = f"{r[i, j]:.2f}{stars}" if i != j else ""
+            color = "white" if abs(r[i, j]) > 0.6 else "black"
+            ax.text(j, i, txt, ha="center", va="center", fontsize=9, color=color)
+    ax.set_title(
+        "Figure 11. Pairwise Pearson correlations (* p<.05, ** p<.01, *** p<.001)"
+    )
+    fig.tight_layout()
+    fig.savefig(path, dpi=180)
+    plt.close(fig)
+    return path
+
+
+def _fig_gap_vs_poverty(gdf):
+    path = _fig("figure-12-gap-vs-poverty-scatter.png")
+    valid = gdf[gdf["gap_score"] > 0].copy()
+    if valid.empty:
+        return path
+    borough_colors = {
+        "Manhattan": "#4c78a8",
+        "Brooklyn": "#f58518",
+        "Queens": "#e45756",
+        "Bronx": "#72b7b2",
+        "Staten Island": "#54a24b",
+    }
+    fig, ax = plt.subplots(figsize=(10, 6))
+    for borough, color in borough_colors.items():
+        sub = valid[valid["borough"] == borough]
+        if not sub.empty:
+            ax.scatter(
+                sub["poverty_rate"],
+                sub["gap_score"],
+                c=color,
+                label=borough,
+                alpha=0.5,
+                s=15,
+                edgecolors="none",
+            )
+    r, p = sp_stats.pearsonr(valid["poverty_rate"], valid["gap_score"])
+    slope, intercept = np.polyfit(valid["poverty_rate"], valid["gap_score"], 1)
+    x_line = np.linspace(valid["poverty_rate"].min(), valid["poverty_rate"].max(), 100)
+    ax.plot(x_line, slope * x_line + intercept, "k--", linewidth=1.5, alpha=0.7)
+    ax.annotate(
+        f"r = {r:.3f}, p {_fmt_p(p)}",
+        xy=(0.02, 0.95),
+        xycoords="axes fraction",
+        fontsize=10,
+        fontweight="bold",
+        bbox={"boxstyle": "round,pad=0.3", "facecolor": "wheat", "alpha": 0.8},
+    )
+    ax.set_xlabel("Poverty rate")
+    ax.set_ylabel("Gap score")
+    ax.set_title("Figure 12. Gap score vs poverty rate (gap tracts only)")
+    ax.legend(fontsize=9, markerscale=2)
+    fig.tight_layout()
+    fig.savefig(path, dpi=180)
+    plt.close(fig)
+    return path
+
+
+def _fig_gap_vs_disability(gdf):
+    path = _fig("figure-13-gap-vs-disability-scatter.png")
+    valid = gdf[gdf["gap_score"] > 0].copy()
+    if valid.empty:
+        return path
+    borough_colors = {
+        "Manhattan": "#4c78a8",
+        "Brooklyn": "#f58518",
+        "Queens": "#e45756",
+        "Bronx": "#72b7b2",
+        "Staten Island": "#54a24b",
+    }
+    fig, ax = plt.subplots(figsize=(10, 6))
+    for borough, color in borough_colors.items():
+        sub = valid[valid["borough"] == borough]
+        if not sub.empty:
+            ax.scatter(
+                sub["disability_rate"],
+                sub["gap_score"],
+                c=color,
+                label=borough,
+                alpha=0.5,
+                s=15,
+                edgecolors="none",
+            )
+    r, p = sp_stats.pearsonr(valid["disability_rate"], valid["gap_score"])
+    slope, intercept = np.polyfit(valid["disability_rate"], valid["gap_score"], 1)
+    x_line = np.linspace(
+        valid["disability_rate"].min(), valid["disability_rate"].max(), 100
+    )
+    ax.plot(x_line, slope * x_line + intercept, "k--", linewidth=1.5, alpha=0.7)
+    ax.annotate(
+        f"r = {r:.3f}, p {_fmt_p(p)}",
+        xy=(0.02, 0.95),
+        xycoords="axes fraction",
+        fontsize=10,
+        fontweight="bold",
+        bbox={"boxstyle": "round,pad=0.3", "facecolor": "wheat", "alpha": 0.8},
+    )
+    ax.set_xlabel("Disability rate")
+    ax.set_ylabel("Gap score")
+    ax.set_title("Figure 13. Gap score vs disability rate (gap tracts only)")
+    ax.legend(fontsize=9, markerscale=2)
+    fig.tight_layout()
+    fig.savefig(path, dpi=180)
+    plt.close(fig)
+    return path
+
+
+def _fig_bivariate_map(gdf, var_a, var_b, label_a, label_b, fig_num, slug):
+    path = _fig(f"figure-{fig_num}-{slug}.png")
+    plot_gdf = gdf.to_crs("EPSG:3857")
+    fig, axes = plt.subplots(1, 2, figsize=(22, 14))
+    for ax, col, label, cmap in [
+        (axes[0], var_a, label_a, "YlOrRd"),
+        (axes[1], var_b, label_b, "PuBuGn"),
+    ]:
+        plot_gdf.plot(
+            column=col,
+            ax=ax,
+            cmap=cmap,
+            legend=True,
+            legend_kwds={"label": label, "shrink": 0.6},
+            missing_kwds={"color": "#e0e0e0"},
+            edgecolor="white",
+            linewidth=0.1,
+        )
+        if ctx is not None:
+            with contextlib.suppress(OSError, RuntimeError, ValueError):
+                ctx.add_basemap(
+                    ax,
+                    crs="EPSG:3857",
+                    source=ctx.providers.CartoDB.Positron,
+                    alpha=0.4,
+                    zorder=0,
+                )
+        ax.set_title(label, fontsize=12)
+        ax.set_axis_off()
+    fig.suptitle(
+        f"Figure {fig_num}. {label_a} vs {label_b} by census tract",
+        fontsize=14,
+        y=0.98,
+    )
+    fig.tight_layout()
+    fig.savefig(path, dpi=140)
+    plt.close(fig)
+    return path
+
+
 # ---------------------------------------------------------------------------
 # CSV export
 # ---------------------------------------------------------------------------
@@ -746,8 +1126,441 @@ def _skewness(vals):
     return (n / ((n - 1) * (n - 2))) * sum(((v - m) / s) ** 3 for v in vals)
 
 
+SUPPLEMENTARY_DIR = REPORTS_DIR / "supplementary"
+
+
+def write_correlation_report(_gdf, corr, spearman, vif_results, equity_reg, provenance):
+    """Auto-generate supplementary/correlation-analysis.md."""
+    L = []
+
+    def _w(s):
+        L.append(s)
+
+    pv = provenance
+    _w("# Correlation Analysis")
+    _w("")
+    _w(f"*Auto-generated: {pv['report_date']}*")
+    _w("")
+    _w(
+        "This supplementary report provides full correlation matrices, multicollinearity "
+        "diagnostics, and an OLS regression of gap score on demographic predictors."
+    )
+    _w("")
+
+    # Pearson matrix.
+    _w("## Pearson correlation matrix")
+    _w("")
+    labels = corr["labels"]
+    r_mat = corr["r_matrix"]
+    p_mat = corr["p_matrix"]
+    n = len(labels)
+    header = "| | " + " | ".join(labels) + " |"
+    sep = "| :--- |" + " ---: |" * n
+    _w(header)
+    _w(sep)
+    for i in range(n):
+        row = f"| **{labels[i]}** |"
+        for j in range(n):
+            if i == j:
+                row += " 1.000 |"
+            else:
+                stars = _sig_stars(p_mat[i, j])
+                row += f" {r_mat[i, j]:.3f}{stars} |"
+        _w(row)
+    _w("")
+    _w("*Significance: \\* p < 0.05, \\*\\* p < 0.01, \\*\\*\\* p < 0.001*")
+    _w("")
+    _w("![Figure 11](../figures/figure-11-correlation-heatmap.png)")
+    _w("")
+
+    # Spearman matrix.
+    _w("## Spearman rank correlation matrix")
+    _w("")
+    rho_mat = spearman["rho_matrix"]
+    sp_mat = spearman["p_matrix"]
+    _w(header)
+    _w(sep)
+    for i in range(n):
+        row = f"| **{labels[i]}** |"
+        for j in range(n):
+            if i == j:
+                row += " 1.000 |"
+            else:
+                stars = _sig_stars(sp_mat[i, j])
+                row += f" {rho_mat[i, j]:.3f}{stars} |"
+        _w(row)
+    _w("")
+    _w(
+        "Spearman correlations are robust to non-linear monotonic relationships and outliers. "
+        "Agreement with Pearson results indicates linear association is a reasonable approximation."
+    )
+    _w("")
+
+    # VIF.
+    _w("## Variance inflation factors (VIF)")
+    _w("")
+    _w("| Variable | VIF |")
+    _w("| :--- | ---: |")
+    for var, vif in vif_results:
+        flag = " \u26a0\ufe0f" if vif > 5 else ""
+        _w(f"| {var} | {vif:.2f}{flag} |")
+    _w("")
+    max_vif = max(v for _, v in vif_results)
+    if max_vif < 5:
+        _w(
+            f"All VIF values are below 5 (max = {max_vif:.2f}), indicating no problematic multicollinearity "
+            "among the demographic predictors."
+        )
+    else:
+        _w(
+            f"**Warning:** At least one VIF exceeds 5 (max = {max_vif:.2f}), suggesting multicollinearity. "
+            "Consider dropping or combining correlated predictors."
+        )
+    _w("")
+
+    # Scatter plots.
+    _w("## Bivariate scatter plots")
+    _w("")
+    _w("![Figure 12](../figures/figure-12-gap-vs-poverty-scatter.png)")
+    _w("")
+    _w("![Figure 13](../figures/figure-13-gap-vs-disability-scatter.png)")
+    _w("")
+
+    # Equity OLS.
+    if equity_reg is not None:
+        _w("## OLS regression: gap score on demographic predictors")
+        _w("")
+        _w(
+            "Model: `gap_score = b0 + b1*poverty_rate + b2*disability_rate + b3*senior_rate`"
+        )
+        _w("")
+        _w(
+            f"N = {equity_reg['nobs']:,}, R\u00b2 = {equity_reg['rsquared']:.4f}, "
+            f"Adj. R\u00b2 = {equity_reg['rsquared_adj']:.4f}, "
+            f"F = {equity_reg['fvalue']:.2f} (p {_fmt_p(equity_reg['f_pvalue'])})"
+        )
+        _w("")
+        _w("| Variable | Coefficient | SE | t | p-value | |")
+        _w("| :--- | ---: | ---: | ---: | ---: | :--- |")
+        for i, var in enumerate(equity_reg["var_names"]):
+            b = equity_reg["params"][i]
+            se = equity_reg["bse"][i]
+            t = equity_reg["tvalues"][i]
+            p = equity_reg["pvalues"][i]
+            _w(
+                f"| {var} | {b:.4f} | {se:.4f} | {t:.2f} | {_fmt_p(p)} | {_sig_stars(p)} |"
+            )
+        _w("")
+        # Identify strongest predictor (largest |t| among non-constant).
+        pred_idx = [
+            i
+            for i in range(len(equity_reg["var_names"]))
+            if equity_reg["var_names"][i] != "const"
+        ]
+        best_i = max(pred_idx, key=lambda i: abs(equity_reg["tvalues"][i]))
+        best_var = equity_reg["var_names"][best_i]
+        _w(
+            f"**Strongest predictor:** {best_var} (|t| = {abs(equity_reg['tvalues'][best_i]):.2f}). "
+            "Robust standard errors (HC1) account for heteroskedasticity."
+        )
+    _w("")
+
+    out = _dir(SUPPLEMENTARY_DIR) / "correlation-analysis.md"
+    out.write_text("\n".join(L) + "\n", encoding="utf-8")
+    return out
+
+
+def write_model_spec_report(
+    _panel, _gdf, weights, balance_stats, diag_stats, provenance
+):
+    """Auto-generate supplementary/model-specification.md."""
+    L = []
+
+    def _w(s):
+        L.append(s)
+
+    pv = provenance
+
+    _w("# Model Specification")
+    _w("")
+    _w(f"*Auto-generated: {pv['report_date']}*")
+    _w("")
+    _w(
+        "This supplementary report details the difference-in-differences (DiD) panel model "
+        "specification, its identifying assumptions, and pre-estimation diagnostics."
+    )
+    _w("")
+
+    # DiD specification.
+    _w("## Difference-in-differences specification")
+    _w("")
+    _w("```")
+    _w(
+        "Y_it = alpha + beta * Treatment_it + gamma * X_it + delta_i + tau_t + epsilon_it"
+    )
+    _w("```")
+    _w("")
+    _w("| Symbol | Description |")
+    _w("| :--- | :--- |")
+    _w(
+        "| Y_it | Outcome: population change, demographic composition, or housing cost |"
+    )
+    _w("| Treatment_it | 1 if tract *i* has an accessible station by period *t* |")
+    _w("| X_it | Time-varying covariates: disability rate, senior rate, poverty rate |")
+    _w(
+        "| delta_i | Tract fixed effects (absorb time-invariant tract characteristics) |"
+    )
+    _w("| tau_t | Period fixed effects (absorb city-wide trends) |")
+    _w("| beta | **Causal estimate:** effect of gaining an accessible station |")
+    _w("")
+
+    # Assumptions.
+    _w("## Identifying assumptions")
+    _w("")
+    _w("### 1. Parallel trends")
+    _w("")
+    _w(
+        "In the absence of treatment, treated and control tracts would have followed "
+        "the same outcome trajectory. This is the core identifying assumption of DiD. "
+        "It cannot be directly tested, but pre-treatment outcome trends should be parallel."
+    )
+    _w("")
+    _w(
+        "**Status:** Cannot be verified with the current simulated upgrade timeline. "
+        "With real MTA Capital Program upgrade dates, plot pre-treatment outcome trends "
+        "for treatment vs control groups to visually assess parallelism."
+    )
+    _w("")
+    _w("### 2. No anticipation")
+    _w("")
+    _w(
+        "Units do not change behavior in anticipation of treatment. Since ADA station "
+        "upgrades are infrastructure projects announced years in advance, this assumption "
+        "could be violated if households sort based on announced plans."
+    )
+    _w("")
+    _w("### 3. SUTVA (Stable Unit Treatment Value Assumption)")
+    _w("")
+    _w(
+        "One unit's treatment does not affect another unit's outcome. Spatial spillovers "
+        "(e.g., a new accessible station increasing property values in adjacent tracts) "
+        "could violate SUTVA. The SAR extension below addresses this."
+    )
+    _w("")
+
+    # Balance table with t-tests.
+    _w("## Balance check with hypothesis tests")
+    _w("")
+    _w("| Variable | Treatment | Control | Diff | Cohen's d | t-stat | p-value | |")
+    _w("| :--- | ---: | ---: | ---: | ---: | ---: | ---: | :--- |")
+    for row in balance_stats:
+        stars = _sig_stars(row["p_value"])
+        _w(
+            f"| {row['label']} | {row['t_mean']:.4f} | {row['c_mean']:.4f} "
+            f"| {row['diff']:+.4f} | {row['cohens_d']:.3f} | {row['t_stat']:.2f} "
+            f"| {_fmt_p(row['p_value'])} | {stars} |"
+        )
+    _w("")
+    _w(
+        "**Welch's t-test** (unequal variance) used for all comparisons. "
+        "Cohen's d: |d| < 0.2 = negligible, 0.2-0.5 = small, 0.5-0.8 = medium, > 0.8 = large."
+    )
+    _w("")
+
+    # Enhanced diagnostics.
+    _w("## Distribution diagnostics")
+    _w("")
+    _w("| Statistic | Need score | Distance (m) | Gap score |")
+    _w("| :--- | ---: | ---: | ---: |")
+    for stat_name, vals in diag_stats.items():
+        _w(f"| {stat_name} | {vals[0]} | {vals[1]} | {vals[2]} |")
+    _w("")
+
+    # SAR extension.
+    _w("## Spatial autoregressive (SAR) extension")
+    _w("")
+    _w("```")
+    _w("Y_it = rho * W * Y_it + beta * X_it + delta_i + tau_t + epsilon_it")
+    _w("```")
+    _w("")
+    units_nbrs = sum(1 for u in weights if weights[u])
+    mean_nbrs = sum(len(n) for n in weights.values()) / len(weights) if weights else 0
+    _w(
+        f"Where *W* is the row-standardized distance-based spatial weights matrix "
+        f"({len(weights):,} units, {units_nbrs:,} with neighbors, mean {mean_nbrs:.1f} neighbors, "
+        f"2 km threshold)."
+    )
+    _w("")
+    _w(
+        "If significant spatial autocorrelation is detected (see [spatial diagnostics]"
+        "(./spatial-diagnostics.md)), the SAR model should be preferred over standard DiD "
+        "to avoid biased coefficients."
+    )
+    _w("")
+
+    # Limitations.
+    _w("## Limitations of current panel")
+    _w("")
+    _w(
+        "- **Simulated upgrade timeline:** Station ADA upgrade years are hash-derived from "
+        "current ADA status, not from actual MTA Capital Program records. This means the "
+        "treatment assignment is artificial and **DiD coefficients would not be causally interpretable**."
+    )
+    _w(
+        "- **Repeated demographics:** ACS estimates are repeated across vintage years (the "
+        "same 2023 estimates appear in all periods). Production use should fetch actual multi-vintage "
+        "ACS data via `fetch_multi_vintage_estimates()`."
+    )
+    _w(
+        "- **No outcome variable:** The panel currently has treatment indicators and covariates "
+        "but no outcome variable (e.g., property values, transit ridership, population change). "
+        "Defining the outcome requires linking to additional data sources."
+    )
+    _w("")
+
+    out = _dir(SUPPLEMENTARY_DIR) / "model-specification.md"
+    out.write_text("\n".join(L) + "\n", encoding="utf-8")
+    return out
+
+
+def write_spatial_report(_gdf, weights, morans_results, provenance):
+    """Auto-generate supplementary/spatial-diagnostics.md."""
+    L = []
+
+    def _w(s):
+        L.append(s)
+
+    pv = provenance
+    _w("# Spatial Diagnostics")
+    _w("")
+    _w(f"*Auto-generated: {pv['report_date']}*")
+    _w("")
+
+    # Weights summary.
+    _w("## Spatial weights matrix")
+    _w("")
+    units_nbrs = sum(1 for u in weights if weights[u])
+    islands = sum(1 for u in weights if not weights[u])
+    all_nbr_counts = [len(n) for n in weights.values()]
+    mean_nbrs = _mean(all_nbr_counts)
+    _w("| Property | Value |")
+    _w("| :--- | ---: |")
+    _w(f"| Units | {len(weights):,} |")
+    _w("| Distance threshold | 2,000 m |")
+    _w(f"| Units with neighbors | {units_nbrs:,} |")
+    _w(f"| Islands (no neighbors) | {islands:,} |")
+    _w(f"| Mean neighbors | {mean_nbrs:.1f} |")
+    if all_nbr_counts:
+        _w(f"| Min neighbors | {min(all_nbr_counts)} |")
+        _w(f"| Max neighbors | {max(all_nbr_counts)} |")
+        _w(f"| Median neighbors | {sorted(all_nbr_counts)[len(all_nbr_counts) // 2]} |")
+    _w("")
+    _w(
+        "Row-standardized distance-based weights: each unit's neighbors (within 2 km) "
+        "receive equal weight summing to 1. Units with no neighbors (islands) are excluded "
+        "from spatial analysis."
+    )
+    _w("")
+
+    # Moran's I.
+    _w("## Global Moran's I")
+    _w("")
+    _w(
+        "Moran's I tests whether a variable is spatially clustered (I > E[I]) or "
+        "dispersed (I < E[I]). Under the null hypothesis of spatial randomness, "
+        "I converges to E[I] = -1/(N-1)."
+    )
+    _w("")
+    _w("| Variable | Moran's I | E[I] | z-score | p-value | |")
+    _w("| :--- | ---: | ---: | ---: | ---: | :--- |")
+    for var_name, res in morans_results.items():
+        stars = _sig_stars(res["p_value"])
+        label = var_name.replace("_", " ").title()
+        _w(
+            f"| {label} | {res['I']:.4f} | {res['expected_I']:.4f} "
+            f"| {res['z_score']:.2f} | {_fmt_p(res['p_value'])} | {stars} |"
+        )
+    _w("")
+
+    any_significant = any(r["p_value"] < 0.05 for r in morans_results.values())
+    if any_significant:
+        _w(
+            "**Interpretation:** Statistically significant spatial autocorrelation detected. "
+            "Key variables are not randomly distributed across space -- similar values cluster together. "
+            "This has two implications:"
+        )
+        _w("")
+        _w(
+            "1. **For the DiD model:** Standard errors may be underestimated if spatial dependence "
+            "is ignored. The SAR panel extension or spatial HAC standard errors should be used."
+        )
+        _w(
+            "2. **For policy:** The clustering suggests that accessibility gaps are concentrated "
+            "in specific neighborhoods, not uniformly distributed. Targeted investment in these "
+            "clusters would be more efficient than system-wide uniform upgrades."
+        )
+    else:
+        _w(
+            "**Interpretation:** No significant spatial autocorrelation detected. "
+            "Standard (non-spatial) panel methods are appropriate."
+        )
+    _w("")
+
+    # Bivariate maps.
+    _w("## Bivariate geographic comparison")
+    _w("")
+    _w("![Figure 14](../figures/figure-14-gap-vs-poverty-map.png)")
+    _w("")
+    _w(
+        "Side-by-side maps allow visual comparison of gap score spatial distribution (left) "
+        "with poverty rate (right). Where both are dark, high-poverty neighborhoods also lack "
+        "accessible transit."
+    )
+    _w("")
+    _w("![Figure 15](../figures/figure-15-gap-vs-disability-map.png)")
+    _w("")
+    _w(
+        "Gap score vs disability rate. Where gap scores are high in tracts with high disability "
+        "prevalence, the equity burden is most acute."
+    )
+    _w("")
+
+    # Future work.
+    _w("## Future work")
+    _w("")
+    _w(
+        "- **Local indicators of spatial association (LISA):** Identify specific clusters "
+        "of high-gap / high-need tracts using local Moran's I. Requires `esda` package."
+    )
+    _w(
+        "- **Spatial lag model estimation:** Estimate the SAR panel with `spreg` or `pysal` "
+        "once a suitable outcome variable is available."
+    )
+    _w(
+        "- **Geographically weighted regression (GWR):** Allow coefficients to vary across "
+        "space to identify neighborhoods where the gap-demographics relationship is strongest."
+    )
+    _w("")
+
+    out = _dir(SUPPLEMENTARY_DIR) / "spatial-diagnostics.md"
+    out.write_text("\n".join(L) + "\n", encoding="utf-8")
+    return out
+
+
 def write_report(
-    summaries, panel, gdf, weights, years, boroughs, minutes, figs, provenance
+    summaries,
+    panel,
+    gdf,
+    weights,
+    years,
+    boroughs,
+    minutes,
+    figs,
+    provenance,
+    balance_stats=None,
+    diag_stats=None,
+    morans_results=None,
+    equity_reg=None,
 ):
     treatment = panel.treatment_group()
     control = panel.control_group()
@@ -926,43 +1739,39 @@ def write_report(
     _w("")
     _w("### Table 5. Balance check")
     _w("")
-    _w("| Variable | Treatment | Control | Diff | Interpretation |")
-    _w("| :--- | ---: | ---: | ---: | :--- |")
-    for label, attr, interp_pos, interp_neg in [
-        (
-            "Disability rate",
-            "disability_rate",
-            "Treatment tracts have higher disability prevalence",
-            "Control tracts have higher disability prevalence",
-        ),
-        (
-            "Senior rate",
-            "senior_rate",
-            "Treatment tracts skew older",
-            "Control tracts skew older",
-        ),
-        (
-            "Poverty rate",
-            "poverty_rate",
-            "Treatment tracts have higher poverty",
-            "Control tracts have higher poverty",
-        ),
-        (
-            "Need score",
-            "need_score",
-            "Treatment tracts have higher composite need",
-            "Control tracts have higher composite need",
-        ),
-    ]:
-        tv = _mean([getattr(o, attr) for o in t_obs]) if t_obs else 0
-        cv = _mean([getattr(o, attr) for o in c_obs]) if c_obs else 0
-        diff = tv - cv
-        sign = "+" if diff > 0 else ""
-        interp = interp_pos if diff > 0 else interp_neg
-        _w(f"| {label} | {tv:.4f} | {cv:.4f} | {sign}{diff:.4f} | {interp} |")
-    t_pop = sum(o.total_population for o in t_obs)
-    c_pop = sum(o.total_population for o in c_obs)
-    _w(f"| Population | {t_pop:,} | {c_pop:,} | | |")
+    if balance_stats:
+        _w("| Variable | Treatment | Control | Diff | Cohen's d | p-value | |")
+        _w("| :--- | ---: | ---: | ---: | ---: | ---: | :--- |")
+        for row in balance_stats:
+            stars = _sig_stars(row["p_value"])
+            _w(
+                f"| {row['label']} | {row['t_mean']:.4f} | {row['c_mean']:.4f} "
+                f"| {row['diff']:+.4f} | {row['cohens_d']:.3f} | {_fmt_p(row['p_value'])} | {stars} |"
+            )
+        t_pop = sum(o.total_population for o in t_obs)
+        c_pop = sum(o.total_population for o in c_obs)
+        _w(f"| Population | {t_pop:,} | {c_pop:,} | | | | |")
+        _w("")
+        _w(
+            "*Welch's t-test (unequal variance). Cohen's d: |d| < 0.2 negligible, "
+            "0.2\u20130.5 small, 0.5\u20130.8 medium, > 0.8 large.*"
+        )
+    else:
+        _w("| Variable | Treatment | Control | Diff |")
+        _w("| :--- | ---: | ---: | ---: |")
+        for label, attr in [
+            ("Disability rate", "disability_rate"),
+            ("Senior rate", "senior_rate"),
+            ("Poverty rate", "poverty_rate"),
+            ("Need score", "need_score"),
+        ]:
+            tv = _mean([getattr(o, attr) for o in t_obs]) if t_obs else 0
+            cv = _mean([getattr(o, attr) for o in c_obs]) if c_obs else 0
+            diff = tv - cv
+            _w(f"| {label} | {tv:.4f} | {cv:.4f} | {diff:+.4f} |")
+        t_pop = sum(o.total_population for o in t_obs)
+        c_pop = sum(o.total_population for o in c_obs)
+        _w(f"| Population | {t_pop:,} | {c_pop:,} | |")
     _w("")
     if t_obs and c_obs:
         t_need = _mean([o.need_score for o in t_obs])
@@ -1011,28 +1820,94 @@ def write_report(
 
     _w("### Table 6. Summary diagnostics")
     _w("")
-    _w("| Statistic | Need score | Distance (m) | Gap score |")
-    _w("| :--- | ---: | ---: | ---: |")
-    _w(f"| N | {len(need_vals):,} | {len(dist_vals):,} | {len(gap_vals):,} |")
-    _w(
-        f"| Mean | {_mean(need_vals):.4f} | {_mean(dist_vals):.0f} | {_mean(gap_vals):.4f} |"
-    )
-    _w(
-        f"| Median | {median(need_vals):.4f} | {median(dist_vals):.0f} | {median(gap_vals):.4f} |"
-    )
-    _w(
-        f"| Std dev | {stdev(need_vals):.4f} | {stdev(dist_vals):.0f} | {stdev(gap_vals):.4f} |"
-    )
-    _w(
-        f"| Skewness | {_skewness(need_vals):.2f} | {_skewness(dist_vals):.2f} | {_skewness(gap_vals):.2f} |"
-    )
-    _w(f"| Min | {min(need_vals):.4f} | {min(dist_vals):.0f} | {min(gap_vals):.4f} |")
-    _w(f"| Max | {max(need_vals):.4f} | {max(dist_vals):.0f} | {max(gap_vals):.4f} |")
+    if diag_stats:
+        _w("| Statistic | Need score | Distance (m) | Gap score |")
+        _w("| :--- | ---: | ---: | ---: |")
+        for stat_name, vals in diag_stats.items():
+            _w(f"| {stat_name} | {vals[0]} | {vals[1]} | {vals[2]} |")
+    else:
+        _w("| Statistic | Need score | Distance (m) | Gap score |")
+        _w("| :--- | ---: | ---: | ---: |")
+        _w(f"| N | {len(need_vals):,} | {len(dist_vals):,} | {len(gap_vals):,} |")
+        _w(
+            f"| Mean | {_mean(need_vals):.4f} | {_mean(dist_vals):.0f} | {_mean(gap_vals):.4f} |"
+        )
+        _w(
+            f"| Median | {median(need_vals):.4f} | {median(dist_vals):.0f} | {median(gap_vals):.4f} |"
+        )
+        _w(
+            f"| Std dev | {stdev(need_vals):.4f} | {stdev(dist_vals):.0f} | {stdev(gap_vals):.4f} |"
+        )
+        _w(
+            f"| Skewness | {_skewness(need_vals):.2f} | {_skewness(dist_vals):.2f} | {_skewness(gap_vals):.2f} |"
+        )
+        _w(
+            f"| Min | {min(need_vals):.4f} | {min(dist_vals):.0f} | {min(gap_vals):.4f} |"
+        )
+        _w(
+            f"| Max | {max(need_vals):.4f} | {max(dist_vals):.0f} | {max(gap_vals):.4f} |"
+        )
     _w("")
     _w(
         f"**Spatial weights:** {len(weights):,} units, {units_nbrs:,} with neighbors (2 km threshold), "
         f"mean {mean_nbrs:.1f} neighbors per unit."
     )
+    _w("")
+
+    # Correlation and equity analysis.
+    _w("## Correlation and equity analysis")
+    _w("")
+    _w(f"![Figure 11](./figures/{figs['f11'].name})")
+    _w("")
+    _w(
+        "The correlation heatmap (Figure 11) reveals the structure of association among "
+        "demographic and accessibility variables. See the "
+        "[full correlation analysis](./supplementary/correlation-analysis.md) for Pearson and "
+        "Spearman matrices with p-values, VIF diagnostics, and OLS regression results."
+    )
+    _w("")
+    _w(f"![Figure 12](./figures/{figs['f12'].name})")
+    _w("")
+    _w(f"![Figure 13](./figures/{figs['f13'].name})")
+    _w("")
+    if equity_reg is not None:
+        best_idx = [
+            i
+            for i in range(len(equity_reg["var_names"]))
+            if equity_reg["var_names"][i] != "const"
+        ]
+        best_i = max(best_idx, key=lambda i: abs(equity_reg["tvalues"][i]))
+        best_var = equity_reg["var_names"][best_i]
+        _w(
+            f"**Equity regression:** {best_var} is the strongest demographic predictor of gap score "
+            f"(R\u00b2 = {equity_reg['rsquared']:.3f}, F = {equity_reg['fvalue']:.1f}, "
+            f"p {_fmt_p(equity_reg['f_pvalue'])}). "
+            "See [correlation analysis](./supplementary/correlation-analysis.md) for full regression table."
+        )
+        _w("")
+    if morans_results:
+        _w("### Spatial autocorrelation summary")
+        _w("")
+        _w("| Variable | Moran's I | z-score | p-value | |")
+        _w("| :--- | ---: | ---: | ---: | :--- |")
+        for var_name, res in morans_results.items():
+            stars = _sig_stars(res["p_value"])
+            label = var_name.replace("_", " ").title()
+            _w(
+                f"| {label} | {res['I']:.4f} | {res['z_score']:.2f} "
+                f"| {_fmt_p(res['p_value'])} | {stars} |"
+            )
+        _w("")
+        _w(
+            "See [spatial diagnostics](./supplementary/spatial-diagnostics.md) for full "
+            "spatial weights summary and interpretation."
+        )
+        _w("")
+    _w("### Geographic comparison")
+    _w("")
+    _w(f"![Figure 14](./figures/{figs['f14'].name})")
+    _w("")
+    _w(f"![Figure 15](./figures/{figs['f15'].name})")
     _w("")
 
     # Model specification.
@@ -1096,6 +1971,20 @@ def write_report(
         "Tracts that have gained accessible stations have modestly higher disability and poverty rates than those "
         "that have not, suggesting the MTA's Capital Program is reaching higher-need areas. "
         "However, the gap remains enormous and the pace must accelerate."
+    )
+    _w("")
+
+    # Supplementary.
+    _w("## Supplementary analyses")
+    _w("")
+    _w(
+        "- [Correlation analysis](./supplementary/correlation-analysis.md) \u2014 full Pearson and Spearman matrices, VIF, equity OLS regression"
+    )
+    _w(
+        "- [Model specification](./supplementary/model-specification.md) \u2014 DiD assumptions, balance tests with p-values, enhanced diagnostics"
+    )
+    _w(
+        "- [Spatial diagnostics](./supplementary/spatial-diagnostics.md) \u2014 Moran's I, spatial weights summary, clustering interpretation"
     )
     _w("")
 
@@ -1201,7 +2090,7 @@ def main():
         print(f"  {len(gdf)} tract geometries merged")
         print()
 
-        print("Step 7: Generating figures...")
+        print("Step 7: Generating figures (1-10)...")
         figs = {
             "f1": _fig_coverage_by_borough(summaries),
             "f2": _fig_gap_population(summaries),
@@ -1218,7 +2107,160 @@ def main():
             print(f"  [{k}] {p.name}")
         print()
 
-        print("Step 8: Writing report...")
+        print("Step 8: Statistical diagnostics...")
+
+        # Correlations.
+        corr = _compute_correlations(gdf)
+        spearman = _compute_spearman(gdf)
+        print("  Pearson + Spearman correlations computed")
+
+        # VIF.
+        vif_results = _compute_vif(gdf)
+        max_vif = max(v for _, v in vif_results)
+        print(f"  VIF: max = {max_vif:.2f}")
+
+        # Balance t-tests.
+        treatment = panel.treatment_group()
+        control = panel.control_group()
+        last = panel.periods[-1]
+        t_obs = [o for o in treatment.observations if o.period == last]
+        c_obs = [o for o in control.observations if o.period == last]
+        balance_stats = []
+        for label, attr in [
+            ("Disability rate", "disability_rate"),
+            ("Senior rate", "senior_rate"),
+            ("Poverty rate", "poverty_rate"),
+            ("Need score", "need_score"),
+        ]:
+            t_vals = [getattr(o, attr) for o in t_obs]
+            c_vals = [getattr(o, attr) for o in c_obs]
+            t_stat, p_val = sp_stats.ttest_ind(t_vals, c_vals, equal_var=False)
+            t_mean = _mean(t_vals)
+            c_mean = _mean(c_vals)
+            diff = t_mean - c_mean
+            pooled_sd = np.sqrt((np.var(t_vals, ddof=1) + np.var(c_vals, ddof=1)) / 2)
+            cohens_d = diff / pooled_sd if pooled_sd > 0 else 0.0
+            balance_stats.append(
+                {
+                    "label": label,
+                    "attr": attr,
+                    "t_mean": t_mean,
+                    "c_mean": c_mean,
+                    "diff": diff,
+                    "t_stat": t_stat,
+                    "p_value": p_val,
+                    "cohens_d": cohens_d,
+                }
+            )
+        print("  Balance t-tests computed")
+
+        # Enhanced diagnostics table data.
+        need_vals = gdf["need_score"].dropna().tolist()
+        dist_vals = [d for d in gdf["nearest_distance_m"].dropna().tolist() if d > 0]
+        gap_vals = [g for g in gdf["gap_score"].dropna().tolist() if g > 0]
+        diag_stats = {}
+        diag_stats["N"] = (
+            f"{len(need_vals):,}",
+            f"{len(dist_vals):,}",
+            f"{len(gap_vals):,}",
+        )
+        diag_stats["Mean"] = (
+            f"{_mean(need_vals):.4f}",
+            f"{_mean(dist_vals):.0f}",
+            f"{_mean(gap_vals):.4f}",
+        )
+        diag_stats["Median"] = (
+            f"{median(need_vals):.4f}",
+            f"{median(dist_vals):.0f}",
+            f"{median(gap_vals):.4f}",
+        )
+        diag_stats["Std dev"] = (
+            f"{stdev(need_vals):.4f}",
+            f"{stdev(dist_vals):.0f}",
+            f"{stdev(gap_vals):.4f}",
+        )
+        diag_stats["Skewness"] = (
+            f"{_skewness(need_vals):.2f}",
+            f"{_skewness(dist_vals):.2f}",
+            f"{_skewness(gap_vals):.2f}",
+        )
+        kurt_vals = []
+        jb_vals = []
+        for vals_list in [need_vals, dist_vals, gap_vals]:
+            arr = np.array(vals_list)
+            kurt_vals.append(f"{float(sp_stats.kurtosis(arr, fisher=True)):.2f}")
+            jb_stat, jb_p = sp_stats.jarque_bera(arr)
+            jb_vals.append(f"{jb_stat:.1f} (p {_fmt_p(jb_p)})")
+        diag_stats["Kurtosis (excess)"] = tuple(kurt_vals)
+        diag_stats["Jarque-Bera"] = tuple(jb_vals)
+        diag_stats["Min"] = (
+            f"{min(need_vals):.4f}",
+            f"{min(dist_vals):.0f}",
+            f"{min(gap_vals):.4f}",
+        )
+        diag_stats["Max"] = (
+            f"{max(need_vals):.4f}",
+            f"{max(dist_vals):.0f}",
+            f"{max(gap_vals):.4f}",
+        )
+        print("  Enhanced diagnostics (kurtosis, Jarque-Bera) computed")
+
+        # Moran's I.
+        geoid_to_gap = dict(zip(gdf["geoid"], gdf["gap_score"].fillna(0), strict=True))
+        geoid_to_need = dict(
+            zip(gdf["geoid"], gdf["need_score"].fillna(0), strict=True)
+        )
+        geoid_to_disab = dict(
+            zip(gdf["geoid"], gdf["disability_rate"].fillna(0), strict=True)
+        )
+        morans_results = _compute_morans_i(
+            {
+                "gap_score": geoid_to_gap,
+                "need_score": geoid_to_need,
+                "disability_rate": geoid_to_disab,
+            },
+            weights,
+        )
+        for var_name, res in morans_results.items():
+            print(
+                f"  Moran's I ({var_name}): {res['I']:.4f}, z={res['z_score']:.2f}, p={res['p_value']:.4f}"
+            )
+
+        # Equity regression.
+        equity_reg = _compute_equity_regression(gdf)
+        if equity_reg is not None:
+            print(
+                f"  Equity OLS: R² = {equity_reg['rsquared']:.4f}, F = {equity_reg['fvalue']:.2f}"
+            )
+        print()
+
+        print("Step 9: Generating figures (11-15)...")
+        figs["f11"] = _fig_correlation_heatmap(corr)
+        figs["f12"] = _fig_gap_vs_poverty(gdf)
+        figs["f13"] = _fig_gap_vs_disability(gdf)
+        figs["f14"] = _fig_bivariate_map(
+            gdf,
+            "gap_score",
+            "poverty_rate",
+            "Gap score",
+            "Poverty rate",
+            14,
+            "gap-vs-poverty-map",
+        )
+        figs["f15"] = _fig_bivariate_map(
+            gdf,
+            "gap_score",
+            "disability_rate",
+            "Gap score",
+            "Disability rate",
+            15,
+            "gap-vs-disability-map",
+        )
+        for k in ["f11", "f12", "f13", "f14", "f15"]:
+            print(f"  [{k}] {figs[k].name}")
+        print()
+
+        print("Step 10: Writing reports...")
         provenance = _extract_provenance(snapshots)
         report = write_report(
             summaries,
@@ -1230,8 +2272,24 @@ def main():
             args.minutes,
             figs,
             provenance,
+            balance_stats=balance_stats,
+            diag_stats=diag_stats,
+            morans_results=morans_results,
+            equity_reg=equity_reg,
         )
         print(f"  {report}")
+
+        # Supplementary reports.
+        sr1 = write_correlation_report(
+            gdf, corr, spearman, vif_results, equity_reg, provenance
+        )
+        print(f"  {sr1}")
+        sr2 = write_model_spec_report(
+            panel, gdf, weights, balance_stats, diag_stats, provenance
+        )
+        print(f"  {sr2}")
+        sr3 = write_spatial_report(gdf, weights, morans_results, provenance)
+        print(f"  {sr3}")
         print()
 
     gap = sum(int(s["gap_pop"]) for s in summaries.values())
