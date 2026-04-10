@@ -8,9 +8,15 @@ OUTPUT="$SCRIPT_DIR/../CASESTUDY.md"
 
 : > "$OUTPUT"
 
-for section in "$SECTIONS_DIR"/[0-9]*.md; do
-    cat "$section" >> "$OUTPUT"
-    printf '\n\n' >> "$OUTPUT"
+sections=("$SECTIONS_DIR"/[0-9]*.md)
+for i in "${!sections[@]}"; do
+    cat "${sections[$i]}" >> "$OUTPUT"
+    # Add separator between sections, but not after the last one
+    if (( i < ${#sections[@]} - 1 )); then
+        printf '\n\n' >> "$OUTPUT"
+    fi
 done
+# Ensure exactly one trailing newline (end-of-file-fixer)
+printf '\n' >> "$OUTPUT"
 
 echo "Written to $OUTPUT ($(wc -l < "$OUTPUT") lines)"
