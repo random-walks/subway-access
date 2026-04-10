@@ -22,8 +22,8 @@
   treatment/control splitting, spatial weights)
 - borough and group-level summary aggregation
 - council district and community district study areas via `nyc-geo-toolkit`
-- run the full workflow from the installed `subway-access` CLI
-  (`fetch-snapshot` and `analyze-snapshot`)
+- run the full workflow from the installed `subway-access` CLI (`fetch-snapshot`
+  and `analyze-snapshot`)
 
 ## Still planned
 

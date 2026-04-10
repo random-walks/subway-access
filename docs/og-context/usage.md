@@ -43,13 +43,18 @@ snapshot = pipeline.fetch_study_area_snapshot(
     cache_dir=Path("cache/manhattan"),
 )
 catchments = analysis.generate_catchments(
-    snapshot.stations, models.CatchmentRequest(minutes=10),
+    snapshot.stations,
+    models.CatchmentRequest(minutes=10),
 )
 scores = analysis.score_accessibility(
-    snapshot.stations, catchments, snapshot.demographics,
+    snapshot.stations,
+    catchments,
+    snapshot.demographics,
 )
 reliability = analysis.compute_reliability(
-    snapshot.stations, snapshot.outages, models.TimeWindow(days=30),
+    snapshot.stations,
+    snapshot.outages,
+    models.TimeWindow(days=30),
 )
 gaps = analysis.analyze_gaps(scores)
 ```
