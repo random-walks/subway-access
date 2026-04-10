@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Generate per-borough CSV templates for real ADA upgrade year research.
 
 Fetches the live MTA station catalog (or reads from a cached snapshot),
@@ -207,7 +206,7 @@ def main() -> None:
         print("Fetching MTA station catalog ...")
         try:
             raw_rows = fetch_mta_station_catalog()
-        except Exception as exc:
+        except OSError as exc:
             sys.exit(
                 f"Error: Could not reach the MTA API.\n"
                 f"  {exc}\n\n"
