@@ -31,7 +31,6 @@ make ci
 ## Repository standards
 
 - keep implemented behavior honest and small rather than speculative
-- preserve explicit `NotImplementedError` placeholders for planned surfaces
 - update docs alongside package exports
 - keep parser-level tests deterministic and local by default
 - prefer committed real snapshot slices over packaged synthetic sample data

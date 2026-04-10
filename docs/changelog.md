@@ -6,6 +6,7 @@ Release notes for `subway-access` are published on GitHub Releases:
 
 For the first public release, make sure the release notes summarize:
 
-- the implemented `0.1` analysis workflow
-- current non-goals and explicit placeholders
+- the full data pipeline from live MTA and Census ingestion through analysis
+- composable factor pipeline and temporal panel infrastructure
+- CLI workflow (`fetch-snapshot` and `analyze-snapshot`)
 - docs and packaging changes that affect installation or usage

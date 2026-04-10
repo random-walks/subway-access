@@ -75,4 +75,3 @@ If significant spatial autocorrelation is detected (see [spatial diagnostics](./
 - **Simulated upgrade timeline:** Station ADA upgrade years are hash-derived from current ADA status, not from actual MTA Capital Program records. This means the treatment assignment is artificial and **DiD coefficients would not be causally interpretable**.
 - **Repeated demographics:** ACS estimates are repeated across vintage years (the same 2023 estimates appear in all periods). Production use should fetch actual multi-vintage ACS data via `fetch_multi_vintage_estimates()`.
 - **No outcome variable:** The panel currently has treatment indicators and covariates but no outcome variable (e.g., property values, transit ridership, population change). Defining the outcome requires linking to additional data sources.
-

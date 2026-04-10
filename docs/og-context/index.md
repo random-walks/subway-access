@@ -8,28 +8,28 @@
 subway service really is once you account for walking distance and neighborhood
 need.
 
-## Implemented in v0.1
+## Implemented
 
-The current release includes one real, deterministic happy path:
+The package now includes a full pipeline from live data through research-grade
+analysis:
 
-- load a small packaged station dataset plus ADA status rows
-- generate first-pass Euclidean catchments from a fixed walking-speed assumption
-- load tract-level demographic fixture data
-- compute tract-level need and accessibility gap outputs
-- export catchments to GeoJSON and gaps to CSV
-- run the full flow from the `subway-access demo` CLI command
+- fetch official MTA station, ADA status, elevator availability, equipment,
+  entrance, and GTFS-Pathways data from public APIs
+- fetch ACS 5-year tract-level demographics
+- cache reusable local snapshot bundles per study area
+- generate Euclidean and OSM-network walk catchments
+- compute tract-level need and accessibility gap outputs via factor pipeline
+- compute rolling station reliability from outage history
+- build station-level metrics combining coverage, need, and reliability
+- export catchments to GeoJSON, gaps to CSV, and station metrics to CSV/GeoJSON
+- temporal panel infrastructure for longitudinal causal analysis
+- run the full flow from `subway-access fetch-snapshot` and
+  `subway-access analyze-snapshot` CLI commands
 
-## Planned later
+## Still planned
 
-The project still aims to move beyond binary ADA labels toward reliability-aware
-analysis, but the following surfaces remain intentionally unimplemented
-placeholders:
-
-- outage loading
-- pedestrian network loading
-- reliability scoring
-- advanced routing and travel-time modeling
-- broader station metrics exports
+- public-facing notebook and dashboard reporting
+- fully polished public dashboard UX
 
 ## Project Focus
 
