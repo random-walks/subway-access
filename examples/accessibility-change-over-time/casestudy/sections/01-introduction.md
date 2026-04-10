@@ -1,0 +1,18 @@
+## 1. Introduction
+
+The New York City subway system is the largest rapid transit network in the United States, serving approximately 3.6 million riders on an average weekday across 493 stations and 36 routes (Metropolitan Transportation Authority [MTA], 2026). As of the April 9, 2026 data pull used in this study, only 157 stations (31.8%) meet ADA accessibility standards---meaning they have elevators or ramps that permit use by people in wheelchairs, with strollers, or who otherwise cannot navigate stairs. The remaining 336 stations are functionally inaccessible to a substantial and growing segment of the population.
+
+This accessibility deficit is not merely an inconvenience. For the estimated 895,000 New Yorkers with ambulatory disabilities (U.S. Census Bureau, 2024), and for the 1.15 million residents aged 65 and older whose mobility may be limited, a station without an elevator is a station that does not exist. The problem extends to parents with strollers, travelers with luggage, and anyone with a temporary injury---populations that are large but largely invisible in accessibility planning.
+
+Recent scholarship has examined spatial and racial dimensions of subway accessibility in New York City. Baghestani et al. (2024) employed a gravity index incorporating both distance and service frequency to assess equitable access across boroughs and racial groups, finding that Queens exhibited the most pronounced accessibility deficit and that the non-Hispanic Black population in Queens faced disproportionate barriers. Their analysis focused on the spatial distribution of service quality rather than physical station accessibility, leaving the question of ADA compliance---and the reliability of nominally compliant stations---unexamined. The broader transit equity literature distinguishes between horizontal equity, in which services are distributed according to aggregate travel demand, and vertical equity, in which services are distributed according to the needs of vulnerable populations (Delbosc & Currie, 2011; Lucas & Jones, 2012). This study operates primarily within the vertical equity framework, asking whether ADA infrastructure reaches the communities that need it most.
+
+Transportation equity has received renewed policy attention in New York City following the June 2024 launch of the Manhattan congestion pricing program, which charges vehicles entering below 60th Street a peak toll of $9 (MTA, 2024). The program's equity logic assumes that drivers priced off the road will shift to public transit---an assumption that fails for the approximately 68% of subway stations that cannot be used by people with mobility impairments. If congestion pricing generates revenue earmarked for transit capital improvements but those improvements do not include ADA upgrades, the policy risks compounding existing inequities rather than alleviating them.
+
+This study asks four questions:
+
+1. What is the current scale of ADA inaccessibility across NYC boroughs, measured at the census-tract level?
+2. How does elevator reliability affect the effective coverage of nominally accessible stations?
+3. What demographic factors predict the spatial distribution of accessibility gaps?
+4. Is there significant spatial clustering of gap tracts that could inform geographically targeted investment?
+
+We address these questions using a combination of descriptive spatial analysis, reliability-weighted coverage modeling, OLS regression with robust standard errors, and global spatial autocorrelation testing. We also specify---but do not estimate---a difference-in-differences panel model for future causal analysis once actual MTA Capital Program upgrade dates become available.
