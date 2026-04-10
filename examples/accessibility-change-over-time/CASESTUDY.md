@@ -399,4 +399,3 @@ The following supplementary reports provide full diagnostic detail:
 - [Correlation analysis](reports/supplementary/correlation-analysis.md) --- Pearson and Spearman matrices with significance levels, variance inflation factors, bivariate scatter plots, and OLS equity regression with robust standard errors.
 - [Model specification](reports/supplementary/model-specification.md) --- Full DiD and SAR panel equations, identifying assumptions, balance tests with *t*-statistics and *P*-values, and distribution diagnostics.
 - [Spatial diagnostics](reports/supplementary/spatial-diagnostics.md) --- Spatial weights matrix properties, Global Moran's *I* with *z*-scores and permutation *P*-values, bivariate geographic comparison maps, and recommendations for LISA and GWR extensions.
-
