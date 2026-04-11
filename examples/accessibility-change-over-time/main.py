@@ -1273,7 +1273,6 @@ def write_correlation_report(_gdf, corr, spearman, vif_results, equity_reg, prov
             f"**Strongest predictor:** {best_var} (|t| = {abs(equity_reg['tvalues'][best_i]):.2f}). "
             "Robust standard errors (HC1) account for heteroskedasticity."
         )
-    _w("")
 
     out = _dir(SUPPLEMENTARY_DIR) / "correlation-analysis.md"
     out.write_text("\n".join(L) + "\n", encoding="utf-8")
@@ -1336,9 +1335,9 @@ def write_model_spec_report(
     )
     _w("")
     _w(
-        "**Status:** Cannot be verified with the current simulated upgrade timeline. "
-        "With real MTA Capital Program upgrade dates, plot pre-treatment outcome trends "
-        "for treatment vs control groups to visually assess parallelism."
+        "**Status:** Partially verifiable with the sourced upgrade timeline (101/157 stations). "
+        "Plot pre-treatment outcome trends for treatment vs control groups "
+        "to visually assess parallelism."
     )
     _w("")
     _w("### 2. No anticipation")
@@ -1412,9 +1411,9 @@ def write_model_spec_report(
     _w("## Limitations of current panel")
     _w("")
     _w(
-        "- **Simulated upgrade timeline:** Station ADA upgrade years are hash-derived from "
-        "current ADA status, not from actual MTA Capital Program records. This means the "
-        "treatment assignment is artificial and **DiD coefficients would not be causally interpretable**."
+        "- **Partially sourced upgrade timeline:** 101 of 157 station upgrade years are traced to "
+        "MTA press releases, Capital Program records, and news coverage. The remaining 56 use "
+        "hash-based approximations pending a FOIL request for Key Station Program completion records."
     )
     _w(
         "- **Repeated demographics:** ACS estimates are repeated across vintage years (the "
@@ -1426,7 +1425,6 @@ def write_model_spec_report(
         "but no outcome variable (e.g., property values, transit ridership, population change). "
         "Defining the outcome requires linking to additional data sources."
     )
-    _w("")
 
     out = _dir(SUPPLEMENTARY_DIR) / "model-specification.md"
     out.write_text("\n".join(L) + "\n", encoding="utf-8")
@@ -1550,7 +1548,6 @@ def write_spatial_report(_gdf, weights, morans_results, provenance):
         "- **Geographically weighted regression (GWR):** Allow coefficients to vary across "
         "space to identify neighborhoods where the gap-demographics relationship is strongest."
     )
-    _w("")
 
     out = _dir(SUPPLEMENTARY_DIR) / "spatial-diagnostics.md"
     out.write_text("\n".join(L) + "\n", encoding="utf-8")
@@ -2025,7 +2022,7 @@ def write_report(
         "- Panel uses current ACS estimates repeated across vintage years (production would use actual multi-year ACS)"
     )
     _w(
-        "- Upgrade timeline is simulated from current ADA status; actual MTA Capital Program dates would strengthen causal identification"
+        "- Upgrade timeline is 64% sourced from public records; a FOIL request for Key Station Program dates would complete the remaining 36%"
     )
     _w(
         "- First-and-last-mile barriers (stairs, curb cuts, sidewalk condition) are not captured"

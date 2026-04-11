@@ -1,6 +1,6 @@
 # Accessibility Change Over Time
 
-*Report generated: April 10, 2026*
+*Report generated: April 11, 2026*
 
 | | |
 | :--- | :--- |
@@ -93,9 +93,9 @@ Nominal coverage counts any ADA station within the catchment. Reliability-weight
 
 | Year | Covered tracts | Rate | Covered pop |
 | :--- | ---: | ---: | ---: |
-| 2017 | 389 | 16.8% | 1,620,306 |
-| 2018 | 417 | 18.0% | 1,704,030 |
-| 2019 | 471 | 20.3% | 1,929,169 |
+| 2017 | 402 | 17.4% | 1,667,570 |
+| 2018 | 430 | 18.6% | 1,751,294 |
+| 2019 | 484 | 20.9% | 1,976,433 |
 | 2020 | 614 | 26.5% | 2,549,087 |
 | 2021 | 674 | 29.1% | 2,797,941 |
 | 2022 | 725 | 31.3% | 3,048,894 |
@@ -237,7 +237,7 @@ Where *W* is the row-standardized distance-based spatial weights matrix (2,317 u
 **Limitations:**
 - Euclidean distance overstates coverage vs actual walking routes
 - Panel uses current ACS estimates repeated across vintage years (production would use actual multi-year ACS)
-- Upgrade timeline is simulated from current ADA status; actual MTA Capital Program dates would strengthen causal identification
+- Upgrade timeline is 64% sourced from public records; a FOIL request for Key Station Program dates would complete the remaining 36%
 - First-and-last-mile barriers (stairs, curb cuts, sidewalk condition) are not captured
 
 **Reproducibility:** `python main.py` regenerates all figures, tables, and this report from live API data.

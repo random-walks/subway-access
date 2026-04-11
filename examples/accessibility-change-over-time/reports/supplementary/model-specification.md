@@ -1,6 +1,6 @@
 # Model Specification
 
-*Auto-generated: April 10, 2026*
+*Auto-generated: April 11, 2026*
 
 This supplementary report details the difference-in-differences (DiD) panel model specification, its identifying assumptions, and pre-estimation diagnostics.
 
@@ -25,7 +25,7 @@ Y_it = alpha + beta * Treatment_it + gamma * X_it + delta_i + tau_t + epsilon_it
 
 In the absence of treatment, treated and control tracts would have followed the same outcome trajectory. This is the core identifying assumption of DiD. It cannot be directly tested, but pre-treatment outcome trends should be parallel.
 
-**Status:** Cannot be verified with the current simulated upgrade timeline. With real MTA Capital Program upgrade dates, plot pre-treatment outcome trends for treatment vs control groups to visually assess parallelism.
+**Status:** Partially verifiable with the sourced upgrade timeline (101/157 stations). Plot pre-treatment outcome trends for treatment vs control groups to visually assess parallelism.
 
 ### 2. No anticipation
 
@@ -72,7 +72,6 @@ If significant spatial autocorrelation is detected (see [spatial diagnostics](./
 
 ## Limitations of current panel
 
-- **Simulated upgrade timeline:** Station ADA upgrade years are hash-derived from current ADA status, not from actual MTA Capital Program records. This means the treatment assignment is artificial and **DiD coefficients would not be causally interpretable**.
+- **Partially sourced upgrade timeline:** 101 of 157 station upgrade years are traced to MTA press releases, Capital Program records, and news coverage. The remaining 56 use hash-based approximations pending a FOIL request for Key Station Program completion records.
 - **Repeated demographics:** ACS estimates are repeated across vintage years (the same 2023 estimates appear in all periods). Production use should fetch actual multi-vintage ACS data via `fetch_multi_vintage_estimates()`.
 - **No outcome variable:** The panel currently has treatment indicators and covariates but no outcome variable (e.g., property values, transit ridership, population change). Defining the outcome requires linking to additional data sources.
-

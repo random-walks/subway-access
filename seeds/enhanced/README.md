@@ -16,12 +16,12 @@ MTA for the complete Key Station Program schedule would close this gap.
 
 ### `upgrade_templates/`
 
-Per-borough CSV files listing every currently ADA-accessible subway station. Each
-row has:
+Per-borough CSV files listing every currently ADA-accessible subway station.
+Each row has:
 
 - **Populated columns** — station ID, name, borough, coordinates, routes, line,
-  division, structure, current ADA status (from the MTA station catalog API), and
-  researched fields where available: `upgrade_year`, `upgrade_source`,
+  division, structure, current ADA status (from the MTA station catalog API),
+  and researched fields where available: `upgrade_year`, `upgrade_source`,
   `capital_program`, and others.
 - **Empty columns** — fields still awaiting data for the 57 unresolved stations.
 
@@ -31,8 +31,8 @@ Per-station research folders (`{station_id:03d}-{slug}/`) each containing:
 
 - **`data.json`** — structured data matching the CSV schema (upgrade year,
   source, capital program, cost, contractor, features, notes).
-- **`research.md`** — citations, links to MTA press releases, Wikipedia articles,
-  and news coverage documenting how each upgrade year was determined.
+- **`research.md`** — citations, links to MTA press releases, Wikipedia
+  articles, and news coverage documenting how each upgrade year was determined.
 
 ### How to fill them in
 

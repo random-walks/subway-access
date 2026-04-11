@@ -1,6 +1,6 @@
 # Correlation Analysis
 
-*Auto-generated: April 10, 2026*
+*Auto-generated: April 11, 2026*
 
 This supplementary report provides full correlation matrices, multicollinearity diagnostics, and an OLS regression of gap score on demographic predictors.
 
@@ -62,4 +62,3 @@ N = 2,317, R² = 0.2024, Adj. R² = 0.2013, F = 108.83 (p < 0.001)
 | senior_rate | 0.2626 | 0.0165 | 15.93 | < 0.001 | *** |
 
 **Strongest predictor:** senior_rate (|t| = 15.93). Robust standard errors (HC1) account for heteroskedasticity.
-

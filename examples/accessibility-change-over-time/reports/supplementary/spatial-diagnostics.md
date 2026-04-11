@@ -1,6 +1,6 @@
 # Spatial Diagnostics
 
-*Auto-generated: April 10, 2026*
+*Auto-generated: April 11, 2026*
 
 ## Spatial weights matrix
 
@@ -47,4 +47,3 @@ Gap score vs disability rate. Where gap scores are high in tracts with high disa
 - **Local indicators of spatial association (LISA):** Identify specific clusters of high-gap / high-need tracts using local Moran's I. Requires `esda` package.
 - **Spatial lag model estimation:** Estimate the SAR panel with `spreg` or `pysal` once a suitable outcome variable is available.
 - **Geographically weighted regression (GWR):** Allow coefficients to vary across space to identify neighborhoods where the gap-demographics relationship is strongest.
-
