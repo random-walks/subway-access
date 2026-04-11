@@ -1,0 +1,14 @@
+{
+  "station_id": "410",
+  "upgrade_year": null,
+  "upgrade_source": "MTA ADA station list",
+  "capital_program": "Key Station Program",
+  "project_id": "",
+  "contract_number": "",
+  "construction_start_date": "",
+  "construction_end_date": "",
+  "project_cost_millions": null,
+  "contractor": "",
+  "accessibility_features": "elevators",
+  "notes": "ADA accessible. Major interchange serving multiple lines. Elevator on NE corner Canal St and Lafayette St. Exact upgrade year unclear. [CONFIDENCE: LOW]"
+}

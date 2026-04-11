@@ -1,0 +1,14 @@
+{
+  "station_id": "101",
+  "upgrade_year": 2024,
+  "upgrade_source": "Wikipedia (Marcy Avenue station); MTA accessibility project records",
+  "capital_program": "2020-2024 MTA Capital Program",
+  "project_id": "",
+  "contract_number": "",
+  "construction_start_date": "2021-12",
+  "construction_end_date": "2024-09-03",
+  "project_cost_millions": null,
+  "contractor": "",
+  "accessibility_features": "elevators",
+  "notes": "Elevators on NW and SW corners of Broadway and Marcy Ave. Original elevators announced 2002, but exact original installation date undocumented. Elevator replacement contract awarded December 2021, new elevators opened September 3, 2024, achieving full ADA compliance. Using 2024 as the definitive ADA compliance date since the original installation timeline is unclear."
+}

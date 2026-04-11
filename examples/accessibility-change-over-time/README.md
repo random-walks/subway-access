@@ -1,236 +1,117 @@
+<!-- Author: Blaise Albis-Burdige | https://blaiseab.com | Creator of subway-access -->
+
+> **Note from Blaise:** This case study is an example of more advanced statistical analysis using the [subway-access](https://github.com/random-walks/subway-access) library and the NYC open data ecosystem. The central question is almost comical: do accessibility initiatives actually increase equity if the elevator is never running? On a more serious note, the findings highlight a gap in investment follow-through when it comes to ADA infrastructure. Current accessibility classifications may succeed in incentivizing initial capital commitments, but without robust maintenance funding, many stations that are "accessible" on paper are not accessible in practice.
+
 # Accessibility Change Over Time
 
-Research pipeline that analyzes how ADA station upgrades track against
-neighborhood demographics across all five NYC boroughs.
+Research pipeline that analyzes how ADA station upgrades track against neighborhood demographics across all five NYC boroughs.
 
-## Background
+**[Read the full case study (CASESTUDY.md)](CASESTUDY.md)** for formal methods, APA-formatted results, model diagnostics, and a complete reference list.
 
-The New York City subway system has **493 stations** across five boroughs. As of
-the April 9, 2026 data pull, only **157 (32%) are ADA-accessible** -- meaning
-they have elevators or ramps that allow use by people in wheelchairs, with
-strollers, or who otherwise cannot use stairs. The remaining 336 stations are
-effectively off-limits to anyone who cannot navigate stairways.
+---
 
-This analysis asks a simple question: **who is left out, where, and how badly?**
-It measures accessibility at the census-tract level across the entire city, then
-layers in elevator reliability data to distinguish between stations that are
-nominally accessible and stations that actually work.
+## TL;DR for researchers
 
-### Data sources
+4,717,140 New Yorkers (55.4%) reside in census tracts with no ADA-accessible subway station within 800 m. Only 157 of 493 stations (31.8%) are ADA-accessible (MTA, April 2026). Queens bears the largest absolute gap: 1,752,073 residents at a mean distance of 1,966 m from the nearest accessible station, corroborating Baghestani et al. (2024) who independently identified Queens as the most underserved borough using a gravity-index methodology.
 
-| Source                                    | Description                                       |                           N | Coverage                                                                |
-| :---------------------------------------- | :------------------------------------------------ | --------------------------: | :---------------------------------------------------------------------- |
-| **MTA Subway Station Catalog**            | Station locations, routes, ADA status             |            **493 stations** | All active stations, fetched April 9, 2026 via Open Data NY Socrata API |
-| **MTA Elevator & Escalator Availability** | Monthly outage and uptime records                 | **6,765 availability rows** | **May 2025 -- April 2026** (12-month rolling window)                    |
-| **American Community Survey**             | Tract-level disability, senior, and poverty rates |            **2,317 tracts** | **2023 vintage** (5-year estimates, survey period 2019--2023)           |
-| **NYC Census Tract Boundaries**           | Tract geometries for spatial analysis             |            **2,325 tracts** | 2020 vintage (nyc-geo-toolkit)                                          |
+Elevator reliability further erodes nominal coverage. Of the 157 accessible stations, 49 operated below 95% uptime over a 12-month window (May 2025--April 2026). Manhattan's effective tract coverage drops from 77% to 71% under reliability weighting---and Manhattan is the best-performing borough.
 
-### Sample
+An OLS equity regression (*N* = 2,317, *R*² = .202, *F*(3, 2313) = 108.83, *P* < .001) identifies senior population rate as the strongest predictor of gap score (*b* = 0.263, *t* = 15.93, *P* < .001), followed by poverty rate (*b* = 0.164, *t* = 4.99, *P* < .001). Disability rate is not significant when the other two are included (*t* = 0.21, *P* = .84), likely absorbed by its high collinearity with poverty (*r* = .70). Global Moran's *I* confirms significant spatial clustering of gap scores (*I* = .23, *z* = 40.87, *P* < .001), indicating that accessibility deficits concentrate in identifiable geographic corridors rather than distributing randomly.
 
-- **Geographic scope:** All five NYC boroughs (Manhattan, Brooklyn, Queens,
-  Bronx, Staten Island)
-- **Unit of analysis:** Census tract (n = **2,317** tracts with matched
-  demographics)
-- **Total study population:** **8,507,596** residents
-- **Temporal panel:** 7 simulated periods (2017--2023), **16,219 observations**
-  (2,317 tracts x 7 years)
-- **Spatial weights:** Distance-based (2 km threshold), **2,315 of 2,317** units
-  with at least one neighbor, mean **47.9** neighbors per unit
+**Key limitations.** The 800 m Euclidean catchment overstates walking coverage (no street-network routing). ACS 2023 five-year estimates are now three years stale. The DiD panel uses a partially sourced upgrade timeline: 101 of 157 stations (64.3%) have dates traced to MTA press releases, Capital Program records, and news coverage; the remaining 56 use approximate dates because Key Station Program completion records are not publicly available. A FOIL request for the full schedule and an outcome variable (ridership, property values) are needed before strong causal claims can be made. Significant Moran's *I* values mean OLS standard errors are likely underestimated; spatial HAC corrections are recommended.
 
-## Methodology
+---
 
-**Accessibility model.** A tract is "covered" if its centroid falls within an
-800-meter Euclidean radius (approximately a 10-minute walk at 80 m/min) of at
-least one ADA-accessible station. This is intentionally a first-pass model --
-Euclidean distance overstates true walking coverage because it ignores street
-networks, elevation, and sidewalk conditions.
+## What this means (plain English)
 
-**Need score.** Each tract receives a composite need score: the unweighted mean
-of its disability rate, senior rate, and poverty rate (ACS 2023). Tracts with
-high need and no accessible coverage receive a nonzero gap score; covered tracts
-receive zero.
+Two-thirds of NYC subway stations have no elevator or ramp. If you use a wheelchair, push a stroller, or can't do stairs, those stations don't exist for you.
 
-**Reliability weighting.** Nominal coverage treats any ADA station as fully
-accessible. Reliability-weighted coverage discounts by the station's actual
-elevator uptime over the observation window (May 2025 -- April 2026). A station
-with 50% uptime contributes 0.50 effective coverage, not 1.00.
+**4.7 million people**---more than the entire population of Los Angeles---live too far from any accessible station to reasonably walk there. Queens is the worst-off borough by far: 1.75 million residents with no accessible station nearby.
 
-**Temporal panel.** The panel assigns ADA upgrade years to currently-accessible
-stations using a deterministic hash (simulating the MTA Capital Program
-rollout). Each tract x year observation records whether the tract had accessible
-coverage in that period, enabling difference-in-differences estimation.
-Treatment = tracts that gained an accessible station during the panel window (n
-= **908**). Control = tracts never covered (n = **1,409**).
+It gets worse. Even among the stations that *are* labeled accessible, many have elevators that are broken for weeks or months at a time. Columbus Circle's elevator was down for essentially the entire year. Herald Square---one of the busiest stations in the system---had only 51% uptime. When you account for broken elevators, Manhattan's "77% coverage" drops to 71%, and that's the *best* borough.
 
-**Composable factor pipeline.** All classification runs through the
-`subway_access.factors` system. Built-in factors (NeedScore, Coverage, GapScore,
-NearestStationDistance, StationCount, ReliabilityWeightedCoverage) are composed
-into a `Pipeline` object that evaluates every factor for every tract in a single
-pass. Custom factors can be added by subclassing `Factor`.
+The pattern is not random. Neighborhoods with high concentrations of seniors and people living in poverty are disproportionately likely to be in accessibility gap zones. And these gap zones cluster together geographically---entire corridors of the city are systematically underserved, which means targeted investment in those specific corridors would be far more effective than spreading upgrades evenly across the system.
 
-See the
-[model specification](reports/accessibility-change-report.md#model-specification)
-in the auto-generated report for the full DiD and SAR panel equations.
+**Bottom line:** labeling a station "accessible" means nothing if the elevator doesn't work. The MTA is spending billions on ADA upgrades, but without matching maintenance investment, those upgrades are a paper promise.
 
-## Results
+## About this example
 
-The full auto-generated report with all tables and figures is at
-**[reports/accessibility-change-report.md](reports/accessibility-change-report.md)**.
+This example is part of the [subway-access](https://github.com/random-walks/subway-access) library. It demonstrates:
 
-Key results at a glance:
+- **Multi-source data integration** --- MTA station catalog, elevator outage history, ACS demographics, and census tract geometries, all fetched programmatically from public APIs.
+- **The `subway_access.factors` pipeline** --- composable factor evaluation (NeedScore, Coverage, GapScore, ReliabilityWeightedCoverage, etc.) over every census tract in a single pass.
+- **Temporal panel construction** --- building a balanced tract × year panel dataset for difference-in-differences estimation using `subway_access.temporal`.
+- **Spatial analysis** --- distance-based spatial weights, Moran's *I*, and the framework for SAR panel models via `libpysal`.
+- **Auto-generated reporting** --- the pipeline produces a full markdown report with 15 figures, 6 tables, and 3 supplementary analyses.
 
-| Finding                                   | Value                                        | Source                                                                                     |
-| :---------------------------------------- | :------------------------------------------- | :----------------------------------------------------------------------------------------- |
-| Population in gap tracts                  | **4,717,140** (55%)                          | [Table 1](reports/accessibility-change-report.md#table-1-system-wide-snapshot)             |
-| Borough with largest gap                  | **Queens** (1,752,073 gap pop, 22% coverage) | [Table 2](reports/accessibility-change-report.md#table-2-borough-comparison)               |
-| Borough with highest coverage             | **Manhattan** (77%)                          | [Figure 1](reports/figures/figure-1-coverage-by-borough.png)                               |
-| Fragile accessible stations (<95% uptime) | **49** system-wide                           | [Table 3](reports/accessibility-change-report.md#table-3-most-fragile-accessible-stations) |
-| Worst station uptime                      | **Columbus Circle: 0%**                      | [Table 3](reports/accessibility-change-report.md#table-3-most-fragile-accessible-stations) |
-| Manhattan nominal vs effective coverage   | **77% vs 71%**                               | [Figure 3](reports/figures/figure-3-reliability-nominal-vs-effective.png)                  |
-| Treatment-control need score gap          | **+0.0056** (treatment higher)               | [Table 5](reports/accessibility-change-report.md#table-5-balance-check)                    |
-| Need score skewness                       | **0.73** (right-skewed)                      | [Table 6](reports/accessibility-change-report.md#table-6-summary-diagnostics)              |
+### Project structure
 
-## Conclusion / Interpretation (April 9, 2026)
+```
+accessibility-change-over-time/
+├── main.py                        # Entry point --- run this
+├── CASESTUDY.md                   # Formal case study (APA style)
+├── README.md                      # You are here
+├── reports/
+│   ├── accessibility-change-report.md   # Auto-generated report
+│   ├── figures/                         # All 15 figures (PNG)
+│   └── supplementary/
+│       ├── correlation-analysis.md      # Pearson/Spearman, VIF, OLS
+│       ├── model-specification.md       # DiD/SAR equations, balance tests
+│       └── spatial-diagnostics.md       # Moran's I, weights summary
+├── artifacts/
+│   ├── panel-dataset.csv          # 16,219 tract × year observations
+│   └── borough-summary.csv       # Borough-level summary stats
+├── casestudy/
+│   ├── sections/                  # Case study source sections (00--07)
+│   └── combine.sh                # Assembles CASESTUDY.md from sections
+└── cache/                         # Cached API responses (gitignored)
+```
 
-The headline number is worse than I expected: **4.7 million New Yorkers** -- 55%
-of the city -- live more than a 10-minute walk from any ADA-accessible subway
-station. Only 157 of 493 stations (32%) are wheelchair-accessible as of the
-April 2026 MTA data pull.
+## Reproducing the analysis
 
-The borough-level picture
-([Table 2](reports/accessibility-change-report.md#table-2-borough-comparison),
-[Figure 1](reports/figures/figure-1-coverage-by-borough.png)) shows a stark
-divide. Manhattan has 77% tract coverage -- dense station spacing helps. But
-Queens is at just 22%, with 1.75 million residents in gap tracts and an average
-distance of nearly 2 km to the nearest accessible station. Staten Island is
-worse in rate terms (9%) but smaller in absolute population. The coverage map
-([Figure 5](reports/figures/figure-5-choropleth-coverage-status.png)) makes the
-geography visceral: Manhattan is a blue island surrounded by a sea of red.
-
-The reliability analysis
-([Figure 3](reports/figures/figure-3-reliability-nominal-vs-effective.png),
-[Table 3](reports/accessibility-change-report.md#table-3-most-fragile-accessible-stations))
-is the most policy-relevant finding. 49 accessible stations had less than 95%
-elevator uptime over the May 2025 -- April 2026 observation window. Columbus
-Circle reported 0% uptime. Port Authority Bus Terminal: 14%. Herald Square: 51%.
-These are some of the busiest stations in the system. When you weight coverage
-by actual reliability, Manhattan drops from 77% nominal to 71% effective -- and
-that is the _best_ borough. A station that is "accessible" in the MTA database
-but has broken elevators half the time is not meaningfully accessible for
-someone in a wheelchair. Capital investment in new ADA stations without matching
-maintenance investment is spending money on a fiction.
-
-The treatment-vs-control balance check
-([Table 5](reports/accessibility-change-report.md#table-5-balance-check)) shows
-that tracts that have gained accessible stations have modestly higher disability
-rates (+0.95 pp) and poverty rates (+1.84 pp) than those that have not. This is
-directionally correct for equity -- the MTA Capital Program appears to be
-reaching higher-need neighborhoods. But the imbalance also means a naive
-before/after comparison would overstate the benefit; the
-difference-in-differences specification with tract and period fixed effects is
-necessary for causal identification.
-
-The diagnostic checks
-([Figures 8--10](reports/figures/figure-8-need-score-distribution.png)) confirm
-the modeling assumptions hold reasonably well. The need score distribution is
-right-skewed (skewness = 0.73) but not severely so. The distance decay curve
-([Figure 9](reports/figures/figure-9-distance-decay.png)) validates the 800 m
-catchment: coverage is near-total within 800 m and drops sharply beyond it. The
-gap-distance scatter
-([Figure 10](reports/figures/figure-10-gap-vs-distance-scatter.png)) shows that
-high-population tracts are affected at every distance range, not just at the
-urban fringe -- this is a systemic problem, not an edge case.
-
-The panel dataset (`artifacts/panel-dataset.csv`) has 16,219 observations across
-2,317 tracts and 7 simulated periods, ready for econometric estimation. The
-spatial weights matrix (2,315 of 2,317 units with neighbors at a 2 km threshold,
-mean 47.9 neighbors) supports the SAR panel extension if spatial spillovers are
-a concern.
-
-**Caveats.** The demographics come from ACS 2023 5-year estimates (survey period
-2019--2023), which are now three years stale at publication. Disability and
-poverty rates may have shifted, particularly post-pandemic. The upgrade timeline
-in the panel is simulated from current ADA status -- actual MTA Capital Program
-upgrade dates (obtainable via FOIL or the MTA's capital dashboard) would
-substantially strengthen causal identification and are the most important next
-step.
-
-## Reproducibility
+**Prerequisites:** Python 3.12+, [uv](https://docs.astral.sh/uv/)
 
 ```bash
-python main.py                              # all 5 boroughs, full report
-python main.py --boroughs Manhattan,Brooklyn # subset
-python main.py --skip-download              # reuse cached data
-python main.py --no-publish-report          # CSVs only, skip figures + report
+# Install dependencies
+uv sync
+
+# Run the full pipeline (fetches live data from MTA + Census APIs)
+python main.py
+
+# Subset to specific boroughs
+python main.py --boroughs Manhattan,Brooklyn
+
+# Reuse cached data (skip API calls)
+python main.py --skip-download
+
+# Generate CSVs only, skip figures and report
+python main.py --no-publish-report
 ```
 
-**Output artifacts:**
+Running `python main.py` regenerates all figures, tables, artifacts, and the auto-generated report from live API data. Cached responses in `cache/` can be reused with `--skip-download` for faster iteration.
 
-| Path                                     | Description                                  |
-| :--------------------------------------- | :------------------------------------------- |
-| `reports/accessibility-change-report.md` | Auto-generated report (10 figures, 6 tables) |
-| `artifacts/panel-dataset.csv`            | Geographic panel dataset (tract x year)      |
-| `artifacts/borough-summary.csv`          | Borough-level summary statistics             |
-| `reports/figures/figure-{1..10}-*.png`   | All figures                                  |
+### Output artifacts
 
-Running `python main.py` regenerates all figures, tables, and the report from
-live MTA and Census API data. Cached data in `cache/` can be reused with
-`--skip-download`.
+| Path | Description |
+| :--- | :--- |
+| `reports/accessibility-change-report.md` | Auto-generated report (15 figures, 6 tables) |
+| `reports/supplementary/*.md` | Correlation, model spec, and spatial diagnostics |
+| `artifacts/panel-dataset.csv` | Geographic panel dataset (2,317 tracts × 7 periods) |
+| `artifacts/borough-summary.csv` | Borough-level summary statistics |
+| `reports/figures/figure-{1..15}-*.png` | All figures |
 
-## Works cited
+### Rebuilding the case study
 
-- Gu, Y., & Zheng, S. (2024). Residential location responses to new subway
-  stations: Evidence from Shenzhen. _Journal of Urban Economics_.
-  Difference-in-differences on individual residential trajectories; found
-  attraction effects in lower-rent neighborhoods, no displacement.
+The formal case study is assembled from modular sections:
 
-- Jeong, H., & Lee, L.-F. (2024). Maximum likelihood estimation of spatial
-  autoregressive models for origin-destination flows. _Journal of Econometrics_.
-  Framework for the SAR panel origin-destination flow model.
-
-- MTA. (2020). 2020--2024 Capital Program: Accessibility. $5.2 billion committed
-  to 67 station ADA upgrades, contract award pace five times pre-2020 levels.
-
-- NYC Council Data Team. (2019). Accessibility at MTA subway stations.
-  Identified 283 non-accessible stations (57% of system) with no funding plan.
-
-- Zhang, M., et al. (2024). Transit deserts and gentrification in the New York
-  metropolitan area. Multinomial logistic regression; transit desert rate higher
-  in economically disadvantaged neighborhoods.
-
-## Appendix
-
-### A. Factor pipeline architecture
-
-The `subway_access.factors` module provides a composable pipeline inspired by
-Quantopian's Zipline:
-
-```python
-from subway_access.factors import Pipeline, NeedScoreFactor, CoverageFactor
-
-pipe = Pipeline().add(NeedScoreFactor()).add(CoverageFactor())
-result = pipe.run(contexts)  # one pass over all tracts
-result.to_records()  # tuple of dicts
-result.to_dataframe()  # pandas DataFrame (optional dep)
+```bash
+bash casestudy/combine.sh   # Combines sections/00-07 into CASESTUDY.md
 ```
 
-Custom factors subclass `Factor` and implement `compute(context) -> value`. The
-pipeline applies every factor to every tract and returns a columnar result.
+## Further reading
 
-### B. Temporal panel schema
-
-Each row in `artifacts/panel-dataset.csv`:
-
-| Column                          | Type  | Description                          |
-| :------------------------------ | :---- | :----------------------------------- |
-| `unit_id`                       | str   | Census tract GEOID                   |
-| `period`                        | str   | Simulated ACS vintage year           |
-| `has_accessible_station`        | bool  | Treatment indicator                  |
-| `treatment_year`                | int   | Year first accessible station opened |
-| `disability_rate`               | float | ACS estimate                         |
-| `senior_rate`                   | float | ACS estimate                         |
-| `poverty_rate`                  | float | ACS estimate                         |
-| `total_population`              | int   | ACS estimate                         |
-| `accessible_station_count`      | int   | Stations in catchment                |
-| `nearest_accessible_distance_m` | float | Haversine meters                     |
-| `need_score`                    | float | mean(disability, senior, poverty)    |
+- **[Full case study](CASESTUDY.md)** --- formal APA-style write-up with abstract, literature review, methods, results, discussion, and references.
+- **[Auto-generated report](reports/accessibility-change-report.md)** --- all tables and figures with brief interpretation.
+- **[Correlation analysis](reports/supplementary/correlation-analysis.md)** --- Pearson/Spearman matrices, VIF, OLS equity regression.
+- **[Model specification](reports/supplementary/model-specification.md)** --- DiD and SAR panel equations, identifying assumptions, balance tests.
+- **[Spatial diagnostics](reports/supplementary/spatial-diagnostics.md)** --- Moran's *I*, spatial weights, clustering interpretation.

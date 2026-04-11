@@ -1,0 +1,14 @@
+{
+  "station_id": "38",
+  "upgrade_year": 2020,
+  "upgrade_source": "Bklyner",
+  "capital_program": "2015-2019 MTA Capital Program",
+  "project_id": "",
+  "contract_number": "",
+  "construction_start_date": "",
+  "construction_end_date": "2020-08",
+  "project_cost_millions": null,
+  "contractor": "",
+  "accessibility_features": "elevators",
+  "notes": "Made ADA accessible around same time as Bedford Av L station, August 2020."
+}

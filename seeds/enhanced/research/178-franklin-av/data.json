@@ -1,0 +1,14 @@
+{
+  "station_id": "178",
+  "upgrade_year": 1999,
+  "upgrade_source": "Wikipedia (Franklin Avenue station, Fulton Street); MTA records",
+  "capital_program": "1995-1999 MTA Capital Program",
+  "project_id": "",
+  "contract_number": "",
+  "construction_start_date": "1998",
+  "construction_end_date": "1999-10-18",
+  "project_cost_millions": null,
+  "contractor": "",
+  "accessibility_features": "elevators",
+  "notes": "ADA accessibility achieved through elevators installed during the 1998-1999 Franklin Avenue Shuttle reconstruction project. Two elevators make the entire station complex ADA-accessible, connecting the shuttle platform, overpass, main fare control area, and the IND Fulton Street Line platforms. Different station ID from Franklin Av Shuttle (ID 139) but same physical complex. Reopened October 18, 1999."
+}

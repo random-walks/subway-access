@@ -1,0 +1,14 @@
+{
+  "station_id": "438",
+  "upgrade_year": null,
+  "upgrade_source": "MTA ADA station list",
+  "capital_program": "Key Station Program",
+  "project_id": "",
+  "contract_number": "",
+  "construction_start_date": "",
+  "construction_end_date": "",
+  "project_cost_millions": null,
+  "contractor": "",
+  "accessibility_features": "elevators",
+  "notes": "ADA accessible. 2/3 trains on Lenox Line in Harlem. Elevators on SW and NE corners of 135th St and Lenox Ave. Exact upgrade year unclear. [CONFIDENCE: LOW]"
+}

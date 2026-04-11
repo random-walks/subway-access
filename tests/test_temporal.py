@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import pytest
 
 from subway_access.models import Station, StationDataset
@@ -13,6 +15,8 @@ from subway_access.temporal import (
     build_distance_weights,
     build_panel_dataset,
     build_upgrade_timeline,
+    load_known_upgrades,
+    load_known_upgrades_from_dir,
 )
 
 
@@ -177,6 +181,54 @@ class TestPanelObservation:
             need_score=0.15,
         )
         assert obs.covariates is None
+
+
+class TestLoadKnownUpgrades:
+    def test_reads_filled_rows(self, tmp_path: Path) -> None:
+        csv_file = tmp_path / "manhattan.csv"
+        csv_file.write_text(
+            "station_id,station_name,borough,upgrade_year\n"
+            "21,Cortlandt St,Manhattan,2019\n"
+            "105,Chambers St,Manhattan,\n"
+            "302,14 St-Union Sq,Manhattan,2021\n"
+        )
+        result = load_known_upgrades(csv_file)
+        assert result == {"21": 2019, "302": 2021}
+
+    def test_skips_non_numeric_year(self, tmp_path: Path) -> None:
+        csv_file = tmp_path / "test.csv"
+        csv_file.write_text(
+            "station_id,station_name,upgrade_year\n"
+            "21,Cortlandt St,TBD\n"
+            "105,Chambers St,2020\n"
+        )
+        result = load_known_upgrades(csv_file)
+        assert result == {"105": 2020}
+
+    def test_empty_csv_returns_empty(self, tmp_path: Path) -> None:
+        csv_file = tmp_path / "empty.csv"
+        csv_file.write_text("station_id,station_name,upgrade_year\n")
+        assert load_known_upgrades(csv_file) == {}
+
+
+class TestLoadKnownUpgradesFromDir:
+    def test_merges_multiple_csvs(self, tmp_path: Path) -> None:
+        (tmp_path / "manhattan.csv").write_text("station_id,upgrade_year\n21,2019\n")
+        (tmp_path / "brooklyn.csv").write_text("station_id,upgrade_year\n401,2020\n")
+        result = load_known_upgrades_from_dir(tmp_path)
+        assert result == {"21": 2019, "401": 2020}
+
+    def test_skips_underscore_prefixed(self, tmp_path: Path) -> None:
+        (tmp_path / "manhattan.csv").write_text("station_id,upgrade_year\n21,2019\n")
+        (tmp_path / "_all_boroughs.csv").write_text(
+            "station_id,upgrade_year\n21,2019\n401,2020\n"
+        )
+        result = load_known_upgrades_from_dir(tmp_path)
+        # Only manhattan.csv — _all_boroughs.csv is excluded
+        assert result == {"21": 2019}
+
+    def test_empty_dir_returns_empty(self, tmp_path: Path) -> None:
+        assert load_known_upgrades_from_dir(tmp_path) == {}
 
 
 class TestDistanceWeights:

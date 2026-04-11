@@ -1,6 +1,6 @@
 # Spatial Diagnostics
 
-*Auto-generated: April 9, 2026*
+*Auto-generated: April 11, 2026*
 
 ## Spatial weights matrix
 

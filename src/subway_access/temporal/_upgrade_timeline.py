@@ -2,11 +2,14 @@
 
 from __future__ import annotations
 
+import csv
 from typing import TYPE_CHECKING
 
 from ._models import StationUpgradeRecord, UpgradeTimeline
 
 if TYPE_CHECKING:
+    from pathlib import Path
+
     from ..models import StationDataset
 
 # Known ADA upgrade years for selected stations.
@@ -67,3 +70,34 @@ def build_upgrade_timeline(
         )
 
     return UpgradeTimeline(records=tuple(records))
+
+
+def load_known_upgrades(csv_path: Path) -> dict[str, int]:
+    """Read a seeds CSV and return ``{station_id: upgrade_year}`` for filled rows.
+
+    Rows where ``upgrade_year`` is empty or non-numeric are silently skipped.
+    """
+    known: dict[str, int] = {}
+    with csv_path.open(newline="", encoding="utf-8") as fh:
+        for row in csv.DictReader(fh):
+            year_str = row.get("upgrade_year", "").strip()
+            station_id = row.get("station_id", "").strip()
+            if year_str and station_id:
+                try:
+                    known[station_id] = int(year_str)
+                except ValueError:
+                    continue
+    return known
+
+
+def load_known_upgrades_from_dir(directory: Path) -> dict[str, int]:
+    """Scan *directory* for per-borough CSVs and merge all filled upgrade years.
+
+    ``_all_boroughs.csv`` is excluded to avoid double-counting.
+    """
+    known: dict[str, int] = {}
+    for path in sorted(directory.glob("*.csv")):
+        if path.name.startswith("_"):
+            continue
+        known.update(load_known_upgrades(path))
+    return known

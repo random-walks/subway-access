@@ -1,0 +1,14 @@
+{
+  "station_id": "356",
+  "upgrade_year": 2008,
+  "upgrade_source": "Wikipedia (Church Avenue station IND Culver Line); MTA records",
+  "capital_program": "2000-2004 MTA Capital Program",
+  "project_id": "",
+  "contract_number": "",
+  "construction_start_date": "",
+  "construction_end_date": "2008-07-07",
+  "project_cost_millions": null,
+  "contractor": "",
+  "accessibility_features": "elevators",
+  "notes": "Three elevators installed during a 2008 renovation, opening July 7, 2008. Station on the IND Culver Line serving F and G trains at Church and McDonald Avenues in Kensington. Note: scaffolded data lists routes as 2/5 Nostrand/IRT, but user specifies F/G Culver/IND. Research covers the IND Culver Line station per user instructions. The IRT Nostrand Avenue Line Church Av (2/5) was separately made accessible in Spring 1999. Different from Church Av B/Q BMT Brighton (ID 44, accessible 2025) and Church Av B/Q (ID 243)."
+}
