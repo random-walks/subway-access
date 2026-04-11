@@ -275,7 +275,9 @@ def build_panel(snapshots, years, minutes):
             h = int(hashlib.md5(s.station_id.encode()).hexdigest(), 16)
             known[s.station_id] = lo + (h % span)
             synth_count += 1
-    print(f"  Upgrade timeline: {real_count} sourced + {synth_count} synthetic = {len(known)} total")
+    print(
+        f"  Upgrade timeline: {real_count} sourced + {synth_count} synthetic = {len(known)} total"
+    )
     recs = []
     seen = set()
     for s in snapshots.values():

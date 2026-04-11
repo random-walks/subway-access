@@ -141,9 +141,7 @@ def write_csvs(rows: list[dict[str, str]]) -> None:
     print(f"  All boroughs: {len(rows)} stations -> _all_boroughs.csv")
 
 
-def show_dry_run(
-    stations: list[dict[str, str]], research: dict[str, dict]
-) -> None:
+def show_dry_run(stations: list[dict[str, str]], research: dict[str, dict]) -> None:
     """Show what would change without writing."""
     found = 0
     for st in stations:

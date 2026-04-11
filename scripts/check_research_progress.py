@@ -153,9 +153,7 @@ def scaffold(stations: list[dict[str, str]]) -> int:
     return created
 
 
-def show_progress(
-    stations: list[dict[str, str]], borough_filter: str | None
-) -> None:
+def show_progress(stations: list[dict[str, str]], borough_filter: str | None) -> None:
     """Print per-borough progress bars."""
     by_borough: dict[str, list[dict[str, str]]] = {}
     for st in stations:
@@ -191,9 +189,7 @@ def show_progress(
         print(f"\n  Total: {total_done} / {total_count} ({pct:.1f}%)")
 
 
-def show_next(
-    stations: list[dict[str, str]], borough_filter: str | None
-) -> None:
+def show_next(stations: list[dict[str, str]], borough_filter: str | None) -> None:
     """Print JSON for the next unresearched station."""
     for st in stations:
         if borough_filter and st["borough"] != borough_filter:
@@ -222,13 +218,13 @@ def show_unresearched(
             continue
         slug = slugify_station(st["station_id"], st["station_name"])
         if not is_researched(RESEARCH_DIR / slug):
-            print(f"  {st['station_id']:>3s}  {st['station_name']:<45s}  {st['borough']}")
+            print(
+                f"  {st['station_id']:>3s}  {st['station_name']:<45s}  {st['borough']}"
+            )
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Track ADA upgrade research progress."
-    )
+    parser = argparse.ArgumentParser(description="Track ADA upgrade research progress.")
     parser.add_argument(
         "--next", action="store_true", help="Print next unresearched station as JSON."
     )

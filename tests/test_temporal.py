@@ -213,19 +213,13 @@ class TestLoadKnownUpgrades:
 
 class TestLoadKnownUpgradesFromDir:
     def test_merges_multiple_csvs(self, tmp_path: Path) -> None:
-        (tmp_path / "manhattan.csv").write_text(
-            "station_id,upgrade_year\n21,2019\n"
-        )
-        (tmp_path / "brooklyn.csv").write_text(
-            "station_id,upgrade_year\n401,2020\n"
-        )
+        (tmp_path / "manhattan.csv").write_text("station_id,upgrade_year\n21,2019\n")
+        (tmp_path / "brooklyn.csv").write_text("station_id,upgrade_year\n401,2020\n")
         result = load_known_upgrades_from_dir(tmp_path)
         assert result == {"21": 2019, "401": 2020}
 
     def test_skips_underscore_prefixed(self, tmp_path: Path) -> None:
-        (tmp_path / "manhattan.csv").write_text(
-            "station_id,upgrade_year\n21,2019\n"
-        )
+        (tmp_path / "manhattan.csv").write_text("station_id,upgrade_year\n21,2019\n")
         (tmp_path / "_all_boroughs.csv").write_text(
             "station_id,upgrade_year\n21,2019\n401,2020\n"
         )
