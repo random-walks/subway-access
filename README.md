@@ -243,8 +243,9 @@ checks, spatial weights, and model specification.
 
 ## Extending with factor-factory (optional)
 
-`subway-access` integrates with [`factor-factory`](https://github.com/random-walks/factor-factory)
---- a causal-inference engine registry --- and
+`subway-access` integrates with
+[`factor-factory`](https://github.com/random-walks/factor-factory) --- a
+causal-inference engine registry --- and
 [`jellycell`](https://github.com/random-walks/jellycell) for tearsheet
 rendering, via the optional `[factor-factory]` and `[tearsheets]` extras:
 
@@ -253,18 +254,18 @@ pip install "subway-access[factor-factory,tearsheets]"
 ```
 
 This unlocks the `subway_access.reporting` module (lazy-imports; a plain
-`pip install subway-access` leaves the library fully usable without these
-deps) and an "Engine audit" appendix on the accessibility case study that
-cross-checks the headline findings with five factor-factory engine fits:
-two-way fixed-effects DiD (`did.twfe`), Sun-Abraham IW (`did.sa`), augmented
-synthetic control (`scm.augmented`), regression discontinuity at the 800 m
-walk radius (`rdd.rd_robust`), and Moran's *I* via the registry
-(`spatial.morans_i`). Each fit emits a JSON artifact consumed by the
-shipped jellycell `findings.md.j2` tearsheet template.
+`pip install subway-access` leaves the library fully usable without these deps)
+and an "Engine audit" appendix on the accessibility case study that cross-checks
+the headline findings with five factor-factory engine fits: two-way
+fixed-effects DiD (`did.twfe`), Sun-Abraham IW (`did.sa`), augmented synthetic
+control (`scm.augmented`), regression discontinuity at the 800 m walk radius
+(`rdd.rd_robust`), and Moran's _I_ via the registry (`spatial.morans_i`). Each
+fit emits a JSON artifact consumed by the shipped jellycell `findings.md.j2`
+tearsheet template.
 
 For the wiring pattern, see
-[`docs/factor-factory-integration.md`](docs/factor-factory-integration.md)
-and the minimal recipe in
+[`docs/factor-factory-integration.md`](docs/factor-factory-integration.md) and
+the minimal recipe in
 [`examples/factor-factory-rdd-walkthrough/`](examples/factor-factory-rdd-walkthrough/).
 
 ## Methodology

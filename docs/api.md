@@ -9,7 +9,8 @@ The supported public contract is now subpackage-first:
 - `subway_access.helpers`
 - `subway_access.export`
 - `subway_access.pipeline`
-- `subway_access.reporting` (optional; requires `[factor-factory]` or `[tearsheets]`)
+- `subway_access.reporting` (optional; requires `[factor-factory]` or
+  `[tearsheets]`)
 - `subway_access.temporal`
 - `subway_access.cli`
 

@@ -12,9 +12,12 @@
 
 <!-- If yes, confirm: -->
 
-- [ ] `reports/accessibility-change-report.md` numbers intact OR intentional delta flagged below with an explanation
-- [ ] `CASESTUDY.md` narrative preserved (or explicitly updated to match the new numbers)
-- [ ] Any new engine fit lives in the "Engine audit" appendix, not in Results Section 4.x
+- [ ] `reports/accessibility-change-report.md` numbers intact OR intentional
+      delta flagged below with an explanation
+- [ ] `CASESTUDY.md` narrative preserved (or explicitly updated to match the new
+      numbers)
+- [ ] Any new engine fit lives in the "Engine audit" appendix, not in Results
+      Section 4.x
 - [ ] Not applicable
 
 <!-- If numbers changed, list the delta here: -->
@@ -22,10 +25,14 @@
 ## Checklist
 
 - [ ] `make ci` green locally
-- [ ] New public API? → docstring + `docs/api.md` entry + `scripts/audit_public_api.py` passes
-- [ ] New optional-dep extra? → folded into `[all]` + lazy import at call-site + clear error pointing at the extras group
-- [ ] Factor-factory / jellycell touch? → `pytest.importorskip` in tests, lazy import in `src/subway_access/reporting/`
-- [ ] CHANGELOG `[Unreleased]` entry written under the right header (Added / Changed / Fixed / Deprecated / Security)
+- [ ] New public API? → docstring + `docs/api.md` entry +
+      `scripts/audit_public_api.py` passes
+- [ ] New optional-dep extra? → folded into `[all]` + lazy import at call-site +
+      clear error pointing at the extras group
+- [ ] Factor-factory / jellycell touch? → `pytest.importorskip` in tests, lazy
+      import in `src/subway_access/reporting/`
+- [ ] CHANGELOG `[Unreleased]` entry written under the right header (Added /
+      Changed / Fixed / Deprecated / Security)
 - [ ] `docs/` updated if user-visible
 
 ## Test plan
