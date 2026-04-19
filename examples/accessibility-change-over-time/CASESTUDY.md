@@ -398,3 +398,62 @@ The following supplementary reports provide full diagnostic detail:
 - [Correlation analysis](reports/supplementary/correlation-analysis.md) --- Pearson and Spearman matrices with significance levels, variance inflation factors, bivariate scatter plots, and OLS equity regression with robust standard errors.
 - [Model specification](reports/supplementary/model-specification.md) --- Full DiD and SAR panel equations, identifying assumptions, balance tests with *t*-statistics and *P*-values, and distribution diagnostics.
 - [Spatial diagnostics](reports/supplementary/spatial-diagnostics.md) --- Spatial weights matrix properties, Global Moran's *I* with *z*-scores and permutation *P*-values, bivariate geographic comparison maps, and recommendations for LISA and GWR extensions.
+- [Engine audit](reports/supplementary/engine-audit.md) --- Auto-generated cross-check of the headline results against five [`factor-factory`](https://github.com/random-walks/factor-factory) engine fits. See Appendix D for methodology.
+
+
+## Appendix D. Engine Audit (factor-factory cross-check)
+
+This appendix is an **auto-generated cross-check**, not a replacement for the primary results. When the optional `[factor-factory]` + `[tearsheets]` extras are installed, `main.py` re-runs the analysis through the [`factor-factory`](https://github.com/random-walks/factor-factory) engine registry and writes a jellycell tearsheet. The goal is registry parity and methodological triangulation: each factor-factory engine implements a peer-reviewed estimator, and directional agreement with the primary analysis (Sections 4.6--4.8) raises confidence in the headline findings; disagreement would surface a specification issue.
+
+The appendix is additive. If the extras are not installed, it is silently skipped and the primary report is unchanged.
+
+### D.1 Design
+
+Five engine fits are produced:
+
+1. **`did.twfe`** --- Two-way fixed-effects DiD on `gap_score` with the existing cohort-based treatment definition. Provides a registry-native re-run of the hand-rolled fixed-effects panel specified in Section 3.5.
+2. **`did.sa`** (Sun-Abraham IW, Sun & Abraham 2021) --- Staggered-rollout-robust interaction-weighted estimator. Important here because the ADA upgrade rollout is staggered over 1987--2026 across 101 press-release-sourced stations plus 56 hash-fallback stations. The two-way-fixed-effects DiD is known to be biased under heterogeneous treatment effects with staggered timing (Goodman-Bacon, 2021); the Sun-Abraham estimator provides a robustness check.
+3. **`scm.augmented`** (Ben-Michael, Feller & Rothstein, 2021) --- Augmented synthetic control on a single treated tract whose treatment year falls in the interior of the panel window. This is a **single-unit** cross-check: one tract's gap-score trajectory is compared to a synthetic control built from never-treated tracts. The SCM is not meant to substitute for the panel DiD but to show the post-treatment trajectory of one well-sourced upgrade explicitly.
+4. **`rdd.rd_robust`** (Calonico, Cattaneo & Titiunik, 2014) --- Regression discontinuity on the `distance_to_nearest_accessible_station` forcing variable at the 800 m threshold. By construction, `gap_score` is zero for covered tracts (those within the 800 m catchment of at least one accessible station) and equals `need_score` for uncovered tracts. An RDD at 800 m with `gap_score` as the outcome therefore detects a mechanical discontinuity of approximately `-mean(need_score)`. This is a **specification check**, not a causal test: a null estimate would indicate catchment-radius drift or a data pipeline bug.
+5. **`spatial.morans_i`** --- Global Moran's *I* via the factor-factory spatial registry with KNN spatial weights (*k* = 5). This differs from the 2 km distance-threshold weights used in Section 4.8 of the primary analysis (47.9 mean neighbors), so the *I* point estimate and *z*-score are not expected to match exactly. The audit confirms directional agreement (positive, significant clustering) and registry parity.
+
+### D.2 Interpretation guardrails
+
+Results from this appendix should be read against the following interpretive guidance:
+
+- **Directional agreement is the confirmation target.** The primary analysis (Sections 4.6--4.8) reports specific point estimates under specific spatial-weight and identifying-assumption choices. The engine-audit fits use different (peer-reviewed) specifications --- KNN spatial weights for Moran's *I*, doubly-robust Sun-Abraham IW for DiD, augmented SCM for a single treated tract, `rdrobust` with MSE-optimal bandwidth for RDD. Agreement in sign and significance across specifications is the intended signal.
+- **The SCM fit is a single-unit illustration.** It is not a system-wide causal estimate. Use it as a worked example of the pattern, not as a borough- or city-level claim.
+- **The RDD fit is mechanical.** See D.1 point 4. Report it to verify the 800 m catchment is consistently applied; do not interpret the point estimate as a causal effect of the boundary on outcomes.
+- **The Sun-Abraham fit can contradict TWFE under heterogeneous treatment effects.** If the two disagree, trust Sun-Abraham for the ATT magnitude --- the TWFE estimand becomes an uninterpretable weighted average of cohort-level effects under staggered timing. Document any disagreement in the narrative and flag the heterogeneity-robustness concern.
+
+If any engine fit produces a finding that is **directionally inconsistent** with the primary analysis --- e.g. a positive Moran's *I* is rejected by the registry fit, or the Sun-Abraham ATT has the opposite sign of the TWFE point estimate --- the contributor must **surface the discrepancy** in a PR comment and in this appendix rather than silently updating the primary narrative. Triangulation is only informative if discordant results are reported honestly.
+
+### D.3 Output artifacts
+
+When the engine audit runs successfully, the following artifacts are written:
+
+- `engine-audit/artifacts/did_results.json` --- TWFE + Sun-Abraham point estimates, SEs, 95% CIs, and cohort-level ATTs where available.
+- `engine-audit/artifacts/rdd_results.json` --- RDD point estimate, bandwidth, effective sample size.
+- `engine-audit/artifacts/scm_results.json` --- Augmented-SCM point estimate with pre/post-period RMSPE, donor weights, and the focal treated tract.
+- `engine-audit/artifacts/spatial_results.json` --- Moran's *I*, *z*-score, permutation *p*-value with the KNN(*k* = 5) weights specification.
+- `engine-audit/manuscripts/FINDINGS.md` --- Rendered jellycell tearsheet consuming the four JSON files via the shipped `findings.md.j2` template.
+- [`reports/supplementary/engine-audit.md`](reports/supplementary/engine-audit.md) --- Compact summary table of all five fits, linked from Appendix C.
+
+### D.4 Reproducibility
+
+Run the full pipeline (including the engine audit) with:
+
+```bash
+pip install "subway-access[all,factor-factory,tearsheets]"
+cd examples/accessibility-change-over-time
+python main.py --skip-download     # assumes cache/ is populated
+```
+
+To skip the engine audit even when the extras are installed, pass `--skip-engine-audit`. The primary report numbers (Sections 4.1--4.8, Tables 1--5) are produced entirely by Steps 1--10 of `main.py` and are independent of the engine-audit appendix.
+
+### D.5 Citations
+
+- Sun, L., & Abraham, S. (2021). Estimating dynamic treatment effects in event studies with heterogeneous treatment effects. *Journal of Econometrics*, *225*(2), 175--199. https://doi.org/10.1016/j.jeconom.2020.09.006
+- Goodman-Bacon, A. (2021). Difference-in-differences with variation in treatment timing. *Journal of Econometrics*, *225*(2), 254--277. https://doi.org/10.1016/j.jeconom.2021.03.014
+- Ben-Michael, E., Feller, A., & Rothstein, J. (2021). The augmented synthetic control method. *Journal of the American Statistical Association*, *116*(536), 1789--1803. https://doi.org/10.1080/01621459.2021.1929245
+- Calonico, S., Cattaneo, M. D., & Titiunik, R. (2014). Robust nonparametric confidence intervals for regression-discontinuity designs. *Econometrica*, *82*(6), 2295--2326. https://doi.org/10.3982/ECTA11757

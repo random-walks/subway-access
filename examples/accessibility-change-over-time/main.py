@@ -62,6 +62,31 @@ try:
 except ImportError:
     ctx = None  # type: ignore[assignment]
 
+try:
+    import factor_factory
+    import factor_factory.engines.rdd
+    import factor_factory.engines.scm
+    import factor_factory.engines.spatial  # noqa: F401
+    from factor_factory.engines import did as _ff_did
+    from factor_factory.engines import rdd as _ff_rdd
+    from factor_factory.engines import scm as _ff_scm
+    from factor_factory.engines import spatial as _ff_spatial
+    from factor_factory.tidy import Panel as _FFPanel
+    from factor_factory.tidy import PanelMetadata as _FFPanelMetadata
+    from factor_factory.tidy import Provenance as _FFProvenance
+    from factor_factory.tidy import TreatmentEvent as _FFTreatmentEvent
+
+    _FACTOR_FACTORY_AVAILABLE = True
+except ImportError:
+    _FACTOR_FACTORY_AVAILABLE = False
+
+try:
+    import jellycell  # noqa: F401  (import-check only)
+
+    _JELLYCELL_AVAILABLE = True
+except ImportError:
+    _JELLYCELL_AVAILABLE = False
+
 ROOT = Path(__file__).resolve().parent
 CACHE_DIR = ROOT / "cache"
 ARTIFACTS_DIR = ROOT / "artifacts"
@@ -148,6 +173,15 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--skip-download", action="store_true")
     p.add_argument("--refresh", action="store_true")
     p.add_argument("--no-publish-report", action="store_true")
+    p.add_argument(
+        "--skip-engine-audit",
+        action="store_true",
+        help=(
+            "Skip the factor-factory engine-audit appendix (step 11). "
+            "The appendix is skipped automatically if factor-factory + jellycell "
+            "are not installed; this flag forces the skip even when they are."
+        ),
+    )
     return p
 
 
@@ -517,7 +551,7 @@ def _compute_morans_i(values_dict, weights, n_permutations=999):
 def _compute_equity_regression(gdf):
     """OLS: gap_score ~ poverty_rate + disability_rate + senior_rate."""
     try:
-        import statsmodels.api as sm  # noqa: PLC0415
+        import statsmodels.api as sm
     except ImportError:
         return None
 
@@ -2042,6 +2076,515 @@ def write_report(
 # ---------------------------------------------------------------------------
 
 
+# ---------------------------------------------------------------------------
+# Engine audit (optional, factor-factory + jellycell)
+# ---------------------------------------------------------------------------
+
+
+def _build_factor_factory_panel(panel, gdf, snapshots):
+    """Convert a subway-access ``PanelDataset`` to a factor-factory ``Panel``.
+
+    Extracted so the ``factor_factory`` import lives inside a conditional.
+    Used by ``run_engine_audit`` — do not call directly unless
+    ``_FACTOR_FACTORY_AVAILABLE`` is True.
+    """
+    import pandas as pd
+
+    # Build (unit_id, period) DataFrame with the outcome + predictors.
+    geoid_to_row = {str(r["geoid"]): r for _, r in gdf.iterrows()}
+    centroids: dict[str, tuple[float, float]] = {}
+    for snap in snapshots.values():
+        for tract in snap.demographics.tracts:
+            centroids[tract.tract_id] = (
+                float(tract.centroid_latitude),
+                float(tract.centroid_longitude),
+            )
+
+    rows = []
+    for obs in panel.observations:
+        g = geoid_to_row.get(obs.unit_id)
+        gap_score = 0.0
+        if g is not None:
+            raw_gap = g.get("gap_score")
+            if raw_gap is not None and not _isnan(raw_gap):
+                gap_score = float(raw_gap)
+
+        lat, lon = centroids.get(obs.unit_id, (0.0, 0.0))
+
+        distance = obs.nearest_accessible_distance_m
+        rows.append(
+            {
+                "unit_id": obs.unit_id,
+                "period": int(obs.period),
+                "gap_score": gap_score,
+                "need_score": float(obs.need_score),
+                "disability_rate": float(obs.disability_rate),
+                "senior_rate": float(obs.senior_rate),
+                "poverty_rate": float(obs.poverty_rate),
+                "distance_to_nearest_accessible_station": float(
+                    distance if distance is not None else 9999.0
+                ),
+                "latitude": lat,
+                "longitude": lon,
+                "treatment": 1 if obs.has_accessible_station else 0,
+            }
+        )
+
+    df = pd.DataFrame(rows).set_index(["unit_id", "period"]).sort_index()
+
+    # Build cohort-level treatment events (one per distinct treatment_year).
+    cohorts: dict[int, set[str]] = {}
+    for obs in panel.observations:
+        if obs.treatment_year is not None:
+            cohorts.setdefault(int(obs.treatment_year), set()).add(obs.unit_id)
+
+    events = tuple(
+        _FFTreatmentEvent(
+            name=f"ada-upgrade-cohort-{year}",
+            description=f"Tracts whose first accessible station opened in {year}",
+            treated_units=tuple(sorted(units)),
+            period_value=float(year),
+            dimension="tract",
+        )
+        for year, units in sorted(cohorts.items())
+    )
+
+    metadata = _FFPanelMetadata(
+        outcome_cols=("gap_score",),
+        period_kind="integer",
+        freq=None,
+        dimension="tract",
+        treatment_events=events,
+        record_count=len(rows),
+        provenance=_FFProvenance(
+            data_source="MTA + ACS 2023 five-year / subway-access case study",
+            license="MIT",
+            creator="Blaise Albis-Burdige",
+            citation="https://github.com/random-walks/subway-access",
+        ),
+    )
+
+    return _FFPanel(df, metadata, validate=False)
+
+
+def _isnan(value) -> bool:
+    try:
+        return float(value) != float(value)
+    except (TypeError, ValueError):
+        return False
+
+
+def _run_did_engines(ff_panel):
+    """Fit TWFE + Sun-Abraham DiD. Returns a dict method → result-dict, or empty if unavailable."""
+    out: dict[str, dict] = {}
+    try:
+        results = _ff_did.estimate(
+            ff_panel,
+            methods=("twfe", "sa"),
+            outcome="gap_score",
+            treatment="treatment",
+        )
+    except (KeyError, ImportError) as exc:
+        print(f"    [did] skipped: {exc}")
+        return out
+    except (ValueError, RuntimeError) as exc:
+        print(f"    [did] fit failed: {exc}")
+        return out
+
+    for result in results:
+        out[result.method] = result.to_dict()
+    return out
+
+
+def _run_rdd_engine(ff_panel):
+    """Fit rd_robust on gap_score vs distance_to_nearest_accessible_station at 800 m."""
+    try:
+        results = _ff_rdd.estimate(
+            ff_panel,
+            methods=("rd_robust",),
+            outcome="gap_score",
+            running_variable="distance_to_nearest_accessible_station",
+            cutoff=800.0,
+            design="sharp",
+        )
+    except (KeyError, ImportError) as exc:
+        print(f"    [rdd] skipped: {exc}")
+        return {}
+    except (ValueError, RuntimeError) as exc:
+        print(f"    [rdd] fit failed: {exc}")
+        return {}
+
+    return {"rd_robust": results[0].to_dict()}
+
+
+def _run_scm_engine(ff_panel, panel):
+    """Fit augmented-SCM on a single press-release-sourced treated tract.
+
+    SCM requires a single treated unit. We pick a treated tract whose
+    treatment_year falls in the interior of the panel (so there are both
+    pre- and post-treatment periods) and whose upgrade year came from the
+    sourced seed file rather than the hash fallback — the ``upgrade_source``
+    provenance is carried on ``panel.observations`` via the original
+    ``UpgradeTimeline``.
+
+    If no such tract exists in the panel, return an empty dict.
+    """
+    periods = sorted({int(o.period) for o in panel.observations})
+    if len(periods) < 3:
+        return {}
+    lo, hi = periods[0], periods[-1]
+    interior_lo, interior_hi = lo + 1, hi - 1
+
+    # Find tracts whose treatment_year is in the interior of the panel.
+    candidate_tracts: list[tuple[str, int]] = []
+    seen: set[str] = set()
+    for obs in panel.observations:
+        if obs.unit_id in seen:
+            continue
+        if (
+            obs.treatment_year is not None
+            and interior_lo <= obs.treatment_year <= interior_hi
+        ):
+            candidate_tracts.append((obs.unit_id, int(obs.treatment_year)))
+            seen.add(obs.unit_id)
+
+    if not candidate_tracts:
+        return {}
+
+    # Deterministic selection: first tract sorted by (year, tract_id).
+    treated_tract, treated_year = sorted(candidate_tracts, key=lambda p: (p[1], p[0]))[
+        0
+    ]
+
+    # Build a reduced panel with a single treatment event naming only this tract.
+    reduced_event = _FFTreatmentEvent(
+        name=f"ada-upgrade-{treated_tract}-{treated_year}",
+        description=(
+            f"Focal tract for the augmented-SCM fit — first accessible station "
+            f"opened in {treated_year}."
+        ),
+        treated_units=(treated_tract,),
+        period_value=float(treated_year),
+        dimension="tract",
+    )
+
+    df = ff_panel.df.copy()
+    reduced_metadata = _FFPanelMetadata(
+        outcome_cols=ff_panel.metadata.outcome_cols,
+        period_kind=ff_panel.metadata.period_kind,
+        freq=ff_panel.metadata.freq,
+        dimension=ff_panel.metadata.dimension,
+        treatment_events=(reduced_event,),
+        record_count=ff_panel.metadata.record_count,
+        provenance=ff_panel.metadata.provenance,
+    )
+    reduced_panel = _FFPanel(df, reduced_metadata, validate=False)
+
+    try:
+        results = _ff_scm.estimate(
+            reduced_panel,
+            methods=("augmented",),
+            outcome="gap_score",
+            treatment="treatment",
+            ridge_lambda=1.0,
+        )
+    except (KeyError, ImportError) as exc:
+        print(f"    [scm] skipped: {exc}")
+        return {}
+    except (ValueError, RuntimeError) as exc:
+        print(f"    [scm] fit failed: {exc}")
+        return {}
+
+    payload = results[0].to_dict()
+    payload["treated_tract"] = treated_tract
+    payload["treated_year"] = treated_year
+    return {"augmented": payload}
+
+
+def _run_spatial_engine(ff_panel):
+    """Fit Moran's I via the factor-factory registry with KNN spatial weights."""
+    try:
+        results = _ff_spatial.estimate(
+            ff_panel,
+            methods=("morans_i",),
+            outcome="gap_score",
+            coordinates=("latitude", "longitude"),
+            k_neighbors=5,
+        )
+    except (KeyError, ImportError) as exc:
+        print(f"    [spatial] skipped: {exc}")
+        return {}
+    except (ValueError, RuntimeError) as exc:
+        print(f"    [spatial] fit failed: {exc}")
+        return {}
+
+    return {"morans_i": results[0].to_dict()}
+
+
+def _write_engine_summary_markdown(all_results, out_path, project_dir):
+    """Write a compact summary table for the CASESTUDY.md engine-audit appendix."""
+    from subway_access.reporting import write_engine_results_json  # noqa: F401
+
+    lines = [
+        "# Engine audit — factor-factory results",
+        "",
+        (
+            "This supplementary page is auto-generated by "
+            "`examples/accessibility-change-over-time/main.py` when "
+            "`factor-factory` and `jellycell` are installed. It cross-checks the "
+            "headline case-study findings with five factor-factory engine fits "
+            "run through the standard `factor_factory.engines.*.estimate(...)` "
+            "registry. The rendered findings tearsheet lives alongside it at "
+            "[`FINDINGS.md`](../engine-audit/manuscripts/FINDINGS.md)."
+        ),
+        "",
+        f"Project dir: `{project_dir}`",
+        "",
+        "## Results",
+        "",
+    ]
+
+    if not any(all_results.values()):
+        lines.append(
+            "_No engine fits produced results — check that the relevant extras "
+            "(`factor-factory[did,rdd,scm,spatial]` + `jellycell`) are installed._"
+        )
+        out_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        return
+
+    # Per-family summaries.
+    did_fits = all_results.get("did", {})
+    if did_fits:
+        lines.append("### Difference-in-differences")
+        lines.append("")
+        lines.append("| Method | ATT | SE | 95 % CI | *P* | *N* |")
+        lines.append("| :--- | ---: | ---: | :--- | ---: | ---: |")
+        for method, fit in did_fits.items():
+            att = fit.get("att")
+            se = fit.get("se")
+            ci_lo = fit.get("ci_95_lower")
+            ci_hi = fit.get("ci_95_upper")
+            p = fit.get("p_value")
+            n = fit.get("n")
+            lines.append(
+                f"| `{method}` | {_fmt_num(att)} | {_fmt_num(se)} | "
+                f"[{_fmt_num(ci_lo)}, {_fmt_num(ci_hi)}] | "
+                f"{_fmt_num(p)} | {n if n is not None else '—'} |"
+            )
+        lines.append("")
+
+    scm_fits = all_results.get("scm", {})
+    if scm_fits:
+        lines.append("### Augmented synthetic control")
+        lines.append("")
+        for method, fit in scm_fits.items():
+            lines.append(
+                f"- Method: `{method}` | Treated tract: "
+                f"`{fit.get('treated_tract')}` (upgraded {fit.get('treated_year')}) | "
+                f"ATT: {_fmt_num(fit.get('att'))} | "
+                f"Pre RMSPE: {_fmt_num(fit.get('pre_period_rmspe'))} | "
+                f"Post RMSPE: {_fmt_num(fit.get('post_period_rmspe'))} | "
+                f"Donors: {fit.get('n_donor')}"
+            )
+        lines.append("")
+
+    rdd_fits = all_results.get("rdd", {})
+    if rdd_fits:
+        lines.append("### Regression discontinuity (800 m walk-radius cutoff)")
+        lines.append("")
+        lines.append(
+            "This is a **specification check**: for uncovered tracts, `gap_score` "
+            "is defined as `need_score`, and for covered tracts, `gap_score = 0`. "
+            "The 800 m catchment drives the covered/uncovered boundary, so an RDD "
+            "at 800 m with `gap_score` as the outcome should detect a mechanical "
+            "discontinuity of approximately `-mean(need_score)` when crossing "
+            "from uncovered to covered. A null estimate would signal either "
+            "catchment-radius drift or a data issue."
+        )
+        lines.append("")
+        lines.append("| Method | Estimate | SE | 95 % CI | Bandwidth | *N* eff |")
+        lines.append("| :--- | ---: | ---: | :--- | ---: | ---: |")
+        for method, fit in rdd_fits.items():
+            est = fit.get("estimate")
+            se = fit.get("std_error")
+            ci_lo = fit.get("ci_95_lower")
+            ci_hi = fit.get("ci_95_upper")
+            bw = fit.get("bandwidth")
+            n_eff = fit.get("n_effective")
+            lines.append(
+                f"| `{method}` | {_fmt_num(est)} | {_fmt_num(se)} | "
+                f"[{_fmt_num(ci_lo)}, {_fmt_num(ci_hi)}] | "
+                f"{_fmt_num(bw)} | {n_eff if n_eff is not None else '—'} |"
+            )
+        lines.append("")
+
+    spatial_fits = all_results.get("spatial", {})
+    if spatial_fits:
+        lines.append("### Moran's *I* (registry-parity fit)")
+        lines.append("")
+        lines.append(
+            "Re-runs Global Moran's *I* via the factor-factory spatial registry "
+            "for registry-parity against the hand-rolled Moran's *I* reported in "
+            "Section 4.8 of CASESTUDY.md. The KNN spatial-weights specification "
+            "(`k = 5`) differs from the 2 km distance-threshold weights used in "
+            "the main analysis, so point estimates are not expected to match "
+            "exactly; directional agreement (positive, significant clustering) "
+            "is the confirmation target."
+        )
+        lines.append("")
+        lines.append("| Method | *I* | *z* | *p* | Weights | *N* |")
+        lines.append("| :--- | ---: | ---: | ---: | :--- | ---: |")
+        for method, fit in spatial_fits.items():
+            stat = fit.get("statistic")
+            z = fit.get("z_score")
+            p = fit.get("p_value")
+            w = fit.get("weights_type")
+            n = fit.get("n_units")
+            lines.append(
+                f"| `{method}` | {_fmt_num(stat)} | {_fmt_num(z)} | "
+                f"{_fmt_num(p)} | {w or '—'} | {n if n is not None else '—'} |"
+            )
+        lines.append("")
+
+    lines.append("## Artifacts")
+    lines.append("")
+    lines.append(f"- `{project_dir}/artifacts/did_results.json`")
+    lines.append(f"- `{project_dir}/artifacts/rdd_results.json`")
+    lines.append(f"- `{project_dir}/artifacts/scm_results.json`")
+    lines.append(f"- `{project_dir}/artifacts/spatial_results.json`")
+    lines.append(f"- `{project_dir}/manuscripts/FINDINGS.md` (rendered tearsheet)")
+    lines.append("")
+
+    out_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
+def _fmt_num(value) -> str:
+    import math
+
+    if value is None:
+        return "—"
+    try:
+        num = float(value)
+    except (TypeError, ValueError):
+        return str(value)
+    if math.isnan(num):
+        return "—"
+    if abs(num) >= 1000 or (0 < abs(num) < 0.001):
+        return f"{num:.3e}"
+    return f"{num:.4f}"
+
+
+def run_engine_audit(panel, gdf, snapshots, args, project_dir):
+    """Run all five factor-factory engine fits and emit a jellycell tearsheet.
+
+    This is a no-op if factor-factory or jellycell are not installed, or if
+    ``--skip-engine-audit`` was passed.
+    """
+    if args.skip_engine_audit:
+        print("  Skipped (--skip-engine-audit).")
+        return
+    if not _FACTOR_FACTORY_AVAILABLE:
+        print(
+            '  Skipped — install with: pip install "subway-access[factor-factory,tearsheets]"'
+        )
+        return
+    if not _JELLYCELL_AVAILABLE:
+        print('  Skipped — install with: pip install "subway-access[tearsheets]"')
+        return
+
+    from subway_access.reporting import (
+        emit_findings_tearsheet,
+        write_engine_results_json,
+    )
+
+    project_dir = Path(project_dir)
+    project_dir.mkdir(parents=True, exist_ok=True)
+    artifacts_dir = _dir(project_dir / "artifacts")
+
+    print("  Building factor-factory Panel from PanelDataset...")
+    ff_panel = _build_factor_factory_panel(panel, gdf, snapshots)
+    print(
+        f"    {len(ff_panel.unit_ids):,} tracts x {len(ff_panel.periods)} periods "
+        f"(outcome = gap_score, {len(ff_panel.treatment_events)} cohorts)"
+    )
+
+    all_results: dict[str, dict] = {}
+
+    print("  Fitting did.twfe + did.sa (Sun-Abraham)...")
+    did_results = _run_did_engines(ff_panel)
+    all_results["did"] = did_results
+    if did_results:
+        # Write as factor-factory-native did_results.json so the findings
+        # template picks it up. The template expects {"results": [...]}.
+        write_engine_results_json(
+            [{"method": m, **r} for m, r in did_results.items()],
+            artifacts_dir=artifacts_dir,
+            family="did",
+        )
+        for method, payload in did_results.items():
+            print(
+                f"    [{method}] ATT = {_fmt_num(payload.get('att'))}, "
+                f"SE = {_fmt_num(payload.get('se'))}"
+            )
+
+    print("  Fitting rdd.rd_robust on 800 m walk radius...")
+    rdd_results = _run_rdd_engine(ff_panel)
+    all_results["rdd"] = rdd_results
+    if rdd_results:
+        write_engine_results_json(
+            [{"method": m, **r} for m, r in rdd_results.items()],
+            artifacts_dir=artifacts_dir,
+            family="rdd",
+        )
+        rd = rdd_results["rd_robust"]
+        print(
+            f"    [rd_robust] estimate = {_fmt_num(rd.get('estimate'))}, "
+            f"bandwidth = {_fmt_num(rd.get('bandwidth'))}"
+        )
+
+    print("  Fitting scm.augmented on a press-release-sourced treated tract...")
+    scm_results = _run_scm_engine(ff_panel, panel)
+    all_results["scm"] = scm_results
+    if scm_results:
+        write_engine_results_json(
+            [{"method": m, **r} for m, r in scm_results.items()],
+            artifacts_dir=artifacts_dir,
+            family="scm",
+        )
+        ss = scm_results["augmented"]
+        print(
+            f"    [augmented] treated_tract = {ss.get('treated_tract')}, "
+            f"ATT = {_fmt_num(ss.get('att'))}"
+        )
+
+    print("  Fitting spatial.morans_i via KNN weights...")
+    spatial_results = _run_spatial_engine(ff_panel)
+    all_results["spatial"] = spatial_results
+    if spatial_results:
+        write_engine_results_json(
+            [{"method": m, **r} for m, r in spatial_results.items()],
+            artifacts_dir=artifacts_dir,
+            family="spatial",
+        )
+        sp = spatial_results["morans_i"]
+        print(
+            f"    [morans_i] I = {_fmt_num(sp.get('statistic'))}, "
+            f"z = {_fmt_num(sp.get('z_score'))}"
+        )
+
+    print("  Rendering FINDINGS.md tearsheet...")
+    try:
+        tearsheet_path = emit_findings_tearsheet(project_dir, overwrite=True)
+        print(f"    {tearsheet_path}")
+    except Exception as exc:  # noqa: BLE001 - template / jellycell errors are logged
+        print(f"    [tearsheet] skipped: {exc}")
+
+    summary_path = REPORTS_DIR / "supplementary" / "engine-audit.md"
+    _dir(summary_path.parent)
+    _write_engine_summary_markdown(all_results, summary_path, project_dir)
+    print(f"    {summary_path}")
+
+
 def main():
     args = build_parser().parse_args()
     boroughs = [b.strip() for b in args.boroughs.split(",")]
@@ -2297,6 +2840,16 @@ def main():
         print(f"  {sr2}")
         sr3 = write_spatial_report(gdf, weights, morans_results, provenance)
         print(f"  {sr3}")
+        print()
+
+        print("Step 11: Engine audit (factor-factory, optional)...")
+        run_engine_audit(
+            panel,
+            gdf,
+            snapshots,
+            args,
+            project_dir=ROOT / "engine-audit",
+        )
         print()
 
     gap = sum(int(s["gap_pop"]) for s in summaries.values())

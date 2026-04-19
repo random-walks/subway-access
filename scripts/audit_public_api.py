@@ -26,6 +26,7 @@ PUBLIC_MODULES: Final[tuple[str, ...]] = (
     "subway_access.io",
     "subway_access.models",
     "subway_access.pipeline",
+    "subway_access.reporting",
     "subway_access.temporal",
 )
 DOC_DIRECTIVE_RE: Final[re.Pattern[str]] = re.compile(

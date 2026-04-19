@@ -15,6 +15,7 @@ PUBLIC_MODULES = (
     "subway_access.io",
     "subway_access.models",
     "subway_access.pipeline",
+    "subway_access.reporting",
     "subway_access.temporal",
 )
 
