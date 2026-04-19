@@ -1,0 +1,43 @@
+cff-version: 1.2.0
+title: subway-access
+message: >
+  If you use subway-access or its accessibility case study in academic
+  work, please cite this software record in addition to any canonical
+  papers underlying the specific methods you invoke (e.g. factor-factory
+  engine adapters, ACS methodology, Moran's I). Adapter docstrings carry
+  the primary references.
+type: software
+authors:
+  - given-names: Blaise
+    family-names: Albis-Burdige
+    website: "https://blaiseab.com/"
+repository-code: "https://github.com/random-walks/subway-access"
+url: "https://subway-access.readthedocs.io/"
+license: MIT
+keywords:
+  - nyc
+  - subway
+  - accessibility
+  - transit
+  - ada
+  - civic-tech
+  - open-data
+  - geospatial
+  - spatial-equity
+  - difference-in-differences
+preferred-citation:
+  type: software
+  title: "subway-access: A Python toolkit for reproducible NYC subway accessibility analysis"
+  authors:
+    - given-names: Blaise
+      family-names: Albis-Burdige
+  url: "https://github.com/random-walks/subway-access"
+  notes: >
+    The package ships a formal APA-formatted case study at
+    examples/accessibility-change-over-time/CASESTUDY.md covering
+    tract-level ADA-accessibility gap analysis across all five NYC
+    boroughs using April 2026 MTA data and ACS 2023 five-year
+    demographics. Extensions added in v0.5.0 cross-check the headline
+    findings using factor-factory engines (RDD at the 800 m walk-radius
+    threshold, augmented SCM on sourced upgrade-year stations,
+    Sun-Abraham staggered DiD, Moran's I via registry).

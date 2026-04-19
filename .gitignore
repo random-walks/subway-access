@@ -187,6 +187,14 @@ Thumbs.db
 cache/
 artifacts/
 
+# Claude Code MCP / scheduled-tasks runtime state
+.claude/scheduled_tasks.lock
+
+# jellycell cache manifests
+**/.jellycell/cache/blobs/
+**/.jellycell/cache/state.db
+**/.jellycell/cache/assets/
+
 # Common editor files
 *~
 *.swp

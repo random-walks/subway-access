@@ -79,6 +79,14 @@ spatial-models = [
   "libpysal>=4.10",
   "spreg>=1.6",
 ]
+factor-factory = [
+  # factor-factory v1.0.2 requires Python >=3.12; gate the pin so subway-access
+  # continues to install on 3.10/3.11 without the engine-audit appendix.
+  "factor-factory[did,rdd,scm,spatial]>=1.0.2,<2 ; python_version >= '3.12'",
+]
+tearsheets = [
+  "jellycell>=1.3.5,<2 ; python_version >= '3.12'",
+]
 all = [
   "contextily>=1.6",
   "geopandas>=1.1",
@@ -89,6 +97,8 @@ all = [
   "scikit-learn>=1.6",
   "statsmodels>=0.14",
   "scipy>=1.14",
+  "factor-factory[did,rdd,scm,spatial]>=1.0.2,<2 ; python_version >= '3.12'",
+  "jellycell>=1.3.5,<2 ; python_version >= '3.12'",
 ]
 
 
@@ -220,6 +230,10 @@ ignore_missing_imports = true
 module = ["statsmodels", "statsmodels.*", "scipy", "scipy.*"]
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+module = ["factor_factory", "factor_factory.*", "jellycell", "jellycell.*"]
+ignore_missing_imports = true
+
 
 [tool.ruff]
 show-fixes = true
@@ -278,8 +292,11 @@ ignore = [
 "src/subway_access/analysis/_core.py" = ["PLC0415"]
 "src/subway_access/factors/_base.py" = ["PLC0415"]
 "src/subway_access/factors/_compat.py" = ["PLC0415"]
+"src/subway_access/reporting/_jellycell_bridge.py" = ["PLC0415"]
 "src/subway_access/temporal/_models.py" = ["PLC0415"]
 "src/subway_access/temporal/_spatial_weights.py" = ["PLC0415"]
+"examples/factor-factory-rdd-walkthrough/main.py" = ["PLC0415", "RUF001", "RUF002"]
+"examples/accessibility-change-over-time/main.py" = ["PLC0415"]
 "src/subway_access/__main__.py" = ["I001"]
 "src/subway_access/cli/_main.py" = ["T20"]
 "scripts/*.py" = ["EM", "TRY", "F541", "T20", "TC003"]

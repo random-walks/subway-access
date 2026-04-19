@@ -1,0 +1,21 @@
+{
+  "version": "0.1",
+  "servers": [
+    {
+      "name": "docs-preview",
+      "command": "uv run mkdocs serve",
+      "port": 8000,
+      "description": "Live-reload MkDocs preview at http://127.0.0.1:8000."
+    },
+    {
+      "name": "pytest-watch",
+      "command": "uv run pytest --lf --ff -x",
+      "description": "Re-run pytest focused on last-failed, first-failed, fail-fast."
+    },
+    {
+      "name": "case-study-preview",
+      "command": "uv run python examples/accessibility-change-over-time/main.py --skip-download",
+      "description": "Re-run the accessibility case study against cached snapshots (no network)."
+    }
+  ]
+}
