@@ -51,7 +51,12 @@ def require_factor_factory() -> ModuleType:
         import factor_factory
     except ImportError as exc:  # pragma: no cover - exercised in lazy-import tests
         raise ImportError(_FACTOR_FACTORY_HINT) from exc
-    return factor_factory  # type: ignore[no-any-return]
+    # The paired ignore codes are intentional: ``no-any-return`` fires when
+    # factor-factory is NOT installed (the mypy override treats the import
+    # as ``Any``), and ``unused-ignore`` silences mypy when it IS installed
+    # (the real module resolves cleanly). Keeping both keeps CI green under
+    # either environment.
+    return factor_factory  # type: ignore[no-any-return, unused-ignore]
 
 
 def require_jellycell() -> ModuleType:
@@ -72,7 +77,7 @@ def require_jellycell() -> ModuleType:
         import jellycell
     except ImportError as exc:  # pragma: no cover - exercised in lazy-import tests
         raise ImportError(_JELLYCELL_HINT) from exc
-    return jellycell  # type: ignore[no-any-return]
+    return jellycell  # type: ignore[no-any-return, unused-ignore]
 
 
 def write_engine_results_json(

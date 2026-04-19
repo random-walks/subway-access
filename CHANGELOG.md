@@ -39,6 +39,7 @@ The authoritative release notes are also published on [GitHub Releases](https://
 
 ### Changed
 
+- Bumped `nyc-geo-toolkit` floor from `>=0.1.5` to `>=0.3.0,<0.4` now that [nyc-geo-toolkit v0.3.0](https://pypi.org/project/nyc-geo-toolkit/0.3.0/) has landed on PyPI with Claude Code infrastructure parity and the boundary-explorer tearsheet showcase.
 - GitHub Actions pin bumps in `ci.yml` + `cd.yml`: `astral-sh/setup-uv` from SHA-pinned v8.0.0 to `v8.1.0` (exact, per factor-factory's learning that v8 has no moving tag), `actions/upload-artifact@v6` to `@v7`. `actions/checkout@v6`, `actions/download-artifact@v8`, `actions/setup-python@v6` already current.
 - CI test matrix extended from Ubuntu-only to `ubuntu-latest` + `macos-latest` + `windows-latest` across Python 3.10–3.13.
 - `.gitignore`: added `.claude/scheduled_tasks.lock` and jellycell cache manifest paths.

@@ -2349,11 +2349,11 @@ wheels = [
 
 [[package]]
 name = "nyc-geo-toolkit"
-version = "0.1.5"
+version = "0.3.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/14/3c/f3d5d85c75e3bd663eb64a7744fe6d4e4aacef56188031e6d5b80d6421c4/nyc_geo_toolkit-0.1.5.tar.gz", hash = "sha256:3b8036a750d3adb2615f430f9849fdf4a33e44ec207af30207aee04a623fbbbe", size = 8658910, upload-time = "2026-04-03T16:34:07.99Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/21/6d/9769c73c3255ce78e54367558a4c78d1f317c679f86260db4395fc1a1759/nyc_geo_toolkit-0.3.0.tar.gz", hash = "sha256:103a96975bbb9e73e8679b5a020ee15810bdf20e83276bfc5d0caf8b5e5da814", size = 11557524, upload-time = "2026-04-19T22:33:36.961Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/7f/e6/fa61d06ec102f09618bd9260f45b9380b1198418db3886e69981abf8de88/nyc_geo_toolkit-0.1.5-py3-none-any.whl", hash = "sha256:8038ae6e412c3e019b7ed591ec1908d8ad0b35fb72b082e0a9c2fa69525d002c", size = 8549097, upload-time = "2026-04-03T16:34:05.574Z" },
+    { url = "https://files.pythonhosted.org/packages/02/b2/25e40c383dd0fd1e70aad95b12264f9cd6fbb5b2535f6abdc0e6da6f9a5b/nyc_geo_toolkit-0.3.0-py3-none-any.whl", hash = "sha256:1ba543bbfc2e97997c8a73b1853ea8827581047eb1ff81cfd9aeed1f8b824ee2", size = 10545685, upload-time = "2026-04-19T22:33:33.236Z" },
 ]
 
 [[package]]
@@ -4423,7 +4423,7 @@ requires-dist = [
     { name = "matplotlib", marker = "extra == 'plotting'", specifier = ">=3.10" },
     { name = "networkx", marker = "extra == 'all'", specifier = ">=3.4.2" },
     { name = "networkx", marker = "extra == 'network'", specifier = ">=3.4.2" },
-    { name = "nyc-geo-toolkit", specifier = ">=0.1.5" },
+    { name = "nyc-geo-toolkit", specifier = ">=0.3.0,<0.4" },
     { name = "osmnx", marker = "extra == 'all'", specifier = ">=2.0.6" },
     { name = "osmnx", marker = "extra == 'network'", specifier = ">=2.0.6" },
     { name = "pandas", marker = "extra == 'all'", specifier = ">=2.2" },

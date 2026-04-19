@@ -179,7 +179,7 @@ def test_write_engine_results_json_creates_missing_directory(tmp_path: Path) -> 
     assert (nested_dir / "spatial_results.json").is_file()
 
 
-def test_emit_findings_tearsheet_requires_factor_factory() -> None:
+def test_emit_findings_tearsheet_requires_factor_factory(tmp_path: Path) -> None:
     """Skip the tearsheet test if factor-factory is not installed."""
     pytest.importorskip("factor_factory.jellycell.tearsheets")
     pytest.importorskip("jellycell")
@@ -187,9 +187,10 @@ def test_emit_findings_tearsheet_requires_factor_factory() -> None:
     # With both extras installed, the function should at minimum fail with a
     # factor-factory-native error (e.g. template not found, invalid project)
     # rather than our shim ImportError. Anything else — e.g. success — is also
-    # fine; we just confirm the plumbing reaches factor-factory.
-    project = Path(__file__).resolve().parent / "data" / "reporting-empty-project"
-    project.mkdir(parents=True, exist_ok=True)
+    # fine; we just confirm the plumbing reaches factor-factory. Using
+    # ``tmp_path`` keeps every run's project dir isolated + auto-cleaned.
+    project = tmp_path / "reporting-empty-project"
+    project.mkdir(parents=True)
 
     try:
         reporting.emit_findings_tearsheet(project, overwrite=True)
