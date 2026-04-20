@@ -27,7 +27,9 @@ you produce a punch list.
    footers point at the right tag range.
 3. **pyproject metadata.** `name`, `authors`, `requires-python`, `license`,
    `classifiers` intact. Optional extras (`[factor-factory]`, `[tearsheets]`,
-   `[all]`) present and consistent.
+   `[all]`) present and consistent. `nyc-geo-toolkit` pinned `>=0.3.0,<0.4`
+   (Session 1 baseline); `factor-factory` + `jellycell` gated behind
+   `; python_version >= '3.12'` env markers.
 4. **CI state.** `gh run list --branch <branch> --limit 5` — last CI run is
    green across ubuntu/macos/windows × py3.10-3.13.
 5. **Docs build.** `make ci-docs` completes without warnings.

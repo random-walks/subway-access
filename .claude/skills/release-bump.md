@@ -36,8 +36,10 @@ Is the diff a bug fix, docs edit, internal refactor, dep bump, test addition, CI
   `[tearsheets]`). Removing an extra is major.
 - **The `subway_access.factors` API is public** (re-exported from
   `subway_access`). Any break is major.
-- **The `subway_access.reporting.jellycell_bridge` API was added in v0.5.0 and
-  is public.** Breaking it is major.
+- **The `subway_access.reporting` API was added in v0.5.0 and is public** (the
+  `_jellycell_bridge` module that backs it is private — touch it freely, but
+  don't break the re-exported symbols in `subway_access.reporting.__all__`). Any
+  break to those symbols is major.
 
 ## CHANGELOG entry shape
 

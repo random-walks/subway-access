@@ -240,6 +240,79 @@ Step 11 (`run_engine_audit(...)`) and the recipe is in
 The appendix it produces is documented in
 [CASESTUDY.md Appendix D](https://github.com/random-walks/subway-access/tree/main/examples/accessibility-change-over-time/CASESTUDY.md#appendix-d-engine-audit-factor-factory-cross-check).
 
+## 6. Using factor-factory without jellycell
+
+Every piece above is modular. If you want the factor-factory engine fits but
+don't need the rendered tearsheet (for example, you're feeding the estimates
+into your own reporting tool, or you just want the numbers in a notebook),
+install only the `[factor-factory]` extra and skip `[tearsheets]`:
+
+```bash
+pip install "subway-access[factor-factory]"
+```
+
+Then fit the engines normally. Skip the tearsheet step:
+
+```python
+from factor_factory.engines import did, rdd
+from subway_access.reporting import write_engine_results_json
+
+did_results = did.estimate(
+    ff_panel, methods=("twfe", "sa"), outcome="gap_score", treatment="treatment"
+)
+
+rdd_results = rdd.estimate(
+    ff_panel,
+    methods=("rd_robust",),
+    outcome="gap_score",
+    running_variable="distance_to_nearest_accessible_station",
+    cutoff=800.0,
+)
+
+# Optional: persist for other tooling. `write_engine_results_json` does
+# NOT require jellycell — it's pure stdlib JSON + a trailing newline.
+write_engine_results_json(did_results, artifacts_dir=Path("artifacts"), family="did")
+write_engine_results_json(rdd_results, artifacts_dir=Path("artifacts"), family="rdd")
+
+# Or skip the serialization entirely and use the results directly:
+for r in did_results:
+    print(f"{r.method}: ATT = {r.att:.4f}, SE = {r.se:.4f}")
+```
+
+What each surface actually requires:
+
+| Call                                                                                   |     Requires `[factor-factory]`      |     Requires `[tearsheets]`     |
+| :------------------------------------------------------------------------------------- | :----------------------------------: | :-----------------------------: |
+| `did.estimate(...)`, `rdd.estimate(...)`, `scm.estimate(...)`, `spatial.estimate(...)` |                  ✓                   |                —                |
+| `write_engine_results_json(...)`                                                       | — (pure stdlib JSON; no runtime dep) |                —                |
+| `require_factor_factory()`                                                             |   raises `ImportError` if missing    |                —                |
+| `require_jellycell()`                                                                  |                  —                   | raises `ImportError` if missing |
+| `emit_findings_tearsheet(...)`                                                         |     ✓ (for the template engine)      |      ✓ (for the renderer)       |
+
+`subway_access.reporting` splits cleanly: the serialization helper works without
+jellycell, the tearsheet renderer requires it. Users who want the numbers
+without a rendered manuscript can stay one extra lighter.
+
+### Pattern: light audit → JSON only
+
+A common middle-ground is: fit the engines, dump the results JSON, and stop.
+Downstream readers (notebooks, CI artifact archives, custom dashboards) consume
+the JSON. Example layout:
+
+```
+my-analysis/
+├── pyproject.toml        # deps = ["subway-access[factor-factory]"]
+├── main.py               # fits engines, writes artifacts/*.json
+└── artifacts/
+    ├── did_results.json
+    └── rdd_results.json
+```
+
+No `manuscripts/` directory, no jellycell dependency. The JSON shape is the same
+one the jellycell `findings.md.j2` template consumes, so a downstream consumer
+can always render a tearsheet later by installing `jellycell` and pointing
+`emit_findings_tearsheet` at the project dir.
+
 ## 6. See also
 
 - [`subway_access.reporting` API](api.md#reporting) — the lazy-import bridge.

@@ -41,6 +41,22 @@ who only want accessibility scoring. Only the engine-audit appendix and the
    `rdd.estimate(panel, methods=("rd_robust",))` with `rdrobust` not installed
    raises `KeyError: "Unknown engine 'rd_robust'. Available: []"`. Check
    `rdd.registry.available()` if you want a crisp error.
+7. **Python >= 3.12 gate.** `factor-factory v1.0.2` + `jellycell` require Python
+   3.12+. In `pyproject.toml` the `[factor-factory]` and `[tearsheets]` extras
+   are env-markered (`; python_version >= '3.12'`) so subway-access still
+   installs cleanly on 3.10 / 3.11 — users on those versions just don't get the
+   engine-audit appendix.
+8. **Engine-specific `period_kind` constraints.** Sun-Abraham (`did.sa`) and
+   Callaway-Sant'Anna (`did.cs`) reject `period_kind="float"` and `"ordinal"`.
+   Integer or timestamp only. The case-study panel uses `period_kind="integer"`
+   for ACS vintage years.
+9. **Panel columns for spatial engines.** `spatial.morans_i` needs both
+   `latitude` and `longitude` as real columns on `panel.df`. Merging lat/lon via
+   `Panel`'s `record_view` is not enough; the spatial engine reads from the core
+   DataFrame.
+10. **`write_engine_results_json` emits a trailing newline** so pre-commit's
+    `end-of-file-fixer` is happy when the JSON is committed alongside a
+    jellycell-backed example. A contract test guards this.
 
 ## `subway_access.reporting.jellycell_bridge`
 

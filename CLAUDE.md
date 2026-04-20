@@ -1,7 +1,10 @@
 # CLAUDE.md
 
-Dense one-pager for agents working in this repo. The broader human-oriented
-contributor guide is [`CONTRIBUTING.md`](CONTRIBUTING.md) (which itself wraps
+Claude-Code-specific conventions for this repo. The canonical cross-agent guide
+is [`AGENTS.md`](AGENTS.md) (AGENTS.md spec format, read natively by Cursor,
+Codex, Copilot, Aider, Zed, Warp, Windsurf, Gemini CLI); this file layers
+Claude-Code-specific conventions on top. The broader human-oriented contributor
+guide is [`CONTRIBUTING.md`](CONTRIBUTING.md) (which itself wraps
 [`docs/contributing.md`](docs/contributing.md)).
 
 ## What this library does
@@ -79,8 +82,9 @@ make ci            # full local CI-equivalent sequence with summary
 
 - `/bump [patch|minor|major]` — roll CHANGELOG, stage
 - `/release-check` — run `make ci` + case-study smoke + release-auditor
-- `/run-case-study [--with-factor-factory]` — re-run the accessibility case
-  study against cached data
+- `/run-case-study [--skip-engine-audit]` — re-run the accessibility case study
+  against cached data; Step 11 engine-audit appendix runs automatically when
+  `[factor-factory,tearsheets]` are installed unless explicitly skipped
 
 ## Agents (`.claude/agents/`)
 
