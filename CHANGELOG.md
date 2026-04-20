@@ -43,6 +43,35 @@ The authoritative release notes are also published on
   full case-study machinery. Ships with its `artifacts/rdd_results.json` +
   `manuscripts/FINDINGS.md` committed so GitHub renders the rendered tearsheet
   inline and the jellycell site can pick it up with zero setup.
+- Committed engine-audit output for the accessibility case study at
+  `examples/accessibility-change-over-time/engine-audit/` (`artifacts/*.json`
+  for each engine family plus the rendered `manuscripts/FINDINGS.md` tearsheet).
+  Same jellycell-rendering convenience as the walkthrough. April 2026 cache
+  readings: `did.twfe` and `did.sa` both return ATT ≈ 0 (honest diagnosis that
+  `gap_score` has no within-unit variation — matches the Section 5.3 "panel
+  lacks an outcome variable" caveat); `rdd.rd_robust` returns 0.0841 ≈
+  mean(need_score) (specification check passes); `spatial.morans_i` under KNN
+  (k=5) returns I = 0.4475 (directionally consistent with the primary I = 0.2271
+  under 2 km distance-threshold).
+- `examples/accessibility-change-over-time/reports/supplementary/upgrade-provenance.csv`
+  — per-station audit of the 157 ADA-accessible stations' upgrade-year
+  provenance. 101 rows tagged `press_release_sourced`, 56 tagged
+  `hash_fallback`, balance `mta_ada_status` (non-accessible stations with
+  `upgrade_year=None`). Columns: `station_id`, `station_name`, `borough`,
+  `upgrade_year`, `upgrade_source`. Filter on
+  `upgrade_source == "press_release_sourced"` to reconstruct the sourced-only
+  subset for a robustness DiD spec.
+- `build_upgrade_timeline(..., known_upgrade_sources=...)` — new optional kwarg
+  on `subway_access.temporal.build_upgrade_timeline` that lets callers stamp
+  per-station `upgrade_source` tags on each resulting `StationUpgradeRecord`.
+  Backward-compatible; test in `tests/test_temporal.py`.
+- Top-level `AGENTS.md` — canonical agent guide in the AGENTS.md spec format
+  (Cursor, Codex, Copilot, Aider, Zed, Warp, Windsurf, Gemini CLI). `CLAUDE.md`
+  now layers Claude-Code-specific conventions on top.
+- `docs/factor-factory-integration.md` §6 "Using factor-factory without
+  jellycell" — shows the light-audit path that installs only `[factor-factory]`,
+  serializes engine results to JSON, and skips tearsheet rendering. Includes an
+  adapter-to-extras mapping table.
 - Claude Code infrastructure:
   - `.claude/launch.json`, `.claude/settings.local.json` (extended allowlist).
   - `.claude/agents/release-auditor.md`,
@@ -89,7 +118,23 @@ The authoritative release notes are also published on
   spatial-weight specifications (2 km distance threshold vs KNN(k=5)) and serve
   complementary purposes: the hand-rolled fit drives the primary Section 4.8
   numbers (_I_ = .2271); the factor-factory fit is registry parity in Appendix
-  D.
+  D. Replacing the hand-rolled version with the factor-factory KNN fit would
+  change the headline _I_ to .4475 and require re-narrating Section 4.8;
+  coexistence was chosen to preserve the primary research numbers while still
+  surfacing registry parity.
+- CASESTUDY.md fetch-date references updated from "April 9, 2026" to "April 5,
+  2026" to match the cache snapshot that generated the current committed
+  reports. All scientific numbers (493 stations, 157 ADA, OLS R² = .202, Moran's
+  _I_ = .2271, gap population 4,717,140, etc.) are identical.
+- Regenerated tracked figures under `examples/*/reports/figures/` via
+  `scripts/render_tracked_example_figures.py` — 7 figures refreshed
+  (borough-gap-analysis / network-access-comparison /
+  outage-reliability-report). No underlying data changed; MPL font-rendering +
+  metadata timestamp refresh only.
+- `.claude/agents/case-study-reviewer.md` invariants expanded from 7 to 10:
+  added the upgrade-provenance audit path, the KNN-vs-2-km Moran's _I_ spec
+  split, the committed cache-date lock, and the committed engine-audit artifact
+  requirements.
 
 ### Fixed
 
@@ -107,7 +152,22 @@ The authoritative release notes are also published on
   which files to ship inside the wheel".
 - `emit_findings_tearsheet` in the walkthrough overrides the `project` template
   variable so the committed `FINDINGS.md` header is stable across machines
-  instead of leaking the generator's absolute filesystem path.
+  instead of leaking the generator's absolute filesystem path. The case-study's
+  Step 11 engine-audit run now uses the same override pattern.
+- `examples/accessibility-change-over-time/pyproject.toml` — same hatchling
+  build-backend removal the walkthrough got. Running
+  `uv run python main.py --skip-download` from the example directory now works
+  out of the box.
+- `examples/accessibility-change-over-time/.gitignore` — `/cache` (no trailing
+  slash) so a symlink-to-dir (e.g. `ln -s ../about-the-data/cache cache` for
+  rerunning against a shared cache) is properly ignored.
+- `.claude/agents/case-study-reviewer.md` invariants expanded: added the
+  upgrade-provenance audit path, the KNN-vs-2-km Moran's _I_ spec split, the
+  committed cache-date lock, and the committed engine-audit artifact
+  requirements. Now 10 invariants (was 7).
+- Multiple prose-wrap / ambiguous-unicode fixes flagged by `ruff`'s
+  RUF002/RUF003 rules in the new case-study comments + docstrings (en dashes →
+  hyphen-minus where comments/docstrings describe year ranges).
 
 ## Prior releases
 

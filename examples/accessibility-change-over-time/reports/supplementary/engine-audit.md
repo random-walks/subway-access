@@ -40,4 +40,3 @@ Re-runs Global Moran's *I* via the factor-factory spatial registry for registry-
 - `engine-audit/artifacts/scm_results.json`
 - `engine-audit/artifacts/spatial_results.json`
 - `engine-audit/manuscripts/FINDINGS.md` (rendered tearsheet)
-
