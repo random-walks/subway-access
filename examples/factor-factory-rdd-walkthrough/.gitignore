@@ -1,0 +1,10 @@
+# factor-factory-rdd-walkthrough — jellycell-backed recipe.
+# Committed:   artifacts/  (rdd_results.json consumed by the findings template)
+# Committed:   manuscripts/  (rendered FINDINGS.md tearsheet — the whole deliverable)
+# Ignored:     cache/, data/, uv.lock + .venv/ (user-local).
+.venv/
+__pycache__/
+*.py[cod]
+uv.lock
+/cache/
+/data/

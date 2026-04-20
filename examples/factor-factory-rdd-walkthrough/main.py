@@ -47,17 +47,19 @@ def _require_jellycell() -> None:
 
 
 def build_synthetic_panel():
-    """Return a factor-factory ``Panel`` of 200 tracts × 3 periods.
+    """Return a factor-factory ``Panel`` of 400 tracts × 3 periods.
 
     The panel encodes a sharp discontinuity at the 800 m cutoff:
 
     - Tracts with ``distance_to_nearest_accessible_station < 800`` are
-      "covered" and have ``gap_score = 0``.
-    - Tracts with ``distance >= 800`` are "uncovered" and have a constant
-      ``gap_score = 0.10`` (stand-in for a per-tract need score).
+      "covered" and have ``gap_score ≈ 0`` (plus Gaussian noise).
+    - Tracts with ``distance >= 800`` are "uncovered" and have a
+      ``gap_score ≈ 0.10`` (plus Gaussian noise — stand-in for a per-tract
+      need score).
 
-    In a real-data setting, the outcome varies per tract; here we use a
-    constant so the RDD fit detects the mechanical cutoff cleanly.
+    In a real-data setting, the outcome varies per tract; here we inject
+    small Gaussian noise so ``rdrobust``'s bandwidth selector can estimate
+    a curvature (``rdrobust`` rejects perfect step functions as singular).
     """
     import pandas as pd
     from factor_factory.tidy import (
@@ -68,23 +70,28 @@ def build_synthetic_panel():
     )
 
     rng = np.random.default_rng(42)
-    n_units = 200
+    n_units = 400
     periods = (2021, 2022, 2023)
 
     distances = rng.uniform(0.0, 1600.0, size=n_units)
     unit_ids = [f"synthetic-tract-{i:04d}" for i in range(n_units)]
 
-    records = [
-        {
-            "unit_id": unit_id,
-            "period": period,
-            "gap_score": 0.0 if distance < 800.0 else 0.10,
-            "distance_to_nearest_accessible_station": float(distance),
-            "treatment": 1 if distance < 800.0 else 0,
-        }
-        for unit_id, distance in zip(unit_ids, distances, strict=True)
-        for period in periods
-    ]
+    records = []
+    for unit_id, distance in zip(unit_ids, distances, strict=True):
+        base = 0.0 if distance < 800.0 else 0.10
+        for period in periods:
+            # Small Gaussian noise keeps rdrobust's regression matrices
+            # positive-definite; the sharp 0 / 0.10 contrast still dominates.
+            noise = float(rng.normal(0.0, 0.01))
+            records.append(
+                {
+                    "unit_id": unit_id,
+                    "period": period,
+                    "gap_score": base + noise,
+                    "distance_to_nearest_accessible_station": float(distance),
+                    "treatment": 1 if distance < 800.0 else 0,
+                }
+            )
 
     df = pd.DataFrame(records).set_index(["unit_id", "period"]).sort_index()
 
@@ -144,7 +151,7 @@ def main() -> None:
         write_engine_results_json,
     )
 
-    print("Building synthetic panel (200 tracts × 3 periods)...")
+    print("Building synthetic panel (400 tracts x 3 periods)...")
     panel = build_synthetic_panel()
     print(
         f"  {len(panel.unit_ids):,} units, {len(panel.periods)} periods, "
@@ -179,7 +186,17 @@ def main() -> None:
 
     print("Rendering FINDINGS.md tearsheet...")
     try:
-        tearsheet = emit_findings_tearsheet(ROOT, overwrite=True)
+        tearsheet = emit_findings_tearsheet(
+            ROOT,
+            overwrite=True,
+            # Override the ``project`` template variable so the committed
+            # FINDINGS.md header doesn't leak the generator's absolute path.
+            # This keeps the file reproducible across machines + readable on
+            # GitHub.
+            template_overrides={
+                "project": "subway-access / factor-factory-rdd-walkthrough"
+            },
+        )
         print(f"  Wrote {tearsheet.relative_to(ROOT)}")
     except Exception as exc:  # noqa: BLE001 — jellycell-side errors are informational
         print(f"  Skipped tearsheet render: {exc}")

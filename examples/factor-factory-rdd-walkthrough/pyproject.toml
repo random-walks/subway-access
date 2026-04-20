@@ -1,6 +1,6 @@
 [project]
-name = "factor-factory-rdd-walkthrough"
-version = "0.1.0"
+name = "subway-access-factor-factory-rdd-walkthrough"
+version = "0.0.0"
 description = "Minimal walkthrough: regression discontinuity at the 800 m ADA walk-radius threshold using factor-factory engines."
 # factor-factory v1.0.2 + jellycell require Python >= 3.12; this example will
 # not resolve on 3.10 / 3.11 because factor-factory is its whole point.
@@ -9,6 +9,5 @@ dependencies = [
   "subway-access[all,factor-factory,tearsheets]",
 ]
 
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+[tool.uv.sources]
+subway-access = { path = "../..", editable = true }
