@@ -4423,7 +4423,7 @@ requires-dist = [
     { name = "matplotlib", marker = "extra == 'plotting'", specifier = ">=3.10" },
     { name = "networkx", marker = "extra == 'all'", specifier = ">=3.4.2" },
     { name = "networkx", marker = "extra == 'network'", specifier = ">=3.4.2" },
-    { name = "nyc-geo-toolkit", specifier = ">=0.3.0,<0.4" },
+    { name = "nyc-geo-toolkit", specifier = ">=0.3,<0.5" },
     { name = "osmnx", marker = "extra == 'all'", specifier = ">=2.0.6" },
     { name = "osmnx", marker = "extra == 'network'", specifier = ">=2.0.6" },
     { name = "pandas", marker = "extra == 'all'", specifier = ">=2.2" },

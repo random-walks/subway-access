@@ -35,6 +35,30 @@ The authoritative release notes are also published on
 
 ### Security
 
+## [0.5.1] — 2026-04-20
+
+### Changed
+
+- Widened the `nyc-geo-toolkit` pin from `>=0.3.0,<0.4` to `>=0.3,<0.5` so
+  downstream consumers can install `subway-access` alongside
+  [nyc-geo-toolkit v0.4.0](https://github.com/random-walks/nyc-geo-toolkit/releases/tag/v0.4.0)
+  ([#18](https://github.com/random-walks/subway-access/issues/18)). This mirrors
+  [nyc311 v1.0.2](https://github.com/random-walks/nyc311/releases/tag/v1.0.2),
+  which shipped the same widening on the same day, and unblocks the
+  `blaise-website` `packages/python-showcase/` package from resolving both
+  libraries in a single environment. Compat-only — `subway-access` does not use
+  the new 0.4 helpers (e.g. `centroids_from_boundaries`) yet.
+
+### Notes
+
+- Jellycell [v1.4.0](https://github.com/random-walks/jellycell/releases/tag/v1.4.0)
+  landed the same week with a new top-level `jellycell.tearsheets` Python API
+  (`jt.findings`, `jt.methodology`, `jt.audit`). Our existing
+  `jellycell>=1.3.5,<2` pin already allows v1.4.x — no edit needed. Migrating
+  `subway_access.reporting._jellycell_bridge` off `factor_factory.jellycell.*`
+  onto the native `jellycell.tearsheets` API is a follow-up enhancement for
+  v0.6, not a v0.5.x patch.
+
 ## [0.5.0] — 2026-04-19
 
 ### Added
