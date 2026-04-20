@@ -1,6 +1,6 @@
 # Correlation Analysis
 
-*Auto-generated: April 11, 2026*
+*Auto-generated: April 20, 2026*
 
 This supplementary report provides full correlation matrices, multicollinearity diagnostics, and an OLS regression of gap score on demographic predictors.
 

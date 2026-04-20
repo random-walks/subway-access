@@ -104,6 +104,60 @@ class TestBuildUpgradeTimeline:
         assert len(timeline.records) == 1
         assert timeline.records[0].upgrade_year == 2019
 
+    def test_per_station_upgrade_source_distinguishes_provenance(self) -> None:
+        """``known_upgrade_sources`` lets callers tag each record's provenance.
+
+        This is the schema the accessibility case study uses to separate the
+        101 press-release-sourced upgrade years from the 56 hash-fallback
+        placeholders in a single ``UpgradeTimeline``.
+        """
+        stations = StationDataset(
+            stations=(
+                Station(
+                    station_id="S1",
+                    name="Station A (sourced)",
+                    borough="Manhattan",
+                    latitude=40.750,
+                    longitude=-73.990,
+                    ada_status="accessible",
+                ),
+                Station(
+                    station_id="S2",
+                    name="Station B (fallback)",
+                    borough="Brooklyn",
+                    latitude=40.700,
+                    longitude=-73.950,
+                    ada_status="accessible",
+                ),
+                Station(
+                    station_id="S3",
+                    name="Station C (no tag)",
+                    borough="Queens",
+                    latitude=40.720,
+                    longitude=-73.900,
+                    ada_status="accessible",
+                ),
+            )
+        )
+        timeline = build_upgrade_timeline(
+            stations,
+            known_upgrades={"S1": 2019, "S2": 2020, "S3": 2021},
+            known_upgrade_sources={
+                "S1": "press_release_sourced",
+                "S2": "hash_fallback",
+                # S3 intentionally absent — falls back to the `source=` default.
+            },
+            source="mta_ada_status",
+        )
+        by_id = {r.station_id: r for r in timeline.records}
+        assert by_id["S1"].upgrade_source == "press_release_sourced"
+        assert by_id["S2"].upgrade_source == "hash_fallback"
+        assert by_id["S3"].upgrade_source == "mta_ada_status"
+        # The year columns are unchanged by the provenance split.
+        assert by_id["S1"].upgrade_year == 2019
+        assert by_id["S2"].upgrade_year == 2020
+        assert by_id["S3"].upgrade_year == 2021
+
 
 class TestBuildPanelDataset:
     def test_basic_panel_construction(self) -> None:

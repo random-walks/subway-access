@@ -27,6 +27,7 @@ def build_upgrade_timeline(
     station_data: StationDataset,
     *,
     known_upgrades: dict[str, int] | None = None,
+    known_upgrade_sources: dict[str, str] | None = None,
     source: str = "mta_ada_status",
 ) -> UpgradeTimeline:
     """Build an upgrade timeline from station dataset and known upgrade years.
@@ -39,7 +40,14 @@ def build_upgrade_timeline(
         station_data: Current station dataset with ADA status.
         known_upgrades: Optional mapping of station_id -> upgrade year.
             Overrides or supplements the built-in database.
-        source: Label for the data source.
+        known_upgrade_sources: Optional mapping of station_id -> per-station
+            provenance tag. When a station id appears here, the tag is used
+            as the record's ``upgrade_source`` — letting callers distinguish
+            e.g. ``"press_release_sourced"`` stations from
+            ``"hash_fallback"`` stations in the same timeline. Stations
+            without an explicit entry fall back to the ``source`` kwarg.
+        source: Default label used for the data source when no per-station
+            tag is supplied via ``known_upgrade_sources``.
 
     Returns:
         An UpgradeTimeline with one record per station.
@@ -54,6 +62,8 @@ def build_upgrade_timeline(
     if known_upgrades:
         upgrades.update(known_upgrades)
 
+    per_station_sources = known_upgrade_sources or {}
+
     records: list[StationUpgradeRecord] = []
     for station in station_data.stations:
         upgrade_year: int | None = upgrades.get(station.station_id)
@@ -65,7 +75,7 @@ def build_upgrade_timeline(
                 latitude=station.latitude,
                 longitude=station.longitude,
                 upgrade_year=upgrade_year,
-                upgrade_source=source,
+                upgrade_source=per_station_sources.get(station.station_id, source),
             )
         )
 

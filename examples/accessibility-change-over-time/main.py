@@ -296,31 +296,63 @@ def build_panel(snapshots, years, minutes):
         for st in s.stations.stations:
             locs[st.station_id] = (st.latitude, st.longitude)
             all_st.append(st)
-    # Load real upgrade years from enhanced seeds (100 stations with sourced dates).
+    # The upgrade timeline is assembled from two schema-distinct sources so
+    # downstream consumers can audit which station dates are primary research
+    # data vs deterministic fallbacks.
+    #
+    # 1. ``sourced_years``: press-release / Capital Program / news-sourced
+    #    completion years (101 stations as of April 2026), loaded from
+    #    ``seeds/enhanced/upgrade_templates/*.csv``. These drive Sections
+    #    4.1-4.8 of the paper and are treated as the primary research data.
+    # 2. ``fallback_years``: deterministic hash-based placeholders for the
+    #    ~56 accessible stations without publicly documented completion
+    #    dates (primarily Key Station Program stations, 1994-2020). The
+    #    hash uses ``hashlib.md5`` of the station_id so the assignment is
+    #    reproducible across runs but does not reflect real completion
+    #    timing. See ``reports/supplementary/upgrade-provenance.csv`` for
+    #    the per-station audit.
     seeds_dir = ROOT.parents[1] / "seeds" / "enhanced" / "upgrade_templates"
-    known = load_known_upgrades_from_dir(seeds_dir) if seeds_dir.is_dir() else {}
-    real_count = len(known)
-    # Fill remaining accessible stations (no sourced date) with hash fallback.
+    sourced_years: dict[str, int] = (
+        load_known_upgrades_from_dir(seeds_dir) if seeds_dir.is_dir() else {}
+    )
+    fallback_years: dict[str, int] = {}
     lo, hi = min(years), max(years)
     span = hi - lo + 1
-    synth_count = 0
     for s in all_st:
-        if s.ada_status == "accessible" and s.station_id not in known:
+        if s.ada_status == "accessible" and s.station_id not in sourced_years:
             h = int(hashlib.md5(s.station_id.encode()).hexdigest(), 16)
-            known[s.station_id] = lo + (h % span)
-            synth_count += 1
+            fallback_years[s.station_id] = lo + (h % span)
+
+    # Merge years; build an explicit per-station provenance map so the
+    # UpgradeTimeline records carry the correct ``upgrade_source`` tag.
+    known = {**sourced_years, **fallback_years}
+    upgrade_sources: dict[str, str] = {}
+    upgrade_sources.update(dict.fromkeys(sourced_years, "press_release_sourced"))
+    upgrade_sources.update(dict.fromkeys(fallback_years, "hash_fallback"))
+
     print(
-        f"  Upgrade timeline: {real_count} sourced + {synth_count} synthetic = {len(known)} total"
+        f"  Upgrade timeline: {len(sourced_years)} press-release-sourced "
+        f"+ {len(fallback_years)} hash-fallback = {len(known)} total"
     )
     recs = []
     seen = set()
     for s in snapshots.values():
-        tl = build_upgrade_timeline(s.stations, known_upgrades=known)
+        tl = build_upgrade_timeline(
+            s.stations,
+            known_upgrades=known,
+            known_upgrade_sources=upgrade_sources,
+        )
         for r in tl.records:
             if r.station_id not in seen:
                 recs.append(r)
                 seen.add(r.station_id)
     timeline = UpgradeTimeline(records=tuple(recs))
+
+    # Emit a per-station provenance audit CSV so readers can filter the
+    # panel to sourced-only subsets (e.g. for the robustness-only DiD spec
+    # referenced in CASESTUDY §3.5 "Data provenance caveat"). Committed
+    # alongside the other supplementary reports.
+    _write_upgrade_provenance_csv(timeline)
     vint = {}
     for y in years:
         yt = {}
@@ -2076,6 +2108,59 @@ def write_report(
 # ---------------------------------------------------------------------------
 
 
+def _write_upgrade_provenance_csv(timeline):
+    """Write a committed CSV audit of each accessible station's upgrade provenance.
+
+    Columns: station_id, station_name, borough, upgrade_year, upgrade_source.
+    ``upgrade_source`` is one of:
+
+    - ``press_release_sourced`` — completion year traced to an MTA press
+      release, Capital Program record, or news article (primary research
+      data). These rows drive Sections 4.1-4.8 of CASESTUDY.md.
+    - ``hash_fallback`` — deterministic ``md5(station_id) mod span``
+      placeholder for accessible stations without a publicly documented
+      completion year (primarily Key Station Program stations,
+      1994-2020). Not real timing — use only for the relative-robustness
+      DiD spec discussed in CASESTUDY §3.5.
+    - ``mta_ada_status`` — default tag for non-accessible stations that
+      appear in the station dataset (``upgrade_year`` is ``None`` so they
+      sit in the control group across all periods).
+
+    Down-stream consumers can reconstruct the sourced-only subset with:
+
+    .. code-block:: python
+
+        sourced_only = [
+            r for r in timeline.records
+            if r.upgrade_source == "press_release_sourced"
+        ]
+    """
+    out_path = REPORTS_DIR / "supplementary" / "upgrade-provenance.csv"
+    _dir(out_path.parent)
+    with out_path.open("w", encoding="utf-8", newline="") as fh:
+        writer = csv.DictWriter(
+            fh,
+            fieldnames=[
+                "station_id",
+                "station_name",
+                "borough",
+                "upgrade_year",
+                "upgrade_source",
+            ],
+        )
+        writer.writeheader()
+        for r in sorted(timeline.records, key=lambda r: r.station_id):
+            writer.writerow(
+                {
+                    "station_id": r.station_id,
+                    "station_name": r.station_name,
+                    "borough": r.borough,
+                    "upgrade_year": "" if r.upgrade_year is None else r.upgrade_year,
+                    "upgrade_source": r.upgrade_source,
+                }
+            )
+
+
 # ---------------------------------------------------------------------------
 # Engine audit (optional, factor-factory + jellycell)
 # ---------------------------------------------------------------------------
@@ -2325,6 +2410,13 @@ def _write_engine_summary_markdown(all_results, out_path, project_dir):
     """Write a compact summary table for the CASESTUDY.md engine-audit appendix."""
     from subway_access.reporting import write_engine_results_json  # noqa: F401
 
+    # Keep the committed summary machine-independent — display a project-relative
+    # path rather than the generator's absolute filesystem path.
+    try:
+        project_display = project_dir.relative_to(ROOT)
+    except ValueError:
+        project_display = Path(project_dir.name)
+
     lines = [
         "# Engine audit — factor-factory results",
         "",
@@ -2338,7 +2430,7 @@ def _write_engine_summary_markdown(all_results, out_path, project_dir):
             "[`FINDINGS.md`](../engine-audit/manuscripts/FINDINGS.md)."
         ),
         "",
-        f"Project dir: `{project_dir}`",
+        f"Project dir: `{project_display}` (relative to repo root).",
         "",
         "## Results",
         "",
@@ -2448,11 +2540,11 @@ def _write_engine_summary_markdown(all_results, out_path, project_dir):
 
     lines.append("## Artifacts")
     lines.append("")
-    lines.append(f"- `{project_dir}/artifacts/did_results.json`")
-    lines.append(f"- `{project_dir}/artifacts/rdd_results.json`")
-    lines.append(f"- `{project_dir}/artifacts/scm_results.json`")
-    lines.append(f"- `{project_dir}/artifacts/spatial_results.json`")
-    lines.append(f"- `{project_dir}/manuscripts/FINDINGS.md` (rendered tearsheet)")
+    lines.append(f"- `{project_display}/artifacts/did_results.json`")
+    lines.append(f"- `{project_display}/artifacts/rdd_results.json`")
+    lines.append(f"- `{project_display}/artifacts/scm_results.json`")
+    lines.append(f"- `{project_display}/artifacts/spatial_results.json`")
+    lines.append(f"- `{project_display}/manuscripts/FINDINGS.md` (rendered tearsheet)")
     lines.append("")
 
     out_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -2574,7 +2666,17 @@ def run_engine_audit(panel, gdf, snapshots, args, project_dir):
 
     print("  Rendering FINDINGS.md tearsheet...")
     try:
-        tearsheet_path = emit_findings_tearsheet(project_dir, overwrite=True)
+        tearsheet_path = emit_findings_tearsheet(
+            project_dir,
+            overwrite=True,
+            # Override the ``project`` template variable so the committed
+            # FINDINGS.md header doesn't leak the generator's absolute path.
+            # Keeps the engine-audit manuscript reproducible across machines.
+            template_overrides={
+                "project": "subway-access / accessibility-change-over-time "
+                "(engine-audit appendix)"
+            },
+        )
         print(f"    {tearsheet_path}")
     except Exception as exc:  # noqa: BLE001 - template / jellycell errors are logged
         print(f"    [tearsheet] skipped: {exc}")
