@@ -5,7 +5,7 @@
 
 ## Project
 
-`subway-access / factor-factory-rdd-walkthrough` — generated 2026-04-20 00:09 UTC via factor-factory v1.0.2.
+`subway-access / factor-factory-rdd-walkthrough` — generated 2026-04-20 00:13 UTC via factor-factory v1.0.2.
 
 ## Headline numbers
 

@@ -133,8 +133,10 @@ def write_engine_results_json(
         ]
 
     output_path = artifacts_dir / f"{family}_results.json"
+    # Trailing newline keeps `end-of-file-fixer` (pre-commit) happy when the
+    # JSON is committed alongside a jellycell-backed example.
     output_path.write_text(
-        json.dumps({"results": records}, indent=2, default=str, sort_keys=True),
+        json.dumps({"results": records}, indent=2, default=str, sort_keys=True) + "\n",
         encoding="utf-8",
     )
     return output_path

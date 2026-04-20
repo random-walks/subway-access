@@ -166,6 +166,17 @@ def test_write_engine_results_json_from_iterable(tmp_path: Path) -> None:
     assert payload["results"][0]["method"] == "augmented"
 
 
+def test_write_engine_results_json_ends_with_trailing_newline(tmp_path: Path) -> None:
+    """Contract test: the file ends with ``\\n`` so end-of-file-fixer is happy."""
+    out = reporting.write_engine_results_json(
+        _FakeResult(method="rd_robust", estimate=0.05),
+        artifacts_dir=tmp_path / "artifacts",
+        family="rdd",
+    )
+    raw = out.read_text(encoding="utf-8")
+    assert raw.endswith("\n"), "write_engine_results_json must emit a trailing newline"
+
+
 def test_write_engine_results_json_creates_missing_directory(tmp_path: Path) -> None:
     nested_dir = tmp_path / "case-study" / "artifacts"
     assert not nested_dir.exists()
