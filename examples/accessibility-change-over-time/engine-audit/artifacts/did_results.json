@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "att": 9.232845146752707e-36,
+      "ci_95_lower": -1.1033740104023813e-19,
+      "ci_95_upper": 1.1033740104023813e-19,
+      "cohort_atts": null,
+      "cohort_ses": null,
+      "diagnostics": {
+        "r_squared": 0.0,
+        "r_squared_within": 0.0
+      },
+      "method": "twfe",
+      "n": 16219,
+      "p_value": 1.0,
+      "se": 5.629072302450054e-20
+    },
+    {
+      "att": 0.0,
+      "ci_95_lower": 0.0,
+      "ci_95_upper": 0.0,
+      "cohort_atts": null,
+      "cohort_ses": null,
+      "diagnostics": {
+        "aggregation": "sun_abraham_iw",
+        "control_group": "never_treated",
+        "est_method": "dr",
+        "n_event_times": 11,
+        "upstream": "differences.ATTgt event-study aggregation"
+      },
+      "method": "sa",
+      "n": 16219,
+      "p_value": 1.0,
+      "se": 0.0
+    }
+  ]
+}

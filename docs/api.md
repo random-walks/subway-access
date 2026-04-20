@@ -9,6 +9,8 @@ The supported public contract is now subpackage-first:
 - `subway_access.helpers`
 - `subway_access.export`
 - `subway_access.pipeline`
+- `subway_access.reporting` (optional; requires `[factor-factory]` or
+  `[tearsheets]`)
 - `subway_access.temporal`
 - `subway_access.cli`
 
@@ -50,6 +52,10 @@ The advanced network layer lives alongside the baseline analysis surfaces under
 ## Pipeline
 
 ::: subway_access.pipeline
+
+## Reporting
+
+::: subway_access.reporting
 
 ## Temporal
 

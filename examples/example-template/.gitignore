@@ -1,5 +1,14 @@
+# Bootstrap template — start with every transient path ignored. A new example
+# that produces a committed jellycell tearsheet should REMOVE the relevant
+# line(s) below (usually /artifacts/ and /manuscripts/) so the rendered
+# output can be committed for GitHub / jellycell-site pickup.
 .venv/
 __pycache__/
 *.py[cod]
-cache/
-artifacts/
+uv.lock
+/cache/
+/artifacts/
+/data/
+/manuscripts/
+/engine-audit/
+/reports/

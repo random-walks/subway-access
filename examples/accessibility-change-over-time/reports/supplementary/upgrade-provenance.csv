@@ -1,0 +1,494 @@
+station_id,station_name,borough,upgrade_year,upgrade_source
+1,Astoria-Ditmars Blvd,Queens,,mta_ada_status
+10,49 St,Manhattan,,mta_ada_status
+100,Hewes St,Brooklyn,,mta_ada_status
+101,Marcy Av,Brooklyn,2024,press_release_sourced
+102,Delancey St-Essex St,Manhattan,,mta_ada_status
+103,Bowery,Manhattan,,mta_ada_status
+104,Canal St,Manhattan,,mta_ada_status
+105,Chambers St,Manhattan,2022,hash_fallback
+106,Fulton St,Manhattan,2014,press_release_sourced
+107,Broad St,Manhattan,,mta_ada_status
+108,Middle Village-Metropolitan Av,Queens,2020,hash_fallback
+109,Fresh Pond Rd,Queens,,mta_ada_status
+11,Times Sq-42 St,Manhattan,2022,press_release_sourced
+110,Forest Av,Queens,,mta_ada_status
+111,Seneca Av,Queens,,mta_ada_status
+112,Myrtle-Wyckoff Avs,Brooklyn,2007,press_release_sourced
+113,Knickerbocker Av,Brooklyn,,mta_ada_status
+114,Central Av,Brooklyn,,mta_ada_status
+115,8 Av,Manhattan,2024,press_release_sourced
+116,6 Av,Manhattan,2024,press_release_sourced
+117,14 St-Union Sq,Manhattan,2021,hash_fallback
+118,3 Av,Manhattan,,mta_ada_status
+119,1 Av,Manhattan,2020,hash_fallback
+12,34 St-Herald Sq,Manhattan,2018,hash_fallback
+120,Bedford Av,Brooklyn,2020,press_release_sourced
+121,Lorimer St,Brooklyn,2023,press_release_sourced
+122,Graham Av,Brooklyn,,mta_ada_status
+123,Grand St,Brooklyn,2023,press_release_sourced
+124,Montrose Av,Brooklyn,,mta_ada_status
+125,Morgan Av,Brooklyn,,mta_ada_status
+126,Jefferson St,Brooklyn,,mta_ada_status
+127,DeKalb Av,Brooklyn,,mta_ada_status
+128,Myrtle-Wyckoff Avs,Brooklyn,2007,press_release_sourced
+129,Halsey St,Queens,,mta_ada_status
+13,28 St,Manhattan,,mta_ada_status
+130,Wilson Av,Brooklyn,,mta_ada_status
+131,Bushwick Av-Aberdeen St,Brooklyn,,mta_ada_status
+132,Broadway Junction,Brooklyn,,mta_ada_status
+133,Atlantic Av,Brooklyn,,mta_ada_status
+134,Sutter Av,Brooklyn,,mta_ada_status
+135,Livonia Av,Brooklyn,2020,press_release_sourced
+136,New Lots Av,Brooklyn,,mta_ada_status
+137,East 105 St,Brooklyn,,mta_ada_status
+138,Canarsie-Rockaway Pkwy,Brooklyn,1987,press_release_sourced
+139,Franklin Av,Brooklyn,1999,press_release_sourced
+14,23 St,Manhattan,,mta_ada_status
+141,Park Pl,Brooklyn,1999,press_release_sourced
+142,Botanic Garden,Brooklyn,,mta_ada_status
+143,Inwood-207 St,Manhattan,2020,hash_fallback
+144,Dyckman St,Manhattan,,mta_ada_status
+145,190 St,Manhattan,,mta_ada_status
+146,181 St,Manhattan,2023,press_release_sourced
+147,175 St,Manhattan,2020,hash_fallback
+148,168 St,Manhattan,2019,hash_fallback
+149,163 St-Amsterdam Av,Manhattan,,mta_ada_status
+15,14 St-Union Sq,Manhattan,2020,hash_fallback
+150,155 St,Manhattan,,mta_ada_status
+151,145 St,Manhattan,,mta_ada_status
+152,135 St,Manhattan,,mta_ada_status
+153,125 St,Manhattan,2023,hash_fallback
+154,116 St,Manhattan,,mta_ada_status
+155,Cathedral Pkwy (110 St),Manhattan,,mta_ada_status
+156,103 St,Manhattan,,mta_ada_status
+157,96 St,Manhattan,,mta_ada_status
+158,86 St,Manhattan,,mta_ada_status
+159,81 St-Museum of Natural History,Manhattan,,mta_ada_status
+16,8 St-NYU,Manhattan,,mta_ada_status
+160,72 St,Manhattan,,mta_ada_status
+161,59 St-Columbus Circle,Manhattan,2012,press_release_sourced
+162,50 St,Manhattan,,mta_ada_status
+163,42 St-Port Authority Bus Terminal,Manhattan,2020,hash_fallback
+164,34 St-Penn Station,Manhattan,2023,press_release_sourced
+165,23 St,Manhattan,,mta_ada_status
+166,14 St,Manhattan,2024,press_release_sourced
+167,W 4 St-Wash Sq,Manhattan,2021,hash_fallback
+168,Spring St,Manhattan,,mta_ada_status
+169,Canal St,Manhattan,,mta_ada_status
+17,Prince St,Manhattan,,mta_ada_status
+170,Chambers St,Manhattan,,mta_ada_status
+171,World Trade Center,Manhattan,2021,hash_fallback
+172,Fulton St,Manhattan,2014,press_release_sourced
+173,High St,Brooklyn,,mta_ada_status
+174,Jay St-MetroTech,Brooklyn,2010,press_release_sourced
+175,Hoyt-Schermerhorn Sts,Brooklyn,,mta_ada_status
+176,Lafayette Av,Brooklyn,,mta_ada_status
+177,Clinton-Washington Avs,Brooklyn,,mta_ada_status
+178,Franklin Av,Brooklyn,1999,press_release_sourced
+179,Nostrand Av,Brooklyn,,mta_ada_status
+18,Canal St,Manhattan,,mta_ada_status
+180,Kingston-Throop Avs,Brooklyn,,mta_ada_status
+181,Utica Av,Brooklyn,2014,press_release_sourced
+182,Ralph Av,Brooklyn,,mta_ada_status
+183,Rockaway Av,Brooklyn,,mta_ada_status
+184,Broadway Junction,Brooklyn,,mta_ada_status
+185,Liberty Av,Brooklyn,,mta_ada_status
+186,Van Siclen Av,Brooklyn,,mta_ada_status
+187,Shepherd Av,Brooklyn,,mta_ada_status
+188,Euclid Av,Brooklyn,2006,press_release_sourced
+189,Grant Av,Brooklyn,,mta_ada_status
+19,Canal St,Manhattan,,mta_ada_status
+190,80 St,Queens,,mta_ada_status
+191,88 St,Queens,,mta_ada_status
+192,Rockaway Blvd,Queens,,mta_ada_status
+193,104 St,Queens,,mta_ada_status
+194,111 St,Queens,,mta_ada_status
+195,Ozone Park-Lefferts Blvd,Queens,2019,hash_fallback
+196,Aqueduct Racetrack,Queens,2013,press_release_sourced
+197,Aqueduct-N Conduit Av,Queens,,mta_ada_status
+198,Howard Beach-JFK Airport,Queens,2020,hash_fallback
+199,Broad Channel,Queens,,mta_ada_status
+2,Astoria Blvd,Queens,2020,press_release_sourced
+20,City Hall,Manhattan,,mta_ada_status
+200,Beach 90 St,Queens,,mta_ada_status
+201,Beach 98 St,Queens,,mta_ada_status
+202,Beach 105 St,Queens,,mta_ada_status
+203,Rockaway Park-Beach 116 St,Queens,2017,hash_fallback
+204,Beach 67 St,Queens,2024,press_release_sourced
+205,Beach 60 St,Queens,,mta_ada_status
+206,Beach 44 St,Queens,,mta_ada_status
+207,Beach 36 St,Queens,,mta_ada_status
+208,Beach 25 St,Queens,,mta_ada_status
+209,Far Rockaway-Mott Av,Queens,2012,press_release_sourced
+21,Cortlandt St,Manhattan,2021,hash_fallback
+210,Norwood-205 St,Bronx,,mta_ada_status
+211,Bedford Park Blvd,Bronx,2021,hash_fallback
+212,Kingsbridge Rd,Bronx,2023,hash_fallback
+213,Fordham Rd,Bronx,,mta_ada_status
+214,182-183 Sts,Bronx,,mta_ada_status
+215,Tremont Av,Bronx,2023,press_release_sourced
+216,174-175 Sts,Bronx,,mta_ada_status
+217,170 St,Bronx,,mta_ada_status
+218,167 St,Bronx,,mta_ada_status
+219,161 St-Yankee Stadium,Bronx,2002,press_release_sourced
+22,Rector St,Manhattan,,mta_ada_status
+220,155 St,Manhattan,,mta_ada_status
+221,21 St-Queensbridge,Queens,1989,press_release_sourced
+222,Roosevelt Island,Manhattan,1989,press_release_sourced
+223,Lexington Av/63 St,Manhattan,1989,press_release_sourced
+224,57 St,Manhattan,,mta_ada_status
+225,47-50 Sts-Rockefeller Ctr,Manhattan,2023,hash_fallback
+226,42 St-Bryant Pk,Manhattan,,mta_ada_status
+227,34 St-Herald Sq,Manhattan,2018,hash_fallback
+228,23 St,Manhattan,,mta_ada_status
+229,14 St,Manhattan,2024,press_release_sourced
+23,Whitehall St-South Ferry,Manhattan,,mta_ada_status
+230,Broadway-Lafayette St,Manhattan,2012,press_release_sourced
+231,Grand St,Manhattan,,mta_ada_status
+232,2 Av,Manhattan,,mta_ada_status
+233,Delancey St-Essex St,Manhattan,,mta_ada_status
+234,East Broadway,Manhattan,,mta_ada_status
+235,York St,Brooklyn,,mta_ada_status
+236,Bergen St,Brooklyn,,mta_ada_status
+237,Carroll St,Brooklyn,,mta_ada_status
+238,Smith-9 Sts,Brooklyn,,mta_ada_status
+239,4 Av-9 St,Brooklyn,,mta_ada_status
+24,Court St,Brooklyn,,mta_ada_status
+240,7 Av,Brooklyn,2023,press_release_sourced
+241,15 St-Prospect Park,Brooklyn,,mta_ada_status
+242,Fort Hamilton Pkwy,Brooklyn,,mta_ada_status
+243,Church Av,Brooklyn,2025,press_release_sourced
+244,Ditmas Av,Brooklyn,,mta_ada_status
+245,18 Av,Brooklyn,,mta_ada_status
+246,Avenue I,Brooklyn,,mta_ada_status
+247,Bay Pkwy,Brooklyn,,mta_ada_status
+248,Avenue N,Brooklyn,,mta_ada_status
+249,Avenue P,Brooklyn,,mta_ada_status
+25,Jay St-MetroTech,Brooklyn,2010,press_release_sourced
+250,Kings Hwy,Brooklyn,,mta_ada_status
+251,Avenue U,Brooklyn,,mta_ada_status
+252,Avenue X,Brooklyn,,mta_ada_status
+253,Neptune Av,Brooklyn,,mta_ada_status
+254,Jamaica-179 St,Queens,2021,hash_fallback
+255,169 St,Queens,,mta_ada_status
+256,Parsons Blvd,Queens,,mta_ada_status
+257,Sutphin Blvd,Queens,,mta_ada_status
+258,Briarwood,Queens,,mta_ada_status
+259,Kew Gardens-Union Tpke,Queens,2022,hash_fallback
+26,DeKalb Av,Brooklyn,2005,press_release_sourced
+260,75 Av,Queens,,mta_ada_status
+261,Forest Hills-71 Av,Queens,2021,hash_fallback
+262,67 Av,Queens,,mta_ada_status
+263,63 Dr-Rego Park,Queens,,mta_ada_status
+264,Woodhaven Blvd,Queens,,mta_ada_status
+265,Grand Av-Newtown,Queens,,mta_ada_status
+266,Elmhurst Av,Queens,,mta_ada_status
+267,Jackson Hts-Roosevelt Av,Queens,2017,hash_fallback
+268,65 St,Queens,,mta_ada_status
+269,Northern Blvd,Queens,2025,press_release_sourced
+27,Atlantic Av-Barclays Ctr,Brooklyn,2012,press_release_sourced
+270,46 St,Queens,,mta_ada_status
+271,Steinway St,Queens,,mta_ada_status
+272,36 St,Queens,,mta_ada_status
+273,Queens Plaza,Queens,2019,hash_fallback
+274,Court Sq-23 St,Queens,,mta_ada_status
+275,Lexington Av/53 St,Manhattan,2018,hash_fallback
+276,5 Av/53 St,Manhattan,,mta_ada_status
+277,7 Av,Manhattan,,mta_ada_status
+278,Jamaica Center-Parsons/Archer,Queens,1988,press_release_sourced
+279,Sutphin Blvd-Archer Av-JFK Airport,Queens,1988,press_release_sourced
+28,Union St,Brooklyn,,mta_ada_status
+280,Jamaica-Van Wyck,Queens,1988,press_release_sourced
+281,Court Sq,Queens,2023,press_release_sourced
+282,21 St,Queens,,mta_ada_status
+283,Greenpoint Av,Brooklyn,2020,press_release_sourced
+284,Nassau Av,Brooklyn,,mta_ada_status
+285,Metropolitan Av,Brooklyn,2024,press_release_sourced
+286,Broadway,Brooklyn,,mta_ada_status
+287,Flushing Av,Brooklyn,,mta_ada_status
+288,Myrtle-Willoughby Avs,Brooklyn,,mta_ada_status
+289,Bedford-Nostrand Avs,Brooklyn,,mta_ada_status
+29,4 Av-9 St,Brooklyn,,mta_ada_status
+290,Classon Av,Brooklyn,,mta_ada_status
+291,Clinton-Washington Avs,Brooklyn,,mta_ada_status
+292,Fulton St,Brooklyn,,mta_ada_status
+293,Van Cortlandt Park-242 St,Bronx,,mta_ada_status
+294,238 St,Bronx,,mta_ada_status
+295,231 St,Bronx,2023,hash_fallback
+296,Marble Hill-225 St,Manhattan,,mta_ada_status
+297,215 St,Manhattan,,mta_ada_status
+298,207 St,Manhattan,,mta_ada_status
+299,Dyckman St,Manhattan,2023,press_release_sourced
+3,30 Av,Queens,,mta_ada_status
+30,Prospect Av,Brooklyn,,mta_ada_status
+300,191 St,Manhattan,,mta_ada_status
+301,181 St,Manhattan,,mta_ada_status
+302,168 St-Washington Hts,Manhattan,,mta_ada_status
+303,157 St,Manhattan,,mta_ada_status
+304,145 St,Manhattan,,mta_ada_status
+305,137 St-City College,Manhattan,,mta_ada_status
+306,125 St,Manhattan,,mta_ada_status
+307,116 St-Columbia University,Manhattan,,mta_ada_status
+308,Cathedral Pkwy (110 St),Manhattan,,mta_ada_status
+309,103 St,Manhattan,,mta_ada_status
+31,25 St,Brooklyn,,mta_ada_status
+310,96 St,Manhattan,2022,hash_fallback
+311,86 St,Manhattan,,mta_ada_status
+312,79 St,Manhattan,,mta_ada_status
+313,72 St,Manhattan,2023,hash_fallback
+314,66 St-Lincoln Center,Manhattan,2025,press_release_sourced
+315,59 St-Columbus Circle,Manhattan,2012,press_release_sourced
+316,50 St,Manhattan,,mta_ada_status
+317,Times Sq-42 St,Manhattan,2022,press_release_sourced
+318,34 St-Penn Station,Manhattan,2023,press_release_sourced
+319,28 St,Manhattan,,mta_ada_status
+32,36 St,Brooklyn,,mta_ada_status
+320,23 St,Manhattan,,mta_ada_status
+321,18 St,Manhattan,,mta_ada_status
+322,14 St,Manhattan,2024,press_release_sourced
+323,Christopher St-Stonewall,Manhattan,,mta_ada_status
+324,Houston St,Manhattan,,mta_ada_status
+325,Canal St,Manhattan,,mta_ada_status
+326,Franklin St,Manhattan,,mta_ada_status
+327,Chambers St,Manhattan,2021,hash_fallback
+328,WTC Cortlandt,Manhattan,2018,press_release_sourced
+329,Rector St,Manhattan,,mta_ada_status
+33,45 St,Brooklyn,,mta_ada_status
+330,South Ferry,Manhattan,2009,press_release_sourced
+331,Park Place,Manhattan,,mta_ada_status
+332,Fulton St,Manhattan,2014,press_release_sourced
+333,Wall St,Manhattan,,mta_ada_status
+334,Clark St,Brooklyn,,mta_ada_status
+335,Borough Hall,Brooklyn,1993,press_release_sourced
+336,Hoyt St,Brooklyn,,mta_ada_status
+337,Nevins St,Brooklyn,,mta_ada_status
+338,Atlantic Av-Barclays Ctr,Brooklyn,2012,press_release_sourced
+339,Bergen St,Brooklyn,,mta_ada_status
+34,53 St,Brooklyn,,mta_ada_status
+340,Grand Army Plaza,Brooklyn,,mta_ada_status
+341,Eastern Pkwy-Brooklyn Museum,Brooklyn,2020,press_release_sourced
+342,Franklin Av-Medgar Evers College,Brooklyn,,mta_ada_status
+343,Nostrand Av,Brooklyn,,mta_ada_status
+344,Kingston Av,Brooklyn,,mta_ada_status
+345,Crown Hts-Utica Av,Brooklyn,2017,hash_fallback
+346,Sutter Av-Rutland Rd,Brooklyn,,mta_ada_status
+347,Saratoga Av,Brooklyn,,mta_ada_status
+348,Rockaway Av,Brooklyn,,mta_ada_status
+349,Junius St,Brooklyn,,mta_ada_status
+35,59 St,Brooklyn,2020,press_release_sourced
+350,Pennsylvania Av,Brooklyn,,mta_ada_status
+351,Van Siclen Av,Brooklyn,,mta_ada_status
+352,New Lots Av,Brooklyn,,mta_ada_status
+353,President St-Medgar Evers College,Brooklyn,,mta_ada_status
+354,Sterling St,Brooklyn,,mta_ada_status
+355,Winthrop St,Brooklyn,,mta_ada_status
+356,Church Av,Brooklyn,2008,press_release_sourced
+357,Beverly Rd,Brooklyn,,mta_ada_status
+358,Newkirk Av-Little Haiti,Brooklyn,,mta_ada_status
+359,Flatbush Av-Brooklyn College,Brooklyn,1997,press_release_sourced
+36,Bay Ridge Av,Brooklyn,,mta_ada_status
+360,Pelham Bay Park,Bronx,2018,hash_fallback
+361,Buhre Av,Bronx,,mta_ada_status
+362,Middletown Rd,Bronx,,mta_ada_status
+363,Westchester Sq-E Tremont Av,Bronx,2025,press_release_sourced
+364,Zerega Av,Bronx,,mta_ada_status
+365,Castle Hill Av,Bronx,,mta_ada_status
+366,Parkchester,Bronx,2017,hash_fallback
+367,St Lawrence Av,Bronx,,mta_ada_status
+368,Morrison Av-Soundview,Bronx,,mta_ada_status
+369,Elder Av,Bronx,,mta_ada_status
+37,77 St,Brooklyn,,mta_ada_status
+370,Whitlock Av,Bronx,,mta_ada_status
+371,Hunts Point Av,Bronx,2022,hash_fallback
+372,Longwood Av,Bronx,,mta_ada_status
+373,E 149 St,Bronx,2023,press_release_sourced
+374,E 143 St-St Mary's St,Bronx,,mta_ada_status
+375,Cypress Av,Bronx,,mta_ada_status
+376,Brook Av,Bronx,,mta_ada_status
+377,3 Av-138 St,Bronx,,mta_ada_status
+378,Woodlawn,Bronx,,mta_ada_status
+379,Mosholu Pkwy,Bronx,2025,press_release_sourced
+38,86 St,Brooklyn,2020,press_release_sourced
+380,Bedford Park Blvd-Lehman College,Bronx,,mta_ada_status
+381,Kingsbridge Rd,Bronx,,mta_ada_status
+382,Fordham Rd,Bronx,2020,hash_fallback
+383,183 St,Bronx,,mta_ada_status
+384,Burnside Av,Bronx,,mta_ada_status
+385,176 St,Bronx,,mta_ada_status
+386,Mt Eden Av,Bronx,,mta_ada_status
+387,170 St,Bronx,2022,hash_fallback
+388,167 St,Bronx,,mta_ada_status
+389,161 St-Yankee Stadium,Bronx,2002,press_release_sourced
+39,Bay Ridge-95 St,Brooklyn,2025,press_release_sourced
+390,149 St-Grand Concourse,Bronx,,mta_ada_status
+391,138 St-Grand Concourse,Bronx,,mta_ada_status
+392,125 St,Manhattan,2021,hash_fallback
+393,116 St,Manhattan,,mta_ada_status
+394,110 St,Manhattan,,mta_ada_status
+395,103 St,Manhattan,,mta_ada_status
+396,96 St,Manhattan,,mta_ada_status
+397,86 St,Manhattan,,mta_ada_status
+398,77 St,Manhattan,,mta_ada_status
+399,68 St-Hunter College,Manhattan,2024,press_release_sourced
+4,Broadway,Queens,,mta_ada_status
+40,Atlantic Av-Barclays Ctr,Brooklyn,2012,press_release_sourced
+400,59 St,Manhattan,,mta_ada_status
+401,51 St,Manhattan,2021,hash_fallback
+402,Grand Central-42 St,Manhattan,2020,press_release_sourced
+403,33 St,Manhattan,,mta_ada_status
+404,28 St,Manhattan,,mta_ada_status
+405,23 St-Baruch College,Manhattan,2017,hash_fallback
+406,14 St-Union Sq,Manhattan,,mta_ada_status
+407,Astor Pl,Manhattan,,mta_ada_status
+408,Bleecker St,Manhattan,2012,press_release_sourced
+409,Spring St,Manhattan,,mta_ada_status
+41,7 Av,Brooklyn,,mta_ada_status
+410,Canal St,Manhattan,2019,hash_fallback
+411,Brooklyn Bridge-City Hall,Manhattan,2020,press_release_sourced
+412,Fulton St,Manhattan,2014,press_release_sourced
+413,Wall St,Manhattan,,mta_ada_status
+414,Bowling Green,Manhattan,2007,press_release_sourced
+415,Borough Hall,Brooklyn,2025,press_release_sourced
+416,Wakefield-241 St,Bronx,,mta_ada_status
+417,Nereid Av,Bronx,,mta_ada_status
+418,233 St,Bronx,2023,hash_fallback
+419,225 St,Bronx,,mta_ada_status
+42,Prospect Park,Brooklyn,1996,press_release_sourced
+420,219 St,Bronx,,mta_ada_status
+421,Gun Hill Rd,Bronx,2018,hash_fallback
+422,Burke Av,Bronx,,mta_ada_status
+423,Allerton Av,Bronx,,mta_ada_status
+424,Pelham Pkwy,Bronx,2022,hash_fallback
+425,Bronx Park East,Bronx,,mta_ada_status
+426,E 180 St,Bronx,2023,hash_fallback
+427,West Farms Sq-E Tremont Av,Bronx,,mta_ada_status
+428,174 St,Bronx,,mta_ada_status
+429,Freeman St,Bronx,,mta_ada_status
+43,Parkside Av,Brooklyn,,mta_ada_status
+430,Simpson St,Bronx,2019,hash_fallback
+431,Intervale Av,Bronx,,mta_ada_status
+432,Prospect Av,Bronx,,mta_ada_status
+433,Jackson Av,Bronx,,mta_ada_status
+434,3 Av-149 St,Bronx,2017,hash_fallback
+435,149 St-Grand Concourse,Bronx,,mta_ada_status
+436,Harlem-148 St,Manhattan,,mta_ada_status
+437,145 St,Manhattan,,mta_ada_status
+438,135 St,Manhattan,2020,hash_fallback
+439,125 St,Manhattan,,mta_ada_status
+44,Church Av,Brooklyn,2025,press_release_sourced
+440,116 St,Manhattan,,mta_ada_status
+441,110 St-Malcolm X Plaza,Manhattan,,mta_ada_status
+442,Eastchester-Dyre Av,Bronx,,mta_ada_status
+443,Baychester Av,Bronx,,mta_ada_status
+444,Gun Hill Rd,Bronx,2021,hash_fallback
+445,Pelham Pkwy,Bronx,,mta_ada_status
+446,Morris Park,Bronx,,mta_ada_status
+447,Flushing-Main St,Queens,2000,press_release_sourced
+448,Mets-Willets Point,Queens,,mta_ada_status
+449,111 St,Queens,,mta_ada_status
+45,Beverley Rd,Brooklyn,,mta_ada_status
+450,103 St-Corona Plaza,Queens,,mta_ada_status
+451,Junction Blvd,Queens,2017,hash_fallback
+452,90 St-Elmhurst Av,Queens,,mta_ada_status
+453,82 St-Jackson Hts,Queens,,mta_ada_status
+454,74 St-Broadway,Queens,2023,hash_fallback
+455,69 St,Queens,,mta_ada_status
+456,61 St-Woodside,Queens,2022,hash_fallback
+457,52 St,Queens,,mta_ada_status
+458,46 St-Bliss St,Queens,,mta_ada_status
+459,40 St-Lowery St,Queens,,mta_ada_status
+46,Cortelyou Rd,Brooklyn,,mta_ada_status
+460,33 St-Rawson St,Queens,,mta_ada_status
+461,Queensboro Plaza,Queens,2025,press_release_sourced
+462,Court Sq,Queens,2021,hash_fallback
+463,Hunters Point Av,Queens,,mta_ada_status
+464,Vernon Blvd-Jackson Av,Queens,,mta_ada_status
+465,Grand Central-42 St,Manhattan,2020,press_release_sourced
+466,5 Av,Manhattan,,mta_ada_status
+467,Times Sq-42 St,Manhattan,2022,press_release_sourced
+468,Times Sq-42 St,Manhattan,2022,press_release_sourced
+469,Grand Central-42 St,Manhattan,2020,press_release_sourced
+47,Newkirk Plaza,Brooklyn,,mta_ada_status
+471,34 St-Hudson Yards,Manhattan,2015,press_release_sourced
+475,96 St,Manhattan,2017,press_release_sourced
+476,86 St,Manhattan,2017,press_release_sourced
+477,72 St,Manhattan,2017,press_release_sourced
+48,Avenue H,Brooklyn,2021,press_release_sourced
+49,Avenue J,Brooklyn,,mta_ada_status
+5,36 Av,Queens,,mta_ada_status
+50,Avenue M,Brooklyn,,mta_ada_status
+501,St George,Staten Island,2020,hash_fallback
+502,Tompkinsville,Staten Island,,mta_ada_status
+503,Stapleton,Staten Island,,mta_ada_status
+504,Clifton,Staten Island,,mta_ada_status
+505,Grasmere,Staten Island,,mta_ada_status
+506,Old Town,Staten Island,,mta_ada_status
+507,Dongan Hills,Staten Island,1993,press_release_sourced
+508,Jefferson Av,Staten Island,,mta_ada_status
+509,Grant City,Staten Island,,mta_ada_status
+51,Kings Hwy,Brooklyn,2011,press_release_sourced
+510,New Dorp,Staten Island,2023,press_release_sourced
+511,Oakwood Heights,Staten Island,,mta_ada_status
+512,Bay Terrace,Staten Island,,mta_ada_status
+513,Great Kills,Staten Island,1997,press_release_sourced
+514,Eltingville,Staten Island,,mta_ada_status
+515,Annadale,Staten Island,,mta_ada_status
+516,Huguenot,Staten Island,,mta_ada_status
+517,Prince's Bay,Staten Island,,mta_ada_status
+518,Pleasant Plains,Staten Island,,mta_ada_status
+519,Richmond Valley,Staten Island,,mta_ada_status
+52,Avenue U,Brooklyn,,mta_ada_status
+522,Tottenville,Staten Island,2019,hash_fallback
+523,Arthur Kill,Staten Island,2017,press_release_sourced
+53,Neck Rd,Brooklyn,,mta_ada_status
+54,Sheepshead Bay,Brooklyn,2026,press_release_sourced
+55,Brighton Beach,Brooklyn,,mta_ada_status
+56,Ocean Pkwy,Brooklyn,,mta_ada_status
+57,W 8 St-NY Aquarium,Brooklyn,,mta_ada_status
+58,Coney Island-Stillwell Av,Brooklyn,2004,press_release_sourced
+59,9 Av,Brooklyn,,mta_ada_status
+6,39 Av-Dutch Kills,Queens,,mta_ada_status
+60,Fort Hamilton Pkwy,Brooklyn,,mta_ada_status
+61,50 St,Brooklyn,,mta_ada_status
+62,55 St,Brooklyn,,mta_ada_status
+63,62 St,Brooklyn,2019,press_release_sourced
+64,71 St,Brooklyn,,mta_ada_status
+65,79 St,Brooklyn,,mta_ada_status
+66,18 Av,Brooklyn,,mta_ada_status
+67,20 Av,Brooklyn,,mta_ada_status
+68,Bay Pkwy,Brooklyn,2012,press_release_sourced
+69,25 Av,Brooklyn,,mta_ada_status
+7,Lexington Av/59 St,Manhattan,,mta_ada_status
+70,Bay 50 St,Brooklyn,,mta_ada_status
+71,8 Av,Brooklyn,2023,press_release_sourced
+72,Fort Hamilton Pkwy,Brooklyn,,mta_ada_status
+73,New Utrecht Av,Brooklyn,2019,press_release_sourced
+74,18 Av,Brooklyn,,mta_ada_status
+75,20 Av,Brooklyn,,mta_ada_status
+76,Bay Pkwy,Brooklyn,,mta_ada_status
+77,Kings Hwy,Brooklyn,,mta_ada_status
+78,Avenue U,Brooklyn,,mta_ada_status
+79,86 St,Brooklyn,,mta_ada_status
+8,5 Av/59 St,Manhattan,,mta_ada_status
+80,121 St,Queens,,mta_ada_status
+81,111 St,Queens,,mta_ada_status
+82,104 St,Queens,,mta_ada_status
+83,Woodhaven Blvd,Queens,2025,press_release_sourced
+84,85 St-Forest Pkwy,Queens,,mta_ada_status
+85,75 St-Elderts Ln,Queens,,mta_ada_status
+86,Cypress Hills,Brooklyn,,mta_ada_status
+87,Crescent St,Brooklyn,,mta_ada_status
+88,Norwood Av,Brooklyn,,mta_ada_status
+89,Cleveland St,Brooklyn,,mta_ada_status
+9,57 St-7 Av,Manhattan,2019,hash_fallback
+90,Van Siclen Av,Brooklyn,,mta_ada_status
+91,Alabama Av,Brooklyn,,mta_ada_status
+92,Broadway Junction,Brooklyn,,mta_ada_status
+93,Chauncey St,Brooklyn,,mta_ada_status
+94,Halsey St,Brooklyn,,mta_ada_status
+95,Gates Av,Brooklyn,,mta_ada_status
+96,Kosciuszko St,Brooklyn,,mta_ada_status
+97,Myrtle Av,Brooklyn,,mta_ada_status
+98,Flushing Av,Brooklyn,2003,press_release_sourced
+99,Lorimer St,Brooklyn,,mta_ada_status

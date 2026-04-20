@@ -1,0 +1,16 @@
+{
+  "results": [
+    {
+      "diagnostics": {
+        "permutations": 999,
+        "upstream": "esda.Moran"
+      },
+      "method": "morans_i",
+      "n_units": 2317,
+      "p_value": 0.001,
+      "statistic": 0.4475481073380059,
+      "weights_type": "KNN(k=5)",
+      "z_score": 35.146535882782594
+    }
+  ]
+}

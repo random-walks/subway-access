@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "bandwidth": 117.29841788869689,
+      "ci_95_lower": 0.08088855482220565,
+      "ci_95_upper": 0.08731201082277913,
+      "covariate_balance_pvalues": null,
+      "cutoff": 800.0,
+      "design": "sharp",
+      "diagnostics": {
+        "bwselect": "mserd",
+        "cluster": null,
+        "covariates": []
+      },
+      "estimate": 0.08410028282249239,
+      "first_stage_f": null,
+      "kernel": "triangular",
+      "method": "rd_robust",
+      "n_effective": 1747,
+      "n_total": 16219,
+      "p_value": 0.0,
+      "polynomial_order": 1,
+      "std_error": 0.0016386668457280067
+    }
+  ]
+}

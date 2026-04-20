@@ -60,6 +60,7 @@ nav:
   - CLI Reference: cli.md
   - Architecture: architecture.md
   - Python API: api.md
+  - Factor-Factory Integration: factor-factory-integration.md
   - Contributing: contributing.md
   - Releasing: releasing.md
   - Changelog: changelog.md

@@ -42,7 +42,10 @@ repos:
       - id: prettier
         types_or: [yaml, markdown, html, css, scss, javascript, json]
         args: [--prose-wrap=always]
-        exclude: ^examples/.*\.md$
+        # examples/ are self-contained projects with their own voice + their
+        # own lock/tooling surface; keep root-level markdown/yaml tooling off
+        # them so a project-specific README style doesn't fight the root.
+        exclude: ^examples/
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: "v0.15.7"

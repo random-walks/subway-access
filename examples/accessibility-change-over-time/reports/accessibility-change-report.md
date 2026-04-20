@@ -1,12 +1,12 @@
 # Accessibility Change Over Time
 
-*Report generated: April 11, 2026*
+*Report generated: April 20, 2026*
 
 | | |
 | :--- | :--- |
 | **Boroughs** | Manhattan, Brooklyn, Queens, Bronx, Staten Island |
-| **Stations & ADA status** | MTA Open Data, fetched April 9, 2026 |
-| **Outage observation window** | May 2025 – April 9, 2026 (12 months) |
+| **Stations & ADA status** | MTA Open Data, fetched April 5, 2026 |
+| **Outage observation window** | May 2025 – April 5, 2026 (12 months) |
 | **Demographics** | ACS 5-year estimates, 2023 vintage (survey period 2019–2023) |
 | **Census tract boundaries** | 2020 vintage (nyc-geo-toolkit) |
 | **Tracts analyzed** | 2,317 |
@@ -19,7 +19,7 @@
 - **4,717,140 New Yorkers** (55% of the city) live more than a 10-minute walk from any ADA-accessible subway station.
 - Only **157 of 493 stations** (32%) are wheelchair-accessible. If you use a wheelchair, cane, stroller, or have trouble with stairs, two-thirds of stations are off-limits.
 - **Queens** has the largest gap: 1,752,073 residents without accessible station coverage.
-- Even among accessible stations, **49 have elevators down more than 5% of the time**. 59 St-Columbus Circle had just 0% uptime (May 2025 – April 9, 2026).
+- Even among accessible stations, **49 have elevators down more than 5% of the time**. 59 St-Columbus Circle had just 0% uptime (May 2025 – April 5, 2026).
 
 ## Table 1. System-wide snapshot
 
@@ -83,7 +83,7 @@ Nominal coverage counts any ADA station within the catchment. Reliability-weight
 | Gun Hill Rd | Bronx | 72.9% | 142,511 |
 | Grand Central-42 St | Manhattan | 75.2% | 130,558 |
 
-*49 accessible stations system-wide had <95% uptime during the May 2025 – April 9, 2026 observation window.*
+*49 accessible stations system-wide had <95% uptime during the May 2025 – April 5, 2026 observation window.*
 
 ## Temporal panel
 
@@ -224,7 +224,7 @@ Where *W* is the row-standardized distance-based spatial weights matrix (2,317 u
 
 **Data sources:**
 - MTA Subway Station Catalog (Open Data NY, Socrata API)
-- MTA Elevator & Escalator Availability History (May 2025 – April 9, 2026)
+- MTA Elevator & Escalator Availability History (May 2025 – April 5, 2026)
 - American Community Survey 5-year estimates, 2023 vintage (survey period 2019–2023)
 - NYC census tract boundaries (nyc-geo-toolkit, 2020 vintage)
 

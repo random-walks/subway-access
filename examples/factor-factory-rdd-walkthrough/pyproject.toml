@@ -1,0 +1,13 @@
+[project]
+name = "subway-access-factor-factory-rdd-walkthrough"
+version = "0.0.0"
+description = "Minimal walkthrough: regression discontinuity at the 800 m ADA walk-radius threshold using factor-factory engines."
+# factor-factory v1.0.2 + jellycell require Python >= 3.12; this example will
+# not resolve on 3.10 / 3.11 because factor-factory is its whole point.
+requires-python = ">=3.12"
+dependencies = [
+  "subway-access[all,factor-factory,tearsheets]",
+]
+
+[tool.uv.sources]
+subway-access = { path = "../..", editable = true }

@@ -1,0 +1,15 @@
+# accessibility-change-over-time — the flagship research artifact.
+# Committed:   reports/  (primary research output — 15 figures + supplementary)
+# Committed:   engine-audit/  (jellycell tearsheet output for CASESTUDY App D)
+# Ignored:     cache/ (MTA + ACS snapshots), artifacts/ (intermediate CSVs),
+#              data/ (raw downloads), uv.lock + .venv/ (user-local).
+.venv/
+__pycache__/
+*.py[cod]
+uv.lock
+# No trailing slash on /cache so symlinks-to-dir (e.g. reusing the
+# about-the-data cache via `ln -s ../about-the-data/cache cache`) are also
+# ignored — git treats symlinks-to-dir as files, not dirs.
+/cache
+/artifacts/
+/data/

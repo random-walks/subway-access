@@ -19,7 +19,7 @@ The Americans with Disabilities Act (ADA) of 1990 mandates equal access to publi
 
 ## 1. Introduction
 
-The New York City subway system is the largest rapid transit network in the United States, serving approximately 3.6 million riders on an average weekday across 493 stations and 36 routes (Metropolitan Transportation Authority [MTA], 2026). As of the April 9, 2026 data pull used in this study, only 157 stations (31.8%) meet ADA accessibility standards---meaning they have elevators or ramps that permit use by people in wheelchairs, with strollers, or who otherwise cannot navigate stairs. The remaining 336 stations are functionally inaccessible to a substantial and growing segment of the population.
+The New York City subway system is the largest rapid transit network in the United States, serving approximately 3.6 million riders on an average weekday across 493 stations and 36 routes (Metropolitan Transportation Authority [MTA], 2026). As of the April 5, 2026 data pull used in this study, only 157 stations (31.8%) meet ADA accessibility standards---meaning they have elevators or ramps that permit use by people in wheelchairs, with strollers, or who otherwise cannot navigate stairs. The remaining 336 stations are functionally inaccessible to a substantial and growing segment of the population.
 
 This accessibility deficit is not merely an inconvenience. For the estimated 895,000 New Yorkers with ambulatory disabilities (U.S. Census Bureau, 2024), and for the 1.15 million residents aged 65 and older whose mobility may be limited, a station without an elevator is a station that does not exist. The problem extends to parents with strollers, travelers with luggage, and anyone with a temporary injury---populations that are large but largely invisible in accessibility planning.
 
@@ -66,7 +66,7 @@ Four primary data sources were assembled for this analysis. Table 1 summarizes c
 
 | Source | Description | *N* | Coverage |
 | :--- | :--- | ---: | :--- |
-| MTA Subway Station Catalog | Station locations, routes, ADA status | 493 stations | All active stations; fetched April 9, 2026 via Open Data NY Socrata API (MTA, 2026) |
+| MTA Subway Station Catalog | Station locations, routes, ADA status | 493 stations | All active stations; fetched April 5, 2026 via Open Data NY Socrata API (MTA, 2026) |
 | MTA Elevator & Escalator Availability | Monthly outage and uptime records | 6,765 rows | May 2025--April 2026, 12-month rolling window (MTA, 2026) |
 | American Community Survey (ACS) | Tract-level disability, senior, and poverty rates | 2,317 tracts | 2023 vintage, 5-year estimates covering survey period 2019--2023 (U.S. Census Bureau, 2024) |
 | NYC Census Tract Boundaries | Tract polygon geometries | 2,325 tracts | 2020 vintage, via nyc-geo-toolkit |
@@ -127,7 +127,7 @@ Y_it = ρ · W · Y_it + β · X_it + δ_i + τ_t + ε_it
 
 where *W* is the row-standardized distance-based spatial weights matrix (2,317 units, mean 47.9 neighbors, 2 km threshold).
 
-**Data provenance caveat.** The upgrade timeline is substantially---but not entirely---sourced from public records. Of the 157 accessible stations, 101 have dates traced to official MTA announcements, press releases, or documented construction completions. The remaining 56 use a deterministic hash-based fallback because per-station completion records for the MTA's Key Station Program (1994--2020) were not publicly available at the time of analysis. Consequently, β estimates from this panel should be interpreted with caution: the treatment timing is accurate for the majority of stations but approximate for roughly one-third. A FOIL request to the MTA for the complete Key Station Program completion schedule would close this gap. Three identifying assumptions merit explicit discussion:
+**Data provenance caveat.** The upgrade timeline is substantially---but not entirely---sourced from public records. Of the 157 accessible stations, 101 have dates traced to official MTA announcements, press releases, or documented construction completions. The remaining 56 use a deterministic hash-based fallback because per-station completion records for the MTA's Key Station Program (1994--2020) were not publicly available at the time of analysis. Consequently, β estimates from this panel should be interpreted with caution: the treatment timing is accurate for the majority of stations but approximate for roughly one-third. A FOIL request to the MTA for the complete Key Station Program completion schedule would close this gap. A per-station provenance audit is committed to [`reports/supplementary/upgrade-provenance.csv`](reports/supplementary/upgrade-provenance.csv) — each row carries an `upgrade_source` tag of `press_release_sourced` (101 stations) or `hash_fallback` (56 stations), which down-stream consumers can filter on to reconstruct the sourced-only subset for a robustness DiD spec. Three identifying assumptions merit explicit discussion:
 
 1. **Parallel trends.** In the absence of treatment, treated and control tracts would follow the same outcome trajectory. Pre-treatment outcome data under the sourced upgrade dates would enable formal testing of this assumption.
 2. **No anticipation.** Units do not change behavior in anticipation of treatment. Since ADA station upgrades are capital projects announced years in advance, household sorting based on announced plans could violate this assumption.
@@ -398,3 +398,76 @@ The following supplementary reports provide full diagnostic detail:
 - [Correlation analysis](reports/supplementary/correlation-analysis.md) --- Pearson and Spearman matrices with significance levels, variance inflation factors, bivariate scatter plots, and OLS equity regression with robust standard errors.
 - [Model specification](reports/supplementary/model-specification.md) --- Full DiD and SAR panel equations, identifying assumptions, balance tests with *t*-statistics and *P*-values, and distribution diagnostics.
 - [Spatial diagnostics](reports/supplementary/spatial-diagnostics.md) --- Spatial weights matrix properties, Global Moran's *I* with *z*-scores and permutation *P*-values, bivariate geographic comparison maps, and recommendations for LISA and GWR extensions.
+- [Engine audit](reports/supplementary/engine-audit.md) --- Auto-generated cross-check of the headline results against five [`factor-factory`](https://github.com/random-walks/factor-factory) engine fits. See Appendix D for methodology.
+
+
+## Appendix D. Engine Audit (factor-factory cross-check)
+
+This appendix is an **auto-generated cross-check**, not a replacement for the primary results. When the optional `[factor-factory]` + `[tearsheets]` extras are installed, `main.py` re-runs the analysis through the [`factor-factory`](https://github.com/random-walks/factor-factory) engine registry and writes a jellycell tearsheet. The goal is registry parity and methodological triangulation: each factor-factory engine implements a peer-reviewed estimator, and directional agreement with the primary analysis (Sections 4.6--4.8) raises confidence in the headline findings; disagreement would surface a specification issue.
+
+The appendix is additive. If the extras are not installed, it is silently skipped and the primary report is unchanged.
+
+### D.1 Design
+
+Five engine fits are produced:
+
+1. **`did.twfe`** --- Two-way fixed-effects DiD on `gap_score` with the existing cohort-based treatment definition. Provides a registry-native re-run of the hand-rolled fixed-effects panel specified in Section 3.5.
+2. **`did.sa`** (Sun-Abraham IW, Sun & Abraham 2021) --- Staggered-rollout-robust interaction-weighted estimator. Important here because the ADA upgrade rollout is staggered over 1987--2026 across 101 press-release-sourced stations plus 56 hash-fallback stations. The two-way-fixed-effects DiD is known to be biased under heterogeneous treatment effects with staggered timing (Goodman-Bacon, 2021); the Sun-Abraham estimator provides a robustness check.
+3. **`scm.augmented`** (Ben-Michael, Feller & Rothstein, 2021) --- Augmented synthetic control on a single treated tract whose treatment year falls in the interior of the panel window. This is a **single-unit** cross-check: one tract's gap-score trajectory is compared to a synthetic control built from never-treated tracts. The SCM is not meant to substitute for the panel DiD but to show the post-treatment trajectory of one well-sourced upgrade explicitly.
+4. **`rdd.rd_robust`** (Calonico, Cattaneo & Titiunik, 2014) --- Regression discontinuity on the `distance_to_nearest_accessible_station` forcing variable at the 800 m threshold. By construction, `gap_score` is zero for covered tracts (those within the 800 m catchment of at least one accessible station) and equals `need_score` for uncovered tracts. An RDD at 800 m with `gap_score` as the outcome therefore detects a mechanical discontinuity of approximately `-mean(need_score)`. This is a **specification check**, not a causal test: a null estimate would indicate catchment-radius drift or a data pipeline bug.
+5. **`spatial.morans_i`** --- Global Moran's *I* via the factor-factory spatial registry with KNN spatial weights (*k* = 5). This differs from the 2 km distance-threshold weights used in Section 4.8 of the primary analysis (47.9 mean neighbors), so the *I* point estimate and *z*-score are not expected to match exactly. The audit confirms directional agreement (positive, significant clustering) and registry parity.
+
+### D.2 Interpretation guardrails
+
+Results from this appendix should be read against the following interpretive guidance:
+
+- **Directional agreement is the confirmation target.** The primary analysis (Sections 4.6--4.8) reports specific point estimates under specific spatial-weight and identifying-assumption choices. The engine-audit fits use different (peer-reviewed) specifications --- KNN spatial weights for Moran's *I*, doubly-robust Sun-Abraham IW for DiD, augmented SCM for a single treated tract, `rdrobust` with MSE-optimal bandwidth for RDD. Agreement in sign and significance across specifications is the intended signal.
+- **The SCM fit is a single-unit illustration.** It is not a system-wide causal estimate. Use it as a worked example of the pattern, not as a borough- or city-level claim.
+- **The RDD fit is mechanical.** See D.1 point 4. Report it to verify the 800 m catchment is consistently applied; do not interpret the point estimate as a causal effect of the boundary on outcomes.
+- **The Sun-Abraham fit can contradict TWFE under heterogeneous treatment effects.** If the two disagree, trust Sun-Abraham for the ATT magnitude --- the TWFE estimand becomes an uninterpretable weighted average of cohort-level effects under staggered timing. Document any disagreement in the narrative and flag the heterogeneity-robustness concern.
+
+If any engine fit produces a finding that is **directionally inconsistent** with the primary analysis --- e.g. a positive Moran's *I* is rejected by the registry fit, or the Sun-Abraham ATT has the opposite sign of the TWFE point estimate --- the contributor must **surface the discrepancy** in a PR comment and in this appendix rather than silently updating the primary narrative. Triangulation is only informative if discordant results are reported honestly.
+
+### D.2.1 Observed results
+
+The engine audit was executed against the April 2026 cache and produced the following fits (full detail in [`reports/supplementary/engine-audit.md`](reports/supplementary/engine-audit.md)):
+
+| Engine | Estimate | Interpretation |
+| :--- | ---: | :--- |
+| `did.twfe` | ATT ≈ 0 (9.2 × 10⁻³⁶) | Confirms the Section 5.3 caveat that "the panel lacks an outcome variable." `gap_score` is defined as `need_score · 1[uncovered]`, which has zero within-unit variation once a tract is covered — the DiD estimator has nothing to identify against. |
+| `did.sa` (Sun-Abraham IW) | ATT ≈ 0 | Same as TWFE — the panel outcome is not responsive to treatment by construction. Sun-Abraham's staggered-rollout robustness cannot rescue a non-varying outcome. |
+| `scm.augmented` | ATT ≈ 0 | Same limitation — a single tract's synthetic-control trajectory cannot extract signal from an outcome that goes from *need_score* to 0 deterministically at treatment. |
+| `rdd.rd_robust` | 0.0841 (SE 0.0016) at bandwidth 117.3 m | Close to the mean `need_score` of 0.088 (Table 3). Confirms the 800 m catchment is consistently applied — crossing the boundary produces the expected mechanical jump. **Specification check passes.** |
+| `spatial.morans_i` (KNN *k* = 5) | *I* = 0.4475 (*z* = 35.15) | Same positive, highly-significant spatial clustering as the primary Section 4.8 fit (*I* = .2271 under 2 km distance-threshold weights). The higher *I* reflects KNN's tighter neighbor set, not a contradictory finding. **Directional agreement confirmed.** |
+
+The DiD / SCM near-zero ATTs are not a bug in the engine audit; they are an honest diagnosis of the panel specification. The primary paper already acknowledges this in Section 5.3 ("The panel lacks an outcome variable") — the next research iteration, once MTA turnstile counts or ACRIS property-value data are linked to tract ids, will have an actual DiD estimand to recover.
+
+### D.3 Output artifacts
+
+When the engine audit runs successfully, the following artifacts are written:
+
+- `engine-audit/artifacts/did_results.json` --- TWFE + Sun-Abraham point estimates, SEs, 95% CIs, and cohort-level ATTs where available.
+- `engine-audit/artifacts/rdd_results.json` --- RDD point estimate, bandwidth, effective sample size.
+- `engine-audit/artifacts/scm_results.json` --- Augmented-SCM point estimate with pre/post-period RMSPE, donor weights, and the focal treated tract.
+- `engine-audit/artifacts/spatial_results.json` --- Moran's *I*, *z*-score, permutation *p*-value with the KNN(*k* = 5) weights specification.
+- `engine-audit/manuscripts/FINDINGS.md` --- Rendered jellycell tearsheet consuming the four JSON files via the shipped `findings.md.j2` template.
+- [`reports/supplementary/engine-audit.md`](reports/supplementary/engine-audit.md) --- Compact summary table of all five fits, linked from Appendix C.
+
+### D.4 Reproducibility
+
+Run the full pipeline (including the engine audit) with:
+
+```bash
+pip install "subway-access[all,factor-factory,tearsheets]"
+cd examples/accessibility-change-over-time
+python main.py --skip-download     # assumes cache/ is populated
+```
+
+To skip the engine audit even when the extras are installed, pass `--skip-engine-audit`. The primary report numbers (Sections 4.1--4.8, Tables 1--5) are produced entirely by Steps 1--10 of `main.py` and are independent of the engine-audit appendix.
+
+### D.5 Citations
+
+- Sun, L., & Abraham, S. (2021). Estimating dynamic treatment effects in event studies with heterogeneous treatment effects. *Journal of Econometrics*, *225*(2), 175--199. https://doi.org/10.1016/j.jeconom.2020.09.006
+- Goodman-Bacon, A. (2021). Difference-in-differences with variation in treatment timing. *Journal of Econometrics*, *225*(2), 254--277. https://doi.org/10.1016/j.jeconom.2021.03.014
+- Ben-Michael, E., Feller, A., & Rothstein, J. (2021). The augmented synthetic control method. *Journal of the American Statistical Association*, *116*(536), 1789--1803. https://doi.org/10.1080/01621459.2021.1929245
+- Calonico, S., Cattaneo, M. D., & Titiunik, R. (2014). Robust nonparametric confidence intervals for regression-discontinuity designs. *Econometrica*, *82*(6), 2295--2326. https://doi.org/10.3982/ECTA11757
