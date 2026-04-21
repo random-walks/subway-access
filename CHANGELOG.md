@@ -51,8 +51,9 @@ The authoritative release notes are also published on
 
 ### Notes
 
-- Jellycell [v1.4.0](https://github.com/random-walks/jellycell/releases/tag/v1.4.0)
-  landed the same week with a new top-level `jellycell.tearsheets` Python API
+- Jellycell
+  [v1.4.0](https://github.com/random-walks/jellycell/releases/tag/v1.4.0) landed
+  the same week with a new top-level `jellycell.tearsheets` Python API
   (`jt.findings`, `jt.methodology`, `jt.audit`). Our existing
   `jellycell>=1.3.5,<2` pin already allows v1.4.x — no edit needed. Migrating
   `subway_access.reporting._jellycell_bridge` off `factor_factory.jellycell.*`
