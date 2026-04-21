@@ -10,7 +10,24 @@ The authoritative release notes are also published on
 
 ### Added
 
+- `subway_access.reporting.render_findings_from_dict(results, *, out_path, project, template_overrides=None)`
+  — new helper that wraps
+  [jellycell v1.4.0's](https://github.com/random-walks/jellycell/releases/tag/v1.4.0)
+  native `jellycell.tearsheets.findings` API for rendering a `FINDINGS.md`
+  manuscript directly from an in-memory results dict. Complementary to
+  `emit_findings_tearsheet`, which scans a factor-factory project directory for
+  JSON files. The new path is useful for notebooks, CI smoke tests, and ad-hoc
+  manuscript assembly where the factor-factory project-dir convention is
+  overkill. Raises a crisp `ImportError` pointing at
+  `pip install "jellycell>=1.4"` when the `[tearsheets]` extra is installed at
+  an older version.
+
 ### Changed
+
+- Fixed duplicate `## 6.` heading in `docs/factor-factory-integration.md` (both
+  "Using factor-factory without jellycell" and "See also" shared the same
+  number). The jellycell-free light-audit path keeps §6; the cross-links move to
+  §8, and the new jellycell v1.4 lightweight-tearsheets section occupies §7.
 
 ### Fixed
 

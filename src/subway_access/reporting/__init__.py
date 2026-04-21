@@ -16,6 +16,7 @@ from __future__ import annotations
 from ._jellycell_bridge import (
     EngineKind,
     emit_findings_tearsheet,
+    render_findings_from_dict,
     require_factor_factory,
     require_jellycell,
     write_engine_results_json,
@@ -24,6 +25,7 @@ from ._jellycell_bridge import (
 __all__ = [
     "EngineKind",
     "emit_findings_tearsheet",
+    "render_findings_from_dict",
     "require_factor_factory",
     "require_jellycell",
     "write_engine_results_json",

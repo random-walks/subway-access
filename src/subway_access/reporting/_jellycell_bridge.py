@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal
 
 if TYPE_CHECKING:  # pragma: no cover - import-time only for type checkers.
-    from collections.abc import Iterable
+    from collections.abc import Iterable, Mapping
     from types import ModuleType
 
 EngineKind = Literal["did", "rdd", "scm", "spatial", "event_study", "mediation"]
@@ -30,6 +30,12 @@ _FACTOR_FACTORY_HINT = (
 _JELLYCELL_HINT = (
     "jellycell is required for tearsheet rendering. "
     "Install via 'pip install \"subway-access[tearsheets]\"'."
+)
+_JELLYCELL_14_HINT = (
+    "jellycell>=1.4 is required for render_findings_from_dict — the "
+    "'jellycell.tearsheets' module was introduced in v1.4.0. "
+    "Install via 'pip install \"jellycell>=1.4\"' (or "
+    "'pip install --upgrade jellycell' if [tearsheets] is already installed)."
 )
 
 
@@ -205,5 +211,74 @@ def emit_findings_tearsheet(
         project=str(Path(project_dir).resolve()),
         overwrite=overwrite,
         template_overrides=template_overrides,
+    )
+    return Path(rendered)
+
+
+def render_findings_from_dict(
+    results: Mapping[str, Mapping[str, Any]],
+    *,
+    out_path: Path,
+    project: str,
+    template_overrides: Mapping[str, Any] | None = None,
+) -> Path:
+    """Render a ``FINDINGS.md`` tearsheet directly from in-memory results.
+
+    Thin wrapper over
+    [``jellycell.tearsheets.findings``](https://github.com/random-walks/jellycell/releases/tag/v1.4.0)
+    (new in jellycell v1.4.0). Complementary to
+    :func:`emit_findings_tearsheet`: that helper scans a factor-factory project
+    directory for ``artifacts/<family>_results.json`` files and renders
+    ``manuscripts/FINDINGS.md`` with freeze-marker splicing. This one takes a
+    plain Python dict and writes to any path — useful when you already have
+    engine fits in memory (notebook, CI smoke, blog-post assembly) and don't
+    want the project-directory dance.
+
+    Parameters
+    ----------
+    results
+        Mapping of ``method_name -> {field: value}``. One ``## <method_name>``
+        heading + two-column metric table is emitted per top-level key. Nested
+        dicts flatten with dotted keys (``{"cs": {"att": 0.2}}`` →  ``cs.att``
+        row). The canonical way to produce this shape from factor-factory
+        results is::
+
+            results_dict = {r.method: r.to_dict() for r in did_results}
+
+    out_path
+        Target markdown path. Parent directories are created if needed.
+    project
+        Project name rendered in the manuscript header (e.g.
+        ``"subway-access / accessibility-change"``). Does not have to be a
+        filesystem path — this is just a label.
+    template_overrides
+        Optional header-field overrides forwarded to
+        ``jellycell.tearsheets.findings``. Supported keys include ``author``,
+        ``author_url``, ``month_year``, ``version``, ``project``.
+
+    Returns
+    -------
+    Path
+        The resolved path of the rendered tearsheet.
+
+    Raises
+    ------
+    ImportError
+        If ``jellycell`` is not installed (points at ``[tearsheets]``) or if
+        the installed ``jellycell`` is older than v1.4.0.
+    """
+    require_jellycell()
+    try:
+        from jellycell.tearsheets import (  # pylint: disable=import-error
+            findings as _jc_findings,
+        )
+    except ImportError as exc:  # pragma: no cover - exercised in lazy-import tests
+        raise ImportError(_JELLYCELL_14_HINT) from exc
+
+    rendered = _jc_findings(
+        results=dict(results),
+        out_path=str(out_path),
+        project=project,
+        template_overrides=dict(template_overrides) if template_overrides else None,
     )
     return Path(rendered)

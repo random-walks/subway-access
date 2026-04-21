@@ -1,0 +1,67 @@
+# subway-access
+
+> Reproducible NYC subway accessibility analysis. Fetches live MTA + Census data, scores census tracts for accessible-station coverage, measures elevator reliability, and produces research-ready (tract × year) panel datasets. Optional causal-inference integration with factor-factory and tearsheet rendering with jellycell.
+
+`subway-access` is a Python package (`pip install subway-access`) that sits **downstream of [nyc-geo-toolkit](https://github.com/random-walks/nyc-geo-toolkit)** (NYC boundary + geodesy primitives) and **alongside [nyc311](https://github.com/random-walks/nyc311)** (service-request analytics). Optional integration with [factor-factory](https://github.com/random-walks/factor-factory) (causal estimators) and [jellycell](https://github.com/random-walks/jellycell) (tearsheet rendering) behind opt-in extras.
+
+The public API is **subpackage-first**: import from `subway_access.analysis`, `subway_access.models`, `subway_access.factors`, `subway_access.temporal`, `subway_access.io`, `subway_access.pipeline`, `subway_access.export`, `subway_access.helpers`, `subway_access.reporting`, `subway_access.cli`. The root `subway_access` namespace only exposes `__version__`.
+
+## Canonical pipeline
+
+```
+fetch → io (cache) → models → analysis (scoring) → factors (composable) → temporal (panel) → export → reporting (tearsheets, optional)
+```
+
+Higher layers may import lower layers; never the reverse.
+
+## Install
+
+- Baseline: `pip install subway-access`
+- Full plotting + network stack: `pip install "subway-access[all]"`
+- Optional extras (Python 3.12+ only): `[factor-factory]` for causal estimators, `[tearsheets]` for jellycell rendering
+
+## Docs
+
+- [docs/index.md](docs/index.md) — project overview + doc paths
+- [docs/getting-started.md](docs/getting-started.md) — install, snapshot fetch, baseline analysis, research workflow
+- [docs/architecture.md](docs/architecture.md) — data flow, shared geography boundaries
+- [docs/api.md](docs/api.md) — complete public API reference (mkdocstrings-generated)
+- [docs/cli.md](docs/cli.md) — `subway-access` console script reference
+- [docs/factor-factory-integration.md](docs/factor-factory-integration.md) — optional causal-inference wiring, Panel construction, engine fits, jellycell tearsheets
+- [docs/contributing.md](docs/contributing.md) — dev setup, tests, release flow
+- [docs/releasing.md](docs/releasing.md) — tag-driven OIDC PyPI publish via `hatch-vcs`
+- [docs/changelog.md](docs/changelog.md) — see also [CHANGELOG.md](CHANGELOG.md)
+
+## Examples (real data, reproducible reports)
+
+- [examples/fetch-borough-snapshot/](examples/fetch-borough-snapshot/) — first live cache-building example
+- [examples/borough-gap-analysis/](examples/borough-gap-analysis/) — borough-scale gap story with tracked charts
+- [examples/outage-reliability-report/](examples/outage-reliability-report/) — monthly availability + reliability story
+- [examples/multi-borough-access-profile/](examples/multi-borough-access-profile/) — borough EDA (Manhattan, Brooklyn, Queens)
+- [examples/network-access-comparison/](examples/network-access-comparison/) — Euclidean vs OSM walking-graph comparison
+- [examples/about-the-data/](examples/about-the-data/) — NYC-wide public snapshot with data-catalogue tearsheet
+- [examples/accessibility-change-over-time/](examples/accessibility-change-over-time/) — **real research artifact**: 48 KB APA-formatted case study (`CASESTUDY.md`), 15 figures, 6 tables, `main.py` with ~1800 LOC, DiD + RDD + SCM + Moran's _I_ engine-audit appendix
+- [examples/factor-factory-rdd-walkthrough/](examples/factor-factory-rdd-walkthrough/) — minimal ~150 LOC RDD-at-threshold recipe using factor-factory + jellycell
+- [examples/example-template/](examples/example-template/) — scaffold for new examples
+
+Every example ships with its own `pyproject.toml`, `README.md`, and committed `reports/` (including figures) so GitHub renders the outputs inline.
+
+## API surface (subpackage list)
+
+- `subway_access.models` — typed, frozen dataclasses (`Station`, `StationDataset`, `TractDemographics`, `DemographicDataset`, `CatchmentRequest`, etc.)
+- `subway_access.io` — snapshot cache I/O
+- `subway_access.analysis` — `generate_catchments`, `score_accessibility`, `compute_reliability`, `analyze_gaps`
+- `subway_access.factors` — Zipline-inspired composable pipeline: `Factor`, `Pipeline`, `FactorContext`, built-in factors (`NeedScoreFactor`, `CoverageFactor`, `GapScoreFactor`, `NearestStationDistanceFactor`, `NearestStationTravelMinutesFactor`, `StationCountFactor`, `ReliabilityWeightedCoverageFactor`)
+- `subway_access.temporal` — `build_panel_dataset`, `build_upgrade_timeline`, `build_distance_weights`, `PanelDataset`, `PanelObservation`, `StationUpgradeRecord`, `UpgradeTimeline`, `fetch_multi_vintage_estimates`, `load_known_upgrades[/_from_dir]`
+- `subway_access.pipeline` — `fetch_study_area_snapshot`, `load_cached_snapshot`, `fetch_walk_graph`, `load_cached_walk_graph`
+- `subway_access.export` — GeoJSON / CSV / markdown writers
+- `subway_access.helpers` — multi-borough iteration, CSV export utilities
+- `subway_access.reporting` — optional: `write_engine_results_json`, `emit_findings_tearsheet`, `render_findings_from_dict` (jellycell v1.4 native), `require_factor_factory`, `require_jellycell`
+- `subway_access.cli` — the `subway-access` console script
+
+## Optional
+
+- [CHANGELOG.md](CHANGELOG.md) — version history and migration notes
+- [AGENTS.md](AGENTS.md) — canonical agent guide (AGENTS.md spec format — Cursor, Codex, Copilot, Aider, Zed, Warp, Windsurf, Gemini CLI)
+- [CLAUDE.md](CLAUDE.md) — Claude Code–specific conventions layered on top of `AGENTS.md`
+- [CITATION.cff](CITATION.cff) — software-record citation
