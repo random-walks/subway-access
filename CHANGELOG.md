@@ -44,13 +44,14 @@ v1.4+. No breaking changes — everything is additive or compat-only.
 - New "Research workflow (temporal panel + causal estimators)" section in
   [`docs/getting-started.md`](https://github.com/random-walks/subway-access/blob/main/docs/getting-started.md).
   The temporal panel + causal-estimator surface
-  (`subway_access.temporal.build_panel_dataset`,
-  `build_upgrade_timeline`, `build_distance_weights`, factor-factory engines,
-  jellycell tearsheets) was invisible from the landing page, even though it's
-  the main story of the accessibility case study. New section points users at
-  the primitives, the two downstream paths (hand-rolled stats vs factor-factory),
-  and the two worked examples.
-- New top-level [`llms.txt`](https://github.com/random-walks/subway-access/blob/main/llms.txt)
+  (`subway_access.temporal.build_panel_dataset`, `build_upgrade_timeline`,
+  `build_distance_weights`, factor-factory engines, jellycell tearsheets) was
+  invisible from the landing page, even though it's the main story of the
+  accessibility case study. New section points users at the primitives, the two
+  downstream paths (hand-rolled stats vs factor-factory), and the two worked
+  examples.
+- New top-level
+  [`llms.txt`](https://github.com/random-walks/subway-access/blob/main/llms.txt)
   following the [llmstxt.org](https://llmstxt.org) spec — a concise markdown
   sitemap with project description, canonical pipeline order, install paths,
   links to docs/examples, and the public API surface at subpackage granularity.
@@ -65,13 +66,14 @@ v1.4+. No breaking changes — everything is additive or compat-only.
 - Widened the `nyc-geo-toolkit` pin from `>=0.3.0,<0.4` to `>=0.3,<0.5` so
   downstream consumers can install `subway-access` alongside
   [nyc-geo-toolkit v0.4.0](https://github.com/random-walks/nyc-geo-toolkit/releases/tag/v0.4.0)
-  and [v0.4.1](https://github.com/random-walks/nyc-geo-toolkit/releases/tag/v0.4.1)
+  and
+  [v0.4.1](https://github.com/random-walks/nyc-geo-toolkit/releases/tag/v0.4.1)
   ([#18](https://github.com/random-walks/subway-access/issues/18)). This mirrors
   [nyc311 v1.0.2](https://github.com/random-walks/nyc311/releases/tag/v1.0.2),
   which shipped the same widening on the same day, and unblocks the
   `blaise-website` `packages/python-showcase/` package from resolving both
-  libraries in a single environment. Compat-only at the subway-access layer —
-  we don't use the new 0.4 helpers (`centroids_from_boundaries`) in the package
+  libraries in a single environment. Compat-only at the subway-access layer — we
+  don't use the new 0.4 helpers (`centroids_from_boundaries`) in the package
   itself yet; that's a follow-up internal refactor tracked separately.
 - Fixed duplicate `## 6.` heading in
   [`docs/factor-factory-integration.md`](https://github.com/random-walks/subway-access/blob/main/docs/factor-factory-integration.md)
