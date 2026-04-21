@@ -31,6 +31,9 @@ from subway_access import reporting
 
 _MOCK_FACTOR_FACTORY_UNAVAILABLE = "mock: factor_factory not available"
 _MOCK_JELLYCELL_UNAVAILABLE = "mock: jellycell not available"
+_MOCK_JELLYCELL_TEARSHEETS_UNAVAILABLE = (
+    "mock: pre-v1.4 jellycell without .tearsheets submodule"
+)
 
 
 def test_module_imports_without_optional_extras() -> None:
@@ -39,6 +42,7 @@ def test_module_imports_without_optional_extras() -> None:
     assert set(reporting.__all__) == {
         "EngineKind",
         "emit_findings_tearsheet",
+        "render_findings_from_dict",
         "require_factor_factory",
         "require_jellycell",
         "write_engine_results_json",
@@ -88,6 +92,64 @@ def test_require_jellycell_error_message(monkeypatch: pytest.MonkeyPatch) -> Non
 
     with pytest.raises(ImportError, match=r"subway-access\[tearsheets\]"):
         reporting.require_jellycell()
+
+
+def test_render_findings_from_dict_requires_jellycell_14(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    """If jellycell.tearsheets is missing (pre-v1.4), the error cites the upgrade path."""
+    real_import = builtins.__import__
+
+    def _raise_for_jellycell_tearsheets(
+        name: str,
+        globals_: dict[str, Any] | None = None,
+        locals_: dict[str, Any] | None = None,
+        fromlist: tuple[str, ...] = (),
+        level: int = 0,
+    ) -> Any:
+        # Let `import jellycell` succeed (simulating v1.3.5 installed), but block
+        # the submodule — mirrors the real pre-v1.4 surface.
+        if name == "jellycell.tearsheets" or (
+            name == "jellycell" and "tearsheets" in (fromlist or ())
+        ):
+            raise ImportError(_MOCK_JELLYCELL_TEARSHEETS_UNAVAILABLE)
+        return real_import(name, globals_, locals_, fromlist, level)
+
+    monkeypatch.setattr(builtins, "__import__", _raise_for_jellycell_tearsheets)
+    sys.modules.pop("jellycell.tearsheets", None)
+
+    # The outer `require_jellycell()` must still succeed (jellycell itself is
+    # available in the test env), so this exercises the submodule-level fallback.
+    if importlib.util.find_spec("jellycell") is None:
+        pytest.skip("jellycell must be installed for this test")
+
+    with pytest.raises(ImportError, match=r"jellycell>=1\.4"):
+        reporting.render_findings_from_dict(
+            results={"twfe": {"att": 0.12}},
+            out_path=tmp_path / "FINDINGS.md",
+            project="test",
+        )
+
+
+def test_render_findings_from_dict_against_real_jellycell(tmp_path: Path) -> None:
+    """If jellycell>=1.4 is installed, the helper renders a manuscript."""
+    pytest.importorskip("jellycell.tearsheets")
+
+    out = reporting.render_findings_from_dict(
+        results={
+            "twfe": {"att": 0.12, "se": 0.04, "n_obs": 4634},
+            "sa": {"att": 0.15, "se": 0.05, "n_obs": 4634},
+        },
+        out_path=tmp_path / "FINDINGS.md",
+        project="subway-access / test",
+        template_overrides={"author": "Test Author", "month_year": "April 2026"},
+    )
+    assert out == tmp_path / "FINDINGS.md"
+    assert out.is_file()
+    content = out.read_text(encoding="utf-8")
+    # Per-method headings from the jellycell template.
+    assert "twfe" in content
+    assert "sa" in content
 
 
 class _FakeResult:

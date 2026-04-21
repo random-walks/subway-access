@@ -313,9 +313,59 @@ one the jellycell `findings.md.j2` template consumes, so a downstream consumer
 can always render a tearsheet later by installing `jellycell` and pointing
 `emit_findings_tearsheet` at the project dir.
 
-## 6. See also
+## 7. Lightweight tearsheets via jellycell v1.4
+
+[jellycell v1.4.0](https://github.com/random-walks/jellycell/releases/tag/v1.4.0)
+introduced a top-level `jellycell.tearsheets` Python API — `jt.findings()`,
+`jt.methodology()`, `jt.audit()` — that renders a manuscript directly from a
+Python dict, without the project-directory convention that
+[`emit_findings_tearsheet`](api.md#reporting) relies on. Useful when you just
+want a one-file ``FINDINGS.md`` out of in-memory results (think Jupyter
+exploration, CI smoke tests, blog-post assembly).
+
+`subway_access.reporting.render_findings_from_dict` wraps it with the same
+lazy-import / extras-hint ergonomics as the rest of the module. Requires
+[[tearsheets]](#1-install-the-extras) with ``jellycell>=1.4``; raises an
+``ImportError`` pointing at the right ``pip install`` otherwise.
+
+```python
+from pathlib import Path
+
+from factor_factory.engines import did
+from subway_access.reporting import render_findings_from_dict
+
+did_results = did.estimate(
+    ff_panel, methods=("twfe", "sa"), outcome="gap_score", treatment="treatment"
+)
+
+# Flatten into the shape jellycell.tearsheets.findings expects:
+# {<method_name>: {<field>: <value>}}
+results_dict = {r.method: r.to_dict() for r in did_results}
+
+out = render_findings_from_dict(
+    results=results_dict,
+    out_path=Path("manuscripts/FINDINGS.md"),
+    project="subway-access / accessibility-change",
+    template_overrides={"author": "Blaise Albis-Burdige", "month_year": "April 2026"},
+)
+print(f"Wrote {out}")
+```
+
+When to use which:
+
+| Scenario | Use |
+| :--- | :--- |
+| Full factor-factory project with `artifacts/*.json` files on disk | `emit_findings_tearsheet(project_dir, ...)` |
+| Ad-hoc in-memory results, one-off manuscript | `render_findings_from_dict(results=..., out_path=..., ...)` |
+| Freeze-marker splice (keep hand-written prose below `<!-- tearsheet:freeze -->`) | `emit_findings_tearsheet(overwrite=True)` |
+| Running inside a `jc.step`-tagged notebook cell | Either — both return a ``Path`` |
+
+## 8. See also
 
 - [`subway_access.reporting` API](api.md#reporting) — the lazy-import bridge.
 - [factor-factory docs](https://factor-factory.readthedocs.io/) — engine family
   protocols, contract invariants, piggyback-first rules.
 - [jellycell docs](https://jellycell.readthedocs.io/) — tearsheet rendering.
+  [v1.4.0 release notes](https://github.com/random-walks/jellycell/releases/tag/v1.4.0)
+  document the native `jellycell.tearsheets` API used by
+  `render_findings_from_dict`.
