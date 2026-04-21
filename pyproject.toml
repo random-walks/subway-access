@@ -40,7 +40,7 @@ classifiers = [
 ]
 dynamic = ["version"]
 dependencies = [
-  "nyc-geo-toolkit>=0.3.0,<0.4",
+  "nyc-geo-toolkit>=0.3,<0.5",
   "shapely>=2.1.2",
 ]
 

@@ -5,6 +5,9 @@ from __future__ import annotations
 import calendar
 import hashlib
 import json
+import logging
+import time
+import urllib.error
 from datetime import date, datetime, timezone
 from typing import TYPE_CHECKING, Any
 from urllib.parse import quote
@@ -13,11 +16,20 @@ from urllib.request import urlopen
 if TYPE_CHECKING:
     from pathlib import Path
 
+_logger = logging.getLogger(__name__)
+
 MTA_SUBWAY_STATIONS_API_URL = "https://data.ny.gov/resource/39hk-dx4f.json"
 MTA_SUBWAY_ENTRANCES_API_URL = "https://data.ny.gov/resource/i9wp-a4ja.json"
 MTA_EQUIPMENT_ASSET_API_URL = "https://data.ny.gov/resource/94fv-bak7.json"
 MTA_ELEVATOR_AVAILABILITY_API_URL = "https://data.ny.gov/resource/rc78-7x78.json"
 MTA_GTFS_STATIC_URL = "https://rrgtfsfeeds.s3.amazonaws.com/gtfs_subway.zip"
+
+# MTA OpenData (Socrata on data.ny.gov) occasionally returns 5xx or times out
+# during traffic spikes. Retry transient failures a small number of times with
+# exponential backoff so one bad ping doesn't kill the whole fetch. 4xx errors
+# (schema / permission / bad-query) are deterministic and raise immediately.
+_DEFAULT_READ_JSON_ATTEMPTS = 3
+_DEFAULT_READ_JSON_INITIAL_BACKOFF_S = 1.0
 
 _BOROUGH_MAP = {
     "B": "Brooklyn",
@@ -40,9 +52,75 @@ _ADA_STATUS_MAP = {
 }
 
 
-def _read_json(url: str) -> list[dict[str, Any]]:
-    with urlopen(url, timeout=30.0) as response:
-        payload = json.loads(response.read().decode("utf-8"))
+def _read_json(
+    url: str,
+    *,
+    attempts: int = _DEFAULT_READ_JSON_ATTEMPTS,
+    initial_backoff_seconds: float = _DEFAULT_READ_JSON_INITIAL_BACKOFF_S,
+    timeout_seconds: float = 30.0,
+) -> list[dict[str, Any]]:
+    """Fetch a JSON list from *url*, retrying transient upstream failures.
+
+    Retries with exponential backoff on HTTP 5xx, ``URLError`` (DNS /
+    connection-reset), and ``TimeoutError``. 4xx responses raise immediately —
+    they are deterministic (bad query, permission, not-found) and retrying
+    would only mask the real error.
+
+    Args:
+        url: The Socrata JSON endpoint to fetch.
+        attempts: Total number of attempts, including the first one. Must be
+            >= 1.
+        initial_backoff_seconds: Seconds to wait before the second attempt.
+            Doubles on each subsequent retry.
+        timeout_seconds: Per-attempt socket timeout.
+
+    Raises:
+        urllib.error.HTTPError: If the last attempt returned a 4xx or 5xx.
+        urllib.error.URLError: If the last attempt hit a network-layer error.
+        TimeoutError: If the last attempt timed out.
+        TypeError: If the response parses as valid JSON but is not a list.
+    """
+    if attempts < 1:
+        message = f"attempts must be >= 1, got {attempts}"
+        raise ValueError(message)
+
+    last_exc: Exception | None = None
+    for attempt in range(attempts):
+        try:
+            with urlopen(url, timeout=timeout_seconds) as response:
+                payload = json.loads(response.read().decode("utf-8"))
+            break
+        except urllib.error.HTTPError as exc:
+            # 4xx is deterministic — don't retry.
+            if 400 <= exc.code < 500:
+                raise
+            last_exc = exc
+            _logger.warning(
+                "Transient HTTP %s from %s (attempt %d/%d); retrying.",
+                exc.code,
+                url,
+                attempt + 1,
+                attempts,
+            )
+        except (urllib.error.URLError, TimeoutError) as exc:
+            last_exc = exc
+            _logger.warning(
+                "Transient network error from %s (attempt %d/%d): %s",
+                url,
+                attempt + 1,
+                attempts,
+                exc,
+            )
+        if attempt < attempts - 1:
+            time.sleep(initial_backoff_seconds * (2**attempt))
+    else:
+        # Exhausted every attempt — re-raise the last exception so callers
+        # see the upstream-native error (HTTPError / URLError / TimeoutError).
+        # The loop guarantees at least one exception was recorded before
+        # reaching the else branch.
+        assert last_exc is not None
+        raise last_exc
+
     if not isinstance(payload, list):
         message = f"Expected a JSON list from {url!r}."
         raise TypeError(message)

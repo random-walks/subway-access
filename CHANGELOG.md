@@ -10,6 +10,24 @@ The authoritative release notes are also published on
 
 ### Added
 
+### Changed
+
+### Fixed
+
+### Deprecated
+
+### Security
+
+## [0.5.1] — 2026-04-21
+
+A compat-driven patch with a small additive surface. Primary goal is unblocking
+downstream consumers that want to pull in `subway-access` alongside
+[nyc-geo-toolkit v0.4.0/v0.4.1](https://github.com/random-walks/nyc-geo-toolkit/releases/tag/v0.4.1),
+plus a thin native-jellycell tearsheet path for consumers already on jellycell
+v1.4+. No breaking changes — everything is additive or compat-only.
+
+### Added
+
 - `subway_access.reporting.render_findings_from_dict(results, *, out_path, project, template_overrides=None)`
   — new helper that wraps
   [jellycell v1.4.0's](https://github.com/random-walks/jellycell/releases/tag/v1.4.0)
@@ -20,20 +38,84 @@ The authoritative release notes are also published on
   manuscript assembly where the factor-factory project-dir convention is
   overkill. Raises a crisp `ImportError` pointing at
   `pip install "jellycell>=1.4"` when the `[tearsheets]` extra is installed at
-  an older version.
+  an older version. Tests: `tests/test_reporting.py` gains two cases —
+  `test_render_findings_from_dict_requires_jellycell_14` (error-path) and a
+  `pytest.importorskip`-guarded real-jellycell integration test.
+- New "Research workflow (temporal panel + causal estimators)" section in
+  [`docs/getting-started.md`](https://github.com/random-walks/subway-access/blob/main/docs/getting-started.md).
+  The temporal panel + causal-estimator surface
+  (`subway_access.temporal.build_panel_dataset`, `build_upgrade_timeline`,
+  `build_distance_weights`, factor-factory engines, jellycell tearsheets) was
+  invisible from the landing page, even though it's the main story of the
+  accessibility case study. New section points users at the primitives, the two
+  downstream paths (hand-rolled stats vs factor-factory), and the two worked
+  examples.
+- New top-level
+  [`llms.txt`](https://github.com/random-walks/subway-access/blob/main/llms.txt)
+  following the [llmstxt.org](https://llmstxt.org) spec — a concise markdown
+  sitemap with project description, canonical pipeline order, install paths,
+  links to docs/examples, and the public API surface at subpackage granularity.
+  Lets Claude, Cursor, and other agents load the package context in one fetch
+  instead of crawling `docs/` + `README.md` + `examples/README.md` separately.
+  First `llms.txt` across the `random-walks` org — nyc-geo-toolkit, nyc311,
+  jellycell, and factor-factory are all missing it too; subway-access goes
+  first.
 
 ### Changed
 
-- Fixed duplicate `## 6.` heading in `docs/factor-factory-integration.md` (both
-  "Using factor-factory without jellycell" and "See also" shared the same
-  number). The jellycell-free light-audit path keeps §6; the cross-links move to
-  §8, and the new jellycell v1.4 lightweight-tearsheets section occupies §7.
+- Widened the `nyc-geo-toolkit` pin from `>=0.3.0,<0.4` to `>=0.3,<0.5` so
+  downstream consumers can install `subway-access` alongside
+  [nyc-geo-toolkit v0.4.0](https://github.com/random-walks/nyc-geo-toolkit/releases/tag/v0.4.0)
+  and
+  [v0.4.1](https://github.com/random-walks/nyc-geo-toolkit/releases/tag/v0.4.1)
+  ([#18](https://github.com/random-walks/subway-access/issues/18)). This mirrors
+  [nyc311 v1.0.2](https://github.com/random-walks/nyc311/releases/tag/v1.0.2),
+  which shipped the same widening on the same day, and unblocks the
+  `blaise-website` `packages/python-showcase/` package from resolving both
+  libraries in a single environment. Compat-only at the subway-access layer — we
+  don't use the new 0.4 helpers (`centroids_from_boundaries`) in the package
+  itself yet; that's a follow-up internal refactor tracked separately.
+- Fixed duplicate `## 6.` heading in
+  [`docs/factor-factory-integration.md`](https://github.com/random-walks/subway-access/blob/main/docs/factor-factory-integration.md)
+  (both "Using factor-factory without jellycell" and "See also" shared the same
+  number). The jellycell-free light-audit path keeps §6; the new jellycell v1.4
+  "Lightweight tearsheets" section occupies §7; the cross-links move to §8.
 
 ### Fixed
 
-### Deprecated
+- `subway_access.io._mta._read_json` now retries transient upstream failures
+  with exponential backoff (default 3 attempts; 1 s → 2 s → 4 s waits). Retries
+  HTTP 5xx, `URLError` (DNS / connection reset), and `TimeoutError` — all three
+  are common symptoms of MTA OpenData being under load. HTTP 4xx errors (bad
+  query, not found, permission) raise immediately since they are deterministic
+  and retrying would mask the real error. Attempt count and backoff are
+  keyword-tunable for callers who want different semantics, but the defaults are
+  appropriate for interactive use. Regression test:
+  `tests/test_io.py::TestReadJsonRetry` (6 cases).
+- `scripts/smoke_installed_package.py` restructured as a two-phase smoke: the
+  structural phase (package import, `py.typed` marker, CLI `--help`,
+  `__version__`) is always release-blocking; the live end-to-end phase (full
+  Manhattan fetch + analyze) is opportunistic — if MTA Open-NY returns after
+  retries, the wheel is shippable and the smoke emits a warning rather than
+  failing the release. Decouples "wheel is valid" from "upstream infra is up" so
+  the release pipeline stops wedging on orthogonal MTA OpenData outages.
 
-### Security
+### Notes
+
+- Jellycell
+  [v1.4.0](https://github.com/random-walks/jellycell/releases/tag/v1.4.0) landed
+  the same week with a new top-level `jellycell.tearsheets` Python API
+  (`jt.findings`, `jt.methodology`, `jt.audit`). Our existing
+  `jellycell>=1.3.5,<2` pin already allows v1.4.x — no edit needed. The new
+  `render_findings_from_dict` helper exposes that native API path directly.
+  `emit_findings_tearsheet` still wraps `factor_factory.jellycell.tearsheets`
+  (the JSON-files-on-disk project-directory convention) — both paths now
+  coexist, and callers pick whichever matches their pattern.
+- nyc-geo-toolkit
+  [v0.4.1](https://github.com/random-walks/nyc-geo-toolkit/releases/tag/v0.4.1)
+  landed right after v0.4.0 with an example/dep alignment pass (jellycell 1.4
+  native tearsheets API in the boundary-explorer showcase, no public-surface
+  change). Our widened pin covers it automatically; no further action.
 
 ## [0.5.0] — 2026-04-19
 
