@@ -81,6 +81,25 @@ v1.4+. No breaking changes — everything is additive or compat-only.
   number). The jellycell-free light-audit path keeps §6; the new jellycell v1.4
   "Lightweight tearsheets" section occupies §7; the cross-links move to §8.
 
+### Fixed
+
+- `subway_access.io._mta._read_json` now retries transient upstream failures
+  with exponential backoff (default 3 attempts; 1 s → 2 s → 4 s waits). Retries
+  HTTP 5xx, `URLError` (DNS / connection reset), and `TimeoutError` — all
+  three are common symptoms of MTA OpenData being under load. HTTP 4xx errors
+  (bad query, not found, permission) raise immediately since they are
+  deterministic and retrying would mask the real error. Attempt count and
+  backoff are keyword-tunable for callers who want different semantics, but
+  the defaults are appropriate for interactive use. Regression test:
+  `tests/test_io.py::TestReadJsonRetry` (6 cases).
+- `scripts/smoke_installed_package.py` restructured as a two-phase smoke: the
+  structural phase (package import, `py.typed` marker, CLI `--help`,
+  `__version__`) is always release-blocking; the live end-to-end phase (full
+  Manhattan fetch + analyze) is opportunistic — if MTA Open-NY returns after
+  retries, the wheel is shippable and the smoke emits a warning rather than
+  failing the release. Decouples "wheel is valid" from "upstream infra is up"
+  so the release pipeline stops wedging on orthogonal MTA OpenData outages.
+
 ### Notes
 
 - Jellycell
