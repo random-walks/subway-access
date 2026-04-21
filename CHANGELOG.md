@@ -16,8 +16,8 @@ The authoritative release notes are also published on
   native `jellycell.tearsheets.findings` API for rendering a `FINDINGS.md`
   manuscript directly from an in-memory results dict. Complementary to
   `emit_findings_tearsheet`, which scans a factor-factory project directory for
-  JSON files. The new path is useful for notebooks, CI smoke tests, and
-  ad-hoc manuscript assembly where the factor-factory project-dir convention is
+  JSON files. The new path is useful for notebooks, CI smoke tests, and ad-hoc
+  manuscript assembly where the factor-factory project-dir convention is
   overkill. Raises a crisp `ImportError` pointing at
   `pip install "jellycell>=1.4"` when the `[tearsheets]` extra is installed at
   an older version.
