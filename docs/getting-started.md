@@ -117,17 +117,17 @@ From there you can either:
 
 - run a **hand-rolled DiD / OLS / Moran's _I_** pipeline (no optional extras —
   `numpy` suffices), or
-- plug the panel into
-  [**factor-factory**](factor-factory-integration.md) for peer-reviewed causal
-  estimators (TWFE, Sun-Abraham, synthetic-control, RDD, spatial
-  autocorrelation) behind a single `Panel` + `Engine` contract, and render
+- plug the panel into [**factor-factory**](factor-factory-integration.md) for
+  peer-reviewed causal estimators (TWFE, Sun-Abraham, synthetic-control, RDD,
+  spatial autocorrelation) behind a single `Panel` + `Engine` contract, and
+  render
   [**jellycell**](factor-factory-integration.md#7-lightweight-tearsheets-via-jellycell-v14)
   tearsheets from the results.
 
 The full worked example is
 [`examples/accessibility-change-over-time/`](https://github.com/random-walks/subway-access/tree/main/examples/accessibility-change-over-time)
-— a real research artifact with a 48 KB APA-formatted case study, 15 figures,
-6 tables, and an engine-audit appendix. Minimal RDD recipe:
+— a real research artifact with a 48 KB APA-formatted case study, 15 figures, 6
+tables, and an engine-audit appendix. Minimal RDD recipe:
 [`examples/factor-factory-rdd-walkthrough/`](https://github.com/random-walks/subway-access/tree/main/examples/factor-factory-rdd-walkthrough).
 
 For the integration details see

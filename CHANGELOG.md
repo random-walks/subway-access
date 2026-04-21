@@ -24,11 +24,10 @@ The authoritative release notes are also published on
 
 ### Changed
 
-- Fixed duplicate `## 6.` heading in `docs/factor-factory-integration.md`
-  (both "Using factor-factory without jellycell" and "See also" shared the
-  same number). The jellycell-free light-audit path keeps §6; the cross-links
-  move to §8, and the new jellycell v1.4 lightweight-tearsheets section
-  occupies §7.
+- Fixed duplicate `## 6.` heading in `docs/factor-factory-integration.md` (both
+  "Using factor-factory without jellycell" and "See also" shared the same
+  number). The jellycell-free light-audit path keeps §6; the cross-links move to
+  §8, and the new jellycell v1.4 lightweight-tearsheets section occupies §7.
 
 ### Fixed
 

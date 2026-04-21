@@ -320,13 +320,13 @@ introduced a top-level `jellycell.tearsheets` Python API — `jt.findings()`,
 `jt.methodology()`, `jt.audit()` — that renders a manuscript directly from a
 Python dict, without the project-directory convention that
 [`emit_findings_tearsheet`](api.md#reporting) relies on. Useful when you just
-want a one-file ``FINDINGS.md`` out of in-memory results (think Jupyter
+want a one-file `FINDINGS.md` out of in-memory results (think Jupyter
 exploration, CI smoke tests, blog-post assembly).
 
 `subway_access.reporting.render_findings_from_dict` wraps it with the same
 lazy-import / extras-hint ergonomics as the rest of the module. Requires
-[[tearsheets]](#1-install-the-extras) with ``jellycell>=1.4``; raises an
-``ImportError`` pointing at the right ``pip install`` otherwise.
+[[tearsheets]](#1-install-the-extras) with `jellycell>=1.4`; raises an
+`ImportError` pointing at the right `pip install` otherwise.
 
 ```python
 from pathlib import Path
@@ -353,12 +353,12 @@ print(f"Wrote {out}")
 
 When to use which:
 
-| Scenario | Use |
-| :--- | :--- |
-| Full factor-factory project with `artifacts/*.json` files on disk | `emit_findings_tearsheet(project_dir, ...)` |
-| Ad-hoc in-memory results, one-off manuscript | `render_findings_from_dict(results=..., out_path=..., ...)` |
-| Freeze-marker splice (keep hand-written prose below `<!-- tearsheet:freeze -->`) | `emit_findings_tearsheet(overwrite=True)` |
-| Running inside a `jc.step`-tagged notebook cell | Either — both return a ``Path`` |
+| Scenario                                                                         | Use                                                         |
+| :------------------------------------------------------------------------------- | :---------------------------------------------------------- |
+| Full factor-factory project with `artifacts/*.json` files on disk                | `emit_findings_tearsheet(project_dir, ...)`                 |
+| Ad-hoc in-memory results, one-off manuscript                                     | `render_findings_from_dict(results=..., out_path=..., ...)` |
+| Freeze-marker splice (keep hand-written prose below `<!-- tearsheet:freeze -->`) | `emit_findings_tearsheet(overwrite=True)`                   |
+| Running inside a `jc.step`-tagged notebook cell                                  | Either — both return a `Path`                               |
 
 ## 8. See also
 
