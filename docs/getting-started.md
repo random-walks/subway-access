@@ -99,13 +99,16 @@ from subway_access.temporal import (
 )
 
 # Build a (tract × year) panel from cached snapshots + known upgrade years.
-timeline = build_upgrade_timeline(
-    snapshot.stations,
-    known_upgrades={"S1": 2019, "S2": 2021, ...},  # station_id -> upgrade year
-)
+# `known_upgrades` maps station_id -> upgrade year; populate from
+# `load_known_upgrades[_from_dir]` or your own data source.
+known_upgrades = {"S1": 2019, "S2": 2021}
+timeline = build_upgrade_timeline(snapshot.stations, known_upgrades=known_upgrades)
+
+# `vintage_estimates` is dict[year, dict[tract_id, dict[field, value]]].
+# `station_locations` is dict[station_id, (lat, lon)].
 panel = build_panel_dataset(
-    vintage_estimates,  # dict[int, dict[tract_id, dict[field, value]]]
-    station_locations,  # dict[station_id, (lat, lon)]
+    vintage_estimates,
+    station_locations,
     timeline,
     catchment_radius_meters=800.0,  # 0.5-mile walk radius
 )
