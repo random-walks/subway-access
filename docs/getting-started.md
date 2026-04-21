@@ -83,3 +83,52 @@ The current flow is intentionally explicit and reproducible:
 6. compute need, reliability, and gap metrics
 
 This is a documented first pass, not a claim of full routing realism.
+
+## Research workflow (temporal panel + causal estimators)
+
+On top of the baseline snapshot/score flow, `subway-access` ships a
+research-oriented surface for _changes over time_ — how accessibility, gap, and
+coverage evolve as stations gain elevators year-over-year. The core primitives
+live in [`subway_access.temporal`](api.md#temporal):
+
+```python
+from subway_access.temporal import (
+    build_panel_dataset,
+    build_upgrade_timeline,
+    build_distance_weights,
+)
+
+# Build a (tract × year) panel from cached snapshots + known upgrade years.
+timeline = build_upgrade_timeline(
+    snapshot.stations,
+    known_upgrades={"S1": 2019, "S2": 2021, ...},  # station_id -> upgrade year
+)
+panel = build_panel_dataset(
+    vintage_estimates,  # dict[int, dict[tract_id, dict[field, value]]]
+    station_locations,  # dict[station_id, (lat, lon)]
+    timeline,
+    catchment_radius_meters=800.0,  # 0.5-mile walk radius
+)
+treatment_obs = panel.treatment_group()
+control_obs = panel.control_group()
+```
+
+From there you can either:
+
+- run a **hand-rolled DiD / OLS / Moran's _I_** pipeline (no optional extras —
+  `numpy` suffices), or
+- plug the panel into
+  [**factor-factory**](factor-factory-integration.md) for peer-reviewed causal
+  estimators (TWFE, Sun-Abraham, synthetic-control, RDD, spatial
+  autocorrelation) behind a single `Panel` + `Engine` contract, and render
+  [**jellycell**](factor-factory-integration.md#7-lightweight-tearsheets-via-jellycell-v14)
+  tearsheets from the results.
+
+The full worked example is
+[`examples/accessibility-change-over-time/`](https://github.com/random-walks/subway-access/tree/main/examples/accessibility-change-over-time)
+— a real research artifact with a 48 KB APA-formatted case study, 15 figures,
+6 tables, and an engine-audit appendix. Minimal RDD recipe:
+[`examples/factor-factory-rdd-walkthrough/`](https://github.com/random-walks/subway-access/tree/main/examples/factor-factory-rdd-walkthrough).
+
+For the integration details see
+[factor-factory integration](factor-factory-integration.md).
