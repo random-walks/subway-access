@@ -25,7 +25,9 @@ _TEST_URL = "https://example.com/data.json"
 
 def _fake_http_error(code: int, message: str) -> urllib.error.HTTPError:
     """Build an ``HTTPError`` with the headers arg mypy actually likes."""
-    return urllib.error.HTTPError(_TEST_URL, code, message, email.message.Message(), None)
+    return urllib.error.HTTPError(
+        _TEST_URL, code, message, email.message.Message(), None
+    )
 
 
 def test_loaders_read_committed_real_snapshot_slice() -> None:
@@ -166,9 +168,7 @@ class TestReadJsonRetry:
         result = _read_json(_TEST_URL, attempts=3, initial_backoff_seconds=0.0)
         assert result == [{"station_id": "S1"}]
 
-    def test_does_not_retry_on_http_4xx(
-        self, monkeypatch: pytest.MonkeyPatch
-    ) -> None:
+    def test_does_not_retry_on_http_4xx(self, monkeypatch: pytest.MonkeyPatch) -> None:
         call_count = 0
 
         def fake_urlopen(*_args: object, **_kwargs: object) -> Any:

@@ -46,9 +46,7 @@ def _find_cli() -> Path:
     for candidate in candidates:
         if candidate.exists():
             return candidate
-    raise SystemExit(
-        "Installed package is missing the `subway-access` console script."
-    )
+    raise SystemExit("Installed package is missing the `subway-access` console script.")
 
 
 def _structural_checks(cli_path: Path) -> None:
